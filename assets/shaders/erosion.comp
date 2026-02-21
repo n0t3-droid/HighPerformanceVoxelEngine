@@ -1,0 +1,102 @@
+#version 430 core
+
+layout(local_size_x = 16, local_size_y = 16) in;
+
+layout(binding = 0, r32f) uniform readonly image2D u_HeightIn;
+layout(binding = 1, r32f) uniform readonly image2D u_SedimentIn;
+layout(binding = 2, r32f) uniform writeonly image2D u_HeightOut;
+layout(binding = 3, r32f) uniform writeonly image2D u_SedimentOut;
+layout(binding = 4, r32f) uniform readonly image2D u_Vegetation;
+
+uniform ivec2 u_Dimensions;
+uniform float u_DeltaTime = 0.016;
+uniform float u_ErosionRate = 0.12;
+uniform float u_DepositionRate = 0.38;
+uniform float u_CapacityFactor = 4.2;
+uniform float u_ThermalRate = 0.045;
+uniform float u_TalusHighDeg = 45.0;
+uniform float u_TalusTargetDeg = 32.0;
+uniform float u_CellSize = 1.0;
+uniform float u_WindSpeed = 0.16;
+uniform float u_WindStrength = 0.03;
+
+float loadHeight(ivec2 p) {
+    p = clamp(p, ivec2(0), u_Dimensions - ivec2(1));
+    return imageLoad(u_HeightIn, p).r;
+}
+
+float loadSediment(ivec2 p) {
+    p = clamp(p, ivec2(0), u_Dimensions - ivec2(1));
+    return imageLoad(u_SedimentIn, p).r;
+}
+
+float loadVegetation(ivec2 p) {
+    p = clamp(p, ivec2(0), u_Dimensions - ivec2(1));
+    return imageLoad(u_Vegetation, p).r;
+}
+
+float toSlopeDegrees(float dh) {
+    return degrees(atan(abs(dh) / max(0.001, u_CellSize)));
+}
+
+void main() {
+    ivec2 pos = ivec2(gl_GlobalInvocationID.xy);
+    if (pos.x >= u_Dimensions.x || pos.y >= u_Dimensions.y) {
+        return;
+    }
+
+    const ivec2 OFF[8] = ivec2[8](
+        ivec2(-1, -1), ivec2(0, -1), ivec2(1, -1),
+        ivec2(-1,  0),               ivec2(1,  0),
+        ivec2(-1,  1), ivec2(0,  1), ivec2(1,  1)
+    );
+
+    float h = loadHeight(pos);
+    float s = loadSediment(pos);
+
+    vec2 flowDir = vec2(0.0);
+    float maxSlope = 0.0;
+
+    for (int i = 0; i < 8; ++i) {
+        ivec2 n = pos + OFF[i];
+        float hn = loadHeight(n);
+        float dist = length(vec2(OFF[i]));
+        float slope = (h - hn) / max(0.001, dist);
+        if (slope > maxSlope) {
+            maxSlope = slope;
+            flowDir = vec2(OFF[i]);
+        }
+    }
+
+    float waterVolume = 1.0;
+    float capacity = u_CapacityFactor * maxSlope * waterVolume;
+    float deltaS = capacity - s;
+
+    float erosion = max(0.0, deltaS) * u_ErosionRate * u_DeltaTime;
+    float deposition = max(0.0, -deltaS) * u_DepositionRate * u_DeltaTime;
+
+    float hHyd = h - erosion + deposition;
+    float sHyd = s + erosion - deposition;
+
+    float thermalTransfer = 0.0;
+    for (int i = 0; i < 8; ++i) {
+        ivec2 n = pos + OFF[i];
+        float hn = loadHeight(n);
+        float dh = hHyd - hn;
+        float slopeDeg = toSlopeDegrees(dh);
+        if (slopeDeg > u_TalusHighDeg) {
+            float excess = slopeDeg - u_TalusTargetDeg;
+            float moved = excess * u_CellSize * u_ThermalRate * 0.01;
+            thermalTransfer += moved;
+        }
+    }
+
+    hHyd -= thermalTransfer;
+
+    float vegetation = clamp(loadVegetation(pos), 0.0, 1.0);
+    float windAbrasion = u_WindSpeed * (1.0 - vegetation) * u_WindStrength * u_DeltaTime;
+    hHyd -= windAbrasion;
+
+    imageStore(u_HeightOut, pos, vec4(hHyd, 0.0, 0.0, 1.0));
+    imageStore(u_SedimentOut, pos, vec4(max(0.0, sHyd), 0.0, 0.0, 1.0));
+}

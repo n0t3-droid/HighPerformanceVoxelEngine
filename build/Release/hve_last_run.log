@@ -1,0 +1,332 @@
+=== HVE Run Log ===
+Started: 2026-02-21 19:54:48
+[2026-02-21 19:54:48][INFO] Working directory: C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\Release
+[2026-02-21 19:54:48][INFO] OpenGL context created: requested 4.6
+[2026-02-21 19:54:48][INFO] GL_VERSION: 4.6.0 Core Profile Context 25.8.1.250617
+[2026-02-21 19:54:48][INFO] GL_RENDERER: AMD Radeon(TM) Graphics
+[2026-02-21 19:54:49][INFO] WINDOW resize fb=1600x900
+[2026-02-21 19:54:49][INFO] INPUT capture released
+[2026-02-21 19:54:51][INFO] SNAP fps=91.9 chunks=2 tris=0 draws=0 inFlightGen=22 inFlightRemesh=0 completed=22 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:54:52][INFO] WINDOW resize fb=1920x1009
+[2026-02-21 19:54:52][INFO] SNAP fps=15.0 chunks=10 tris=0 draws=0 inFlightGen=14 inFlightRemesh=0 completed=14 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:54:54][INFO] SPAWN fallback used at x=384 z=384 y=44
+[2026-02-21 19:54:54][INFO] SNAP fps=15.0 chunks=12 tris=2048 draws=1 inFlightGen=12 inFlightRemesh=0 completed=12 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:54:55][INFO] SNAP fps=223.7 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:54:56][INFO] SNAP fps=228.4 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:54:57][INFO] SNAP fps=233.1 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:54:58][INFO] SNAP fps=231.7 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:54:59][INFO] SNAP fps=227.4 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:00][INFO] SNAP fps=227.0 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:01][INFO] SNAP fps=233.8 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:02][INFO] SNAP fps=233.7 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:03][INFO] SNAP fps=234.9 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:04][INFO] SNAP fps=233.9 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:05][INFO] SNAP fps=238.9 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:06][INFO] SNAP fps=239.1 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:07][INFO] SNAP fps=238.7 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:08][INFO] SNAP fps=235.2 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:09][INFO] SNAP fps=238.5 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:10][INFO] SNAP fps=238.4 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:11][INFO] SNAP fps=236.8 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:12][INFO] SNAP fps=235.9 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:13][INFO] SNAP fps=237.5 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:14][INFO] SNAP fps=237.4 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:15][INFO] SNAP fps=235.9 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:16][INFO] SNAP fps=237.9 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:17][INFO] SNAP fps=235.8 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:18][INFO] SNAP fps=237.5 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:19][INFO] SNAP fps=236.6 chunks=24 tris=2048 draws=1 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=1 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:19][INFO] INPUT capture guard active
+[2026-02-21 19:55:20][INFO] SNAP fps=215.3 chunks=145 tris=51666 draws=10 inFlightGen=23 inFlightRemesh=0 completed=2 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:21][INFO] SNAP fps=156.2 chunks=377 tris=149014 draws=22 inFlightGen=18 inFlightRemesh=0 completed=1 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:22][INFO] SNAP fps=149.8 chunks=619 tris=217264 draws=30 inFlightGen=24 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:23][INFO] SNAP fps=142.1 chunks=859 tris=312152 draws=41 inFlightGen=24 inFlightRemesh=0 completed=2 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:24][INFO] SNAP fps=146.0 chunks=1102 tris=369396 draws=53 inFlightGen=24 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:25][INFO] SNAP fps=151.5 chunks=1345 tris=437276 draws=62 inFlightGen=21 inFlightRemesh=0 completed=1 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:25][INFO] INPUT W=down
+[2026-02-21 19:55:26][INFO] SNAP fps=143.2 chunks=1584 tris=611988 draws=88 inFlightGen=22 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:27][INFO] SNAP fps=135.9 chunks=1824 tris=739744 draws=106 inFlightGen=16 inFlightRemesh=0 completed=2 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:27][INFO] INPUT W=up
+[2026-02-21 19:55:28][INFO] SNAP fps=136.1 chunks=2068 tris=807266 draws=119 inFlightGen=21 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:29][INFO] SNAP fps=132.9 chunks=2305 tris=807266 draws=119 inFlightGen=23 inFlightRemesh=0 completed=3 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:30][INFO] SNAP fps=132.0 chunks=2545 tris=807266 draws=119 inFlightGen=16 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:31][INFO] SNAP fps=135.8 chunks=2792 tris=821602 draws=126 inFlightGen=21 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:32][INFO] SNAP fps=129.5 chunks=3049 tris=1005922 draws=141 inFlightGen=23 inFlightRemesh=0 completed=3 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:33][INFO] SNAP fps=128.5 chunks=3308 tris=1005922 draws=141 inFlightGen=22 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:34][INFO] SNAP fps=129.7 chunks=3588 tris=1040738 draws=158 inFlightGen=22 inFlightRemesh=0 completed=2 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:35][INFO] SNAP fps=124.9 chunks=3914 tris=1249634 draws=175 inFlightGen=20 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:36][INFO] SNAP fps=124.1 chunks=4242 tris=1249634 draws=175 inFlightGen=20 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:37][INFO] SNAP fps=120.5 chunks=4562 tris=1433954 draws=205 inFlightGen=20 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:38][INFO] SNAP fps=120.8 chunks=4890 tris=1507682 draws=211 inFlightGen=20 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:39][INFO] SNAP fps=120.8 chunks=5218 tris=1507682 draws=211 inFlightGen=24 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:40][INFO] SNAP fps=122.1 chunks=5546 tris=1721658 draws=245 inFlightGen=20 inFlightRemesh=0 completed=3 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:41][INFO] SNAP fps=118.9 chunks=5874 tris=1795386 draws=251 inFlightGen=20 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:42][INFO] SNAP fps=118.5 chunks=6198 tris=1795386 draws=251 inFlightGen=24 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:43][INFO] SNAP fps=120.5 chunks=6525 tris=1846774 draws=275 inFlightGen=21 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:44][INFO] INPUT S=down
+[2026-02-21 19:55:44][INFO] SNAP fps=118.1 chunks=6846 tris=2148112 draws=303 inFlightGen=20 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:44][INFO] INPUT S=up
+[2026-02-21 19:55:44][INFO] INPUT W=down
+[2026-02-21 19:55:45][INFO] SNAP fps=113.0 chunks=7170 tris=2113972 draws=297 inFlightGen=24 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:45][INFO] INPUT SPACE=down
+[2026-02-21 19:55:45][INFO] INPUT SPACE=up
+[2026-02-21 19:55:45][INFO] INPUT SPACE=down
+[2026-02-21 19:55:46][INFO] INPUT SPACE=up
+[2026-02-21 19:55:46][INFO] SNAP fps=113.0 chunks=7502 tris=2244008 draws=318 inFlightGen=20 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:46][INFO] INPUT SPACE=down
+[2026-02-21 19:55:46][INFO] INPUT SPACE=up
+[2026-02-21 19:55:46][INFO] INPUT SPACE=down
+[2026-02-21 19:55:46][INFO] INPUT SPACE=up
+[2026-02-21 19:55:47][INFO] INPUT SPACE=down
+[2026-02-21 19:55:47][INFO] INPUT SPACE=up
+[2026-02-21 19:55:47][INFO] SNAP fps=104.9 chunks=7825 tris=2404574 draws=341 inFlightGen=21 inFlightRemesh=0 completed=1 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:47][INFO] INPUT SPACE=down
+[2026-02-21 19:55:47][INFO] INPUT SPACE=up
+[2026-02-21 19:55:48][INFO] SNAP fps=99.8 chunks=8142 tris=2716784 draws=387 inFlightGen=24 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:48][INFO] INPUT W=up
+[2026-02-21 19:55:48][INFO] INPUT capture released
+[2026-02-21 19:55:49][INFO] SNAP fps=92.2 chunks=8474 tris=2716682 draws=383 inFlightGen=20 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:50][INFO] SNAP fps=88.1 chunks=8794 tris=2716682 draws=383 inFlightGen=20 inFlightRemesh=0 completed=2 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:55:50][INFO] INPUT ESC=down
+[2026-02-21 19:55:50][INFO] INPUT capture guard active
+[2026-02-21 19:55:50][INFO] INPUT ESC=up
+[2026-02-21 19:55:51][INFO] SNAP fps=89.8 chunks=9111 tris=2732552 draws=394 inFlightGen=24 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:51][INFO] INPUT W=down
+[2026-02-21 19:55:52][INFO] SNAP fps=78.8 chunks=9423 tris=3071888 draws=429 inFlightGen=16 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:52][INFO] INPUT W=up
+[2026-02-21 19:55:53][INFO] SNAP fps=80.3 chunks=9739 tris=2701696 draws=288 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:54][INFO] SNAP fps=85.1 chunks=10057 tris=3022304 draws=429 inFlightGen=22 inFlightRemesh=27 completed=31 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:55][INFO] SNAP fps=89.0 chunks=10378 tris=3004760 draws=430 inFlightGen=19 inFlightRemesh=0 completed=3 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:56][INFO] SNAP fps=88.1 chunks=10689 tris=3049076 draws=435 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:56][INFO] INPUT A=down
+[2026-02-21 19:55:57][INFO] INPUT A=up
+[2026-02-21 19:55:57][INFO] SNAP fps=87.8 chunks=11005 tris=3082378 draws=444 inFlightGen=20 inFlightRemesh=23 completed=27 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:57][INFO] INPUT D=down
+[2026-02-21 19:55:58][INFO] SNAP fps=88.5 chunks=11333 tris=3350090 draws=478 inFlightGen=16 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:58][INFO] INPUT S=down
+[2026-02-21 19:55:58][INFO] INPUT D=up
+[2026-02-21 19:55:58][INFO] INPUT S=up
+[2026-02-21 19:55:59][INFO] INPUT S=down
+[2026-02-21 19:55:59][INFO] SNAP fps=83.1 chunks=11646 tris=3279934 draws=460 inFlightGen=16 inFlightRemesh=0 completed=7 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:55:59][INFO] INPUT S=up
+[2026-02-21 19:55:59][INFO] INPUT D=down
+[2026-02-21 19:56:00][INFO] SNAP fps=84.8 chunks=11965 tris=3379110 draws=473 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:01][INFO] SNAP fps=85.3 chunks=12285 tris=3116182 draws=439 inFlightGen=23 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:01][INFO] INPUT D=up
+[2026-02-21 19:56:01][INFO] INPUT S=down
+[2026-02-21 19:56:02][INFO] INPUT S=up
+[2026-02-21 19:56:02][INFO] SNAP fps=87.9 chunks=12599 tris=3313992 draws=474 inFlightGen=23 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:02][INFO] INPUT A=down
+[2026-02-21 19:56:02][INFO] INPUT A=up
+[2026-02-21 19:56:03][INFO] INPUT D=down
+[2026-02-21 19:56:03][INFO] SNAP fps=87.0 chunks=12912 tris=3295454 draws=470 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:03][INFO] INPUT W=down
+[2026-02-21 19:56:03][INFO] INPUT W=up
+[2026-02-21 19:56:04][INFO] INPUT S=down
+[2026-02-21 19:56:04][INFO] SNAP fps=81.0 chunks=13237 tris=3866772 draws=554 inFlightGen=19 inFlightRemesh=0 completed=3 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:04][INFO] INPUT S=up
+[2026-02-21 19:56:04][INFO] INPUT D=up
+[2026-02-21 19:56:05][INFO] INPUT D=down
+[2026-02-21 19:56:05][INFO] SNAP fps=78.3 chunks=13556 tris=3753998 draws=536 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:06][INFO] INPUT D=up
+[2026-02-21 19:56:06][INFO] INPUT W=down
+[2026-02-21 19:56:06][INFO] SNAP fps=78.8 chunks=13873 tris=3735628 draws=528 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:06][INFO] INPUT W=up
+[2026-02-21 19:56:06][INFO] INPUT W=down
+[2026-02-21 19:56:06][INFO] INPUT W=up
+[2026-02-21 19:56:06][INFO] INPUT W=down
+[2026-02-21 19:56:07][INFO] INPUT W=up
+[2026-02-21 19:56:07][INFO] SNAP fps=80.0 chunks=14193 tris=4015930 draws=571 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:08][INFO] SNAP fps=75.1 chunks=14521 tris=4059514 draws=577 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:08][INFO] INPUT LSHIFT=down
+[2026-02-21 19:56:08][INFO] INPUT LSHIFT=up
+[2026-02-21 19:56:09][INFO] SNAP fps=74.1 chunks=14829 tris=4061562 draws=578 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:09][INFO] WINDOW focus lost -> input fully reset
+[2026-02-21 19:56:09][INFO] MOUSE released (focus lost)
+[2026-02-21 19:56:09][INFO] INPUT capture released
+[2026-02-21 19:56:10][INFO] WINDOW focus gained -> input delta reset
+[2026-02-21 19:56:10][INFO] MOUSE recaptured
+[2026-02-21 19:56:10][INFO] INPUT capture guard active
+[2026-02-21 19:56:10][INFO] SNAP fps=69.0 chunks=15129 tris=4046994 draws=576 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:11][INFO] SNAP fps=73.4 chunks=15445 tris=4132036 draws=588 inFlightGen=20 inFlightRemesh=0 completed=2 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:11][INFO] INPUT LSHIFT=down
+[2026-02-21 19:56:11][INFO] INPUT LSHIFT=up
+[2026-02-21 19:56:12][INFO] WINDOW focus lost -> input fully reset
+[2026-02-21 19:56:12][INFO] MOUSE released (focus lost)
+[2026-02-21 19:56:12][INFO] INPUT capture released
+[2026-02-21 19:56:12][INFO] SNAP fps=71.6 chunks=15741 tris=4132036 draws=588 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:56:12][INFO] WINDOW focus gained -> input delta reset
+[2026-02-21 19:56:12][INFO] MOUSE recaptured
+[2026-02-21 19:56:12][INFO] INPUT capture guard active
+[2026-02-21 19:56:13][INFO] SNAP fps=71.4 chunks=16049 tris=4134346 draws=588 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:14][INFO] SNAP fps=74.1 chunks=16369 tris=4134084 draws=589 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:15][INFO] SNAP fps=74.0 chunks=16685 tris=4223320 draws=622 inFlightGen=17 inFlightRemesh=0 completed=1 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:16][INFO] SNAP fps=65.6 chunks=16962 tris=4632300 draws=660 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:17][INFO] SNAP fps=68.2 chunks=17286 tris=4550160 draws=653 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:18][INFO] SNAP fps=68.1 chunks=17614 tris=4593534 draws=659 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:19][INFO] SNAP fps=68.9 chunks=17950 tris=4605822 draws=660 inFlightGen=16 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:19][INFO] INPUT LSHIFT=down
+[2026-02-21 19:56:20][INFO] INPUT LSHIFT=up
+[2026-02-21 19:56:20][INFO] WINDOW focus lost -> input fully reset
+[2026-02-21 19:56:20][INFO] MOUSE released (focus lost)
+[2026-02-21 19:56:20][INFO] INPUT capture released
+[2026-02-21 19:56:20][INFO] SNAP fps=68.4 chunks=18270 tris=4612938 draws=663 inFlightGen=20 inFlightRemesh=0 completed=1 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:56:20][INFO] WINDOW focus gained -> input delta reset
+[2026-02-21 19:56:20][INFO] MOUSE recaptured
+[2026-02-21 19:56:20][INFO] INPUT capture guard active
+[2026-02-21 19:56:21][INFO] SNAP fps=63.6 chunks=18559 tris=4712502 draws=702 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:22][INFO] SNAP fps=65.0 chunks=18875 tris=5136472 draws=741 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:23][INFO] SNAP fps=62.2 chunks=19191 tris=5037360 draws=728 inFlightGen=16 inFlightRemesh=0 completed=2 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:24][INFO] SNAP fps=66.4 chunks=19513 tris=5083470 draws=733 inFlightGen=18 inFlightRemesh=0 completed=3 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:25][INFO] SNAP fps=65.5 chunks=19843 tris=5061992 draws=729 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:26][INFO] SNAP fps=65.5 chunks=20156 tris=5054108 draws=730 inFlightGen=16 inFlightRemesh=0 completed=8 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:27][INFO] SNAP fps=64.5 chunks=20483 tris=5306406 draws=791 inFlightGen=18 inFlightRemesh=0 completed=3 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:28][INFO] SNAP fps=60.5 chunks=20811 tris=5790800 draws=836 inFlightGen=18 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:29][INFO] SNAP fps=58.0 chunks=21132 tris=5748820 draws=829 inFlightGen=18 inFlightRemesh=0 completed=5 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:30][INFO] SNAP fps=58.7 chunks=21450 tris=5647762 draws=816 inFlightGen=16 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:31][INFO] SNAP fps=60.5 chunks=21774 tris=5652106 draws=818 inFlightGen=19 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:32][INFO] SNAP fps=59.5 chunks=22089 tris=5647762 draws=816 inFlightGen=17 inFlightRemesh=0 completed=2 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:32][INFO] INPUT LSHIFT=down
+[2026-02-21 19:56:33][INFO] INPUT LSHIFT=up
+[2026-02-21 19:56:33][INFO] WINDOW focus lost -> input fully reset
+[2026-02-21 19:56:33][INFO] MOUSE released (focus lost)
+[2026-02-21 19:56:33][INFO] INPUT capture released
+[2026-02-21 19:56:33][INFO] SNAP fps=59.0 chunks=22373 tris=5760930 draws=855 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:56:34][INFO] WINDOW focus gained -> input delta reset
+[2026-02-21 19:56:34][INFO] MOUSE recaptured
+[2026-02-21 19:56:34][INFO] INPUT capture guard active
+[2026-02-21 19:56:34][INFO] SNAP fps=55.5 chunks=22659 tris=5858696 draws=872 inFlightGen=18 inFlightRemesh=0 completed=3 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:35][INFO] SNAP fps=54.5 chunks=22951 tris=6215048 draws=901 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:36][INFO] SNAP fps=55.1 chunks=23255 tris=6215048 draws=901 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:37][INFO] SNAP fps=56.0 chunks=23566 tris=6215048 draws=901 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:38][INFO] SNAP fps=55.5 chunks=23878 tris=6215048 draws=901 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:39][INFO] SNAP fps=55.1 chunks=24194 tris=6215048 draws=901 inFlightGen=16 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:40][INFO] SNAP fps=56.0 chunks=24497 tris=6360768 draws=941 inFlightGen=20 inFlightRemesh=0 completed=5 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:41][INFO] SNAP fps=53.8 chunks=24817 tris=6626744 draws=971 inFlightGen=16 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:42][INFO] SNAP fps=51.7 chunks=25133 tris=6847958 draws=990 inFlightGen=20 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:43][INFO] SNAP fps=52.1 chunks=25469 tris=6839956 draws=990 inFlightGen=16 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:44][INFO] SNAP fps=51.6 chunks=25785 tris=6839956 draws=990 inFlightGen=17 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:45][INFO] SNAP fps=52.0 chunks=26109 tris=6736674 draws=977 inFlightGen=17 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:46][INFO] INPUT SPACE=down
+[2026-02-21 19:56:46][INFO] INPUT SPACE=up
+[2026-02-21 19:56:46][INFO] INPUT D=down
+[2026-02-21 19:56:46][INFO] INPUT SPACE=down
+[2026-02-21 19:56:46][INFO] INPUT W=down
+[2026-02-21 19:56:46][INFO] SNAP fps=51.1 chunks=26437 tris=7145018 draws=1024 inFlightGen=17 inFlightRemesh=0 completed=5 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:46][INFO] INPUT D=up
+[2026-02-21 19:56:46][INFO] INPUT A=down
+[2026-02-21 19:56:47][INFO] INPUT W=up
+[2026-02-21 19:56:47][INFO] INPUT A=up
+[2026-02-21 19:56:47][INFO] INPUT SPACE=up
+[2026-02-21 19:56:47][INFO] SNAP fps=134.8 chunks=26728 tris=69632 draws=14 inFlightGen=24 inFlightRemesh=0 completed=2 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:47][INFO] INPUT A=down
+[2026-02-21 19:56:48][INFO] SNAP fps=155.1 chunks=26983 tris=330082 draws=41 inFlightGen=24 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:49][INFO] SNAP fps=119.7 chunks=27303 tris=8784976 draws=1274 inFlightGen=16 inFlightRemesh=0 completed=8 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:49][INFO] INPUT W=down
+[2026-02-21 19:56:50][INFO] INPUT A=up
+[2026-02-21 19:56:50][INFO] INPUT SPACE=down
+[2026-02-21 19:56:50][INFO] SNAP fps=39.3 chunks=27614 tris=8630446 draws=1197 inFlightGen=16 inFlightRemesh=0 completed=12 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:51][INFO] INPUT SPACE=up
+[2026-02-21 19:56:51][INFO] SNAP fps=111.5 chunks=27927 tris=284966 draws=44 inFlightGen=24 inFlightRemesh=0 completed=2 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:52][INFO] INPUT SPACE=down
+[2026-02-21 19:56:52][INFO] INPUT SPACE=up
+[2026-02-21 19:56:52][INFO] INPUT SPACE=down
+[2026-02-21 19:56:52][INFO] SNAP fps=148.9 chunks=28183 tris=151746 draws=29 inFlightGen=24 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:52][INFO] INPUT SPACE=up
+[2026-02-21 19:56:53][INFO] INPUT W=up
+[2026-02-21 19:56:53][INFO] INPUT SPACE=down
+[2026-02-21 19:56:53][INFO] INPUT SPACE=up
+[2026-02-21 19:56:53][INFO] SNAP fps=158.7 chunks=28507 tris=188606 draws=27 inFlightGen=20 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:53][INFO] INPUT SPACE=down
+[2026-02-21 19:56:54][INFO] INPUT SPACE=up
+[2026-02-21 19:56:54][INFO] INPUT W=down
+[2026-02-21 19:56:54][INFO] INPUT W=up
+[2026-02-21 19:56:54][INFO] INPUT S=down
+[2026-02-21 19:56:54][INFO] SNAP fps=123.3 chunks=28824 tris=3306426 draws=317 inFlightGen=21 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:54][INFO] INPUT SPACE=down
+[2026-02-21 19:56:54][INFO] INPUT A=down
+[2026-02-21 19:56:55][INFO] INPUT S=up
+[2026-02-21 19:56:55][INFO] INPUT W=down
+[2026-02-21 19:56:55][INFO] INPUT A=up
+[2026-02-21 19:56:55][INFO] INPUT W=up
+[2026-02-21 19:56:55][INFO] SNAP fps=149.3 chunks=29154 tris=104630 draws=21 inFlightGen=22 inFlightRemesh=0 completed=2 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:55][INFO] INPUT D=down
+[2026-02-21 19:56:55][INFO] INPUT D=up
+[2026-02-21 19:56:56][INFO] SNAP fps=161.5 chunks=29472 tris=92346 draws=20 inFlightGen=24 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:57][INFO] INPUT W=down
+[2026-02-21 19:56:57][INFO] SNAP fps=164.3 chunks=29796 tris=129210 draws=28 inFlightGen=20 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:57][INFO] INPUT W=up
+[2026-02-21 19:56:58][INFO] SNAP fps=173.1 chunks=30116 tris=215226 draws=35 inFlightGen=24 inFlightRemesh=0 completed=1 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:56:59][INFO] INPUT S=down
+[2026-02-21 19:56:59][INFO] SNAP fps=135.4 chunks=30395 tris=1301922 draws=179 inFlightGen=21 inFlightRemesh=0 completed=1 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:00][INFO] INPUT SPACE=up
+[2026-02-21 19:57:00][INFO] SNAP fps=77.3 chunks=30666 tris=4095356 draws=557 inFlightGen=18 inFlightRemesh=0 completed=5 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:00][INFO] INPUT S=up
+[2026-02-21 19:57:01][INFO] SNAP fps=34.4 chunks=30916 tris=9662240 draws=1392 inFlightGen=16 inFlightRemesh=0 completed=8 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:02][INFO] SNAP fps=34.4 chunks=31150 tris=9093818 draws=1271 inFlightGen=17 inFlightRemesh=0 completed=7 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:03][INFO] INPUT SPACE=down
+[2026-02-21 19:57:03][INFO] INPUT SPACE=up
+[2026-02-21 19:57:03][INFO] INPUT SPACE=down
+[2026-02-21 19:57:03][INFO] INPUT SPACE=up
+[2026-02-21 19:57:03][INFO] SNAP fps=32.7 chunks=31380 tris=8973918 draws=1231 inFlightGen=20 inFlightRemesh=0 completed=8 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:04][INFO] SNAP fps=32.7 chunks=31620 tris=9099980 draws=1260 inFlightGen=16 inFlightRemesh=0 completed=8 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:05][INFO] SNAP fps=33.0 chunks=31851 tris=9171660 draws=1281 inFlightGen=16 inFlightRemesh=0 completed=6 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:06][INFO] SNAP fps=32.1 chunks=32086 tris=8765486 draws=1259 inFlightGen=18 inFlightRemesh=0 completed=8 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:07][INFO] SNAP fps=33.0 chunks=32326 tris=8895560 draws=1263 inFlightGen=16 inFlightRemesh=0 completed=7 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:08][INFO] INPUT SPACE=down
+[2026-02-21 19:57:08][INFO] INPUT SPACE=up
+[2026-02-21 19:57:08][INFO] SNAP fps=33.1 chunks=32580 tris=8836954 draws=1261 inFlightGen=16 inFlightRemesh=0 completed=12 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:08][INFO] INPUT SPACE=down
+[2026-02-21 19:57:08][INFO] INPUT SPACE=up
+[2026-02-21 19:57:09][INFO] INPUT SPACE=down
+[2026-02-21 19:57:09][INFO] SNAP fps=34.0 chunks=32852 tris=8747514 draws=1244 inFlightGen=16 inFlightRemesh=0 completed=16 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:09][INFO] INPUT SPACE=up
+[2026-02-21 19:57:09][INFO] INPUT SPACE=down
+[2026-02-21 19:57:10][INFO] INPUT SPACE=up
+[2026-02-21 19:57:10][INFO] INPUT SPACE=down
+[2026-02-21 19:57:10][INFO] INPUT SPACE=up
+[2026-02-21 19:57:10][INFO] SNAP fps=34.4 chunks=33132 tris=8652642 draws=1212 inFlightGen=16 inFlightRemesh=0 completed=12 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:11][INFO] SNAP fps=105.3 chunks=33448 tris=841120 draws=110 inFlightGen=23 inFlightRemesh=0 completed=0 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:12][INFO] INPUT W=down
+[2026-02-21 19:57:12][INFO] INPUT SPACE=down
+[2026-02-21 19:57:12][INFO] INPUT SPACE=up
+[2026-02-21 19:57:12][INFO] INPUT SPACE=down
+[2026-02-21 19:57:12][INFO] INPUT SPACE=up
+[2026-02-21 19:57:12][INFO] SNAP fps=77.0 chunks=33760 tris=8417426 draws=1207 inFlightGen=16 inFlightRemesh=0 completed=7 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:13][INFO] INPUT A=down
+[2026-02-21 19:57:13][INFO] INPUT A=up
+[2026-02-21 19:57:13][INFO] INPUT W=up
+[2026-02-21 19:57:13][INFO] SNAP fps=41.3 chunks=34096 tris=6126068 draws=566 inFlightGen=16 inFlightRemesh=0 completed=1 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:14][INFO] INPUT S=down
+[2026-02-21 19:57:14][INFO] INPUT LSHIFT=down
+[2026-02-21 19:57:14][INFO] INPUT LSHIFT=up
+[2026-02-21 19:57:14][INFO] SNAP fps=46.2 chunks=34424 tris=8110690 draws=1159 inFlightGen=16 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:14][INFO] INPUT S=up
+[2026-02-21 19:57:15][INFO] SNAP fps=43.6 chunks=34661 tris=8197070 draws=1171 inFlightGen=16 inFlightRemesh=0 completed=12 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:16][INFO] INPUT S=down
+[2026-02-21 19:57:16][INFO] INPUT S=up
+[2026-02-21 19:57:16][INFO] SNAP fps=43.6 chunks=34932 tris=8005936 draws=1135 inFlightGen=16 inFlightRemesh=0 completed=8 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:17][INFO] INPUT S=down
+[2026-02-21 19:57:17][INFO] INPUT S=up
+[2026-02-21 19:57:17][INFO] SNAP fps=43.3 chunks=35232 tris=8252190 draws=1185 inFlightGen=16 inFlightRemesh=0 completed=12 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:18][INFO] SNAP fps=43.0 chunks=35494 tris=8279046 draws=1187 inFlightGen=24 inFlightRemesh=15 completed=27 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:19][INFO] SNAP fps=42.6 chunks=35742 tris=8190834 draws=1180 inFlightGen=16 inFlightRemesh=0 completed=8 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:20][INFO] SNAP fps=43.3 chunks=36047 tris=8273630 draws=1182 inFlightGen=18 inFlightRemesh=0 completed=8 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:21][INFO] INPUT SPACE=down
+[2026-02-21 19:57:21][INFO] INPUT SPACE=up
+[2026-02-21 19:57:21][INFO] INPUT SPACE=down
+[2026-02-21 19:57:21][INFO] INPUT SPACE=up
+[2026-02-21 19:57:21][INFO] SNAP fps=44.3 chunks=36371 tris=8181296 draws=1168 inFlightGen=16 inFlightRemesh=0 completed=4 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:22][INFO] INPUT ESC=down
+[2026-02-21 19:57:22][INFO] INPUT capture released
+[2026-02-21 19:57:22][INFO] INPUT ESC=up
+[2026-02-21 19:57:22][INFO] SNAP fps=43.3 chunks=36507 tris=8222580 draws=1183 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=1 loadingOverlay=0 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:57:23][INFO] INPUT ESC=down
+[2026-02-21 19:57:23][INFO] INPUT capture guard active
+[2026-02-21 19:57:23][INFO] INPUT ESC=up
+[2026-02-21 19:57:23][INFO] SNAP fps=42.9 chunks=36575 tris=8222580 draws=1183 inFlightGen=18 inFlightRemesh=0 completed=8 menuOpen=0 loadingOverlay=0 worldStarted=1 mouseCaptured=1
+[2026-02-21 19:57:24][INFO] INPUT ESC=down
+[2026-02-21 19:57:24][INFO] INPUT capture released
+[2026-02-21 19:57:24][INFO] INPUT ESC=up
+[2026-02-21 19:57:24][INFO] SNAP fps=41.3 chunks=36835 tris=9087992 draws=1284 inFlightGen=0 inFlightRemesh=0 completed=0 menuOpen=1 loadingOverlay=0 worldStarted=1 mouseCaptured=0
+[2026-02-21 19:57:30][INFO] Normal shutdown

@@ -1,0 +1,5 @@
+Working directory set to: C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine
+OpenGL Version: 4.6.0 Core Profile Context 25.8.1.250617
+Renderer: AMD Radeon(TM) Graphics
+Bindless textures: ENABLED
+Bindless sampler rejected (glGetError=0x502) -> fallback to bound textures

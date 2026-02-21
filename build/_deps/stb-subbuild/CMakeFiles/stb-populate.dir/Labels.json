@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/stb-subbuild/CMakeFiles/stb-populate"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/stb-subbuild/CMakeFiles/3fd880211d133adb8007bdff00c182b7/stb-populate.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/stb-subbuild/CMakeFiles/de702a88125b3b72bbb5d6a8f3e6413b/stb-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/stb-subbuild/CMakeFiles/ef37ec9a31ede09dfae65e16ce08e3d8/stb-populate-build.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/stb-subbuild/CMakeFiles/ef37ec9a31ede09dfae65e16ce08e3d8/stb-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/stb-subbuild/CMakeFiles/ef37ec9a31ede09dfae65e16ce08e3d8/stb-populate-download.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/stb-subbuild/CMakeFiles/ef37ec9a31ede09dfae65e16ce08e3d8/stb-populate-install.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/stb-subbuild/CMakeFiles/ef37ec9a31ede09dfae65e16ce08e3d8/stb-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/stb-subbuild/CMakeFiles/ef37ec9a31ede09dfae65e16ce08e3d8/stb-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/stb-subbuild/CMakeFiles/ef37ec9a31ede09dfae65e16ce08e3d8/stb-populate-test.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/stb-subbuild/CMakeFiles/ef37ec9a31ede09dfae65e16ce08e3d8/stb-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"stb-populate"
+		],
+		"name" : "stb-populate"
+	}
+}

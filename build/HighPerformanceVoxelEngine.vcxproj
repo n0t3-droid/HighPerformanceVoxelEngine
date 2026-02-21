@@ -1,0 +1,507 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8EE0DCD6-232C-301A-BDEA-0F3BCBF7E092}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>HighPerformanceVoxelEngine</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">HighPerformanceVoxelEngine.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">HighPerformanceVoxelEngine</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">HighPerformanceVoxelEngine.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">HighPerformanceVoxelEngine</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">HighPerformanceVoxelEngine.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">HighPerformanceVoxelEngine</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">HighPerformanceVoxelEngine.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">HighPerformanceVoxelEngine</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\vendor;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\libigl_glad-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\stb-src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-src\Cpp;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\entt-src\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fmt-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glfw-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;GLM_FORCE_RADIANS;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;GLM_FORCE_RADIANS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\vendor;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\libigl_glad-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\stb-src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-src\Cpp;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\entt-src\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fmt-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glfw-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\vendor;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\libigl_glad-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\stb-src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-src\Cpp;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\entt-src\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fmt-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glfw-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>Copying runtime assets to output directory</Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/assets C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/Debug/assets
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>_deps\glfw-build\src\Debug\glfw3.lib;Debug\glad.lib;_deps\fmt-build\Debug\fmtd.lib;_deps\glm-build\glm\Debug\glm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/Debug/HighPerformanceVoxelEngine.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/Debug/HighPerformanceVoxelEngine.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\vendor;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\libigl_glad-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\stb-src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-src\Cpp;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\entt-src\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fmt-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glfw-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLM_FORCE_RADIANS;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLM_FORCE_RADIANS;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\vendor;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\libigl_glad-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\stb-src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-src\Cpp;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\entt-src\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fmt-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glfw-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\vendor;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\libigl_glad-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\stb-src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-src\Cpp;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\entt-src\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fmt-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glfw-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>Copying runtime assets to output directory</Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/assets C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/Release/assets
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>_deps\glfw-build\src\Release\glfw3.lib;Release\glad.lib;_deps\fmt-build\Release\fmt.lib;_deps\glm-build\glm\Release\glm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/Release/HighPerformanceVoxelEngine.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/Release/HighPerformanceVoxelEngine.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\vendor;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\libigl_glad-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\stb-src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-src\Cpp;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\entt-src\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fmt-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glfw-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLM_FORCE_RADIANS;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLM_FORCE_RADIANS;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\vendor;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\libigl_glad-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\stb-src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-src\Cpp;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\entt-src\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fmt-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glfw-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\vendor;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\libigl_glad-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\stb-src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-src\Cpp;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\entt-src\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fmt-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glfw-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>Copying runtime assets to output directory</Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/assets C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/MinSizeRel/assets
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>_deps\glfw-build\src\MinSizeRel\glfw3.lib;MinSizeRel\glad.lib;_deps\fmt-build\MinSizeRel\fmt.lib;_deps\glm-build\glm\MinSizeRel\glm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/MinSizeRel/HighPerformanceVoxelEngine.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/MinSizeRel/HighPerformanceVoxelEngine.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\vendor;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\libigl_glad-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\stb-src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-src\Cpp;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\entt-src\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fmt-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glfw-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <BufferSecurityCheck></BufferSecurityCheck>
+      <CallingConvention></CallingConvention>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FloatingPointModel></FloatingPointModel>
+      <ForceConformanceInForLoopScope></ForceConformanceInForLoopScope>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RemoveUnreferencedCodeData></RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <SupportJustMyCode></SupportJustMyCode>
+      <TreatWChar_tAsBuiltInType></TreatWChar_tAsBuiltInType>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLM_FORCE_RADIANS;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLM_FORCE_RADIANS;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\vendor;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\libigl_glad-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\stb-src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-src\Cpp;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\entt-src\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fmt-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glfw-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\vendor;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\libigl_glad-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\stb-src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-src\Cpp;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\entt-src\src;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fmt-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glfw-src\include;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message>Copying runtime assets to output directory</Message>
+      <Command>setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/assets C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/RelWithDebInfo/assets
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>_deps\glfw-build\src\RelWithDebInfo\glfw3.lib;RelWithDebInfo\glad.lib;_deps\fmt-build\RelWithDebInfo\fmt.lib;_deps\glm-build\glm\RelWithDebInfo\glm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <DataExecutionPrevention></DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImageHasSafeExceptionHandlers></ImageHasSafeExceptionHandlers>
+      <ImportLibrary>C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/RelWithDebInfo/HighPerformanceVoxelEngine.lib</ImportLibrary>
+      <LinkErrorReporting></LinkErrorReporting>
+      <ProgramDataBaseFile>C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/RelWithDebInfo/HighPerformanceVoxelEngine.pdb</ProgramDataBaseFile>
+      <RandomizedBaseAddress></RandomizedBaseAddress>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine -BC:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build --check-stamp-file C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\ExternalProject\shared_internal_commands.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FetchContent.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FetchContent\CMakeLists.cmake.in;C:\Program Files\CMake\share\cmake-4.2\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\WindowsPaths.cmake;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\4.2.1\CMakeCCompiler.cmake;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\4.2.1\CMakeCXXCompiler.cmake;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\4.2.1\CMakeRCCompiler.cmake;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\4.2.1\CMakeSystem.cmake;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\cmake.verify_globs;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine -BC:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build --check-stamp-file C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\ExternalProject\shared_internal_commands.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FetchContent.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FetchContent\CMakeLists.cmake.in;C:\Program Files\CMake\share\cmake-4.2\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\WindowsPaths.cmake;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\4.2.1\CMakeCCompiler.cmake;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\4.2.1\CMakeCXXCompiler.cmake;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\4.2.1\CMakeRCCompiler.cmake;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\4.2.1\CMakeSystem.cmake;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\cmake.verify_globs;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine -BC:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build --check-stamp-file C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\ExternalProject\shared_internal_commands.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FetchContent.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FetchContent\CMakeLists.cmake.in;C:\Program Files\CMake\share\cmake-4.2\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\WindowsPaths.cmake;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\4.2.1\CMakeCCompiler.cmake;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\4.2.1\CMakeCXXCompiler.cmake;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\4.2.1\CMakeRCCompiler.cmake;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\4.2.1\CMakeSystem.cmake;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\cmake.verify_globs;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine -BC:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build --check-stamp-file C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\ExternalProject\shared_internal_commands.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FetchContent.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FetchContent\CMakeLists.cmake.in;C:\Program Files\CMake\share\cmake-4.2\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.2\Modules\Platform\WindowsPaths.cmake;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\4.2.1\CMakeCCompiler.cmake;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\4.2.1\CMakeCXXCompiler.cmake;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\4.2.1\CMakeRCCompiler.cmake;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\4.2.1\CMakeSystem.cmake;C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\cmake.verify_globs;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\Application.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\GameTime.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\HardwareDetector.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\Input.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\QualityManager.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\RunLog.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\Telemetry.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\TimeSlicedJobSystem.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\Window.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\BindlessTextures.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\Camera.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\IndirectBuffer.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\Mesh.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\Renderer.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\Shader.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\TextureArray.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\WorldRenderer.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\Chunk.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\ChunkManager.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\Generation.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\SparseVoxelOctree.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\TerrainPreset.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\main.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\physics\AABB.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\physics\PhysicsSystem.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\physics\Raycast.cpp" />
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\threading\ThreadPool.cpp" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\Application.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\GameTime.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\HardwareDetector.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\Input.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\Log.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\QualityManager.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\RunLog.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\Telemetry.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\TimeSlicedJobSystem.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\Timer.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\Window.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\ECS\Registry.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\BindlessTextures.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\Camera.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\IndirectBuffer.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\Mesh.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\Renderer.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\Shader.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\TextureArray.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\WorldRenderer.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\Block.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\Chunk.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\ChunkManager.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\Generation.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\Lighting.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\SparseVoxelOctree.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\TerrainPreset.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\World.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\physics\AABB.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\physics\PhysicsSystem.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\physics\Raycast.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\threading\JobSystem.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\threading\ThreadPool.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\utils\Logger.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\utils\Math.h" />
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\utils\VertexPacking.h" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\ZERO_CHECK.vcxproj">
+      <Project>{8A2B6B74-7AFE-317C-94F6-B95EBC9CAFF7}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fmt-build\fmt.vcxproj">
+      <Project>{042D8AA4-D3CC-357B-A046-578F89D53725}</Project>
+      <Name>fmt</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\glad.vcxproj">
+      <Project>{60083BD1-932D-3936-AF49-A34ECF1D884E}</Project>
+      <Name>glad</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glfw-build\src\glfw.vcxproj">
+      <Project>{959DDE80-0E3C-3E63-AB90-F5DEE22D3614}</Project>
+      <Name>glfw</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-build\glm\glm.vcxproj">
+      <Project>{3165FAFE-4B10-3057-870C-749AFEAD408A}</Project>
+      <Name>glm</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-subbuild\CMakeFiles\3dc52805b4794f32e7059611fbf46220\glm-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-subbuild\CMakeFiles\3dc52805b4794f32e7059611fbf46220\glm-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-subbuild\CMakeFiles\3dc52805b4794f32e7059611fbf46220\glm-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-subbuild\CMakeFiles\3dc52805b4794f32e7059611fbf46220\glm-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-subbuild\CMakeFiles\3dc52805b4794f32e7059611fbf46220\glm-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-subbuild\CMakeFiles\3dc52805b4794f32e7059611fbf46220\glm-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-subbuild\CMakeFiles\3dc52805b4794f32e7059611fbf46220\glm-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-subbuild\CMakeFiles\3dc52805b4794f32e7059611fbf46220\glm-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-subbuild\CMakeFiles\b8d3c76c44de2b8e9faaa2d0bc024c55\glm-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-subbuild\CMakeFiles\fdbea2795b315fb854a546512504b895\glm-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glm-subbuild\CMakeFiles\glm-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{6E7275EC-A1C2-3523-94A3-8223BA83F33E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fast_noise_lite-subbuild/CMakeFiles/fast_noise_lite-populate"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fast_noise_lite-subbuild/CMakeFiles/c698729c10f030edeb9114979e422314/fast_noise_lite-populate.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fast_noise_lite-subbuild/CMakeFiles/a817241a2df4c46a00f1002e320be55d/fast_noise_lite-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fast_noise_lite-subbuild/CMakeFiles/da6a88da70c2deb4f3f961ccc7f3ebc8/fast_noise_lite-populate-build.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fast_noise_lite-subbuild/CMakeFiles/da6a88da70c2deb4f3f961ccc7f3ebc8/fast_noise_lite-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fast_noise_lite-subbuild/CMakeFiles/da6a88da70c2deb4f3f961ccc7f3ebc8/fast_noise_lite-populate-download.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fast_noise_lite-subbuild/CMakeFiles/da6a88da70c2deb4f3f961ccc7f3ebc8/fast_noise_lite-populate-install.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fast_noise_lite-subbuild/CMakeFiles/da6a88da70c2deb4f3f961ccc7f3ebc8/fast_noise_lite-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fast_noise_lite-subbuild/CMakeFiles/da6a88da70c2deb4f3f961ccc7f3ebc8/fast_noise_lite-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fast_noise_lite-subbuild/CMakeFiles/da6a88da70c2deb4f3f961ccc7f3ebc8/fast_noise_lite-populate-test.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fast_noise_lite-subbuild/CMakeFiles/da6a88da70c2deb4f3f961ccc7f3ebc8/fast_noise_lite-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"fast_noise_lite-populate"
+		],
+		"name" : "fast_noise_lite-populate"
+	}
+}

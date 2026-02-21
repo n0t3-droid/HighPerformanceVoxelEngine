@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glfw-subbuild/CMakeFiles/glfw-populate"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glfw-subbuild/CMakeFiles/4a3e15c24540ddbadf98ca603741dfc9/glfw-populate.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glfw-subbuild/CMakeFiles/979a0f1c5b640366039b6a4c6a559781/glfw-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glfw-subbuild/CMakeFiles/4ecef1178722a4bedcccb04b191186eb/glfw-populate-build.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glfw-subbuild/CMakeFiles/4ecef1178722a4bedcccb04b191186eb/glfw-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glfw-subbuild/CMakeFiles/4ecef1178722a4bedcccb04b191186eb/glfw-populate-download.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glfw-subbuild/CMakeFiles/4ecef1178722a4bedcccb04b191186eb/glfw-populate-install.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glfw-subbuild/CMakeFiles/4ecef1178722a4bedcccb04b191186eb/glfw-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glfw-subbuild/CMakeFiles/4ecef1178722a4bedcccb04b191186eb/glfw-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glfw-subbuild/CMakeFiles/4ecef1178722a4bedcccb04b191186eb/glfw-populate-test.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glfw-subbuild/CMakeFiles/4ecef1178722a4bedcccb04b191186eb/glfw-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"glfw-populate"
+		],
+		"name" : "glfw-populate"
+	}
+}

@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glad-subbuild/CMakeFiles/glad-populate"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glad-subbuild/CMakeFiles/d2f7f1fe39cc9a2ab070b21af1b24145/glad-populate.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glad-subbuild/CMakeFiles/89a5f6be05b740d45b058c0ff4c46427/glad-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glad-subbuild/CMakeFiles/4f853b05d49501abec4b2af8bc011ae1/glad-populate-build.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glad-subbuild/CMakeFiles/4f853b05d49501abec4b2af8bc011ae1/glad-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glad-subbuild/CMakeFiles/4f853b05d49501abec4b2af8bc011ae1/glad-populate-download.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glad-subbuild/CMakeFiles/4f853b05d49501abec4b2af8bc011ae1/glad-populate-install.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glad-subbuild/CMakeFiles/4f853b05d49501abec4b2af8bc011ae1/glad-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glad-subbuild/CMakeFiles/4f853b05d49501abec4b2af8bc011ae1/glad-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glad-subbuild/CMakeFiles/4f853b05d49501abec4b2af8bc011ae1/glad-populate-test.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glad-subbuild/CMakeFiles/4f853b05d49501abec4b2af8bc011ae1/glad-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"glad-populate"
+		],
+		"name" : "glad-populate"
+	}
+}

@@ -1,0 +1,152 @@
+^C:\USERS\YLBER\DOWNLOADS\R9-HYPER-CORE\HIGHPERFORMANCEVOXELENGINE\BUILD\_DEPS\LIBIGL_GLAD-SUBBUILD\CMAKEFILES\0B3E89F6A418C3256B2142EFFD19B812\LIBIGL_GLAD-POPULATE-MKDIR.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -Dcfgdir=/Debug -P C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/libigl_glad-populate-prefix/tmp/libigl_glad-populate-mkdirs.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/libigl_glad-populate-prefix/src/libigl_glad-populate-stamp/Debug/libigl_glad-populate-mkdir
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\YLBER\DOWNLOADS\R9-HYPER-CORE\HIGHPERFORMANCEVOXELENGINE\BUILD\_DEPS\LIBIGL_GLAD-SUBBUILD\CMAKEFILES\0B3E89F6A418C3256B2142EFFD19B812\LIBIGL_GLAD-POPULATE-DOWNLOAD.RULE
+setlocal
+cd C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE -P C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/libigl_glad-populate-prefix/src/libigl_glad-populate-stamp/download-libigl_glad-populate.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE -P C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/libigl_glad-populate-prefix/src/libigl_glad-populate-stamp/verify-libigl_glad-populate.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE -P C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/libigl_glad-populate-prefix/src/libigl_glad-populate-stamp/extract-libigl_glad-populate.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/libigl_glad-populate-prefix/src/libigl_glad-populate-stamp/Debug/libigl_glad-populate-download
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\YLBER\DOWNLOADS\R9-HYPER-CORE\HIGHPERFORMANCEVOXELENGINE\BUILD\_DEPS\LIBIGL_GLAD-SUBBUILD\CMAKEFILES\0B3E89F6A418C3256B2142EFFD19B812\LIBIGL_GLAD-POPULATE-UPDATE.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/libigl_glad-populate-prefix/src/libigl_glad-populate-stamp/Debug/libigl_glad-populate-update
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\YLBER\DOWNLOADS\R9-HYPER-CORE\HIGHPERFORMANCEVOXELENGINE\BUILD\_DEPS\LIBIGL_GLAD-SUBBUILD\CMAKEFILES\0B3E89F6A418C3256B2142EFFD19B812\LIBIGL_GLAD-POPULATE-PATCH.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/libigl_glad-populate-prefix/src/libigl_glad-populate-stamp/Debug/libigl_glad-populate-patch
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\YLBER\DOWNLOADS\R9-HYPER-CORE\HIGHPERFORMANCEVOXELENGINE\BUILD\_DEPS\LIBIGL_GLAD-SUBBUILD\CMAKEFILES\0B3E89F6A418C3256B2142EFFD19B812\LIBIGL_GLAD-POPULATE-CONFIGURE.RULE
+setlocal
+cd C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\libigl_glad-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/libigl_glad-populate-prefix/src/libigl_glad-populate-stamp/Debug/libigl_glad-populate-configure
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\YLBER\DOWNLOADS\R9-HYPER-CORE\HIGHPERFORMANCEVOXELENGINE\BUILD\_DEPS\LIBIGL_GLAD-SUBBUILD\CMAKEFILES\0B3E89F6A418C3256B2142EFFD19B812\LIBIGL_GLAD-POPULATE-BUILD.RULE
+setlocal
+cd C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\libigl_glad-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/libigl_glad-populate-prefix/src/libigl_glad-populate-stamp/Debug/libigl_glad-populate-build
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\YLBER\DOWNLOADS\R9-HYPER-CORE\HIGHPERFORMANCEVOXELENGINE\BUILD\_DEPS\LIBIGL_GLAD-SUBBUILD\CMAKEFILES\0B3E89F6A418C3256B2142EFFD19B812\LIBIGL_GLAD-POPULATE-INSTALL.RULE
+setlocal
+cd C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\libigl_glad-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/libigl_glad-populate-prefix/src/libigl_glad-populate-stamp/Debug/libigl_glad-populate-install
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\YLBER\DOWNLOADS\R9-HYPER-CORE\HIGHPERFORMANCEVOXELENGINE\BUILD\_DEPS\LIBIGL_GLAD-SUBBUILD\CMAKEFILES\0B3E89F6A418C3256B2142EFFD19B812\LIBIGL_GLAD-POPULATE-TEST.RULE
+setlocal
+cd C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\libigl_glad-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/libigl_glad-populate-prefix/src/libigl_glad-populate-stamp/Debug/libigl_glad-populate-test
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\YLBER\DOWNLOADS\R9-HYPER-CORE\HIGHPERFORMANCEVOXELENGINE\BUILD\_DEPS\LIBIGL_GLAD-SUBBUILD\CMAKEFILES\12C437EB35650DA7DD4492CA5B4A3DD1\LIBIGL_GLAD-POPULATE-COMPLETE.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/CMakeFiles/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/CMakeFiles/Debug/libigl_glad-populate-complete
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/libigl_glad-populate-prefix/src/libigl_glad-populate-stamp/Debug/libigl_glad-populate-done
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\YLBER\DOWNLOADS\R9-HYPER-CORE\HIGHPERFORMANCEVOXELENGINE\BUILD\_DEPS\LIBIGL_GLAD-SUBBUILD\CMAKEFILES\9EBFDB0294ADA9AC4F145A94737792AD\LIBIGL_GLAD-POPULATE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\YLBER\DOWNLOADS\R9-HYPER-CORE\HIGHPERFORMANCEVOXELENGINE\BUILD\_DEPS\LIBIGL_GLAD-SUBBUILD\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild -BC:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild --check-stamp-file C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

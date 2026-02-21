@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glfw-subbuild\CMakeFiles\4a3e15c24540ddbadf98ca603741dfc9\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{26E86A81-AC52-3531-B8A0-D9DCF418ECDC}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

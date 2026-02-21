@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fmt-subbuild/CMakeFiles/fmt-populate"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fmt-subbuild/CMakeFiles/c60a987bde02d77bc9b7daf78e675e33/fmt-populate.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fmt-subbuild/CMakeFiles/96b53fef8611754fad958b9f21ec2cf1/fmt-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fmt-subbuild/CMakeFiles/2ce602251fe0d31ec673083c13928eac/fmt-populate-build.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fmt-subbuild/CMakeFiles/2ce602251fe0d31ec673083c13928eac/fmt-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fmt-subbuild/CMakeFiles/2ce602251fe0d31ec673083c13928eac/fmt-populate-download.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fmt-subbuild/CMakeFiles/2ce602251fe0d31ec673083c13928eac/fmt-populate-install.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fmt-subbuild/CMakeFiles/2ce602251fe0d31ec673083c13928eac/fmt-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fmt-subbuild/CMakeFiles/2ce602251fe0d31ec673083c13928eac/fmt-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fmt-subbuild/CMakeFiles/2ce602251fe0d31ec673083c13928eac/fmt-populate-test.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/fmt-subbuild/CMakeFiles/2ce602251fe0d31ec673083c13928eac/fmt-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"fmt-populate"
+		],
+		"name" : "fmt-populate"
+	}
+}

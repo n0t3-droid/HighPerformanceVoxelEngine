@@ -1,0 +1,10 @@
+^C:\USERS\YLBER\DOWNLOADS\R9-HYPER-CORE\HIGHPERFORMANCEVOXELENGINE\BUILD\_DEPS\LIBIGL_GLAD-SUBBUILD\CMAKEFILES\9EBFDB0294ADA9AC4F145A94737792AD\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild -BC:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/libigl_glad-populate.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

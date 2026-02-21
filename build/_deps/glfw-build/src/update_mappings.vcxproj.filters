@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\CMakeFiles\0c32983e9f0c0ca0dfea245ae1434398\update_mappings.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glfw-src\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glfw-src\src\mappings.h.in">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glfw-src\CMake\GenerateMappings.cmake" />
+    <None Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\glfw-build\src\CMakeFiles\update_mappings" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{21A404E2-3861-3293-814B-E4EA072E7307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{91EE15BD-60B4-3B3B-BC21-4570D24BFB0B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

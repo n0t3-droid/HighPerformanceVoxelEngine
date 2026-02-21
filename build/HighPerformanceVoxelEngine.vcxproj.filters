@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\GameTime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\HardwareDetector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\QualityManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\RunLog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\Telemetry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\TimeSlicedJobSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\BindlessTextures.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\IndirectBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\TextureArray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\WorldRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\Chunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\ChunkManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\Generation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\SparseVoxelOctree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\TerrainPreset.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\physics\AABB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\physics\PhysicsSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\physics\Raycast.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\threading\ThreadPool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\Application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\GameTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\HardwareDetector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\Input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\Log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\QualityManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\RunLog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\Telemetry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\TimeSlicedJobSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\ECS\Registry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\BindlessTextures.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\IndirectBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\Renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\TextureArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Renderer\WorldRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\Block.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\Chunk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\ChunkManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\Generation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\Lighting.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\SparseVoxelOctree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\TerrainPreset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\World.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\physics\AABB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\physics\PhysicsSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\physics\Raycast.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\threading\JobSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\threading\ThreadPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\utils\Logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\utils\Math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\utils\VertexPacking.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{91EE15BD-60B4-3B3B-BC21-4570D24BFB0B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{FF3FB630-9F49-38AF-98CC-6E956E586966}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

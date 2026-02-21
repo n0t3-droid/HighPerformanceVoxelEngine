@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/CMakeFiles/libigl_glad-populate"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/CMakeFiles/9ebfdb0294ada9ac4f145a94737792ad/libigl_glad-populate.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/CMakeFiles/12c437eb35650da7dd4492ca5b4a3dd1/libigl_glad-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/CMakeFiles/0b3e89f6a418c3256b2142effd19b812/libigl_glad-populate-build.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/CMakeFiles/0b3e89f6a418c3256b2142effd19b812/libigl_glad-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/CMakeFiles/0b3e89f6a418c3256b2142effd19b812/libigl_glad-populate-download.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/CMakeFiles/0b3e89f6a418c3256b2142effd19b812/libigl_glad-populate-install.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/CMakeFiles/0b3e89f6a418c3256b2142effd19b812/libigl_glad-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/CMakeFiles/0b3e89f6a418c3256b2142effd19b812/libigl_glad-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/CMakeFiles/0b3e89f6a418c3256b2142effd19b812/libigl_glad-populate-test.rule"
+		},
+		{
+			"file" : "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-subbuild/CMakeFiles/0b3e89f6a418c3256b2142effd19b812/libigl_glad-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"libigl_glad-populate"
+		],
+		"name" : "libigl_glad-populate"
+	}
+}

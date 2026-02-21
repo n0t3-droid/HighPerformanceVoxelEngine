@@ -1,0 +1,10 @@
+^C:\USERS\YLBER\DOWNLOADS\R9-HYPER-CORE\HIGHPERFORMANCEVOXELENGINE\BUILD\_DEPS\ENTT-SUBBUILD\CMAKEFILES\66996182227BB99F39967165900A664D\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/entt-subbuild -BC:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/entt-subbuild --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/entt-subbuild/entt-populate.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

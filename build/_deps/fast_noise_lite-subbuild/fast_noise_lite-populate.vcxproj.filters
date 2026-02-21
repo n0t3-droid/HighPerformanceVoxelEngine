@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-subbuild\CMakeFiles\da6a88da70c2deb4f3f961ccc7f3ebc8\fast_noise_lite-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-subbuild\CMakeFiles\da6a88da70c2deb4f3f961ccc7f3ebc8\fast_noise_lite-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-subbuild\CMakeFiles\da6a88da70c2deb4f3f961ccc7f3ebc8\fast_noise_lite-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-subbuild\CMakeFiles\da6a88da70c2deb4f3f961ccc7f3ebc8\fast_noise_lite-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-subbuild\CMakeFiles\da6a88da70c2deb4f3f961ccc7f3ebc8\fast_noise_lite-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-subbuild\CMakeFiles\da6a88da70c2deb4f3f961ccc7f3ebc8\fast_noise_lite-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-subbuild\CMakeFiles\da6a88da70c2deb4f3f961ccc7f3ebc8\fast_noise_lite-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-subbuild\CMakeFiles\da6a88da70c2deb4f3f961ccc7f3ebc8\fast_noise_lite-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-subbuild\CMakeFiles\a817241a2df4c46a00f1002e320be55d\fast_noise_lite-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-subbuild\CMakeFiles\c698729c10f030edeb9114979e422314\fast_noise_lite-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\build\_deps\fast_noise_lite-subbuild\CMakeFiles\fast_noise_lite-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{063B103F-E9DA-371A-A444-F05F8FB3FD4F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

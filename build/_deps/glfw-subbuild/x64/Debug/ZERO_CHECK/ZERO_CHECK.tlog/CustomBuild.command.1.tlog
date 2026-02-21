@@ -1,0 +1,10 @@
+^C:\USERS\YLBER\DOWNLOADS\R9-HYPER-CORE\HIGHPERFORMANCEVOXELENGINE\BUILD\_DEPS\GLFW-SUBBUILD\CMAKEFILES\4A3E15C24540DDBADF98CA603741DFC9\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glfw-subbuild -BC:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glfw-subbuild --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glfw-subbuild/glfw-populate.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
