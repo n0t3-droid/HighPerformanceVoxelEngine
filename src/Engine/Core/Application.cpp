@@ -2784,6 +2784,7 @@ namespace Engine {
         bool dayNightCycle = GetEnvOrIniBool("HVE_DAY_NIGHT", ini, "day_night_cycle", false);
         bool crosshairEnabled = GetEnvBool("HVE_CROSSHAIR", true);
         bool hotbarEnabled = GetEnvBool("HVE_HOTBAR", true);
+        const bool futuristicUi = GetEnvBool("HVE_FUTURISTIC_UI", true);
         const bool simpleBuild = GetEnvBool("HVE_SIMPLE_BUILD", true);
         const bool strictMouseCapture = GetEnvBool("HVE_STRICT_MOUSE_CAPTURE", true);
         const bool traceRuntime = GetEnvBool("HVE_TRACE_RUNTIME", true);
@@ -6464,14 +6465,29 @@ namespace Engine {
                     }
                 };
 
-                const float panelW = 0.58f;
-                const float panelH = 0.40f;
+                const float hudPulse = futuristicUi ? (0.5f + 0.5f * std::sin((float)now * 2.25f)) : 0.0f;
+                const float panelW = futuristicUi ? 0.62f : 0.58f;
+                const float panelH = futuristicUi ? 0.44f : 0.40f;
                 const float panelX0 = -0.98f;
                 const float panelY1 = 0.98f;
                 const float panelX1 = panelX0 + panelW;
                 const float panelY0 = panelY1 - panelH;
-                pushQuad(panelX0, panelY0, panelX1, panelY1, 0.05f, 0.07f, 0.12f, 0.85f);
-                pushQuad(panelX0 + 0.004f, panelY0 + 0.004f, panelX1 - 0.004f, panelY1 - 0.004f, 0.08f, 0.12f, 0.20f, 0.92f);
+                if (futuristicUi) {
+                    pushQuad(panelX0 - 0.006f, panelY0 - 0.006f, panelX1 + 0.006f, panelY1 + 0.006f,
+                             0.12f, 0.55f + 0.15f * hudPulse, 1.00f, 0.18f + 0.08f * hudPulse);
+                    pushQuad(panelX0, panelY0, panelX1, panelY1, 0.03f, 0.05f, 0.10f, 0.88f);
+                    pushQuad(panelX0 + 0.004f, panelY0 + 0.004f, panelX1 - 0.004f, panelY1 - 0.004f, 0.05f, 0.10f, 0.17f, 0.94f);
+                    pushQuad(panelX0 + 0.004f, panelY1 - 0.045f, panelX1 - 0.004f, panelY1 - 0.004f,
+                             0.10f, 0.28f, 0.45f + 0.15f * hudPulse, 0.86f);
+                    for (int i = 0; i < 6; ++i) {
+                        const float gy = panelY0 + 0.02f + i * 0.06f;
+                        pushQuad(panelX0 + 0.008f, gy, panelX1 - 0.008f, gy + 0.002f,
+                                 0.22f, 0.70f, 1.00f, 0.07f);
+                    }
+                } else {
+                    pushQuad(panelX0, panelY0, panelX1, panelY1, 0.05f, 0.07f, 0.12f, 0.85f);
+                    pushQuad(panelX0 + 0.004f, panelY0 + 0.004f, panelX1 - 0.004f, panelY1 - 0.004f, 0.08f, 0.12f, 0.20f, 0.92f);
+                }
 
                 const Engine::EliteTelemetrySnapshot elite = Telemetry::GetEliteMetrics();
 
@@ -6488,7 +6504,7 @@ namespace Engine {
                 float yPx = 16.0f;
                 const float line = 16.0f;
 
-                pushTextPx(xPx, yPx, "PERF HUD", 1.1f, 0.90f, 0.97f, 1.00f, 0.95f);
+                pushTextPx(xPx, yPx, futuristicUi ? "AETHERFORGE // PERFORMANCE" : "PERF HUD", 1.1f, 0.90f, 0.97f, 1.00f, 0.95f);
                 yPx += line;
                 {
                     std::ostringstream ss;
@@ -7923,11 +7939,27 @@ namespace Engine {
                 const float total = slots * size + (slots - 1) * pad;
                 const float startX = -0.5f * total;
                 const float y = -0.86f;
+                const float hotbarPulse = futuristicUi ? (0.5f + 0.5f * std::sin((float)now * 3.2f)) : 0.0f;
+
+                if (futuristicUi) {
+                    const float trayX0 = startX - 0.04f;
+                    const float trayX1 = startX + total + 0.04f;
+                    const float trayY0 = y - 0.03f;
+                    const float trayY1 = y + size + 0.03f;
+                    pushQuad(trayX0 - 0.005f, trayY0 - 0.005f, trayX1 + 0.005f, trayY1 + 0.005f,
+                             0.12f, 0.56f + 0.12f * hotbarPulse, 1.00f, 0.20f + 0.08f * hotbarPulse);
+                    pushQuad(trayX0, trayY0, trayX1, trayY1, 0.03f, 0.05f, 0.09f, 0.88f);
+                    pushQuad(trayX0 + 0.004f, trayY0 + 0.004f, trayX1 - 0.004f, trayY1 - 0.004f, 0.06f, 0.10f, 0.16f, 0.94f);
+                    const float scanY = trayY0 + 0.012f + (trayY1 - trayY0 - 0.03f) * hotbarPulse;
+                    pushQuad(trayX0 + 0.01f, scanY, trayX1 - 0.01f, scanY + 0.006f, 0.20f, 0.80f, 1.00f, 0.14f);
+                }
 
                 for (int i = 0; i < slots; ++i) {
                     const int id = (int)hotbarSlots[(size_t)i].id;
                     float r = 0.2f, g = 0.2f, b = 0.2f;
-                    float cr = 0.1f, cg = 0.1f, cb = 0.1f;
+                    float cr = futuristicUi ? 0.05f : 0.1f;
+                    float cg = futuristicUi ? 0.08f : 0.1f;
+                    float cb = futuristicUi ? 0.13f : 0.1f;
                     colorForBlock(id, r, g, b);
 
                     const float x0 = startX + i * (size + pad);
@@ -7946,6 +7978,12 @@ namespace Engine {
                         ir = std::min(1.0f, ir + 0.10f);
                         ig = std::min(1.0f, ig + 0.10f);
                         ib = std::min(1.0f, ib + 0.10f);
+                    }
+
+                    if (futuristicUi) {
+                        const float glowA = selected ? (0.30f + 0.22f * hotbarPulse) : 0.08f;
+                        pushInvFrame(x0 - 0.004f, y0 - 0.004f, x1 + 0.004f, y1 + 0.004f, 0.004f,
+                                     0.22f, 0.78f, 1.00f, glowA);
                     }
 
                     if (id > 0) {
@@ -9590,13 +9628,20 @@ namespace Engine {
                 glUseProgram(crossProg);
                 const GLint crossColorLoc = glGetUniformLocation(crossProg, "u_Color");
                 glBindVertexArray(crossVao);
+                const float crossPulse = futuristicUi ? (0.5f + 0.5f * std::sin((float)now * 4.1f)) : 0.0f;
 
                 glLineWidth(crossOuterWidth);
-                if (crossColorLoc >= 0) glUniform4f(crossColorLoc, 0.04f, 0.06f, 0.08f, std::min(1.0f, crossAlpha));
+                if (crossColorLoc >= 0) {
+                    if (futuristicUi) glUniform4f(crossColorLoc, 0.18f, 0.10f, 0.34f, std::min(1.0f, crossAlpha * (0.72f + 0.25f * crossPulse)));
+                    else glUniform4f(crossColorLoc, 0.04f, 0.06f, 0.08f, std::min(1.0f, crossAlpha));
+                }
                 glDrawArrays(GL_LINES, 0, 8);
 
                 glLineWidth(crossInnerWidth);
-                if (crossColorLoc >= 0) glUniform4f(crossColorLoc, 0.90f, 0.97f, 1.00f, crossAlpha);
+                if (crossColorLoc >= 0) {
+                    if (futuristicUi) glUniform4f(crossColorLoc, 0.40f, 0.92f, 1.00f, std::min(1.0f, crossAlpha * (0.90f + 0.10f * crossPulse)));
+                    else glUniform4f(crossColorLoc, 0.90f, 0.97f, 1.00f, crossAlpha);
+                }
                 glDrawArrays(GL_LINES, 0, 8);
 
                 glLineWidth(1.0f);

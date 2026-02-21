@@ -239,6 +239,11 @@ void main() {
     vec3 coolGrade = vec3(0.86, 0.92, 1.04);
     lit *= mix(vec3(1.0), warmGrade, goldenHour * 0.38);
     lit *= mix(vec3(1.0), coolGrade, nightFactor * 0.22);
+    if (isArchitectureBlock(blockType)) {
+        vec3 holoEdge = vec3(0.20, 0.70, 1.00);
+        lit += holoEdge * (0.05 + 0.10 * nightFactor);
+    }
+    lit *= mix(vec3(1.0), vec3(0.95, 1.02, 1.08), 0.10 * nightFactor);
 
     // Subtle color grade for richer contrast without heavy cost
     float luma = dot(lit, vec3(0.2126, 0.7152, 0.0722));
