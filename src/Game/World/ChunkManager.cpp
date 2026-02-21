@@ -146,8 +146,12 @@ namespace Game { namespace World {
         const glm::ivec3 center = WorldToChunkCoord(playerBlock);
 
         const int verticalRadius = GetEnvIntClamped("HVE_VERTICAL_RADIUS", 48, 8, 96);
-        const int minY = center.y - verticalRadius;
-        const int maxY = center.y + verticalRadius;
+        const int worldMaxYChunk = std::max(0, heightChunks - 1);
+        const int minY = std::max(0, center.y - verticalRadius);
+        const int maxY = std::min(worldMaxYChunk, center.y + verticalRadius);
+        if (minY > maxY) {
+            return;
+        }
 
         const bool predictivePrewarm = GetEnvIntClamped("HVE_PREDICTIVE_PREWARM", 1, 0, 1) != 0;
         const int prewarmMaxChunks = GetEnvIntClamped("HVE_PREWARM_CHUNKS", 8, 0, 32);

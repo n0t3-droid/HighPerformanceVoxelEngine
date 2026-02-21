@@ -31,10 +31,8 @@ const uint kStoneBlock = 3u;
 const uint kWaterBlock = 5u;
 
 uint canonicalBlockType(uint blockType) {
-    if (blockType == kDirtBlock || blockType == kGrassBlock || blockType == kStoneBlock || blockType == kWaterBlock) {
-        return blockType;
-    }
     if (blockType == 0u) return 0u;
+    if (blockType <= uint(kAtlasTileCount)) return blockType;
     return kStoneBlock;
 }
 
@@ -143,7 +141,7 @@ void main() {
     }
     
     // Two-pass transparency: draw opaque first, then transparent.
-    bool isTransparent = (blockType == kWaterBlock);
+    bool isTransparent = (blockType == kWaterBlock) || isGlassBlock(blockType) || isPaneBlock(blockType);
     if (u_RenderPass == 0 && isTransparent) discard;
     if (u_RenderPass == 1 && !isTransparent) discard;
 
@@ -217,6 +215,19 @@ void main() {
         float isTop = step(0.95, N.y);
         alpha = mix(0.84, 0.60, isTop);
         alpha = mix(alpha, 0.38, fresnel * 0.38);
+    }
+
+    if (isGlassBlock(blockType) || isPaneBlock(blockType)) {
+        vec3 N = normalize(v_Normal);
+        vec3 V = normalize(u_ViewPos - v_WorldPos);
+        float ndv = clamp(dot(N, V), 0.0, 1.0);
+        float fresnel = pow(1.0 - ndv, 2.6);
+
+        vec3 glassTint = vec3(0.90, 0.97, 1.02);
+        lit = mix(lit, glassTint, 0.22 + fresnel * 0.30);
+
+        float baseAlpha = isPaneBlock(blockType) ? 0.40 : 0.52;
+        alpha = mix(baseAlpha, 0.30, fresnel * 0.45);
     }
 
     // Sun-dependent cinematic grade (very cheap): warm dusk/dawn + cool night.

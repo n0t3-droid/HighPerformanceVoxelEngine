@@ -2787,7 +2787,7 @@ namespace Engine {
         const bool simpleBuild = GetEnvBool("HVE_SIMPLE_BUILD", true);
         const bool strictMouseCapture = GetEnvBool("HVE_STRICT_MOUSE_CAPTURE", true);
         const bool traceRuntime = GetEnvBool("HVE_TRACE_RUNTIME", true);
-        const bool traceInput = GetEnvBool("HVE_TRACE_INPUT", true);
+        const bool traceInput = GetEnvBool("HVE_TRACE_INPUT", false);
         double traceLastSnapshot = -1.0;
 
         bool lastF1 = false;
@@ -3780,7 +3780,8 @@ namespace Engine {
                     preloadStartTime = frameNow;
                     mouseCaptured = false;
                     Input::SetCursorMode(false);
-                    chunkManager.UpdateStreaming(camera.Position, 118, 12);
+                    const int bootHeightChunks = std::min(heightChunks, std::max(8, preloadHeightChunks));
+                    chunkManager.UpdateStreaming(camera.Position, streamDistanceChunks, bootHeightChunks);
                 }
 
                 loadingStatus = "Generiere " + Game::World::g_TerrainPresets[std::clamp(Game::World::g_CurrentPresetIndex, 0, 7)].name + "... " + std::to_string((int)(loadingProgress * 100.0f)) + "%";
@@ -4926,6 +4927,8 @@ namespace Engine {
             int activeStreamDistance = (!preloadDone && preloadRadiusChunks > 0)
                 ? std::min(streamDistanceChunks, preloadRadiusChunks)
                 : streamDistanceChunks;
+            int hudStreamViewDistance = activeStreamDistance;
+            int hudHeightChunks = heightChunks;
             int unloadDistanceChunks = std::min(192, streamDistanceChunks + cacheMarginChunks);
 
             int activeUploadBudget = uploadBudget;
@@ -5039,6 +5042,8 @@ namespace Engine {
                         chunkManager.UnloadFarChunks(camera.Position, unloadDistanceChunks, activeHeightChunks, worldRenderer);
                     }
                 }
+                hudStreamViewDistance = streamViewDistance;
+                hudHeightChunks = activeHeightChunks;
             }
             chunkManager.PumpCompleted(worldRenderer, std::clamp(activeUploadBudget, 1, 64));
 
@@ -6515,6 +6520,24 @@ namespace Engine {
                     ss.setf(std::ios::fixed); ss.precision(1);
                     ss << "Speed " << speed << " | View " << viewDistanceChunks << " | Margin " << streamMarginChunks;
                     pushTextPx(xPx, yPx, ss.str(), 1.0f, 0.75f, 0.85f, 0.96f, 0.85f);
+                }
+                yPx += line;
+                {
+                    std::ostringstream ss;
+                    ss << "Stream " << hudStreamViewDistance
+                       << " | Height " << hudHeightChunks
+                       << " | Unload " << unloadDistanceChunks;
+                    pushTextPx(xPx, yPx, ss.str(), 1.0f, 0.74f, 0.92f, 0.95f, 0.88f);
+                }
+                yPx += line;
+                {
+                    std::ostringstream ss;
+                    ss.setf(std::ios::fixed);
+                    ss.precision(2);
+                    ss << "Mode " << (walkMode ? "WALK" : "FLY")
+                       << " | Ground " << (walkGrounded ? "yes" : "no")
+                       << " | VY " << walkVerticalVel;
+                    pushTextPx(xPx, yPx, ss.str(), 1.0f, 0.88f, 0.86f, 0.96f, 0.90f);
                 }
                 yPx += line;
                 {
