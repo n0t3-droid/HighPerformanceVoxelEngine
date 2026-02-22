@@ -8,6 +8,13 @@ Ziel: In 120 Sekunden massiv höhere Weltabdeckung erreichen und anschließend �
 - PR klein halten: 1 Thema pro PR.
 - Telemetrie in `hve_last_run.log` vergleichen (vorher/nachher).
 
+## Priorität (verbindlich)
+- Reihenfolge ist immer: **(1) Ermöglichen**, **(2) Erfinden**, **(3) Stabilisieren**, **(4) Verschönern**.
+- Wenn ein Ziel mit bestehender Architektur nicht erreichbar ist, muss der Agent einen neuen Mechanismus entwerfen (nicht nur Werte erhöhen).
+- Jede PR braucht einen Low-PC-Pfad mit klaren Limits/Fallbacks.
+- Für „Millionen“-Ziele gilt: nah = echt, fern = LOD/Impostor.
+- Steuerung darf nicht geopfert werden: Input-Latenz und Kontrollqualität sind harte Gates.
+
 ---
 
 ## PR-01 · Far-Field Impostor Ring (höchste Priorität)
