@@ -123,8 +123,9 @@ namespace Game { namespace World {
 
     void ChunkManager::UpdateStreaming(const glm::vec3& playerWorldPos, int viewDistance, int heightChunks) {
         if (!m_Pool) return;
+        ++m_StreamTick;
 
-        const int qualityView = std::clamp(Engine::QualityManager::GetViewDistance(), 1, 192);
+        const int qualityView = std::clamp(Engine::QualityManager::GetViewDistance(), 1, 2048);
         static int stickyViewDistance = 0;
         if (stickyViewDistance <= 0) stickyViewDistance = std::max(viewDistance, qualityView);
         const int requested = std::max(viewDistance, qualityView);
@@ -133,19 +134,19 @@ namespace Game { namespace World {
         } else if (requested > stickyViewDistance) {
             stickyViewDistance = std::min(requested, stickyViewDistance + 2);
         }
-        viewDistance = std::clamp(stickyViewDistance, 1, 192);
+        viewDistance = std::clamp(stickyViewDistance, 1, 2048);
 
         if (heightChunks < 1) heightChunks = 1;
 
         const int defaultInFlight = std::max(12, (int)m_Pool->GetThreadCount() * 6);
-        const int maxInFlight = GetEnvIntClamped("HVE_STREAM_INFLIGHT_MAX", defaultInFlight, 1, 512);
+        const int maxInFlight = GetEnvIntClamped("HVE_STREAM_INFLIGHT_MAX", defaultInFlight, 1, 131072);
         const int defaultEnqueue = std::clamp(10 + viewDistance / 2, 12, 96);
-        const int maxEnqueue = GetEnvIntClamped("HVE_STREAM_ENQUEUE_MAX", defaultEnqueue, 1, 192);
+        const int maxEnqueue = GetEnvIntClamped("HVE_STREAM_ENQUEUE_MAX", defaultEnqueue, 1, 262144);
 
         const glm::ivec3 playerBlock((int)std::floor(playerWorldPos.x), (int)std::floor(playerWorldPos.y), (int)std::floor(playerWorldPos.z));
         const glm::ivec3 center = WorldToChunkCoord(playerBlock);
 
-        const int verticalRadius = GetEnvIntClamped("HVE_VERTICAL_RADIUS", 48, 8, 96);
+        const int verticalRadius = GetEnvIntClamped("HVE_VERTICAL_RADIUS", 48, 8, 512);
         const int worldMaxYChunk = std::max(0, heightChunks - 1);
         const int minY = std::max(0, center.y - verticalRadius);
         const int maxY = std::min(worldMaxYChunk, center.y + verticalRadius);
@@ -183,26 +184,20 @@ namespace Game { namespace World {
 
             m_LastStreamPlayerPos = playerWorldPos;
         }
+        m_LastStreamCenterChunk = streamCenter;
 
-        std::vector<int> yOrder;
-        yOrder.reserve((std::size_t)std::max(16, (maxY - minY + 1) / 2));
-        const int clampedCenterY = std::clamp(center.y, minY, maxY);
-        auto pushUniqueY = [&](int y) {
-            if (y < minY || y > maxY) return;
-            if (std::find(yOrder.begin(), yOrder.end(), y) != yOrder.end()) return;
-            yOrder.push_back(y);
-        };
-
-        pushUniqueY(clampedCenterY);
-        for (int d = 1; d <= verticalRadius; ++d) {
-            pushUniqueY(clampedCenterY + d);
-            pushUniqueY(clampedCenterY - d);
-        }
+        const bool surfaceGuarantee = GetEnvBool("HVE_STREAM_SURFACE_GUARANTEE", true);
+        const int nearBelow = GetEnvIntClamped("HVE_STREAM_NEAR_BELOW", 2, 0, 16);
+        const int nearAbove = GetEnvIntClamped("HVE_STREAM_NEAR_ABOVE", 1, 0, 16);
+        const int farBelow = GetEnvIntClamped("HVE_STREAM_FAR_BELOW", 0, 0, 8);
+        const int farAbove = GetEnvIntClamped("HVE_STREAM_FAR_ABOVE", 0, 0, 8);
+        const int fallbackCenterBand = GetEnvIntClamped("HVE_STREAM_CENTER_BAND", 6, 1, 32);
+        const int streamWatchdogTicks = GetEnvIntClamped("HVE_STREAM_WATCHDOG_TICKS", 180, 0, 100000);
 
         int enqueued = 0;
         const bool dualQueueStreaming = GetEnvIntClamped("HVE_STREAM_DUAL_QUEUE", 1, 0, 1) != 0;
         const int defaultNearRing = std::clamp(3 + viewDistance / 8, 2, 12);
-        const int nearRing = std::clamp(GetEnvIntClamped("HVE_STREAM_NEAR_RING", defaultNearRing, 0, 32), 0, viewDistance);
+        const int nearRing = std::clamp(GetEnvIntClamped("HVE_STREAM_NEAR_RING", defaultNearRing, 0, 2048), 0, viewDistance);
         const int nearSharePct = GetEnvIntClamped("HVE_STREAM_NEAR_SHARE", 70, 30, 95);
 
         auto tryEnqueue = [&](const glm::ivec3& coord, int& budgetUsed, int budgetMax) {
@@ -213,15 +208,32 @@ namespace Game { namespace World {
             ChunkKey key{coord};
             {
                 std::shared_lock<std::shared_mutex> lock(m_ChunksMutex);
-                if (m_Chunks.find(key) != m_Chunks.end()) return;
+                auto it = m_Chunks.find(key);
+                if (it != m_Chunks.end()) {
+                    const bool watchdogEligible = !it->second.ready && !it->second.meshingQueued && streamWatchdogTicks > 0;
+                    const std::uint64_t age = (m_StreamTick > it->second.lastRequestTick) ? (m_StreamTick - it->second.lastRequestTick) : 0;
+                    if (!(watchdogEligible && age >= (std::uint64_t)streamWatchdogTicks)) {
+                        return;
+                    }
+                }
             }
 
             {
                 std::unique_lock<std::shared_mutex> lock(m_ChunksMutex);
-                if (m_Chunks.find(key) != m_Chunks.end()) return;
-                auto [newIt, inserted] = m_Chunks.try_emplace(key, coord);
-                (void)newIt;
-                (void)inserted;
+                auto it = m_Chunks.find(key);
+                if (it == m_Chunks.end()) {
+                    auto [newIt, inserted] = m_Chunks.try_emplace(key, coord);
+                    (void)inserted;
+                    it = newIt;
+                } else {
+                    const bool watchdogEligible = !it->second.ready && !it->second.meshingQueued && streamWatchdogTicks > 0;
+                    const std::uint64_t age = (m_StreamTick > it->second.lastRequestTick) ? (m_StreamTick - it->second.lastRequestTick) : 0;
+                    if (!(watchdogEligible && age >= (std::uint64_t)streamWatchdogTicks)) {
+                        return;
+                    }
+                }
+
+                it->second.lastRequestTick = m_StreamTick;
             }
 
             QueueGenerateAndMesh(coord);
@@ -229,12 +241,45 @@ namespace Game { namespace World {
             ++budgetUsed;
         };
 
+        auto enqueueColumnBands = [&](int cx, int cz, int ring, int& budgetUsed, int budgetMax) {
+            if (surfaceGuarantee) {
+                const int wx = cx * CHUNK_SIZE + CHUNK_SIZE / 2;
+                const int wz = cz * CHUNK_SIZE + CHUNK_SIZE / 2;
+                const int sy = Generation::GetSurfaceYAtWorld(wx, wz);
+                const int surfChunkY = WorldToChunkCoord(glm::ivec3(wx, sy, wz)).y;
+                const int below = (ring <= nearRing) ? nearBelow : farBelow;
+                const int above = (ring <= nearRing) ? nearAbove : farAbove;
+
+                for (int dy = -below; dy <= above; ++dy) {
+                    const int cy = surfChunkY + dy;
+                    if (cy < minY || cy > maxY) continue;
+                    tryEnqueue(glm::ivec3(cx, cy, cz), budgetUsed, budgetMax);
+                }
+
+                if (ring <= nearRing) {
+                    const int centerY = std::clamp(center.y, minY, maxY);
+                    for (int d = 0; d <= fallbackCenterBand; ++d) {
+                        const int up = centerY + d;
+                        const int dn = centerY - d;
+                        if (up >= minY && up <= maxY) tryEnqueue(glm::ivec3(cx, up, cz), budgetUsed, budgetMax);
+                        if (d > 0 && dn >= minY && dn <= maxY) tryEnqueue(glm::ivec3(cx, dn, cz), budgetUsed, budgetMax);
+                    }
+                }
+            } else {
+                const int centerY = std::clamp(center.y, minY, maxY);
+                for (int d = 0; d <= verticalRadius; ++d) {
+                    const int up = centerY + d;
+                    const int dn = centerY - d;
+                    if (up >= minY && up <= maxY) tryEnqueue(glm::ivec3(cx, up, cz), budgetUsed, budgetMax);
+                    if (d > 0 && dn >= minY && dn <= maxY) tryEnqueue(glm::ivec3(cx, dn, cz), budgetUsed, budgetMax);
+                }
+            }
+        };
+
         auto enqueueRingRange = [&](int ringStart, int ringEnd, int& budgetUsed, int budgetMax) {
             for (int ring = ringStart; ring <= ringEnd && budgetUsed < budgetMax && enqueued < maxEnqueue && (int)m_InFlightGenerate.load(std::memory_order_relaxed) < maxInFlight; ++ring) {
-                for (int yi = 0; yi < (int)yOrder.size() && budgetUsed < budgetMax && enqueued < maxEnqueue && (int)m_InFlightGenerate.load(std::memory_order_relaxed) < maxInFlight; ++yi) {
-                const int cy = yOrder[(std::size_t)yi];
                 if (ring == 0) {
-                        tryEnqueue(glm::ivec3(streamCenter.x, cy, streamCenter.z), budgetUsed, budgetMax);
+                    enqueueColumnBands(streamCenter.x, streamCenter.z, ring, budgetUsed, budgetMax);
                     continue;
                 }
 
@@ -243,14 +288,14 @@ namespace Game { namespace World {
                 const int zMin = streamCenter.z - ring;
                 const int zMax = streamCenter.z + ring;
 
-                    for (int x = xMin; x <= xMax && budgetUsed < budgetMax && enqueued < maxEnqueue && (int)m_InFlightGenerate.load(std::memory_order_relaxed) < maxInFlight; ++x) {
-                        tryEnqueue(glm::ivec3(x, cy, zMin), budgetUsed, budgetMax);
-                        tryEnqueue(glm::ivec3(x, cy, zMax), budgetUsed, budgetMax);
+                for (int x = xMin; x <= xMax && budgetUsed < budgetMax && enqueued < maxEnqueue && (int)m_InFlightGenerate.load(std::memory_order_relaxed) < maxInFlight; ++x) {
+                    enqueueColumnBands(x, zMin, ring, budgetUsed, budgetMax);
+                    enqueueColumnBands(x, zMax, ring, budgetUsed, budgetMax);
                 }
-                    for (int z = zMin + 1; z <= zMax - 1 && budgetUsed < budgetMax && enqueued < maxEnqueue && (int)m_InFlightGenerate.load(std::memory_order_relaxed) < maxInFlight; ++z) {
-                        tryEnqueue(glm::ivec3(xMin, cy, z), budgetUsed, budgetMax);
-                        tryEnqueue(glm::ivec3(xMax, cy, z), budgetUsed, budgetMax);
-                    }
+
+                for (int z = zMin + 1; z <= zMax - 1 && budgetUsed < budgetMax && enqueued < maxEnqueue && (int)m_InFlightGenerate.load(std::memory_order_relaxed) < maxInFlight; ++z) {
+                    enqueueColumnBands(xMin, z, ring, budgetUsed, budgetMax);
+                    enqueueColumnBands(xMax, z, ring, budgetUsed, budgetMax);
                 }
             }
         };
@@ -280,14 +325,14 @@ namespace Game { namespace World {
     void ChunkManager::PreloadLargeArea(const glm::vec3& centerPos, int horizontalRadius, int verticalRadius) {
         if (!m_Pool) return;
 
-        horizontalRadius = std::clamp(horizontalRadius, 8, 224);
-        verticalRadius = std::clamp(verticalRadius, 4, 96);
+        horizontalRadius = std::clamp(horizontalRadius, 8, 4096);
+        verticalRadius = std::clamp(verticalRadius, 4, 1024);
 
         const int defaultInFlight = std::max(16, (int)m_Pool->GetThreadCount() * 10);
-        const int maxInFlight = GetEnvIntClamped("HVE_STREAM_INFLIGHT_MAX", defaultInFlight, 1, 4096);
-        const int maxBootstrap = GetEnvIntClamped("HVE_PRELOAD_BOOTSTRAP_MAX", 12000, 256, 500000);
-        const int farStrideBegin = GetEnvIntClamped("HVE_PRELOAD_FAR_STRIDE_BEGIN", horizontalRadius / 2, 8, 224);
-        const int farStride2Begin = GetEnvIntClamped("HVE_PRELOAD_FAR_STRIDE2_BEGIN", (horizontalRadius * 3) / 4, 8, 224);
+        const int maxInFlight = GetEnvIntClamped("HVE_STREAM_INFLIGHT_MAX", defaultInFlight, 1, 131072);
+        const int maxBootstrap = GetEnvIntClamped("HVE_PRELOAD_BOOTSTRAP_MAX", 12000, 256, 5000000);
+        const int farStrideBegin = GetEnvIntClamped("HVE_PRELOAD_FAR_STRIDE_BEGIN", horizontalRadius / 2, 8, 4096);
+        const int farStride2Begin = GetEnvIntClamped("HVE_PRELOAD_FAR_STRIDE2_BEGIN", (horizontalRadius * 3) / 4, 8, 4096);
 
         const glm::ivec3 center = WorldToChunkCoord(glm::ivec3(
             (int)std::floor(centerPos.x),
@@ -412,6 +457,8 @@ namespace Game { namespace World {
     void ChunkManager::QueueGenerateAndMesh(const glm::ivec3& chunkCoord) {
         if (!m_Pool) return;
 
+        std::uint32_t jobToken = 0;
+
         {
             std::unique_lock<std::shared_mutex> lock(m_ChunksMutex);
             ChunkKey key{chunkCoord};
@@ -419,13 +466,15 @@ namespace Game { namespace World {
             if (it == m_Chunks.end()) return;
             if (it->second.meshingQueued) return;
             it->second.meshingQueued = true;
+            jobToken = ++it->second.queuedJobToken;
             m_InFlightGenerate.fetch_add(1, std::memory_order_relaxed);
         }
 
-        m_Pool->Enqueue([this, chunkCoord]() {
+        m_Pool->Enqueue([this, chunkCoord, jobToken]() {
             ChunkMeshCPU done;
             done.key = ChunkKey{chunkCoord};
             done.chunkCoord = chunkCoord;
+            done.jobToken = jobToken;
             done.hasBlocks = true;
 
             // Deterministic padded volume so chunk boundaries don't "morph" when neighbors load/unload.
@@ -487,6 +536,8 @@ namespace Game { namespace World {
     void ChunkManager::QueueRemeshCopy(const glm::ivec3& chunkCoord) {
         if (!m_Pool) return;
 
+        std::uint32_t jobToken = 0;
+
         {
             std::unique_lock<std::shared_mutex> lock(m_ChunksMutex);
             ChunkKey key{chunkCoord};
@@ -494,18 +545,20 @@ namespace Game { namespace World {
             if (it == m_Chunks.end()) return;
             if (it->second.meshingQueued) return;
             it->second.meshingQueued = true;
+            jobToken = ++it->second.queuedJobToken;
         }
 
-        EnqueueRemeshJob(chunkCoord);
+        EnqueueRemeshJob(chunkCoord, jobToken);
     }
 
-    void ChunkManager::EnqueueRemeshJob(const glm::ivec3& chunkCoord) {
+    void ChunkManager::EnqueueRemeshJob(const glm::ivec3& chunkCoord, std::uint32_t jobToken) {
         if (!m_Pool) return;
         m_InFlightRemesh.fetch_add(1, std::memory_order_relaxed);
-        m_Pool->EnqueueUrgent([this, chunkCoord]() {
+        m_Pool->EnqueueUrgent([this, chunkCoord, jobToken]() {
             ChunkMeshCPU done;
             done.key = ChunkKey{chunkCoord};
             done.chunkCoord = chunkCoord;
+            done.jobToken = jobToken;
             done.hasBlocks = false;
 
             constexpr int PAD = CHUNK_SIZE + 2;
@@ -538,6 +591,9 @@ namespace Game { namespace World {
     }
 
     void ChunkManager::RequestRemeshLocked(const glm::ivec3& chunkCoord) {
+        static const int maxInFlightCfg = GetEnvIntClamped("HVE_REMESH_INFLIGHT_MAX", 32, 1, 512);
+        static const int maxDeferredCfg = GetEnvIntClamped("HVE_REMESH_DEFERRED_MAX", 512, 0, 4096);
+
         ChunkKey key{chunkCoord};
         auto it = m_Chunks.find(key);
         if (it == m_Chunks.end()) return;
@@ -545,33 +601,30 @@ namespace Game { namespace World {
             it->second.needsRemesh = true;
             return;
         }
-        const int maxInFlight = GetEnvIntClamped("HVE_REMESH_INFLIGHT_MAX", 32, 1, 512);
-        const int maxDeferred = GetEnvIntClamped("HVE_REMESH_DEFERRED_MAX", 512, 0, 4096);
-        if ((int)m_InFlightRemesh.load(std::memory_order_relaxed) >= maxInFlight) {
+        if ((int)m_InFlightRemesh.load(std::memory_order_relaxed) >= maxInFlightCfg) {
             it->second.needsRemesh = true;
-            if (!it->second.remeshDeferred && (int)m_RemeshDeferred.size() < maxDeferred) {
+            if (!it->second.remeshDeferred && (int)m_RemeshDeferred.size() < maxDeferredCfg) {
                 it->second.remeshDeferred = true;
                 m_RemeshDeferred.push_back(chunkCoord);
             }
             return;
         }
         it->second.meshingQueued = true;
-        EnqueueRemeshJob(chunkCoord);
+        const std::uint32_t jobToken = ++it->second.queuedJobToken;
+        EnqueueRemeshJob(chunkCoord, jobToken);
     }
 
     void ChunkManager::QueueRemeshNeighborhood27Locked(const glm::ivec3& centerCoord) {
+        if (m_BulkEditDepth > 0) {
+            m_BulkEditedCenters.insert(ChunkKey{centerCoord});
+            return;
+        }
+
         for (int dz = -1; dz <= 1; ++dz) {
             for (int dy = -1; dy <= 1; ++dy) {
                 for (int dx = -1; dx <= 1; ++dx) {
                     const glm::ivec3 n = centerCoord + glm::ivec3(dx, dy, dz);
-                    ChunkKey nk{n};
-                    if (m_Chunks.find(nk) == m_Chunks.end()) continue;
-
-                    if (m_BulkEditDepth > 0) {
-                        m_BulkDirtyChunks.insert(nk);
-                    } else {
-                        RequestRemeshLocked(n);
-                    }
+                    RequestRemeshLocked(n);
                 }
             }
         }
@@ -611,17 +664,85 @@ namespace Game { namespace World {
         {
             std::lock_guard<std::mutex> lock(m_CompletedMutex);
             if (m_Completed.empty()) return;
+            completed.swap(m_Completed);
+        }
 
-            // If we have a limit, take only up to that many
-            if (maxUploads > 0 && m_Completed.size() > (size_t)maxUploads) {
-                // Move first 'maxUploads' elements to 'completed'
-                auto begin = m_Completed.begin();
-                auto split = begin + maxUploads;
-                completed.insert(completed.end(), std::make_move_iterator(begin), std::make_move_iterator(split));
-                m_Completed.erase(begin, split);
-            } else {
-                // Take all
-                completed.swap(m_Completed);
+        const bool uploadPriorityNearFirst = GetEnvBool("HVE_UPLOAD_PRIORITY_NEAR", true);
+        const bool uploadBalancedSplit = GetEnvBool("HVE_UPLOAD_BALANCED_SPLIT", true);
+        const int uploadNearSharePct = GetEnvIntClamped("HVE_UPLOAD_NEAR_SHARE", 80, 10, 95);
+        const int uploadNearRadius = GetEnvIntClamped("HVE_UPLOAD_NEAR_RADIUS", 10, 1, 64);
+        if (uploadPriorityNearFirst && completed.size() > 1) {
+            const glm::ivec3 center = m_LastStreamCenterChunk;
+            auto dist2 = [&](const glm::ivec3& c) -> std::int64_t {
+                const std::int64_t dx = (std::int64_t)c.x - (std::int64_t)center.x;
+                const std::int64_t dy = (std::int64_t)c.y - (std::int64_t)center.y;
+                const std::int64_t dz = (std::int64_t)c.z - (std::int64_t)center.z;
+                return dx * dx + dy * dy + dz * dz;
+            };
+            std::stable_sort(completed.begin(), completed.end(), [&](const ChunkMeshCPU& a, const ChunkMeshCPU& b) {
+                return dist2(a.chunkCoord) < dist2(b.chunkCoord);
+            });
+
+            if (uploadBalancedSplit && maxUploads > 0 && completed.size() > (std::size_t)maxUploads) {
+                const std::int64_t nearR2 = (std::int64_t)uploadNearRadius * (std::int64_t)uploadNearRadius;
+                std::vector<std::size_t> nearIdx;
+                std::vector<std::size_t> farIdx;
+                nearIdx.reserve(completed.size());
+                farIdx.reserve(completed.size());
+
+                for (std::size_t i = 0; i < completed.size(); ++i) {
+                    if (dist2(completed[i].chunkCoord) <= nearR2) nearIdx.push_back(i);
+                    else farIdx.push_back(i);
+                }
+
+                const int nearTarget = std::clamp((maxUploads * uploadNearSharePct + 50) / 100, 0, maxUploads);
+                std::vector<char> selected(completed.size(), 0);
+                int chosen = 0;
+
+                for (std::size_t i : nearIdx) {
+                    if (chosen >= nearTarget || chosen >= maxUploads) break;
+                    selected[i] = 1;
+                    ++chosen;
+                }
+                for (std::size_t i : farIdx) {
+                    if (chosen >= maxUploads) break;
+                    selected[i] = 1;
+                    ++chosen;
+                }
+                for (std::size_t i : nearIdx) {
+                    if (chosen >= maxUploads) break;
+                    if (!selected[i]) {
+                        selected[i] = 1;
+                        ++chosen;
+                    }
+                }
+
+                std::vector<ChunkMeshCPU> toProcess;
+                std::vector<ChunkMeshCPU> backlog;
+                toProcess.reserve((std::size_t)maxUploads);
+                backlog.reserve(completed.size() > (std::size_t)maxUploads ? completed.size() - (std::size_t)maxUploads : 0);
+                for (std::size_t i = 0; i < completed.size(); ++i) {
+                    if (selected[i]) toProcess.emplace_back(std::move(completed[i]));
+                    else backlog.emplace_back(std::move(completed[i]));
+                }
+                completed.swap(toProcess);
+
+                if (!backlog.empty()) {
+                    std::lock_guard<std::mutex> lock(m_CompletedMutex);
+                    m_Completed.insert(m_Completed.end(), std::make_move_iterator(backlog.begin()), std::make_move_iterator(backlog.end()));
+                }
+            }
+        }
+
+        if (maxUploads > 0 && completed.size() > (std::size_t)maxUploads) {
+            std::vector<ChunkMeshCPU> backlog;
+            backlog.reserve(completed.size() - (std::size_t)maxUploads);
+            auto split = completed.begin() + maxUploads;
+            backlog.insert(backlog.end(), std::make_move_iterator(split), std::make_move_iterator(completed.end()));
+            completed.erase(split, completed.end());
+            if (!backlog.empty()) {
+                std::lock_guard<std::mutex> lock(m_CompletedMutex);
+                m_Completed.insert(m_Completed.end(), std::make_move_iterator(backlog.begin()), std::make_move_iterator(backlog.end()));
             }
         }
 
@@ -645,6 +766,15 @@ namespace Game { namespace World {
                 auto it = m_Chunks.find(key);
                 if (it == m_Chunks.end()) continue;
 
+                if (job.jobToken != it->second.queuedJobToken) {
+                    if (job.hasBlocks) {
+                        m_StaleGenerateDrops.fetch_add(1, std::memory_order_relaxed);
+                    } else {
+                        m_StaleRemeshDrops.fetch_add(1, std::memory_order_relaxed);
+                    }
+                    continue;
+                }
+
                 it->second.meshingQueued = false;
 
                 if (job.hasBlocks && !job.blocks.empty()) {
@@ -658,6 +788,7 @@ namespace Game { namespace World {
                     }
                     it->second.ready = true;
                     it->second.chunk.SetDirty(false);
+                    it->second.lastCompleteTick = m_StreamTick;
                     if (m_SVO) m_SVO->MarkChunkResident(job.chunkCoord);
                 }
             }
@@ -670,13 +801,23 @@ namespace Game { namespace World {
             auto it = m_Chunks.find(key);
             if (it == m_Chunks.end()) continue;
 
+            if (job.jobToken != it->second.queuedJobToken) {
+                if (job.hasBlocks) {
+                    m_StaleGenerateDrops.fetch_add(1, std::memory_order_relaxed);
+                } else {
+                    m_StaleRemeshDrops.fetch_add(1, std::memory_order_relaxed);
+                }
+                continue;
+            }
+
             it->second.lastMeshStamp = ++m_MeshStampCounter;
+            it->second.hasMesh = !job.indices.empty();
 
             if (it->second.needsRemesh) {
-                const int maxInFlight = GetEnvIntClamped("HVE_REMESH_INFLIGHT_MAX", 32, 1, 512);
-                const int maxDeferred = GetEnvIntClamped("HVE_REMESH_DEFERRED_MAX", 512, 0, 4096);
-                if ((int)m_InFlightRemesh.load(std::memory_order_relaxed) >= maxInFlight) {
-                    if (!it->second.remeshDeferred && (int)m_RemeshDeferred.size() < maxDeferred) {
+                static const int maxInFlightCfg = GetEnvIntClamped("HVE_REMESH_INFLIGHT_MAX", 32, 1, 512);
+                static const int maxDeferredCfg = GetEnvIntClamped("HVE_REMESH_DEFERRED_MAX", 512, 0, 4096);
+                if ((int)m_InFlightRemesh.load(std::memory_order_relaxed) >= maxInFlightCfg) {
+                    if (!it->second.remeshDeferred && (int)m_RemeshDeferred.size() < maxDeferredCfg) {
                         it->second.remeshDeferred = true;
                         m_RemeshDeferred.push_back(job.chunkCoord);
                     }
@@ -684,20 +825,21 @@ namespace Game { namespace World {
                     it->second.needsRemesh = false;
                     it->second.remeshDeferred = false;
                     it->second.meshingQueued = true;
+                    const std::uint32_t remeshToken = ++it->second.queuedJobToken;
                     lock.unlock();
-                    EnqueueRemeshJob(job.chunkCoord);
+                    EnqueueRemeshJob(job.chunkCoord, remeshToken);
                     continue;
                 }
             }
         }
 
-        const int maxDeferredPerFrame = GetEnvIntClamped("HVE_REMESH_DEFERRED_PER_FRAME", 4, 0, 64);
+        static const int maxDeferredPerFrame = GetEnvIntClamped("HVE_REMESH_DEFERRED_PER_FRAME", 4, 0, 64);
         if (maxDeferredPerFrame > 0) {
-            const int maxInFlight = GetEnvIntClamped("HVE_REMESH_INFLIGHT_MAX", 32, 1, 512);
+            static const int maxInFlightCfg = GetEnvIntClamped("HVE_REMESH_INFLIGHT_MAX", 32, 1, 512);
             int processed = 0;
             std::unique_lock<std::shared_mutex> lock(m_ChunksMutex);
             while (!m_RemeshDeferred.empty() && processed < maxDeferredPerFrame) {
-                if ((int)m_InFlightRemesh.load(std::memory_order_relaxed) >= maxInFlight) break;
+                if ((int)m_InFlightRemesh.load(std::memory_order_relaxed) >= maxInFlightCfg) break;
                 const glm::ivec3 coord = m_RemeshDeferred.front();
                 m_RemeshDeferred.pop_front();
 
@@ -711,8 +853,9 @@ namespace Game { namespace World {
                 it->second.needsRemesh = false;
                 it->second.remeshDeferred = false;
                 it->second.meshingQueued = true;
+                const std::uint32_t remeshToken = ++it->second.queuedJobToken;
                 lock.unlock();
-                EnqueueRemeshJob(coord);
+                EnqueueRemeshJob(coord, remeshToken);
                 lock.lock();
                 processed++;
             }
@@ -758,6 +901,22 @@ namespace Game { namespace World {
             --m_BulkEditDepth;
             if (m_BulkEditDepth > 0) {
                 return;
+            }
+
+            if (!m_BulkEditedCenters.empty()) {
+                m_BulkDirtyChunks.reserve(m_BulkDirtyChunks.size() + (m_BulkEditedCenters.size() * 27));
+                for (const auto& centerKey : m_BulkEditedCenters) {
+                    const glm::ivec3 centerCoord = centerKey.coord;
+                    for (int dz = -1; dz <= 1; ++dz) {
+                        for (int dy = -1; dy <= 1; ++dy) {
+                            for (int dx = -1; dx <= 1; ++dx) {
+                                const glm::ivec3 n = centerCoord + glm::ivec3(dx, dy, dz);
+                                m_BulkDirtyChunks.insert(ChunkKey{n});
+                            }
+                        }
+                    }
+                }
+                m_BulkEditedCenters.clear();
             }
 
             remeshTargets.reserve(m_BulkDirtyChunks.size());
@@ -1524,6 +1683,63 @@ namespace Game { namespace World {
         return true;
     }
 
+    std::size_t ChunkManager::EstimateSurfaceCoverageMisses(const glm::vec3& playerWorldPos, int horizontalRadiusChunks, int sampleStrideChunks, int heightChunks) const {
+        if (heightChunks <= 0) return 0;
+
+        const int radius = std::max(0, horizontalRadiusChunks);
+        const int stride = std::max(1, sampleStrideChunks);
+        const int radiusSq = radius * radius;
+        const int worldMaxYChunk = std::max(0, heightChunks - 1);
+        const int bandBelow = GetEnvIntClamped("HVE_COVERAGE_BAND_BELOW", 1, 0, 8);
+        const int bandAbove = GetEnvIntClamped("HVE_COVERAGE_BAND_ABOVE", 0, 0, 8);
+        const int maxSamples = GetEnvIntClamped("HVE_COVERAGE_MAX_SAMPLES", 4096, 64, 65536);
+
+        const glm::ivec3 playerBlock(
+            (int)std::floor(playerWorldPos.x),
+            (int)std::floor(playerWorldPos.y),
+            (int)std::floor(playerWorldPos.z)
+        );
+        const glm::ivec3 center = WorldToChunkCoord(playerBlock);
+
+        std::size_t misses = 0;
+        int samples = 0;
+
+        std::shared_lock<std::shared_mutex> lock(m_ChunksMutex);
+        for (int dz = -radius; dz <= radius; dz += stride) {
+            for (int dx = -radius; dx <= radius; dx += stride) {
+                if (dx * dx + dz * dz > radiusSq) continue;
+                if (samples >= maxSamples) {
+                    return misses;
+                }
+                ++samples;
+
+                const int cx = center.x + dx;
+                const int cz = center.z + dz;
+                const int wx = cx * CHUNK_SIZE + CHUNK_SIZE / 2;
+                const int wz = cz * CHUNK_SIZE + CHUNK_SIZE / 2;
+                const int sy = Generation::GetSurfaceYAtWorld(wx, wz);
+                const int surfChunkY = std::clamp(WorldToChunkCoord(glm::ivec3(wx, sy, wz)).y, 0, worldMaxYChunk);
+
+                bool covered = false;
+                for (int dy = -bandBelow; dy <= bandAbove; ++dy) {
+                    const int cy = std::clamp(surfChunkY + dy, 0, worldMaxYChunk);
+                    ChunkKey key{glm::ivec3(cx, cy, cz)};
+                    auto it = m_Chunks.find(key);
+                    if (it != m_Chunks.end() && it->second.ready && it->second.hasMesh) {
+                        covered = true;
+                        break;
+                    }
+                }
+
+                if (!covered) {
+                    ++misses;
+                }
+            }
+        }
+
+        return misses;
+    }
+
     std::size_t ChunkManager::GetInFlightGenerate() const {
         std::shared_lock<std::shared_mutex> lock(m_ChunksMutex);
         return m_InFlightGenerate;
@@ -1541,6 +1757,49 @@ namespace Game { namespace World {
     std::size_t ChunkManager::GetDeferredRemeshCount() const {
         std::shared_lock<std::shared_mutex> lock(m_ChunksMutex);
         return m_RemeshDeferred.size();
+    }
+
+    std::size_t ChunkManager::GetStaleGenerateDropCount() const {
+        return m_StaleGenerateDrops.load(std::memory_order_relaxed);
+    }
+
+    std::size_t ChunkManager::GetStaleRemeshDropCount() const {
+        return m_StaleRemeshDrops.load(std::memory_order_relaxed);
+    }
+
+    StreamHealthStats ChunkManager::GetStreamHealthStats(int watchdogTicks) const {
+        StreamHealthStats stats{};
+        const std::uint64_t watchdog = (watchdogTicks > 0) ? (std::uint64_t)watchdogTicks : 0;
+
+        std::shared_lock<std::shared_mutex> lock(m_ChunksMutex);
+        for (const auto& kv : m_Chunks) {
+            const ChunkRecord& rec = kv.second;
+            if (rec.ready) {
+                continue;
+            }
+
+            ++stats.pendingNotReady;
+
+            const std::uint64_t age = (m_StreamTick > rec.lastRequestTick) ? (m_StreamTick - rec.lastRequestTick) : 0;
+            if (age > stats.oldestPendingTicks) {
+                stats.oldestPendingTicks = age;
+            }
+
+            const bool watchdogEligible = !rec.meshingQueued && watchdog > 0;
+            if (!watchdogEligible) {
+                continue;
+            }
+
+            ++stats.watchdogEligible;
+            if (age >= watchdog) {
+                ++stats.watchdogOverdue;
+                if (age > stats.oldestOverdueTicks) {
+                    stats.oldestOverdueTicks = age;
+                }
+            }
+        }
+
+        return stats;
     }
 
     std::string ChunkManager::GetChunkStoreFilePath(const glm::ivec3& chunkCoord) const {

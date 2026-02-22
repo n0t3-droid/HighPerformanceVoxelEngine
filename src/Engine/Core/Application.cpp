@@ -30,6 +30,7 @@
 #include <thread>
 #include <algorithm>
 #include <sstream>
+#include <iomanip>
 #include <cstdlib>
 #include <unordered_map>
 #include <set>
@@ -311,6 +312,7 @@ namespace Engine {
     constexpr uint8_t BLOCK_GRASS = 2;
     constexpr uint8_t BLOCK_STONE = 3;
     constexpr uint8_t BLOCK_WATER = 5;
+    static int g_MinecraftImportPage = 0;
 
     struct ItemStack {
         uint16_t id = 0;
@@ -459,8 +461,122 @@ namespace Engine {
                 const std::string p = ResolveHighEndTexturePath("stone.png");
                 if (!p.empty()) return p;
             } break;
+            case 4: {
+                const std::string p = ResolveHighEndTexturePath("sand.png");
+                if (!p.empty()) return p;
+            } break;
             case BLOCK_WATER: {
                 const std::string p = ResolveHighEndTexturePath("water.png");
+                if (!p.empty()) return p;
+            } break;
+            case 6: {
+                const std::string p = ResolveHighEndTexturePath("snow.png");
+                if (!p.empty()) return p;
+            } break;
+            case 7: {
+                const std::string p = ResolveHighEndTexturePath("wood.png");
+                if (!p.empty()) return p;
+            } break;
+            case 8: {
+                const std::string p = ResolveHighEndTexturePath("leaves.png");
+                if (!p.empty()) return p;
+            } break;
+            case 9: {
+                const std::string p = ResolveHighEndTexturePath("concrete.png");
+                if (!p.empty()) return p;
+            } break;
+            case 10: {
+                const std::string p = ResolveHighEndTexturePath("brick.png");
+                if (!p.empty()) return p;
+            } break;
+            case 12: {
+                const std::string p = ResolveHighEndTexturePath("metal.png");
+                if (!p.empty()) return p;
+            } break;
+            case 13: {
+                const std::string p = ResolveHighEndTexturePath("marble.png");
+                if (!p.empty()) return p;
+            } break;
+            case 14: {
+                const std::string p = ResolveHighEndTexturePath("basalt.png");
+                if (!p.empty()) return p;
+            } break;
+            case 15: {
+                const std::string p = ResolveHighEndTexturePath("limestone.png");
+                if (!p.empty()) return p;
+            } break;
+            case 16: {
+                const std::string p = ResolveHighEndTexturePath("slate.png");
+                if (!p.empty()) return p;
+            } break;
+            case 17: {
+                const std::string p = ResolveHighEndTexturePath("terracotta.png");
+                if (!p.empty()) return p;
+            } break;
+            case 18: {
+                const std::string p = ResolveHighEndTexturePath("asphalt.png");
+                if (!p.empty()) return p;
+            } break;
+            case 52:
+            case 56:
+            case 60:
+            case 64:
+            case 71:
+            case 73:
+            case 77:
+            case 78:
+            case 79: {
+                const std::string p = ResolveHighEndTexturePath("stone.png");
+                if (!p.empty()) return p;
+            } break;
+            case 53:
+            case 54: {
+                const std::string p = ResolveHighEndTexturePath("concrete.png");
+                if (!p.empty()) return p;
+            } break;
+            case 55:
+            case 76:
+            case 83: {
+                const std::string p = ResolveHighEndTexturePath("brick.png");
+                if (!p.empty()) return p;
+            } break;
+            case 57:
+            case 59:
+            case 62:
+            case 63:
+            case 80:
+            case 82: {
+                const std::string p = ResolveHighEndTexturePath("metal.png");
+                if (!p.empty()) return p;
+            } break;
+            case 58:
+            case 65:
+            case 66:
+            case 68:
+            case 70: {
+                const std::string p = ResolveHighEndTexturePath("basalt.png");
+                if (!p.empty()) return p;
+            } break;
+            case 61: {
+                const std::string p = ResolveHighEndTexturePath("slate.png");
+                if (!p.empty()) return p;
+            } break;
+            case 67: {
+                const std::string p = ResolveHighEndTexturePath("limestone.png");
+                if (!p.empty()) return p;
+            } break;
+            case 69:
+            case 72:
+            case 75: {
+                const std::string p = ResolveHighEndTexturePath("terracotta.png");
+                if (!p.empty()) return p;
+            } break;
+            case 74: {
+                const std::string p = ResolveHighEndTexturePath("dirt.png");
+                if (!p.empty()) return p;
+            } break;
+            case 81: {
+                const std::string p = ResolveHighEndTexturePath("asphalt.png");
                 if (!p.empty()) return p;
             } break;
             default: break;
@@ -503,6 +619,21 @@ namespace Engine {
         }();
 
         return pool;
+    }
+
+    static int GetMinecraftImportPageSize() {
+        return std::max(0, (int)kMaxBlockId - kBuiltinBlockMaxId);
+    }
+
+    static int GetMinecraftImportPageMax() {
+        const auto& pool = GetMinecraftBlockTexturePool();
+        const int pageSize = GetMinecraftImportPageSize();
+        if (pageSize <= 0 || pool.empty()) return 0;
+        return std::max(0, ((int)pool.size() - 1) / pageSize);
+    }
+
+    static int ClampMinecraftImportPage(int page) {
+        return std::clamp(page, 0, GetMinecraftImportPageMax());
     }
 
     static std::string GetTextureNameForBlockId(int blockId) {
@@ -575,19 +706,27 @@ namespace Engine {
 
         if (blockId > kBuiltinBlockMaxId) {
             const auto& pool = GetMinecraftBlockTexturePool();
-            const int idx = blockId - (kBuiltinBlockMaxId + 1);
-            if (idx >= 0 && idx < (int)pool.size()) return pool[(size_t)idx];
+            const int localIdx = blockId - (kBuiltinBlockMaxId + 1);
+            const int pageSize = GetMinecraftImportPageSize();
+            const int globalIdx = g_MinecraftImportPage * pageSize + localIdx;
+            if (globalIdx >= 0 && globalIdx < (int)pool.size()) return pool[(size_t)globalIdx];
         }
 
         return {};
     }
 
     static int GetRuntimeMaxBlockId() {
-        return 5;
+        const auto& pool = GetMinecraftBlockTexturePool();
+        const int pageSize = GetMinecraftImportPageSize();
+        const int clampedPage = ClampMinecraftImportPage(g_MinecraftImportPage);
+        const int importedStart = clampedPage * pageSize;
+        const int remaining = std::max(0, (int)pool.size() - importedStart);
+        const int importedCount = std::min(remaining, pageSize);
+        return std::clamp(kBuiltinBlockMaxId + importedCount, 1, (int)kMaxBlockId);
     }
 
     static const char* GetBlockDisplayName(int id) {
-        static std::unordered_map<int, std::string> dynamicNameCache;
+        static std::unordered_map<std::uint64_t, std::string> dynamicNameCache;
         switch (id) {
             case 1: return "Dirt";
             case 2: return "Grass Block";
@@ -674,11 +813,12 @@ namespace Engine {
             case 83: return "Structural Beam";
             default: {
                 if (id > kBuiltinBlockMaxId) {
-                    auto it = dynamicNameCache.find(id);
+                    const std::uint64_t key = (std::uint64_t((unsigned)g_MinecraftImportPage) << 32) | (std::uint64_t)(unsigned)id;
+                    auto it = dynamicNameCache.find(key);
                     if (it != dynamicNameCache.end()) return it->second.c_str();
                     const std::string texName = GetTextureNameForBlockId(id);
                     if (!texName.empty()) {
-                        auto [ins, _ok] = dynamicNameCache.emplace(id, HumanizeBlockToken(texName));
+                        auto [ins, _ok] = dynamicNameCache.emplace(key, HumanizeBlockToken(texName));
                         return ins->second.c_str();
                     }
                 }
@@ -780,10 +920,11 @@ namespace Engine {
                   << "  Ctrl+Z: undo | Ctrl+Y: redo\n"
                   << "  LMB: break block | RMB: place selected block (hold to repeat)\n"
                   << "  1..9 or Mouse Wheel: select block id (scroll cycles all blocks)\n"
+                  << "  PageUp/PageDown: switch imported Minecraft asset page\n"
                   << "  Double-tap SPACE: toggle walk mode\n"
                   << "  ESC: release mouse (when captured) / quit (when released)\n"
                   << "  F1: print this help | F2: toggle stats in title\n"
-                  << "  F3: toggle wireframe | F4: toggle vsync\n"
+                  << "  F3 (or HVE_KEY_WIREFRAME): toggle wireframe | F4: toggle vsync\n"
                   << "  F5: toggle crosshair | F6: toggle framebuffer dump\n"
                   << "  F7: cycle quality preset (Low/Med/High)\n"
                   << "  F9: save world | F10: load world\n"
@@ -792,6 +933,7 @@ namespace Engine {
                   << "  Fly: HVE_FLY_ACCEL, HVE_FLY_DRAG, HVE_FLY_MAX_MULT\n"
                   << "  Fly: HVE_FLY_PRECISION_MULT, HVE_FLY_PRECISION_DRAG\n"
                   << "  Stream: HVE_VIEWDIST, HVE_STREAM_MARGIN, HVE_HEIGHT_CHUNKS, HVE_UPLOAD_BUDGET\n"
+                  << "  Wireframe: HVE_KEY_WIREFRAME, HVE_WIREFRAME_STREAM, HVE_WIREFRAME_UPLOAD, HVE_WIREFRAME_HEIGHT, HVE_WIREFRAME_CULL\n"
                   << "  Cache: HVE_DISABLE_UNLOAD=1, HVE_CACHE_MARGIN (extra unload radius)\n"
                   << "  Preload: HVE_PRELOAD_RADIUS, HVE_PRELOAD_MAX_SEC\n"
                   << "  World: HVE_WORLD_FILE (default hve_world.hvew), HVE_QUALITY (0..2)\n"
@@ -810,6 +952,12 @@ namespace Engine {
 
     static void AppendBuildWatchLog(const std::string& line) {
         std::ofstream out("build_watch.log", std::ios::app);
+        if (!out) return;
+        out << line << "\n";
+    }
+
+    static void AppendSpikeLog(const std::string& line) {
+        std::ofstream out("hve_spike_watch.log", std::ios::app);
         if (!out) return;
         out << line << "\n";
     }
@@ -1356,9 +1504,7 @@ namespace Engine {
             outRGBA.assign(tileW * tileH * 4, 255);
 
             const int blockId = tileIndex + 1;
-            const int visualBlockId = (blockId == BLOCK_DIRT || blockId == BLOCK_GRASS || blockId == BLOCK_STONE || blockId == BLOCK_WATER)
-                ? blockId
-                : BLOCK_STONE;
+            const int visualBlockId = blockId;
             const bool isGlassBlock = IsGlassBlockId(visualBlockId);
             const bool isPaneBlock = IsPaneBlockId(visualBlockId);
             const bool isArchitecture = IsArchitectureBlockId(visualBlockId);
@@ -2085,10 +2231,11 @@ namespace Engine {
 
     #ifdef GL_TEXTURE_MAX_ANISOTROPY_EXT
         {
+            const float requestedAniso = float(GetEnvIntClamped("HVE_ATLAS_ANISO", 12, 1, 16));
             GLfloat maxAniso = 0.0f;
             glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &maxAniso);
             if (maxAniso > 1.0f) {
-            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, std::min(8.0f, maxAniso));
+            glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, std::min(requestedAniso, maxAniso));
             }
         }
     #endif
@@ -2176,9 +2323,16 @@ namespace Engine {
         const bool logHits = GetEnvBool("HVE_LOG_HITS", false);
         const bool hardSafeMode = GetEnvBool("HVE_HARD_SAFE_MODE", false);
         const bool horizonMode = GetEnvBool("HVE_HORIZON_MODE", true);
-        int viewDistanceChunks = GetEnvIntClamped("HVE_VIEWDIST", 24, 1, 224);
-        int streamMarginChunks = GetEnvIntClamped("HVE_STREAM_MARGIN", 12, 0, 96);
-        int streamDistanceChunks = std::min(224, viewDistanceChunks + streamMarginChunks);
+        const float fogDensityBase = GetEnvFloatClamped("HVE_FOG_DENSITY", 0.0020f, 0.0001f, 0.03f);
+        const float fogNightBoost = GetEnvFloatClamped("HVE_FOG_NIGHT_BOOST", 1.22f, 1.0f, 2.5f);
+        const int wireframeStreamCapCfg = GetEnvIntClamped("HVE_WIREFRAME_STREAM", 16, 8, 96);
+        const int wireframeUploadCapCfg = GetEnvIntClamped("HVE_WIREFRAME_UPLOAD", 12, 4, 64);
+        const int wireframeHeightCapCfg = GetEnvIntClamped("HVE_WIREFRAME_HEIGHT", 8, 4, 32);
+        const int wireframeCullChunksCfg = GetEnvIntClamped("HVE_WIREFRAME_CULL", 14, 6, 64);
+        const int streamDistanceCap = GetEnvIntClamped("HVE_STREAM_DISTANCE_CAP", 2048, 64, 32768);
+        int viewDistanceChunks = GetEnvIntClamped("HVE_VIEWDIST", 24, 1, streamDistanceCap);
+        int streamMarginChunks = GetEnvIntClamped("HVE_STREAM_MARGIN", 12, 0, streamDistanceCap);
+        int streamDistanceChunks = std::min(streamDistanceCap, viewDistanceChunks + streamMarginChunks);
         const int heightChunks = GetEnvIntClamped("HVE_HEIGHT_CHUNKS", 48, 1, 256); // Default 48 (1536 blocks), max 256
         const int preloadHeightChunks = GetEnvIntClamped("HVE_PRELOAD_HEIGHT_CHUNKS", std::min(12, heightChunks), 1, 256);
 
@@ -2187,23 +2341,44 @@ namespace Engine {
         const bool adaptiveBudget = GetEnvBool("HVE_ADAPTIVE_STREAM_BUDGET", true);
         const bool largeMode = GetEnvBool("HVE_LARGE_MODE", true);
         const float largeTargetFps = GetEnvFloatClamped("HVE_LARGE_TARGET_FPS", 55.0f, 30.0f, 120.0f);
-        const int largeMinStream = GetEnvIntClamped("HVE_LARGE_MIN_STREAM", 10, 1, 224);
+        const int largeMinStream = GetEnvIntClamped("HVE_LARGE_MIN_STREAM", 10, 1, streamDistanceCap);
         const int largeMinUpload = GetEnvIntClamped("HVE_LARGE_MIN_UPLOAD", 8, 1, 128);
         const int largeUploadBoost = GetEnvIntClamped("HVE_LARGE_UPLOAD_BOOST", 24, 0, 128);
+        const bool lowEndController = GetEnvBool("HVE_LOWEND_CONTROLLER", true);
+        const float lowEndTargetMs = GetEnvFloatClamped("HVE_LOWEND_TARGET_MS", 22.2f, 10.0f, 60.0f);
+        const float lowEndHysteresisMs = GetEnvFloatClamped("HVE_LOWEND_HYST_MS", 0.6f, 0.1f, 8.0f);
+        const float lowEndFastEma = GetEnvFloatClamped("HVE_LOWEND_EMA_FAST", 0.20f, 0.02f, 0.95f);
+        const float lowEndSlowEma = GetEnvFloatClamped("HVE_LOWEND_EMA_SLOW", 0.06f, 0.01f, 0.50f);
+        const int lowEndMaxLevel = GetEnvIntClamped("HVE_LOWEND_MAX_LEVEL", 5, 1, 8);
         bool disableUnload = GetEnvBool("HVE_DISABLE_UNLOAD", true);
         int cacheMarginChunks = GetEnvIntClamped("HVE_CACHE_MARGIN", 0, 0, 64);
 
-        int preloadRadiusChunks = GetEnvIntClamped("HVE_PRELOAD_RADIUS", std::min(12, viewDistanceChunks), 0, 96);
+        int preloadRadiusChunks = GetEnvIntClamped("HVE_PRELOAD_RADIUS", std::min(12, viewDistanceChunks), 0, streamDistanceCap);
         float preloadMaxSec = GetEnvFloatClamped("HVE_PRELOAD_MAX_SEC", 14.0f, 0.0f, 120.0f);
         bool preloadBlocksInput = GetEnvBool("HVE_PRELOAD_BLOCKS_INPUT", false);
         const bool instantHugeSight = GetEnvBool("HVE_INSTANT_HUGE_SIGHT", true);
         const bool instantHugeReposition = GetEnvBool("HVE_INSTANT_HUGE_REPOSITION", true);
-        const int instantHugeRadius = GetEnvIntClamped("HVE_INSTANT_HUGE_RADIUS", 168, 16, 224);
-        const int instantHugeVertical = GetEnvIntClamped("HVE_INSTANT_HUGE_VERTICAL", 64, 8, 96);
+        const int instantHugeRadius = GetEnvIntClamped("HVE_INSTANT_HUGE_RADIUS", 168, 16, streamDistanceCap);
+        const int instantHugeVertical = GetEnvIntClamped("HVE_INSTANT_HUGE_VERTICAL", 64, 8, 1024);
+        const bool megaPreloadContinuous = GetEnvBool("HVE_MEGA_PRELOAD_CONTINUOUS", true);
+        const float megaPreloadPulseSec = GetEnvFloatClamped("HVE_MEGA_PRELOAD_PULSE_SEC", 0.8f, 0.05f, 10.0f);
+        const int megaPreloadRadiusStep = GetEnvIntClamped("HVE_MEGA_PRELOAD_RADIUS_STEP", 64, 1, streamDistanceCap);
+        const int megaPreloadRadiusMax = GetEnvIntClamped("HVE_MEGA_PRELOAD_RADIUS_MAX", streamDistanceCap, 16, streamDistanceCap);
+        const int megaPreloadVerticalStep = GetEnvIntClamped("HVE_MEGA_PRELOAD_VERTICAL_STEP", 16, 1, 2048);
+        const int megaPreloadVerticalMax = GetEnvIntClamped("HVE_MEGA_PRELOAD_VERTICAL_MAX", 512, 8, 2048);
 
         // Quality presets: tuned for "potato" -> "cinematic" without changing core rendering.
         // This only adjusts streaming/load behavior (view distance, upload budget, preload radius).
         int qualityLevel = GetEnvOrIniIntClamped("HVE_QUALITY", ini, "quality", 1, 0, 2); // 0=Low, 1=Med, 2=High
+        auto hasEnvValue = [](const char* name) -> bool {
+            const char* v = std::getenv(name);
+            return v && *v;
+        };
+        const bool hasEnvViewDist = hasEnvValue("HVE_VIEWDIST");
+        const bool hasEnvStreamMargin = hasEnvValue("HVE_STREAM_MARGIN");
+        const bool hasEnvUploadBudget = hasEnvValue("HVE_UPLOAD_BUDGET");
+        const bool hasEnvPreloadRadius = hasEnvValue("HVE_PRELOAD_RADIUS");
+        const bool hasEnvPreloadMaxSec = hasEnvValue("HVE_PRELOAD_MAX_SEC");
         const bool autoHardwareQuality = GetEnvBool("HVE_AUTO_HW_QUALITY", true);
         const HardwareProfile hardware = HardwareDetector::Detect();
         if (autoHardwareQuality && hardware.IsToasterClass()) {
@@ -2217,28 +2392,38 @@ namespace Engine {
                   << std::endl;
         std::string worldFile = GetEnvOrIniString("HVE_WORLD_FILE", ini, "world_file", "hve_world.hvew");
         auto applyQuality = [&]() {
+            int qViewDistance = viewDistanceChunks;
+            int qStreamMargin = streamMarginChunks;
+            int qUploadBudget = uploadBudget;
+            int qPreloadRadius = preloadRadiusChunks;
+            float qPreloadMaxSec = preloadMaxSec;
             if (qualityLevel == 0) {
-                viewDistanceChunks = 6;
-                streamMarginChunks = 2;
-                uploadBudget = 32;
-                preloadRadiusChunks = 2;
-                preloadMaxSec = 6.0f;
+                qViewDistance = 6;
+                qStreamMargin = 2;
+                qUploadBudget = 32;
+                qPreloadRadius = 2;
+                qPreloadMaxSec = 6.0f;
             } else if (qualityLevel == 1) {
-                viewDistanceChunks = 24;
-                streamMarginChunks = 12;
-                uploadBudget = 120;
-                preloadRadiusChunks = 10;
-                preloadMaxSec = 14.0f;
+                qViewDistance = 24;
+                qStreamMargin = 12;
+                qUploadBudget = 120;
+                qPreloadRadius = 10;
+                qPreloadMaxSec = 14.0f;
             } else {
-                viewDistanceChunks = 40;
-                streamMarginChunks = 20;
-                uploadBudget = 190;
-                preloadRadiusChunks = 18;
-                preloadMaxSec = 30.0f;
+                qViewDistance = 40;
+                qStreamMargin = 20;
+                qUploadBudget = 190;
+                qPreloadRadius = 18;
+                qPreloadMaxSec = 30.0f;
             }
+            if (!hasEnvViewDist) viewDistanceChunks = qViewDistance;
+            if (!hasEnvStreamMargin) streamMarginChunks = qStreamMargin;
+            if (!hasEnvUploadBudget) uploadBudget = qUploadBudget;
+            if (!hasEnvPreloadRadius) preloadRadiusChunks = qPreloadRadius;
+            if (!hasEnvPreloadMaxSec) preloadMaxSec = qPreloadMaxSec;
             if (viewDistanceChunks < 1) viewDistanceChunks = 1;
             if (streamMarginChunks < 0) streamMarginChunks = 0;
-            streamDistanceChunks = std::min(224, viewDistanceChunks + streamMarginChunks);
+            streamDistanceChunks = std::min(streamDistanceCap, viewDistanceChunks + streamMarginChunks);
             baseUploadBudget = uploadBudget;
         };
         applyQuality();
@@ -2259,7 +2444,7 @@ namespace Engine {
         if (autoHardwareQuality) {
             viewDistanceChunks = std::min(viewDistanceChunks, adaptiveViewDistance);
             streamMarginChunks = std::min(streamMarginChunks, std::max(4, (int)std::round(12.0f * detailLevel)));
-            streamDistanceChunks = std::min(224, viewDistanceChunks + streamMarginChunks);
+            streamDistanceChunks = std::min(streamDistanceCap, viewDistanceChunks + streamMarginChunks);
             uploadBudget = std::max(16, (int)std::round((float)uploadBudget * detailLevel));
             baseUploadBudget = uploadBudget;
         }
@@ -2268,7 +2453,7 @@ namespace Engine {
             qualityLevel = 0;
             viewDistanceChunks = std::min(viewDistanceChunks, 4);
             streamMarginChunks = std::min(streamMarginChunks, 2);
-            streamDistanceChunks = std::min(224, viewDistanceChunks + streamMarginChunks);
+            streamDistanceChunks = std::min(streamDistanceCap, viewDistanceChunks + streamMarginChunks);
             uploadBudget = std::max(uploadBudget, 48);
             baseUploadBudget = uploadBudget;
             preloadRadiusChunks = 0;
@@ -2299,8 +2484,35 @@ namespace Engine {
         int keyDown = GetEnvOrIniIntClamped("HVE_KEY_DOWN", ini, "key_down", GLFW_KEY_LEFT_SHIFT, 0, 512);
         int keyInventory = GetEnvOrIniIntClamped("HVE_KEY_INVENTORY", ini, "key_inventory", GLFW_KEY_E, 0, 512);
         int keyBrake = GetEnvOrIniIntClamped("HVE_KEY_BRAKE", ini, "key_brake", GLFW_KEY_X, 0, 512);
+        int keyWireframe = GetEnvOrIniIntClamped("HVE_KEY_WIREFRAME", ini, "key_wireframe", GLFW_KEY_F3, 0, 512);
+        int keyImportPagePrev = GetEnvOrIniIntClamped("HVE_KEY_IMPORT_PREV", ini, "key_import_prev", GLFW_KEY_PAGE_UP, 0, 512);
+        int keyImportPageNext = GetEnvOrIniIntClamped("HVE_KEY_IMPORT_NEXT", ini, "key_import_next", GLFW_KEY_PAGE_DOWN, 0, 512);
         const bool startWithMouseCaptured = GetEnvBool("HVE_MOUSE_CAPTURED", true);
         const float inputGraceSec = GetEnvFloatClamped("HVE_INPUT_GRACE_SEC", 0.0f, 0.0f, 2.0f);
+        const bool loadingInputBreakout = GetEnvBool("HVE_LOADING_INPUT_BREAKOUT", true);
+        const float loadingOverlayMaxSec = GetEnvFloatClamped("HVE_LOADING_OVERLAY_MAX_SEC", 2.5f, 0.0f, 120.0f);
+        const bool startupForcePreload = GetEnvBool("HVE_STARTUP_FORCE_PRELOAD", true);
+        const int startupBlockMinChunks = GetEnvIntClamped("HVE_STARTUP_BLOCK_MIN_CHUNKS", 1200, 0, 500000);
+        const float startupBlockMaxSec = GetEnvFloatClamped("HVE_STARTUP_BLOCK_MAX_SEC", 20.0f, 0.0f, 300.0f);
+        const float startupBlockStallSec = GetEnvFloatClamped("HVE_STARTUP_BLOCK_STALL_SEC", 3.0f, 0.5f, 60.0f);
+        const float startupPerfProtectSec = GetEnvFloatClamped("HVE_STARTUP_PERF_PROTECT_SEC", 8.0f, 0.0f, 60.0f);
+        const int startupProtectStream = GetEnvIntClamped("HVE_STARTUP_STREAM", 14, 6, 96);
+        const int startupProtectUploadMin = GetEnvIntClamped("HVE_STARTUP_UPLOAD_MIN", 24, 4, 256);
+        const int startupProtectHeight = GetEnvIntClamped("HVE_STARTUP_HEIGHT", 12, 4, 128);
+        const int startupWarmChunksTarget = GetEnvIntClamped("HVE_STARTUP_WARM_CHUNKS", 120, 24, 200000);
+        const int startupMinStreamSteps = GetEnvIntClamped("HVE_STARTUP_STREAM_STEPS", 2, 1, 8);
+        const bool chunkCatchupEnabled = GetEnvBool("HVE_CHUNK_CATCHUP_ENABLED", true);
+        const int chunkCatchupTarget = GetEnvIntClamped("HVE_CHUNK_CATCHUP_TARGET", 220, 24, 200000);
+        const int chunkCatchupUploadBoost = GetEnvIntClamped("HVE_CHUNK_CATCHUP_UPLOAD_BOOST", 22, 0, 256);
+        const int chunkCatchupStreamBonus = GetEnvIntClamped("HVE_CHUNK_CATCHUP_STREAM_BONUS", 8, 0, 128);
+        const int chunkCatchupStepsBonus = GetEnvIntClamped("HVE_CHUNK_CATCHUP_STEPS_BONUS", 1, 0, 4);
+        const int streamStepsWhileMoving = GetEnvIntClamped("HVE_STREAM_STEPS_WHILE_MOVING", 2, 1, 8);
+        const int chunkCatchupDeficitSoft = GetEnvIntClamped("HVE_CHUNK_CATCHUP_DEFICIT_SOFT", 96, 1, 500000);
+        const int chunkCatchupStreamBurstMax = GetEnvIntClamped("HVE_CHUNK_CATCHUP_STREAM_BURST_MAX", 6, 1, 16);
+        const int chunkCatchupUploadBurstMax = GetEnvIntClamped("HVE_CHUNK_CATCHUP_UPLOAD_BURST_MAX", 192, 8, 512);
+        const float chunkCatchupMinFps = GetEnvFloatClamped("HVE_CHUNK_CATCHUP_MIN_FPS", 52.0f, 20.0f, 240.0f);
+        const float chunkCatchupMaxFrameMs = GetEnvFloatClamped("HVE_CHUNK_CATCHUP_MAX_FRAME_MS", 20.0f, 5.0f, 80.0f);
+        const int uploadPumpCap = GetEnvIntClamped("HVE_UPLOAD_PUMP_CAP", 192, 16, 512);
 
         const float flySpeed = GetEnvFloatClamped("HVE_FLY_SPEED", 25.0f, 1.0f, 500.0f);
         const float flyBoostMult = GetEnvFloatClamped("HVE_FLY_BOOST_MULT", 4.0f, 1.0f, 20.0f);
@@ -2318,7 +2530,7 @@ namespace Engine {
         const float playerBuildHalfWidth = GetEnvFloatClamped("HVE_PLAYER_BUILD_HALF_WIDTH", 0.22f, 0.12f, 0.45f);
         const float playerBuildHeight = GetEnvFloatClamped("HVE_PLAYER_BUILD_HEIGHT", 1.65f, 1.2f, 2.4f);
         const int placeMax = GetEnvIntClamped("HVE_PLACE_MAX", 512, 1, 8192);
-        const bool buildWatchEnabled = GetEnvBool("HVE_BUILD_WATCH", true);
+        const bool buildWatchEnabled = GetEnvBool("HVE_BUILD_WATCH", false);
         const float buildWatchSec = GetEnvFloatClamped("HVE_BUILD_WATCH_SEC", 0.75f, 0.1f, 10.0f);
         const int buildWatchMax = GetEnvIntClamped("HVE_BUILD_WATCH_MAX", 128, 1, 2048);
         camera.MovementSpeed = flySpeed;
@@ -2388,7 +2600,7 @@ namespace Engine {
                   bindlessOk ? "assets/shaders/chunk_frag_bindless.glsl"
                      : "assets/shaders/chunk_frag.glsl");
 
-        bool erosionComputeEnabled = GetEnvBool("HVE_EROSION_COMPUTE", !hardSafeMode);
+        bool erosionComputeEnabled = GetEnvBool("HVE_EROSION_COMPUTE", false);
         if (hardSafeMode && erosionComputeEnabled) {
             erosionComputeEnabled = false;
             std::cout << "SAFE MODE: erosion compute disabled" << std::endl;
@@ -2429,10 +2641,11 @@ namespace Engine {
 
 #ifdef GL_TEXTURE_MAX_ANISOTROPY_EXT
             {
+                const float requestedAniso = float(GetEnvIntClamped("HVE_ATLAS_ANISO", 12, 1, 16));
                 GLfloat maxAniso = 0.0f;
                 glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &maxAniso);
                 if (maxAniso > 1.0f) {
-                    glSamplerParameterf(blockSampler, GL_TEXTURE_MAX_ANISOTROPY_EXT, std::min(8.0f, maxAniso));
+                    glSamplerParameterf(blockSampler, GL_TEXTURE_MAX_ANISOTROPY_EXT, std::min(requestedAniso, maxAniso));
                 }
             }
 #endif
@@ -2491,7 +2704,7 @@ namespace Engine {
         const int erosionRegionBlocks = GetEnvIntClamped("HVE_EROSION_REGION", 512, 64, 2048);
         const int erosionSampleStep = GetEnvIntClamped("HVE_EROSION_STEP", 2, 1, 8);
         const int erosionPasses = GetEnvIntClamped("HVE_EROSION_PASSES", 8, 1, 32);
-        const float erosionDispatchSec = GetEnvFloatClamped("HVE_EROSION_DISPATCH_SEC", 1.5f, 0.2f, 10.0f);
+        const float erosionDispatchSec = GetEnvFloatClamped("HVE_EROSION_DISPATCH_SEC", 4.0f, 0.2f, 10.0f);
         const float erosionStrength = GetEnvFloatClamped("HVE_EROSION_STRENGTH", 0.65f, 0.0f, 2.0f);
 
         const int erosionGrid = std::max(16, erosionRegionBlocks / erosionSampleStep);
@@ -2587,7 +2800,13 @@ namespace Engine {
         double lastFpsUpdate = 0.0;
         GameTime gameTime(1.0 / 120.0, 0.1);
         TimeSlicedJobSystem timeSlicedJobs;
-        const int maxFixedStepsPerFrame = GetEnvIntClamped("HVE_MAX_FIXED_STEPS", 8, 1, 32);
+        const int maxFixedStepsPerFrame = GetEnvIntClamped("HVE_MAX_FIXED_STEPS", 6, 1, 32);
+        const int recoveryFixedSteps = std::clamp(GetEnvIntClamped("HVE_RECOVERY_FIXED_STEPS", 2, 1, 32), 1, maxFixedStepsPerFrame);
+        const int fixedStepsWhileMoving = std::clamp(GetEnvIntClamped("HVE_FIXED_STEPS_WHILE_MOVING", 2, 1, 8), 1, maxFixedStepsPerFrame);
+        const int recoveryHoldFrames = GetEnvIntClamped("HVE_RECOVERY_HOLD_FRAMES", 120, 0, 2000);
+        int fixedStepRecoveryFrames = 0;
+        int fixedStepSaturatedFrames = 0;
+        int fixedStepSaturatedFramesSec = 0;
         float stableFpsEma = 0.0f;
         float maxSpikeWindowMs = 0.0f;
         double lastEliteMetricUpdate = -1.0;
@@ -2762,7 +2981,10 @@ namespace Engine {
         glm::ivec3 visualSelMax{0};
         bool visualSelValid = false;
 
-        const int runtimeMaxBlockId = GetRuntimeMaxBlockId();
+        g_MinecraftImportPage = ClampMinecraftImportPage(
+            GetEnvOrIniIntClamped("HVE_IMPORT_PAGE", ini, "import_page", 0, 0, 4096)
+        );
+        int runtimeMaxBlockId = GetRuntimeMaxBlockId();
         uint8_t selectedBlockId = (uint8_t)GetEnvIntClamped("HVE_BLOCK", 1, 1, runtimeMaxBlockId);
         uint8_t patternBlockId = selectedBlockId;
         std::vector<ClipboardVoxel> clipboard;
@@ -2784,12 +3006,115 @@ namespace Engine {
         bool dayNightCycle = GetEnvOrIniBool("HVE_DAY_NIGHT", ini, "day_night_cycle", false);
         bool crosshairEnabled = GetEnvBool("HVE_CROSSHAIR", true);
         bool hotbarEnabled = GetEnvBool("HVE_HOTBAR", true);
-        const bool futuristicUi = GetEnvBool("HVE_FUTURISTIC_UI", true);
+        const bool futuristicUi = true;
         const bool simpleBuild = GetEnvBool("HVE_SIMPLE_BUILD", true);
         const bool strictMouseCapture = GetEnvBool("HVE_STRICT_MOUSE_CAPTURE", true);
-        const bool traceRuntime = GetEnvBool("HVE_TRACE_RUNTIME", true);
+        const bool traceRuntime = GetEnvBool("HVE_TRACE_RUNTIME", false);
         const bool traceInput = GetEnvBool("HVE_TRACE_INPUT", false);
+        const bool spikeGuardEnabled = GetEnvBool("HVE_SPIKE_GUARD", true);
+        const bool spikeLogEnabled = GetEnvBool("HVE_SPIKE_LOG", true);
+        const bool coverageMetricEnabled = GetEnvBool("HVE_COVERAGE_METRIC", true);
+        const int coverageRadiusChunks = GetEnvIntClamped("HVE_COVERAGE_RADIUS", 20, 2, 128);
+        const int coverageStrideChunks = GetEnvIntClamped("HVE_COVERAGE_STRIDE", 2, 1, 8);
+        const bool coverageAlarmEnabled = GetEnvBool("HVE_COVERAGE_ALARM", true);
+        const int coverageAlarmHigh = GetEnvIntClamped("HVE_COVERAGE_ALARM_HIGH", 28, 1, 50000);
+        const int coverageAlarmLow = GetEnvIntClamped("HVE_COVERAGE_ALARM_LOW", 8, 0, 50000);
+        const int coverageAlarmBoost = GetEnvIntClamped("HVE_COVERAGE_ALARM_BOOST", 18, 1, 128);
+        const float coverageAlarmHoldSec = GetEnvFloatClamped("HVE_COVERAGE_ALARM_HOLD_SEC", 1.2f, 0.1f, 20.0f);
+        const float coverageAlarmRampPerSec = GetEnvFloatClamped("HVE_COVERAGE_ALARM_RAMP", 10.0f, 0.1f, 120.0f);
+        const float coverageAlarmDecayPerSec = GetEnvFloatClamped("HVE_COVERAGE_ALARM_DECAY", 6.0f, 0.1f, 120.0f);
+        const bool stutterAlertsEnabled = GetEnvBool("HVE_STUTTER_ALERTS", true);
+        const float stutterAlertMinFps = GetEnvFloatClamped("HVE_ALERT_MIN_FPS", 45.0f, 10.0f, 240.0f);
+        const int stutterAlertFixedSatSec = GetEnvIntClamped("HVE_ALERT_FIXEDSAT_SEC", 1, 0, 120);
+        const int fixedSatDebtSteps = GetEnvIntClamped("HVE_FIXEDSAT_DEBT_STEPS", 2, 1, 8);
+        const int stutterAlertPendingOldTicks = GetEnvIntClamped("HVE_ALERT_PENDING_OLD_TICKS", 90, 1, 200000);
+        const int stutterAlertOverdueChunks = GetEnvIntClamped("HVE_ALERT_OVERDUE_CHUNKS", 8, 1, 100000);
+        const int stutterAlertInFlightGen = GetEnvIntClamped("HVE_ALERT_INFLIGHT_GEN", 28, 1, 100000);
+        const int stutterAlertLatencyWarn = GetEnvIntClamped("HVE_ALERT_LATENCY_WARN", 35, 1, 100);
+        const int stutterAlertFixedSatMinLatency = GetEnvIntClamped("HVE_ALERT_FIXEDSAT_MIN_LATENCY", 28, 1, 100);
+        const float stutterAlertCooldownSec = GetEnvFloatClamped("HVE_ALERT_COOLDOWN_SEC", 0.8f, 0.1f, 30.0f);
+        const bool controlObsEnabled = GetEnvBool("HVE_CONTROL_OBS", true);
+        const bool controlMitigationEnabled = GetEnvBool("HVE_CONTROL_MITIGATION", false);
+        const float controlResponseThreshold = GetEnvFloatClamped("HVE_CONTROL_RESPONSE_THRESHOLD", 0.62f, 0.10f, 1.50f);
+        const float controlLagWarnMs = GetEnvFloatClamped("HVE_CONTROL_LAG_WARN_MS", 28.0f, 4.0f, 300.0f);
+        const float controlDelayIntentMinSec = GetEnvFloatClamped("HVE_CONTROL_DELAY_INTENT_MIN_SEC", 0.10f, 0.0f, 2.0f);
+        const int controlDelayReportMinMs = GetEnvIntClamped("HVE_CONTROL_DELAY_REPORT_MIN_MS", 120, 0, 4000);
+        const float spikeMinorMs = GetEnvFloatClamped("HVE_SPIKE_MINOR_MS", 2.2f, 0.4f, 25.0f);
+        const float spikeMajorMs = GetEnvFloatClamped("HVE_SPIKE_MAJOR_MS", 7.5f, 1.0f, 80.0f);
+        const float spikeZScore = GetEnvFloatClamped("HVE_SPIKE_Z", 2.4f, 0.8f, 8.0f);
+        const float spikeHoldSec = GetEnvFloatClamped("HVE_SPIKE_HOLD_SEC", 3.0f, 0.2f, 20.0f);
+        const float spikeRecoverSec = GetEnvFloatClamped("HVE_SPIKE_RECOVER_SEC", 5.5f, 0.5f, 40.0f);
         double traceLastSnapshot = -1.0;
+        std::array<float, 240> spikeWindow{};
+        int spikeWindowCount = 0;
+        int spikeWindowHead = 0;
+        int spikeMinorCount = 0;
+        int spikeMajorCount = 0;
+        int spikeLevel = 0; // 0..3
+        double spikeStateUntil = -1.0;
+        int coverageMisses = 0;
+        bool coverageMetricLive = false;
+        int coverageBoostApplied = 0;
+        bool coverageAlarmActive = false;
+        float coverageBoostState = 0.0f;
+        double coverageAlarmHoldUntil = -1.0;
+        double lastSpikeEventTime = -1.0;
+        float spikeLastOverBaselineMs = 0.0f;
+        float lowEndEmaFastMs = lowEndTargetMs;
+        float lowEndEmaSlowMs = lowEndTargetMs;
+        int lowEndLevel = 0;
+        double lowEndLastDownshift = -1.0;
+        double lowEndLastUpshift = -1.0;
+        int lowEndDownshiftEvents = 0;
+        int lowEndUpshiftEvents = 0;
+        int lowEndDownshiftEventsSec = 0;
+        int lowEndUpshiftEventsSec = 0;
+        std::string lowEndLastReason = "init";
+        int stutterLatencyScore = 0;
+        bool stutterAlertActive = false;
+        std::string stutterAlertCause = "none";
+        float controlMoveResponseEma = 1.0f;
+        float controlLagMsEma = 0.0f;
+        float controlRotDegPerSecEma = 0.0f;
+        float controlIntentEma = 0.0f;
+        float controlHoldForwardSec = 0.0f;
+        float controlHoldBackSec = 0.0f;
+        float controlHoldLeftSec = 0.0f;
+        float controlHoldRightSec = 0.0f;
+        float controlHoldLmbSec = 0.0f;
+        float controlHoldRmbSec = 0.0f;
+        float controlIntentActiveSec = 0.0f;
+        bool controlAwaitMove = false;
+        double controlAwaitMoveStart = -1.0;
+        int controlMoveDelayMsLast = 0;
+        int controlMoveDelayMsMaxSec = 0;
+        int controlPlaceOpsCounter = 0;
+        int controlBreakOpsCounter = 0;
+        int controlQualityScoreSec = 100;
+        int controlLagMsSec = 0;
+        int controlMoveDelayMsSec = 0;
+        int controlPlaceOpsSec = 0;
+        int controlBreakOpsSec = 0;
+        float controlDistForwardMetersCounter = 0.0f;
+        float controlDistBackMetersCounter = 0.0f;
+        float controlDistLeftMetersCounter = 0.0f;
+        float controlDistRightMetersCounter = 0.0f;
+        float controlDistForwardMetersSec = 0.0f;
+        float controlDistBackMetersSec = 0.0f;
+        float controlDistLeftMetersSec = 0.0f;
+        float controlDistRightMetersSec = 0.0f;
+        float controlRotDegPerSecSec = 0.0f;
+        float controlWASDHoldSec = 0.0f;
+        float controlLmbHoldSec = 0.0f;
+        float controlRmbHoldSec = 0.0f;
+        float lastFrameYaw = camera.Yaw;
+        float lastFramePitch = camera.Pitch;
+        std::size_t streamPendingNotReady = 0;
+        std::size_t streamWatchdogEligible = 0;
+        std::size_t streamWatchdogOverdue = 0;
+        int streamPendingOldestTicks = 0;
+        int streamOverdueOldestTicks = 0;
+        double stutterAlertCooldownUntil = -1.0;
 
         bool lastF1 = false;
         bool lastF2 = false;
@@ -2816,6 +3141,8 @@ namespace Engine {
         bool last0 = false;
         bool lastMinus = false;
         bool lastEqual = false;
+        bool lastImportPrev = false;
+        bool lastImportNext = false;
         bool lastSpace = false;
         static std::vector<ItemStack> hotbarSlots(12);
         static std::vector<ItemStack> mainInventorySlots(27);
@@ -2877,7 +3204,7 @@ namespace Engine {
 
         Input::SetCursorMode(mouseCaptured);
         glfwSwapInterval(vsync ? 1 : 0);
-        glPolygonMode(GL_FRONT_AND_BACK, wireframe ? GL_LINE : GL_FILL);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
         // Crosshair overlay resources (created only if enabled)
         GLuint crossProg = 0;
@@ -2949,14 +3276,39 @@ namespace Engine {
                 in vec2 vUv;
                 in float vUseTex;
                 uniform sampler2D u_BlockAtlas;
+                uniform float u_FuturisticUI;
+                uniform float u_Time;
+                uniform vec2 u_Resolution;
                 out vec4 FragColor;
                 void main(){
+                    vec4 base;
                     if (vUseTex > 0.5) {
                         vec4 tex = texture(u_BlockAtlas, vUv);
-                        FragColor = tex * vColor;
+                        base = tex * vColor;
                     } else {
-                        FragColor = vColor;
+                        base = vColor;
                     }
+
+                    if (u_FuturisticUI > 0.5) {
+                        vec2 res = max(u_Resolution, vec2(1.0));
+                        vec2 suv = gl_FragCoord.xy / res;
+                        float pulse = 0.5 + 0.5 * sin(u_Time * 4.4);
+                        float resScale = clamp(min(res.x, res.y) / 1080.0, 0.85, 1.35);
+                        float edge = smoothstep(0.78, 1.00, max(abs(suv.x - 0.5) * 2.0, abs(suv.y - 0.5) * 2.0));
+                        float topGlow = smoothstep(0.0, 0.65, 1.0 - suv.y);
+                        vec3 blueA = vec3(0.08, 0.16, 0.36);
+                        vec3 blueB = vec3(0.10, 0.44, 0.78);
+                        vec3 blueC = vec3(0.08, 0.74, 1.00);
+                        float grad = clamp(suv.x * 0.65 + suv.y * 0.35, 0.0, 1.0);
+                        vec3 holo = mix(mix(blueA, blueB, grad), blueC, 0.20 + 0.14 * pulse);
+                        float holoMix = (vUseTex > 0.5) ? (0.16 + 0.07 * pulse) : (0.34 + 0.12 * pulse);
+                        base.rgb = mix(base.rgb, base.rgb * holo, holoMix * resScale);
+                        base.rgb += holo * (edge * (0.10 + 0.12 * pulse) * resScale);
+                        base.rgb += vec3(0.04, 0.09, 0.16) * topGlow * 0.30;
+                        base.rgb *= (0.98 + 0.04 * resScale);
+                    }
+
+                    FragColor = base;
                 }
             )GLSL";
             hotbarProg = CreateProgram(vsSrc, fsSrc);
@@ -3051,6 +3403,126 @@ namespace Engine {
             }
         }
 
+        // Far-field horizon terrain (multi-level clipmap-like nested grids)
+        const bool horizonTerrainEnabled = horizonMode && GetEnvBool("HVE_HORIZON_TERRAIN", true);
+        const int horizonGridCells = GetEnvIntClamped("HVE_HORIZON_GRID_CELLS", 96, 24, 192);
+        const int horizonLevelCount = GetEnvIntClamped("HVE_HORIZON_LEVELS", 3, 1, 6);
+        const float horizonCellSize = GetEnvFloatClamped("HVE_HORIZON_CELL_SIZE", 32.0f, 8.0f, 128.0f);
+        const float horizonLevelScale = GetEnvFloatClamped("HVE_HORIZON_LEVEL_SCALE", 2.0f, 1.25f, 4.0f);
+        const float horizonYOffset = GetEnvFloatClamped("HVE_HORIZON_Y_OFFSET", -2.0f, -64.0f, 64.0f);
+        const float horizonUpdateStep = GetEnvFloatClamped("HVE_HORIZON_UPDATE_STEP", 16.0f, 4.0f, 128.0f);
+        const float horizonUpdateMinSec = GetEnvFloatClamped("HVE_HORIZON_UPDATE_MIN_SEC", 0.22f, 0.03f, 2.0f);
+        const int horizonPointsPerFrame = GetEnvIntClamped("HVE_HORIZON_POINTS_PER_FRAME", 4096, 256, 65536);
+        const bool horizonAdaptiveBudget = GetEnvBool("HVE_HORIZON_ADAPTIVE", true);
+
+        struct HorizonLevel {
+            GLuint vao = 0;
+            GLuint vbo = 0;
+            GLuint ebo = 0;
+            std::vector<float> verts;
+            std::vector<unsigned int> indices;
+            float centerX = std::numeric_limits<float>::infinity();
+            float centerZ = std::numeric_limits<float>::infinity();
+            int updateCursor = 0;
+            float cellSize = 1.0f;
+            float snapStep = 1.0f;
+            bool ready = false;
+        };
+
+        GLuint horizonProg = 0;
+        std::vector<HorizonLevel> horizonLevels;
+
+        if (horizonTerrainEnabled) {
+            const char* hVs = R"GLSL(
+                #version 460 core
+                layout(location=0) in vec3 aPos;
+                uniform mat4 u_ViewProjection;
+                out vec3 vWorldPos;
+                void main() {
+                    vWorldPos = aPos;
+                    gl_Position = u_ViewProjection * vec4(aPos, 1.0);
+                }
+            )GLSL";
+
+            const char* hFs = R"GLSL(
+                #version 460 core
+                in vec3 vWorldPos;
+                uniform vec3 u_ViewPos;
+                uniform vec3 u_SunDir;
+                uniform vec3 u_FogColor;
+                uniform float u_FogDensity;
+                out vec4 FragColor;
+
+                void main() {
+                    vec3 dpx = dFdx(vWorldPos);
+                    vec3 dpy = dFdy(vWorldPos);
+                    vec3 N = normalize(cross(dpy, dpx));
+
+                    float slope = 1.0 - clamp(abs(N.y), 0.0, 1.0);
+                    vec3 grass = vec3(0.12, 0.34, 0.14);
+                    vec3 rock = vec3(0.34, 0.34, 0.36);
+                    vec3 albedo = mix(grass, rock, smoothstep(0.22, 0.68, slope));
+
+                    vec3 L = normalize(u_SunDir);
+                    float ndl = max(dot(N, L), 0.0);
+                    vec3 lit = albedo * (0.34 + ndl * 0.78);
+
+                    float dist = distance(u_ViewPos, vWorldPos);
+                    float fog = 1.0 - exp(-max(0.00001, u_FogDensity) * dist);
+                    vec3 col = mix(lit, u_FogColor, clamp(fog, 0.0, 1.0));
+                    FragColor = vec4(col, 1.0);
+                }
+            )GLSL";
+
+            horizonProg = CreateProgram(hVs, hFs);
+            if (horizonProg != 0) {
+                const int vertsPerAxis = horizonGridCells + 1;
+                const std::size_t pointCount = (std::size_t)vertsPerAxis * (std::size_t)vertsPerAxis;
+
+                horizonLevels.resize((std::size_t)horizonLevelCount);
+                for (int li = 0; li < horizonLevelCount; ++li) {
+                    HorizonLevel& level = horizonLevels[(std::size_t)li];
+                    level.cellSize = horizonCellSize * std::pow(horizonLevelScale, (float)li);
+                    level.snapStep = horizonUpdateStep * std::pow(horizonLevelScale, (float)li);
+                    level.verts.resize(pointCount * 3u, 0.0f);
+                    level.indices.reserve((std::size_t)horizonGridCells * (std::size_t)horizonGridCells * 6u);
+
+                    for (int z = 0; z < horizonGridCells; ++z) {
+                        for (int x = 0; x < horizonGridCells; ++x) {
+                            const unsigned int i0 = (unsigned int)(z * vertsPerAxis + x);
+                            const unsigned int i1 = i0 + 1u;
+                            const unsigned int i2 = i0 + (unsigned int)vertsPerAxis;
+                            const unsigned int i3 = i2 + 1u;
+                            level.indices.push_back(i0);
+                            level.indices.push_back(i2);
+                            level.indices.push_back(i1);
+                            level.indices.push_back(i1);
+                            level.indices.push_back(i2);
+                            level.indices.push_back(i3);
+                        }
+                    }
+
+                    glGenVertexArrays(1, &level.vao);
+                    glGenBuffers(1, &level.vbo);
+                    glGenBuffers(1, &level.ebo);
+
+                    glBindVertexArray(level.vao);
+                    glBindBuffer(GL_ARRAY_BUFFER, level.vbo);
+                    glBufferData(GL_ARRAY_BUFFER, level.verts.size() * sizeof(float), level.verts.data(), GL_DYNAMIC_DRAW);
+                    glEnableVertexAttribArray(0);
+                    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+
+                    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, level.ebo);
+                    glBufferData(GL_ELEMENT_ARRAY_BUFFER, level.indices.size() * sizeof(unsigned int), level.indices.data(), GL_STATIC_DRAW);
+                }
+
+                glBindVertexArray(0);
+                glBindBuffer(GL_ARRAY_BUFFER, 0);
+            } else {
+                std::cerr << "[Horizon] Shader disabled (compile/link failed)." << std::endl;
+            }
+        }
+
         // Inventory UI (E): simple grid overlay; click selects a block.
         GLuint invProg = 0;
         GLuint invVao = 0;
@@ -3074,14 +3546,35 @@ namespace Engine {
                 in vec2 vUv;
                 in float vUseTex;
                 uniform sampler2D u_BlockAtlas;
+                uniform float u_FuturisticUI;
+                uniform float u_Time;
+                uniform vec2 u_Resolution;
                 out vec4 FragColor;
                 void main(){
+                    vec4 base;
                     if (vUseTex > 0.5) {
                         vec4 tex = texture(u_BlockAtlas, vUv);
-                        FragColor = tex * vColor;
+                        base = tex * vColor;
                     } else {
-                        FragColor = vColor;
+                        base = vColor;
                     }
+
+                    if (u_FuturisticUI > 0.5) {
+                        vec2 res = max(u_Resolution, vec2(1.0));
+                        vec2 suv = gl_FragCoord.xy / res;
+                        float pulse = 0.5 + 0.5 * sin(u_Time * 3.8);
+                        float resScale = clamp(min(res.x, res.y) / 1080.0, 0.85, 1.35);
+                        float edge = smoothstep(0.80, 1.00, max(abs(suv.x - 0.5) * 2.0, abs(suv.y - 0.5) * 2.0));
+                        float topGlow = smoothstep(0.0, 0.62, 1.0 - suv.y);
+                        vec3 holo = mix(vec3(0.08, 0.16, 0.34), vec3(0.08, 0.62, 0.98), clamp(suv.x * 0.70 + suv.y * 0.30, 0.0, 1.0));
+                        float holoMix = (vUseTex > 0.5) ? (0.16 + 0.07 * pulse) : (0.30 + 0.12 * pulse);
+                        base.rgb = mix(base.rgb, base.rgb * holo, holoMix * resScale);
+                        base.rgb += holo * (edge * (0.10 + 0.11 * pulse) * resScale);
+                        base.rgb += vec3(0.03, 0.08, 0.14) * topGlow * 0.26;
+                        base.rgb *= (0.98 + 0.04 * resScale);
+                    }
+
+                    FragColor = base;
                 }
             )GLSL";
             invProg = CreateProgram(vsSrc, fsSrc);
@@ -3112,6 +3605,18 @@ namespace Engine {
                 glBindBuffer(GL_ARRAY_BUFFER, 0);
             }
         }
+
+        auto applyUiProgramUniforms = [&](GLuint program) {
+            if (program == 0) return;
+            const GLint holoLoc = glGetUniformLocation(program, "u_FuturisticUI");
+            if (holoLoc >= 0) glUniform1f(holoLoc, futuristicUi ? 1.0f : 0.0f);
+
+            const GLint timeLoc = glGetUniformLocation(program, "u_Time");
+            if (timeLoc >= 0) glUniform1f(timeLoc, (float)glfwGetTime());
+
+            const GLint resLoc = glGetUniformLocation(program, "u_Resolution");
+            if (resLoc >= 0) glUniform2f(resLoc, (float)Window::GetWidth(), (float)Window::GetHeight());
+        };
 
         // Aim outline + placement preview (minimal building UX; no HUD).
         bool aimOutlineEnabled = GetEnvBool("HVE_AIM_OUTLINE", true);
@@ -3244,14 +3749,29 @@ namespace Engine {
         glm::ivec3 lastRaycastBlock{ std::numeric_limits<int>::min(), std::numeric_limits<int>::min(), std::numeric_limits<int>::min() };
         uint8_t lastRaycastBlockId = 0xFF;
 
-        const int preloadTargetChunks = (preloadRadiusChunks > 0)
-            ? ((2 * preloadRadiusChunks + 1) * (2 * preloadRadiusChunks + 1) * std::min(heightChunks, preloadHeightChunks))
-            : 0;
+        const int preloadTargetLayers = GetEnvIntClamped("HVE_PRELOAD_TARGET_LAYERS", 1, 1, 32);
+        const bool preloadTargetCircular = GetEnvBool("HVE_PRELOAD_TARGET_CIRCULAR", true);
+        int preloadTargetChunks = 0;
+        if (preloadRadiusChunks > 0) {
+            const int fullGridSpan = (2 * preloadRadiusChunks + 1);
+            const int fullGridArea = fullGridSpan * fullGridSpan;
+            const int effectiveLayers = std::max(1, std::min(std::min(heightChunks, preloadHeightChunks), preloadTargetLayers));
+            int targetArea = fullGridArea;
+            if (preloadTargetCircular) {
+                const float r = (float)preloadRadiusChunks;
+                targetArea = std::max(1, (int)std::lround(3.14159265f * r * r));
+            }
+            preloadTargetChunks = std::clamp(targetArea * effectiveLayers, 1, fullGridArea * std::max(1, std::min(heightChunks, preloadHeightChunks)));
+        }
         bool preloadDone = (preloadRadiusChunks <= 0);
         double preloadStartTime = (double)glfwGetTime();
+        int startupBlockLastChunks = 0;
+        double startupBlockLastProgressTime = preloadStartTime;
+        bool startupPreloadGateReleasedLatched = false;
         const bool startupLoadingOverlay = GetEnvBool("HVE_STARTUP_LOADING_OVERLAY", true);
+        bool loadingOverlayDismissedByInput = false;
 
-        if (worldStarted && !menuOpen && !preloadDone && startupLoadingOverlay) {
+        if (worldStarted && !menuOpen && !preloadDone && startupLoadingOverlay && !loadingOverlayDismissedByInput) {
             showLoadingOverlay = true;
             menuScreen = MenuScreen::Loading;
             mouseCaptured = false;
@@ -3260,6 +3780,9 @@ namespace Engine {
 
         bool cameraAutoPlaced = false;
         bool instantHugeQueued = false;
+        int megaPreloadRadiusCurrent = instantHugeRadius;
+        int megaPreloadVerticalCurrent = instantHugeVertical;
+        double megaPreloadLastPulse = -1.0;
         const double autoPlaceStartTime = glfwGetTime();
         const double autoPlaceFallbackSec = hardSafeMode ? 0.35 : 2.0;
         const bool emergencyTerrainBootstrap = GetEnvBool("HVE_EMERGENCY_TERRAIN_BOOTSTRAP", true);
@@ -3734,6 +4257,94 @@ namespace Engine {
             }
         };
 
+        auto updateHorizonTerrain = [&](const glm::vec3& camPos, double now, int pointsBudgetPerLevel, bool force) {
+            if (!horizonTerrainEnabled || horizonProg == 0 || horizonLevels.empty()) return;
+            const int vertsPerAxis = horizonGridCells + 1;
+            const int totalPoints = vertsPerAxis * vertsPerAxis;
+            if (totalPoints <= 0) return;
+
+            const int baseBudget = std::max(64, pointsBudgetPerLevel);
+
+            for (std::size_t li = 0; li < horizonLevels.size(); ++li) {
+                HorizonLevel& level = horizonLevels[li];
+                if (level.vao == 0 || level.vbo == 0 || level.verts.empty()) continue;
+
+                const float snapStep = std::max(0.001f, level.snapStep);
+                const float snappedX = std::floor(camPos.x / snapStep) * snapStep;
+                const float snappedZ = std::floor(camPos.z / snapStep) * snapStep;
+                const bool centerChanged = !std::isfinite(level.centerX) || !std::isfinite(level.centerZ) ||
+                                           std::abs(snappedX - level.centerX) > 0.001f ||
+                                           std::abs(snappedZ - level.centerZ) > 0.001f;
+
+                if (centerChanged) {
+                    level.centerX = snappedX;
+                    level.centerZ = snappedZ;
+                    level.updateCursor = 0;
+                    level.ready = false;
+                }
+
+                if (!force && !centerChanged && level.ready) continue;
+                if (!force && horizonUpdateMinSec > 0.0f) {
+                    // stagger deeper levels by requiring movement and natural cadence
+                    // (near levels refresh quickly because snapStep is smaller).
+                    const double frac = (double)(li + 1) * 0.25;
+                    if (std::fmod(now, (double)horizonUpdateMinSec + frac) < (double)horizonUpdateMinSec * 0.25) {
+                        // keep cadence smooth without burst updates
+                    }
+                }
+
+                const int levelBudget = force ? totalPoints : std::min(totalPoints, baseBudget / std::max(1, (int)li + 1));
+                if (levelBudget <= 0) continue;
+
+                const float halfSpan = 0.5f * (float)horizonGridCells * level.cellSize;
+                const int start = level.updateCursor;
+                const int count = std::min(levelBudget, totalPoints);
+
+                for (int i = 0; i < count; ++i) {
+                    const int idx = (start + i) % totalPoints;
+                    const int gx = idx % vertsPerAxis;
+                    const int gz = idx / vertsPerAxis;
+                    const float x = level.centerX - halfSpan + (float)gx * level.cellSize;
+                    const float z = level.centerZ - halfSpan + (float)gz * level.cellSize;
+                    const int sx = (int)std::floor(x);
+                    const int sz = (int)std::floor(z);
+                    const float y = (float)Game::World::Generation::GetSurfaceYAtWorld(sx, sz) + horizonYOffset;
+
+                    const std::size_t w = (std::size_t)idx * 3u;
+                    level.verts[w + 0] = x;
+                    level.verts[w + 1] = y;
+                    level.verts[w + 2] = z;
+                }
+
+                glBindBuffer(GL_ARRAY_BUFFER, level.vbo);
+                if (start + count <= totalPoints) {
+                    const std::size_t off = (std::size_t)start * 3u;
+                    glBufferSubData(GL_ARRAY_BUFFER,
+                                    (GLintptr)(off * sizeof(float)),
+                                    (GLsizeiptr)((std::size_t)count * 3u * sizeof(float)),
+                                    level.verts.data() + off);
+                } else {
+                    const int firstCount = totalPoints - start;
+                    const int secondCount = count - firstCount;
+                    const std::size_t offA = (std::size_t)start * 3u;
+                    glBufferSubData(GL_ARRAY_BUFFER,
+                                    (GLintptr)(offA * sizeof(float)),
+                                    (GLsizeiptr)((std::size_t)firstCount * 3u * sizeof(float)),
+                                    level.verts.data() + offA);
+                    glBufferSubData(GL_ARRAY_BUFFER,
+                                    0,
+                                    (GLsizeiptr)((std::size_t)secondCount * 3u * sizeof(float)),
+                                    level.verts.data());
+                }
+                glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+                level.updateCursor = (start + count) % totalPoints;
+                if (level.updateCursor == 0) {
+                    level.ready = true;
+                }
+            }
+        };
+
         while (!Window::ShouldClose()) {
             // Poll events first so mouse/keyboard state is current this frame.
             Window::Update();
@@ -3806,9 +4417,32 @@ namespace Engine {
 
             const double rawFrameDelta = gameTime.BeginFrame(frameNow);
 
+            const bool immediateMoveKeyDown =
+                Input::IsKeyPressed(keyForward) ||
+                Input::IsKeyPressed(keyBack) ||
+                Input::IsKeyPressed(keyLeft) ||
+                Input::IsKeyPressed(keyRight) ||
+                Input::IsKeyPressed(keyUp) ||
+                Input::IsKeyPressed(keyDown);
+            const int baseFixedStepCap = (fixedStepRecoveryFrames > 0) ? recoveryFixedSteps : maxFixedStepsPerFrame;
+            const int fixedStepCapThisFrame = immediateMoveKeyDown
+                ? std::min(baseFixedStepCap, fixedStepsWhileMoving)
+                : baseFixedStepCap;
             int fixedStepCount = 0;
-            while (gameTime.ConsumeStep() && fixedStepCount < maxFixedStepsPerFrame) {
+            while (gameTime.ConsumeStep() && fixedStepCount < fixedStepCapThisFrame) {
                 fixedStepCount++;
+            }
+            const double fixedStepDebtThreshold = gameTime.GetFixedDelta() * (double)std::max(1, fixedSatDebtSteps);
+            const bool fixedStepSaturated =
+                (fixedStepCount >= fixedStepCapThisFrame) &&
+                (gameTime.GetAccumulator() >= fixedStepDebtThreshold);
+            if (fixedStepSaturated) {
+                fixedStepSaturatedFrames++;
+                if (recoveryHoldFrames > 0) {
+                    fixedStepRecoveryFrames = recoveryHoldFrames;
+                }
+            } else if (fixedStepRecoveryFrames > 0) {
+                --fixedStepRecoveryFrames;
             }
 
             const double accumulator = gameTime.GetAccumulator();
@@ -3818,6 +4452,71 @@ namespace Engine {
                 ? (float)(gameTime.GetFixedDelta() * (double)fixedStepCount)
                 : (float)rawFrameDelta;
             if (deltaTime > 0.1f) deltaTime = 0.1f;
+            float inputDeltaTime = (float)rawFrameDelta;
+            if (inputDeltaTime < 0.0f) inputDeltaTime = 0.0f;
+            if (inputDeltaTime > 0.05f) inputDeltaTime = 0.05f;
+            const float frameMsForSpike = deltaTime * 1000.0f;
+            if (spikeGuardEnabled) {
+                int samples = std::max(1, spikeWindowCount);
+                double sum = 0.0;
+                for (int i = 0; i < samples; ++i) {
+                    sum += spikeWindow[(size_t)i];
+                }
+                const double mean = sum / (double)samples;
+                double var = 0.0;
+                for (int i = 0; i < samples; ++i) {
+                    const double d = (double)spikeWindow[(size_t)i] - mean;
+                    var += d * d;
+                }
+                const double sigma = std::sqrt(var / (double)samples);
+                const double overBase = (double)frameMsForSpike - mean;
+                const bool enoughHistory = spikeWindowCount >= 48;
+                const bool zTriggered = enoughHistory && sigma > 0.001 && ((overBase / sigma) >= (double)spikeZScore);
+                const bool minorTriggered = enoughHistory && overBase >= (double)spikeMinorMs;
+                const bool majorTriggered = enoughHistory && overBase >= (double)spikeMajorMs;
+
+                if (zTriggered || minorTriggered) {
+                    spikeMinorCount++;
+                    spikeLastOverBaselineMs = (float)std::max(0.0, overBase);
+                    if (majorTriggered) spikeMajorCount++;
+                    lastSpikeEventTime = frameNow;
+
+                    if (spikeMinorCount >= 3 || spikeMajorCount >= 1) {
+                        spikeLevel = std::min(3, spikeLevel + (majorTriggered ? 2 : 1));
+                        spikeStateUntil = frameNow + (double)spikeHoldSec;
+                        spikeMinorCount = 0;
+                        spikeMajorCount = 0;
+
+                        if (spikeLogEnabled) {
+                            std::ostringstream ss;
+                            ss.setf(std::ios::fixed);
+                            ss.precision(2);
+                            ss << "SPIKE level=" << spikeLevel
+                               << " frameMs=" << frameMsForSpike
+                               << " baselineMs=" << mean
+                               << " overMs=" << overBase
+                               << " sigma=" << sigma
+                               << " chunks=" << worldRenderer.GetChunkCount()
+                               << " inFlightGen=" << chunkManager.GetInFlightGenerate()
+                               << " inFlightRemesh=" << chunkManager.GetInFlightRemesh()
+                               << " deferred=" << chunkManager.GetDeferredRemeshCount();
+                            AppendSpikeLog(ss.str());
+                            RunLog::Warn(ss.str());
+                        }
+                    }
+                }
+
+                if (spikeLevel > 0 && frameNow > spikeStateUntil) {
+                    if (lastSpikeEventTime > 0.0 && (frameNow - lastSpikeEventTime) >= (double)spikeRecoverSec) {
+                        spikeLevel = std::max(0, spikeLevel - 1);
+                        spikeStateUntil = frameNow + (double)spikeHoldSec;
+                    }
+                }
+
+                spikeWindow[(size_t)spikeWindowHead] = frameMsForSpike;
+                spikeWindowHead = (spikeWindowHead + 1) % (int)spikeWindow.size();
+                spikeWindowCount = std::min((int)spikeWindow.size(), spikeWindowCount + 1);
+            }
             const double elapsedMs = glfwGetTime() * 1000.0 - frameStartMs;
             double budgetLeft = eliteFrameBudgetMs - elapsedMs;
             if (budgetLeft > 0.0 && !resizeGuardActive) {
@@ -3854,6 +4553,12 @@ namespace Engine {
 
             if (!worldStarted) {
                 instantHugeQueued = false;
+                megaPreloadRadiusCurrent = instantHugeRadius;
+                megaPreloadVerticalCurrent = instantHugeVertical;
+                megaPreloadLastPulse = -1.0;
+                startupPreloadGateReleasedLatched = false;
+                startupBlockLastChunks = 0;
+                startupBlockLastProgressTime = now;
             }
 
             if (instantHugeSight && worldStarted && !loadingWorld && !asyncLoading && !instantHugeQueued) {
@@ -3865,6 +4570,20 @@ namespace Engine {
                 instantHugeQueued = true;
                 preloadDone = false;
                 preloadStartTime = now;
+                megaPreloadLastPulse = now;
+            }
+
+            if (megaPreloadContinuous && worldStarted && !loadingWorld && !asyncLoading && !preloadDone && showLoadingOverlay) {
+                if (megaPreloadLastPulse < 0.0 || (now - megaPreloadLastPulse) >= (double)megaPreloadPulseSec) {
+                    chunkManager.PreloadLargeArea(camera.Position, megaPreloadRadiusCurrent, megaPreloadVerticalCurrent);
+                    megaPreloadRadiusCurrent = std::min(megaPreloadRadiusMax, megaPreloadRadiusCurrent + megaPreloadRadiusStep);
+                    megaPreloadVerticalCurrent = std::min(megaPreloadVerticalMax, megaPreloadVerticalCurrent + megaPreloadVerticalStep);
+                    megaPreloadLastPulse = now;
+                    if (traceRuntime) {
+                        RunLog::Info("PRELOAD pulse radius=" + std::to_string(megaPreloadRadiusCurrent) +
+                                     " vertical=" + std::to_string(megaPreloadVerticalCurrent));
+                    }
+                }
             }
             bool menuVisible = menuOpen || showLoadingOverlay;
             bool menuBlocksInput = menuVisible;
@@ -3879,7 +4598,33 @@ namespace Engine {
                 }
             }
 
-            if (worldStarted && !loadingWorld && !asyncLoading && !preloadDone && startupLoadingOverlay) {
+            const int startupBlockTargetChunks = (preloadTargetChunks > 0)
+                ? std::clamp(startupBlockMinChunks, 0, preloadTargetChunks)
+                : 0;
+            const int startupBlockHave = worldRenderer.GetChunkCount();
+            const double startupBlockElapsed = now - preloadStartTime;
+            if (startupBlockHave > startupBlockLastChunks) {
+                startupBlockLastChunks = startupBlockHave;
+                startupBlockLastProgressTime = now;
+            }
+            const bool startupBlockStalled = (now - startupBlockLastProgressTime) >= (double)startupBlockStallSec;
+            const bool startupPreloadGateActive = startupForcePreload
+                && worldStarted
+                && !loadingWorld
+                && !asyncLoading
+                && !preloadDone
+                && (startupBlockTargetChunks > 0);
+            const bool startupPreloadGateReleasedRaw = !startupPreloadGateActive
+                || (startupBlockHave >= startupBlockTargetChunks)
+                || (startupBlockMaxSec > 0.0f && startupBlockElapsed >= (double)startupBlockMaxSec)
+                || startupBlockStalled;
+            if (startupPreloadGateReleasedRaw) {
+                startupPreloadGateReleasedLatched = true;
+            }
+            const bool startupPreloadGateReleased = startupPreloadGateReleasedLatched || startupPreloadGateReleasedRaw;
+            const bool startupPreloadGateHold = startupPreloadGateActive && !startupPreloadGateReleased;
+
+            if (worldStarted && !loadingWorld && !asyncLoading && !preloadDone && (startupLoadingOverlay || startupPreloadGateHold) && !loadingOverlayDismissedByInput) {
                 showLoadingOverlay = true;
                 menuOpen = false;
                 menuScreen = MenuScreen::Loading;
@@ -3887,12 +4632,47 @@ namespace Engine {
                     mouseCaptured = false;
                     Input::SetCursorMode(false);
                 }
-            } else if (showLoadingOverlay && !loadingWorld && !asyncLoading && (preloadDone || !startupLoadingOverlay)) {
+            } else if (showLoadingOverlay && !loadingWorld && !asyncLoading && (preloadDone || (!startupLoadingOverlay && !startupPreloadGateHold))) {
                 showLoadingOverlay = false;
                 menuScreen = MenuScreen::Main;
                 if (worldStarted && !menuOpen && !mouseCaptured) {
                     mouseCaptured = true;
                     Input::SetCursorMode(true);
+                }
+            }
+
+            if (loadingInputBreakout && startupPreloadGateReleased && worldStarted && showLoadingOverlay && !loadingWorld && !asyncLoading && inputArmed) {
+                const bool breakoutInput =
+                    Input::IsKeyPressed(keyForward) || Input::IsKeyPressed(keyBack) ||
+                    Input::IsKeyPressed(keyLeft) || Input::IsKeyPressed(keyRight) ||
+                    Input::IsKeyPressed(keyUp) || Input::IsKeyPressed(keyDown) ||
+                    Input::IsMouseButtonPressed(GLFW_MOUSE_BUTTON_LEFT) ||
+                    Input::IsMouseButtonPressed(GLFW_MOUSE_BUTTON_RIGHT);
+                if (breakoutInput) {
+                    showLoadingOverlay = false;
+                    menuOpen = false;
+                    preloadBlocksInput = false;
+                    loadingOverlayDismissedByInput = true;
+                    mouseCaptured = true;
+                    Input::SetCursorMode(true);
+                    if (traceRuntime) {
+                        RunLog::Info("INPUT breakout: loading overlay dismissed by gameplay input");
+                    }
+                }
+            }
+
+            if (startupPreloadGateReleased && worldStarted && showLoadingOverlay && !loadingWorld && !asyncLoading && loadingOverlayMaxSec > 0.0f) {
+                const double overlayElapsed = now - preloadStartTime;
+                if (overlayElapsed >= (double)loadingOverlayMaxSec) {
+                    showLoadingOverlay = false;
+                    menuOpen = false;
+                    preloadBlocksInput = false;
+                    loadingOverlayDismissedByInput = true;
+                    mouseCaptured = true;
+                    Input::SetCursorMode(true);
+                    if (traceRuntime) {
+                        RunLog::Info("INPUT breakout: loading overlay timeout fallback");
+                    }
                 }
             }
 
@@ -4065,7 +4845,138 @@ namespace Engine {
                 fpsAccumTime = 0.0;
                 fpsFrames = 0;
                 lastFpsUpdate = now;
+                lowEndDownshiftEventsSec = lowEndDownshiftEvents;
+                lowEndUpshiftEventsSec = lowEndUpshiftEvents;
+                fixedStepSaturatedFramesSec = fixedStepSaturatedFrames;
+                lowEndDownshiftEvents = 0;
+                lowEndUpshiftEvents = 0;
+                fixedStepSaturatedFrames = 0;
                 const Engine::EliteTelemetrySnapshot elite = Telemetry::GetEliteMetrics();
+                coverageMetricLive = coverageMetricEnabled
+                    && worldStarted
+                    && !showLoadingOverlay
+                    && (worldRenderer.GetChunkCount() >= 24);
+                if (coverageMetricLive) {
+                    coverageMisses = (int)chunkManager.EstimateSurfaceCoverageMisses(
+                        camera.Position,
+                        coverageRadiusChunks,
+                        coverageStrideChunks,
+                        heightChunks
+                    );
+                } else {
+                    coverageMisses = 0;
+                }
+
+                const std::size_t inFlightGen = chunkManager.GetInFlightGenerate();
+                const std::size_t inFlightRemesh = chunkManager.GetInFlightRemesh();
+                const std::size_t completedCount = chunkManager.GetCompletedCount();
+                const auto streamHealth = chunkManager.GetStreamHealthStats(stutterAlertPendingOldTicks);
+                streamPendingNotReady = streamHealth.pendingNotReady;
+                streamWatchdogEligible = streamHealth.watchdogEligible;
+                streamWatchdogOverdue = streamHealth.watchdogOverdue;
+                streamPendingOldestTicks = (int)std::min<std::uint64_t>(streamHealth.oldestPendingTicks, 1000000ull);
+                streamOverdueOldestTicks = (int)std::min<std::uint64_t>(streamHealth.oldestOverdueTicks, 1000000ull);
+
+                const float fpsPenalty = std::clamp((stutterAlertMinFps - (float)fps) / std::max(1.0f, stutterAlertMinFps), 0.0f, 2.0f) * 40.0f;
+                const float fixedPenalty = (stutterAlertFixedSatSec <= 0)
+                    ? 0.0f
+                    : std::clamp((float)fixedStepSaturatedFramesSec / (float)std::max(1, stutterAlertFixedSatSec), 0.0f, 2.0f) * 15.0f;
+                const float pendingPenalty = std::clamp((float)streamPendingOldestTicks / (float)std::max(1, stutterAlertPendingOldTicks), 0.0f, 2.0f) * 20.0f;
+                const float overduePenalty = std::clamp((float)streamWatchdogOverdue / (float)std::max(1, stutterAlertOverdueChunks), 0.0f, 2.0f) * 15.0f;
+                const float inFlightPenalty = std::clamp((float)inFlightGen / (float)std::max(1, stutterAlertInFlightGen), 0.0f, 2.0f) * 10.0f;
+                const float coveragePenalty = (coverageAlarmEnabled && coverageAlarmActive) ? 8.0f : 0.0f;
+                const float latencyRaw = fpsPenalty + fixedPenalty + pendingPenalty + overduePenalty + inFlightPenalty + coveragePenalty;
+                stutterLatencyScore = std::clamp((int)std::lround(latencyRaw), 0, 100);
+                controlQualityScoreSec = std::clamp((int)std::lround(std::clamp(controlMoveResponseEma, 0.0f, 1.2f) * 100.0f), 0, 120);
+                controlLagMsSec = std::clamp((int)std::lround(std::max(controlLagMsEma, 0.0f)), 0, 500);
+                controlPlaceOpsSec = controlPlaceOpsCounter;
+                controlBreakOpsSec = controlBreakOpsCounter;
+                controlRotDegPerSecSec = std::max(0.0f, controlRotDegPerSecEma);
+                controlWASDHoldSec = std::max(std::max(controlHoldForwardSec, controlHoldBackSec), std::max(controlHoldLeftSec, controlHoldRightSec));
+                controlLmbHoldSec = controlHoldLmbSec;
+                controlRmbHoldSec = controlHoldRmbSec;
+                controlMoveDelayMsSec = std::max(controlMoveDelayMsMaxSec, controlMoveDelayMsLast);
+                if (controlMoveDelayMsSec < controlDelayReportMinMs) {
+                    controlMoveDelayMsSec = 0;
+                }
+                controlMoveDelayMsMaxSec = 0;
+                controlPlaceOpsCounter = 0;
+                controlBreakOpsCounter = 0;
+                controlDistForwardMetersSec = controlDistForwardMetersCounter;
+                controlDistBackMetersSec = controlDistBackMetersCounter;
+                controlDistLeftMetersSec = controlDistLeftMetersCounter;
+                controlDistRightMetersSec = controlDistRightMetersCounter;
+                controlDistForwardMetersCounter = 0.0f;
+                controlDistBackMetersCounter = 0.0f;
+                controlDistLeftMetersCounter = 0.0f;
+                controlDistRightMetersCounter = 0.0f;
+
+                const bool fpsLow = fps < stutterAlertMinFps;
+                const bool pendingOld = streamPendingOldestTicks >= stutterAlertPendingOldTicks;
+                const bool overdueBad = (int)streamWatchdogOverdue >= stutterAlertOverdueChunks;
+                const bool inFlightBad = (int)inFlightGen >= stutterAlertInFlightGen && completedCount == 0;
+                const bool stutterAlertLive = worldStarted && !showLoadingOverlay && worldRenderer.GetChunkCount() >= 24;
+                const bool controlBad = controlObsEnabled
+                    && controlIntentEma > 0.25f
+                    && (controlLagMsSec >= (int)std::lround(controlLagWarnMs)
+                        || (controlQualityScoreSec < (int)std::lround(controlResponseThreshold * 100.0f)));
+                const int fixedSatLatencyGate = std::max(stutterAlertLatencyWarn, stutterAlertFixedSatMinLatency);
+                const bool fixedSatSevereByLatency = (stutterLatencyScore >= fixedSatLatencyGate) && (fpsLow || pendingOld || overdueBad || inFlightBad);
+                const bool fixedSatNoThroughput = completedCount == 0 && inFlightGen > 0;
+                const bool fixedSatBad =
+                    (stutterAlertFixedSatSec > 0)
+                    && (fixedStepSaturatedFramesSec >= stutterAlertFixedSatSec)
+                    && (fpsLow || pendingOld || overdueBad || inFlightBad || fixedSatSevereByLatency || fixedSatNoThroughput);
+
+                float topPenalty = fpsPenalty;
+                stutterAlertCause = "FPS_LOW";
+                if (fixedPenalty > topPenalty && fixedSatBad) {
+                    topPenalty = fixedPenalty;
+                    stutterAlertCause = "FIXED_STEP_OVERLOAD";
+                }
+                if (pendingPenalty > topPenalty) {
+                    topPenalty = pendingPenalty;
+                    stutterAlertCause = "STREAM_PENDING_OLD";
+                }
+                if (overduePenalty > topPenalty) {
+                    topPenalty = overduePenalty;
+                    stutterAlertCause = "WATCHDOG_OVERDUE";
+                }
+                if (inFlightPenalty > topPenalty) {
+                    topPenalty = inFlightPenalty;
+                    stutterAlertCause = "GEN_QUEUE_PRESSURE";
+                }
+                if (coveragePenalty > topPenalty) {
+                    stutterAlertCause = "COVERAGE_ALARM";
+                }
+                if (controlBad && !fpsLow && !pendingOld && !overdueBad && !inFlightBad) {
+                    stutterAlertCause = "CONTROL_RESPONSE_LAG";
+                }
+
+                const bool latencyWarnBad = (stutterLatencyScore >= stutterAlertLatencyWarn)
+                    && (fpsLow || pendingOld || overdueBad || inFlightBad || controlBad);
+                stutterAlertActive = stutterAlertsEnabled
+                    && stutterAlertLive
+                    && (fpsLow || fixedSatBad || pendingOld || overdueBad || inFlightBad || controlBad || latencyWarnBad);
+
+                if (stutterAlertsEnabled && stutterAlertLive && stutterAlertActive && (stutterAlertCooldownUntil < 0.0 || now >= stutterAlertCooldownUntil)) {
+                    std::ostringstream warn;
+                    warn.setf(std::ios::fixed);
+                    warn.precision(1);
+                    warn << "ALERT cause=" << stutterAlertCause
+                         << " latency=" << stutterLatencyScore
+                         << " fps=" << fps
+                         << " fixedSat=" << fixedStepSaturatedFramesSec
+                         << " pendOld=" << streamPendingOldestTicks
+                         << " overdue=" << streamWatchdogOverdue
+                         << " inFlightGen=" << inFlightGen
+                         << " completed=" << completedCount
+                        << " ctrlLagMs=" << controlLagMsSec
+                        << " ctrlQ=" << controlQualityScoreSec
+                         << " covAlarm=" << (coverageAlarmActive ? 1 : 0);
+                    RunLog::Warn(warn.str());
+                    stutterAlertCooldownUntil = now + stutterAlertCooldownSec;
+                }
 
                 if (traceRuntime && (traceLastSnapshot < 0.0 || (now - traceLastSnapshot) >= 1.0)) {
                     std::ostringstream trace;
@@ -4075,9 +4986,37 @@ namespace Engine {
                           << " chunks=" << worldRenderer.GetChunkCount()
                           << " tris=" << worldRenderer.GetLastTriangleCount()
                           << " draws=" << worldRenderer.GetLastDrawCount()
-                          << " inFlightGen=" << chunkManager.GetInFlightGenerate()
-                          << " inFlightRemesh=" << chunkManager.GetInFlightRemesh()
-                          << " completed=" << chunkManager.GetCompletedCount()
+                          << " inFlightGen=" << inFlightGen
+                          << " inFlightRemesh=" << inFlightRemesh
+                          << " completed=" << completedCount
+                          << " staleGen=" << chunkManager.GetStaleGenerateDropCount()
+                          << " staleRemesh=" << chunkManager.GetStaleRemeshDropCount()
+                          << " surfMiss=" << coverageMisses
+                          << " covBoost=" << coverageBoostApplied
+                          << " covAlarm=" << (coverageAlarmActive ? 1 : 0)
+                          << " pend=" << streamPendingNotReady
+                          << " pendOld=" << streamPendingOldestTicks
+                          << " wdog=" << streamWatchdogEligible
+                          << " overdue=" << streamWatchdogOverdue
+                          << " overOld=" << streamOverdueOldestTicks
+                          << " fixedSat=" << fixedStepSaturatedFramesSec
+                          << " recFrames=" << fixedStepRecoveryFrames
+                          << " latency=" << stutterLatencyScore
+                          << " ctrlLagMs=" << controlLagMsSec
+                          << " ctrlQ=" << controlQualityScoreSec
+                          << " ctrlRot=" << controlRotDegPerSecSec
+                          << " ctrlHoldWASD=" << controlWASDHoldSec
+                          << " ctrlLMB=" << controlLmbHoldSec
+                          << " ctrlRMB=" << controlRmbHoldSec
+                          << " ctrlDelay=" << controlMoveDelayMsSec
+                          << " distW=" << controlDistForwardMetersSec
+                          << " distA=" << controlDistLeftMetersSec
+                          << " distS=" << controlDistBackMetersSec
+                          << " distD=" << controlDistRightMetersSec
+                          << " placeS=" << controlPlaceOpsSec
+                          << " breakS=" << controlBreakOpsSec
+                          << " alert=" << (stutterAlertActive ? 1 : 0)
+                          << " cause=" << stutterAlertCause
                           << " menuOpen=" << (menuOpen ? 1 : 0)
                           << " loadingOverlay=" << (showLoadingOverlay ? 1 : 0)
                           << " worldStarted=" << (worldStarted ? 1 : 0)
@@ -4095,9 +5034,40 @@ namespace Engine {
                 ss << " | TSI " << elite.toasterStabilityIndex << "%";
                 ss << " | Tris " << worldRenderer.GetLastTriangleCount();
                 ss << " | Draws " << worldRenderer.GetLastDrawCount();
+                ss << " | HG " << chunkManager.GetStaleGenerateDropCount() << "/" << chunkManager.GetStaleRemeshDropCount();
+                if (coverageMetricEnabled) {
+                    ss << " | SurfMiss " << coverageMisses;
+                    if (coverageAlarmEnabled) {
+                        ss << " | CBA " << coverageBoostApplied;
+                    }
+                }
+                ss << " | FSat " << fixedStepSaturatedFramesSec;
+                ss << " | LatR " << stutterLatencyScore;
+                if (controlObsEnabled) {
+                    ss << " | CtrlQ " << controlQualityScoreSec;
+                    ss << " | CLag " << controlLagMsSec << "ms";
+                }
+                if (stutterAlertActive) {
+                    ss << " | ALERT " << stutterAlertCause;
+                }
                 ss << " | Block " << int(selectedBlockId);
+                ss << " (" << GetBlockDisplayName((int)selectedBlockId) << ")";
+                ss << " | MCPage " << g_MinecraftImportPage << "/" << GetMinecraftImportPageMax();
+                if (lowEndController) {
+                    ss << " | LQ " << lowEndLevel << "@" << std::fixed << std::setprecision(1) << lowEndEmaFastMs << "ms";
+                }
+                if (spikeGuardEnabled && spikeLevel > 0) {
+                    ss << " | SpikeGuard L" << spikeLevel << " (" << std::fixed << std::setprecision(1) << spikeLastOverBaselineMs << "ms)";
+                }
                 if (!preloadDone) {
                     ss << " | Loading " << worldRenderer.GetChunkCount() << "/" << preloadTargetChunks;
+                    if (startupForcePreload && startupBlockMinChunks > 0) {
+                        const int startupGateTarget = (preloadTargetChunks > 0)
+                            ? std::clamp(startupBlockMinChunks, 0, preloadTargetChunks)
+                            : startupBlockMinChunks;
+                        ss << " | StartGate " << std::min((int)worldRenderer.GetChunkCount(), startupGateTarget)
+                           << "/" << startupGateTarget;
+                    }
                 }
                 if (wireframe) ss << " | WF";
                 if (vsync) ss << " | VSync";
@@ -4368,10 +5338,20 @@ namespace Engine {
             }
             lastF2 = f2Down;
 
-            const bool f3Down = Input::IsKeyPressed(GLFW_KEY_F3);
+            const bool f3Down = Input::IsKeyPressed(keyWireframe);
             if (f3Down && !lastF3) {
                 wireframe = !wireframe;
-                glPolygonMode(GL_FRONT_AND_BACK, wireframe ? GL_LINE : GL_FILL);
+                glLineWidth(1.0f);
+                std::cout << "Wireframe: " << (wireframe ? "ON" : "OFF") << std::endl;
+                if (wireframe) {
+                    std::cout << "  Caps -> stream=" << wireframeStreamCapCfg
+                              << " upload=" << wireframeUploadCapCfg
+                              << " height=" << wireframeHeightCapCfg
+                              << " cull=" << wireframeCullChunksCfg
+                              << std::endl;
+                }
+                ini["wireframe"] = wireframe ? "1" : "0";
+                SaveIniKeyValue(settingsPath, ini);
             }
             lastF3 = f3Down;
 
@@ -4502,6 +5482,25 @@ namespace Engine {
             // Block selection: number keys and scroll wheel
             const uint8_t prevSelectedBlockId = selectedBlockId;
             if (!inventoryOpen && !menuBlocksInput) {
+                const bool importPrevDown = Input::IsKeyPressed(keyImportPagePrev);
+                const bool importNextDown = Input::IsKeyPressed(keyImportPageNext);
+                if ((importPrevDown && !lastImportPrev) || (importNextDown && !lastImportNext)) {
+                    const int delta = importNextDown ? 1 : -1;
+                    const int oldPage = g_MinecraftImportPage;
+                    g_MinecraftImportPage = ClampMinecraftImportPage(g_MinecraftImportPage + delta);
+                    if (g_MinecraftImportPage != oldPage) {
+                        runtimeMaxBlockId = GetRuntimeMaxBlockId();
+                        selectedBlockId = (uint8_t)std::clamp((int)selectedBlockId, 1, runtimeMaxBlockId);
+                        patternBlockId = selectedBlockId;
+                        ini["import_page"] = std::to_string(g_MinecraftImportPage);
+                        SaveIniKeyValue(settingsPath, ini);
+                        std::cout << "Minecraft import page: " << g_MinecraftImportPage
+                                  << "/" << GetMinecraftImportPageMax() << std::endl;
+                    }
+                }
+                lastImportPrev = importPrevDown;
+                lastImportNext = importNextDown;
+
                 const bool oneDown = Input::IsKeyPressed(GLFW_KEY_1);
                 if (oneDown && !last1) {
                     hotbarIndex = 0;
@@ -4595,14 +5594,26 @@ namespace Engine {
             }
             
             bool hasMoveInput = false;
+            bool keyForwardDownFrame = false;
+            bool keyBackDownFrame = false;
+            bool keyLeftDownFrame = false;
+            bool keyRightDownFrame = false;
+            bool keyUpDownFrame = false;
+            bool keyDownDownFrame = false;
             if (gameplayArmed && !captureGuardActive && !inventoryOpen) {
-                if (Input::IsKeyPressed(keyForward)) { camera.ProcessKeyboard(0, deltaTime); hasMoveInput = true; }
-                if (Input::IsKeyPressed(keyBack)) { camera.ProcessKeyboard(1, deltaTime); hasMoveInput = true; }
-                if (Input::IsKeyPressed(keyLeft)) { camera.ProcessKeyboard(2, deltaTime); hasMoveInput = true; }
-                if (Input::IsKeyPressed(keyRight)) { camera.ProcessKeyboard(3, deltaTime); hasMoveInput = true; }
+                keyForwardDownFrame = Input::IsKeyPressed(keyForward);
+                keyBackDownFrame = Input::IsKeyPressed(keyBack);
+                keyLeftDownFrame = Input::IsKeyPressed(keyLeft);
+                keyRightDownFrame = Input::IsKeyPressed(keyRight);
+                keyUpDownFrame = Input::IsKeyPressed(keyUp);
+                keyDownDownFrame = Input::IsKeyPressed(keyDown);
+                if (keyForwardDownFrame) { camera.ProcessKeyboard(0, inputDeltaTime); hasMoveInput = true; }
+                if (keyBackDownFrame) { camera.ProcessKeyboard(1, inputDeltaTime); hasMoveInput = true; }
+                if (keyLeftDownFrame) { camera.ProcessKeyboard(2, inputDeltaTime); hasMoveInput = true; }
+                if (keyRightDownFrame) { camera.ProcessKeyboard(3, inputDeltaTime); hasMoveInput = true; }
                 if (!walkMode) {
-                    if (Input::IsKeyPressed(keyUp)) { camera.ProcessKeyboard(4, deltaTime); hasMoveInput = true; }
-                    if (Input::IsKeyPressed(keyDown)) { camera.ProcessKeyboard(5, deltaTime); hasMoveInput = true; }
+                    if (keyUpDownFrame) { camera.ProcessKeyboard(4, inputDeltaTime); hasMoveInput = true; }
+                    if (keyDownDownFrame) { camera.ProcessKeyboard(5, inputDeltaTime); hasMoveInput = true; }
                 }
             }
 
@@ -4613,7 +5624,7 @@ namespace Engine {
             const glm::vec3 prePhysicsPos = camera.Position;
 
             // Apply camera physics (inertia/momentum)
-            camera.UpdatePhysics(deltaTime);
+            camera.UpdatePhysics(inputDeltaTime);
 
             {
                 const glm::vec3 step = camera.Position - prePhysicsPos;
@@ -4846,13 +5857,13 @@ namespace Engine {
                     lastGroundedTime = t;
                     walkVerticalVel = 0.0f;
                     const float targetY = groundFeetY + walkEyeHeight;
-                    const float blend = std::clamp((float)deltaTime * (camera.Position.y > targetY ? walkDownLerp : walkSnapLerp), 0.0f, 1.0f);
+                    const float blend = std::clamp(inputDeltaTime * (camera.Position.y > targetY ? walkDownLerp : walkSnapLerp), 0.0f, 1.0f);
                     camera.Position.y = camera.Position.y + (targetY - camera.Position.y) * blend;
                 } else {
                     walkGrounded = false;
-                    walkVerticalVel -= walkGravity * deltaTime;
+                    walkVerticalVel -= walkGravity * inputDeltaTime;
 
-                    float newY = camera.Position.y + walkVerticalVel * deltaTime;
+                    float newY = camera.Position.y + walkVerticalVel * inputDeltaTime;
                     float newFeetY = newY - walkEyeHeight;
 
                     if (walkVerticalVel > 0.0f) {
@@ -4956,6 +5967,42 @@ namespace Engine {
                 activeUploadBudget = adaptiveUpload;
             }
 
+            bool chunkCatchupActive = false;
+            int chunkCatchupStepBoostApplied = 0;
+            if (chunkCatchupEnabled && worldStarted && !showLoadingOverlay) {
+                const int currentChunks = (int)worldRenderer.GetChunkCount();
+                const float frameMsNow = deltaTime * 1000.0f;
+                const bool chunkLow = currentChunks < chunkCatchupTarget;
+                const bool perfGood = (fpsNow >= chunkCatchupMinFps) && (frameMsNow <= chunkCatchupMaxFrameMs);
+                const bool emergencyLow = currentChunks < std::max(32, startupWarmChunksTarget / 2);
+                const bool emergencyPerfOk = frameMsNow <= (chunkCatchupMaxFrameMs + 8.0f);
+                if (chunkLow && (perfGood || (emergencyLow && emergencyPerfOk))) {
+                    chunkCatchupActive = true;
+                    const int deficit = std::max(0, chunkCatchupTarget - currentChunks);
+                    const float deficitRatio = std::clamp((float)deficit / (float)std::max(1, chunkCatchupDeficitSoft), 0.0f, 1.0f);
+                    const int scaledStreamBoost = chunkCatchupStreamBonus + (int)std::lround((float)chunkCatchupStreamBonus * (1.8f * deficitRatio));
+                    const int scaledUploadBoost = chunkCatchupUploadBoost + (int)std::lround((float)chunkCatchupUploadBoost * (2.2f * deficitRatio));
+                    activeStreamDistance = std::min(streamDistanceChunks, activeStreamDistance + scaledStreamBoost);
+                    activeUploadBudget = std::min(chunkCatchupUploadBurstMax, activeUploadBudget + scaledUploadBoost);
+                    chunkCatchupStepBoostApplied = std::clamp(
+                        chunkCatchupStepsBonus + (int)std::lround((float)chunkCatchupStepsBonus * (2.0f * deficitRatio)),
+                        0,
+                        std::max(0, chunkCatchupStreamBurstMax - 1)
+                    );
+                }
+            }
+
+            if (worldStarted && startupPerfProtectSec > 0.0f) {
+                const float startupAgeSec = (float)std::max(0.0, now - startTime);
+                if (startupAgeSec < startupPerfProtectSec) {
+                    const float t = std::clamp(startupAgeSec / startupPerfProtectSec, 0.0f, 1.0f);
+                    const int streamCap = (int)std::lround((float)startupProtectStream + ((float)streamDistanceChunks - (float)startupProtectStream) * t);
+                    const int uploadFloor = (int)std::lround((float)startupProtectUploadMin + ((float)baseUploadBudget - (float)startupProtectUploadMin) * t);
+                    activeStreamDistance = std::min(activeStreamDistance, std::max(8, streamCap));
+                    activeUploadBudget = std::max(activeUploadBudget, std::max(4, uploadFloor));
+                }
+            }
+
             if (largeMode && !hardSafeMode) {
                 const float frameMs = deltaTime * 1000.0f;
                 const float speed = glm::length(camera.Velocity);
@@ -5010,31 +6057,185 @@ namespace Engine {
                 unloadDistanceChunks = std::min(320, activeStreamDistance + std::max(24, cacheMarginChunks));
             }
 
+            if (wireframe) {
+                activeStreamDistance = std::min(activeStreamDistance, wireframeStreamCapCfg);
+                activeUploadBudget = std::min(activeUploadBudget, wireframeUploadCapCfg);
+                unloadDistanceChunks = std::min(192, activeStreamDistance + std::max(8, cacheMarginChunks));
+            }
+
+            if (lowEndController) {
+                const float frameMsNow = deltaTime * 1000.0f;
+                lowEndEmaFastMs += (frameMsNow - lowEndEmaFastMs) * lowEndFastEma;
+                lowEndEmaSlowMs += (frameMsNow - lowEndEmaSlowMs) * lowEndSlowEma;
+
+                const float pressureMs = std::max(lowEndEmaFastMs, lowEndEmaSlowMs);
+                const bool overBudget = pressureMs > (lowEndTargetMs + lowEndHysteresisMs);
+                const bool underBudget = pressureMs < (lowEndTargetMs - lowEndHysteresisMs * 1.4f);
+
+                if (overBudget && (lowEndLastDownshift < 0.0 || (now - lowEndLastDownshift) >= 0.20)) {
+                    const int prev = lowEndLevel;
+                    lowEndLevel = std::min(lowEndMaxLevel, lowEndLevel + 1);
+                    if (lowEndLevel > prev) {
+                        lowEndDownshiftEvents++;
+                        std::ostringstream rs;
+                        rs.setf(std::ios::fixed);
+                        rs.precision(1);
+                        rs << "over-budget " << pressureMs << "ms>" << lowEndTargetMs;
+                        lowEndLastReason = rs.str();
+                    }
+                    lowEndLastDownshift = now;
+                } else if (underBudget && (lowEndLastUpshift < 0.0 || (now - lowEndLastUpshift) >= 0.90)) {
+                    const int prev = lowEndLevel;
+                    lowEndLevel = std::max(0, lowEndLevel - 1);
+                    if (lowEndLevel < prev) {
+                        lowEndUpshiftEvents++;
+                        std::ostringstream rs;
+                        rs.setf(std::ios::fixed);
+                        rs.precision(1);
+                        rs << "recovery " << pressureMs << "ms";
+                        lowEndLastReason = rs.str();
+                    }
+                    lowEndLastUpshift = now;
+                }
+
+                if (lowEndLevel > 0) {
+                    const int streamCut = lowEndLevel * 2;
+                    const int uploadCut = lowEndLevel * 5;
+                    const int minUpload = std::max(4, baseUploadBudget / 6);
+                    activeStreamDistance = std::max(8, activeStreamDistance - streamCut);
+                    activeUploadBudget = std::max(minUpload, activeUploadBudget - uploadCut);
+                    unloadDistanceChunks = std::min(192, activeStreamDistance + std::max(10, cacheMarginChunks));
+                }
+            }
+
+            if (spikeGuardEnabled && spikeLevel > 0) {
+                const float lvl = (float)spikeLevel;
+                const int streamCut = (int)std::round(2.0f + lvl * 2.0f);
+                const int uploadCut = (int)std::round(4.0f + lvl * 6.0f);
+                const int minSafeUpload = std::max(4, baseUploadBudget / 6);
+                activeStreamDistance = std::max(8, activeStreamDistance - streamCut);
+                activeUploadBudget = std::max(minSafeUpload, activeUploadBudget - uploadCut);
+                unloadDistanceChunks = std::min(192, activeStreamDistance + std::max(8, cacheMarginChunks));
+            }
+
+            if (controlObsEnabled && controlMitigationEnabled) {
+                const bool controlPressure = (controlIntentEma > 0.35f)
+                    && (stableFpsEma < 50.0f)
+                    && (controlLagMsEma >= (controlLagWarnMs * 1.5f))
+                    && (controlMoveResponseEma < (controlResponseThreshold * 0.85f));
+                if (controlPressure) {
+                    const int minUpload = std::max(4, baseUploadBudget / 5);
+                    activeStreamDistance = std::max(8, activeStreamDistance - 4);
+                    activeUploadBudget = std::max(minUpload, activeUploadBudget - 8);
+                    unloadDistanceChunks = std::min(192, activeStreamDistance + std::max(8, cacheMarginChunks));
+                }
+            }
+
+            coverageAlarmActive = false;
+            if (coverageAlarmEnabled && coverageMetricLive) {
+                if (coverageMisses >= coverageAlarmHigh) {
+                    coverageAlarmHoldUntil = now + (double)coverageAlarmHoldSec;
+                }
+
+                const bool holdActive = (coverageMisses > coverageAlarmLow) || (coverageAlarmHoldUntil > now);
+                float targetBoost = 0.0f;
+                if (holdActive) {
+                    coverageAlarmActive = true;
+                    if (coverageAlarmHigh > coverageAlarmLow) {
+                        const float t = std::clamp(
+                            (float)(coverageMisses - coverageAlarmLow) / (float)(coverageAlarmHigh - coverageAlarmLow),
+                            0.0f,
+                            1.0f
+                        );
+                        targetBoost = (float)coverageAlarmBoost * t;
+                    } else {
+                        targetBoost = (float)coverageAlarmBoost;
+                    }
+                }
+
+                const float rampAlpha = std::clamp(deltaTime * coverageAlarmRampPerSec, 0.0f, 1.0f);
+                const float decayAlpha = std::clamp(deltaTime * coverageAlarmDecayPerSec, 0.0f, 1.0f);
+                if (targetBoost > coverageBoostState) {
+                    coverageBoostState += (targetBoost - coverageBoostState) * rampAlpha;
+                } else {
+                    coverageBoostState += (targetBoost - coverageBoostState) * decayAlpha;
+                }
+
+                coverageBoostApplied = (int)std::round(coverageBoostState);
+                if (coverageBoostApplied > 0) {
+                    const int maxBudget = std::min(128, std::max(baseUploadBudget + coverageAlarmBoost, activeUploadBudget + coverageAlarmBoost));
+                    activeUploadBudget = std::clamp(activeUploadBudget + coverageBoostApplied, 1, maxBudget);
+                }
+            } else {
+                coverageBoostState = 0.0f;
+                coverageBoostApplied = 0;
+            }
+
             if (resizeGuardActive) {
                 activeUploadBudget = std::min(activeUploadBudget, 2);
             }
 
             if (asyncLoading) {
-                chunkManager.PumpAsyncLoad(worldRenderer, std::clamp(activeUploadBudget, 4, 64));
+                chunkManager.PumpAsyncLoad(worldRenderer, std::clamp(activeUploadBudget, 4, uploadPumpCap));
             }
 
-            if (worldStarted && !menuVisible) {
+            const bool allowStreamingDuringLoadingOverlay = showLoadingOverlay && !loadingWorld;
+            const bool allowWorldStreaming = worldStarted && (!menuVisible || allowStreamingDuringLoadingOverlay);
+            if (allowWorldStreaming) {
                 int activeHeightChunks = (!preloadDone && preloadRadiusChunks > 0)
                     ? std::min(heightChunks, preloadHeightChunks)
                     : heightChunks;
+
+                if (worldStarted && startupPerfProtectSec > 0.0f) {
+                    const float startupAgeSec = (float)std::max(0.0, now - startTime);
+                    if (startupAgeSec < startupPerfProtectSec) {
+                        activeHeightChunks = std::min(activeHeightChunks, startupProtectHeight);
+                    }
+                }
 
                 if (horizonMode && !hardSafeMode) {
                     activeHeightChunks = 12;
                 }
 
+                if (wireframe) {
+                    activeHeightChunks = std::min(activeHeightChunks, wireframeHeightCapCfg);
+                }
+
                 int streamViewDistance = activeStreamDistance;
+                const int streamStepsMax = GetEnvIntClamped("HVE_STREAM_STEPS_MAX", 2, 1, 16);
+                const int streamStepsOverloadMax = GetEnvIntClamped("HVE_STREAM_STEPS_OVERLOAD_MAX", 1, 1, 16);
                 // Fixed-step streaming: each simulation step schedules/updates chunk work.
-                int streamStepsTarget = std::max(1, fixedStepCount);
+                int streamStepsTarget = std::max(1, std::min(fixedStepCount, streamStepsMax));
+                if (fixedStepSaturated) {
+                    streamStepsTarget = std::max(1, std::min(streamStepsTarget, streamStepsOverloadMax));
+                }
                 if (worldRenderer.GetChunkCount() <= 96) {
                     streamStepsTarget = std::max(streamStepsTarget, 1);
                     streamViewDistance = std::max(streamViewDistance, 16);
                     activeHeightChunks = std::max(activeHeightChunks, 12);
                     activeUploadBudget = std::max(activeUploadBudget, 8);
+                }
+
+                if (wireframe) {
+                    streamStepsTarget = 1;
+                }
+
+                if (worldStarted && startupPerfProtectSec > 0.0f) {
+                    const float startupAgeSec = (float)std::max(0.0, now - startTime);
+                    if (startupAgeSec < startupPerfProtectSec * 2.0f && worldRenderer.GetChunkCount() < (std::size_t)startupWarmChunksTarget) {
+                        streamStepsTarget = std::max(streamStepsTarget, startupMinStreamSteps);
+                        activeUploadBudget = std::max(activeUploadBudget, startupProtectUploadMin);
+                        streamViewDistance = std::max(streamViewDistance, startupProtectStream);
+                    }
+                }
+
+                if (chunkCatchupActive && !fixedStepSaturated) {
+                    streamStepsTarget = std::min(streamStepsMax, streamStepsTarget + chunkCatchupStepBoostApplied);
+                }
+
+                const bool movementPressure = (controlIntentEma > 0.30f) || (glm::length(camera.Velocity) > 0.8f);
+                if (movementPressure) {
+                    streamStepsTarget = std::min(streamStepsTarget, streamStepsWhileMoving);
                 }
 
                 for (int streamSteps = 0; streamSteps < streamStepsTarget; ++streamSteps) {
@@ -5046,7 +6247,7 @@ namespace Engine {
                 hudStreamViewDistance = streamViewDistance;
                 hudHeightChunks = activeHeightChunks;
             }
-            chunkManager.PumpCompleted(worldRenderer, std::clamp(activeUploadBudget, 1, 64));
+            chunkManager.PumpCompleted(worldRenderer, std::clamp(activeUploadBudget, 1, uploadPumpCap));
 
             if (terrainMetricReady) {
                 terrainMetrics = terrainMetricsPending;
@@ -5315,6 +6516,8 @@ namespace Engine {
             const bool lmbDown = Input::IsMouseButtonPressed(GLFW_MOUSE_BUTTON_LEFT);
             const bool rmbDown = Input::IsMouseButtonPressed(GLFW_MOUSE_BUTTON_RIGHT);
             const bool mmbDown = Input::IsMouseButtonPressed(GLFW_MOUSE_BUTTON_MIDDLE);
+            int controlPlaceOpsThisFrame = 0;
+            int controlBreakOpsThisFrame = 0;
             glm::ivec3 editorSelMin{0};
             glm::ivec3 editorSelMax{0};
             bool editorSelValid = false;
@@ -5408,6 +6611,7 @@ namespace Engine {
                 const uint8_t prev = chunkManager.GetBlockWorld(p);
                 if (prev == 0) {
                     chunkManager.SetBlockWorld(p, selectedBlockId);
+                    controlPlaceOpsThisFrame++;
                     Telemetry::RecordBlockPlace(glfwGetTime(), p, selectedBlockId);
                     action.changes.push_back(BlockChange{p, prev, selectedBlockId});
 
@@ -5427,6 +6631,7 @@ namespace Engine {
                             const uint8_t mprev = chunkManager.GetBlockWorld(mp);
                             if (mprev == 0) {
                                 chunkManager.SetBlockWorld(mp, selectedBlockId);
+                                controlPlaceOpsThisFrame++;
                                 Telemetry::RecordBlockPlace(glfwGetTime(), mp, selectedBlockId);
                                 action.changes.push_back(BlockChange{mp, mprev, selectedBlockId});
 
@@ -5451,6 +6656,7 @@ namespace Engine {
                 const uint8_t prev = chunkManager.GetBlockWorld(p);
                 if (prev != 0) {
                     chunkManager.SetBlockWorld(p, 0);
+                    controlBreakOpsThisFrame++;
                     Telemetry::RecordBlockBreak(glfwGetTime(), p, prev);
                     action.changes.push_back(BlockChange{p, prev, 0});
 
@@ -5460,6 +6666,7 @@ namespace Engine {
                             const uint8_t mprev = chunkManager.GetBlockWorld(mp);
                             if (mprev != 0) {
                                 chunkManager.SetBlockWorld(mp, 0);
+                                controlBreakOpsThisFrame++;
                                 Telemetry::RecordBlockBreak(glfwGetTime(), mp, mprev);
                                 action.changes.push_back(BlockChange{mp, mprev, 0});
                             }
@@ -6110,6 +7317,93 @@ namespace Engine {
                 holdPlaceActive = false;
                 holdPlaceAxis = -1;
             }
+
+            if (controlObsEnabled) {
+                const float dtCtrl = std::max(0.0001f, deltaTime);
+                const bool controlObsLive = worldStarted && !showLoadingOverlay && worldRenderer.GetChunkCount() >= 24;
+                const bool keyForwardDown = keyForwardDownFrame;
+                const bool keyBackDown = keyBackDownFrame;
+                const bool keyLeftDown = keyLeftDownFrame;
+                const bool keyRightDown = keyRightDownFrame;
+                const bool keyUpDown = !walkMode && keyUpDownFrame;
+                const bool keyDownDown = !walkMode && keyDownDownFrame;
+
+                controlHoldForwardSec = keyForwardDown ? (controlHoldForwardSec + dtCtrl) : 0.0f;
+                controlHoldBackSec = keyBackDown ? (controlHoldBackSec + dtCtrl) : 0.0f;
+                controlHoldLeftSec = keyLeftDown ? (controlHoldLeftSec + dtCtrl) : 0.0f;
+                controlHoldRightSec = keyRightDown ? (controlHoldRightSec + dtCtrl) : 0.0f;
+                controlHoldLmbSec = lmbDown ? (controlHoldLmbSec + dtCtrl) : 0.0f;
+                controlHoldRmbSec = rmbDown ? (controlHoldRmbSec + dtCtrl) : 0.0f;
+
+                const int intentAxes = (keyForwardDown ? 1 : 0) + (keyBackDown ? 1 : 0) + (keyLeftDown ? 1 : 0) + (keyRightDown ? 1 : 0) + (keyUpDown ? 1 : 0) + (keyDownDown ? 1 : 0);
+                const float intentNow = std::clamp((float)intentAxes / 2.0f, 0.0f, 1.0f);
+                const float intentBlend = std::clamp(dtCtrl * 7.0f, 0.0f, 1.0f);
+                controlIntentEma += (intentNow - controlIntentEma) * intentBlend;
+                controlIntentActiveSec = (intentNow > 0.25f) ? (controlIntentActiveSec + dtCtrl) : 0.0f;
+
+                const float moveDist = glm::length(camera.Position - prePhysicsPos);
+                const float moveSpeed = moveDist / dtCtrl;
+                const float expectedMoveSpeed = std::max(0.75f, camera.MovementSpeed * (walkMode ? 0.65f : 0.45f));
+                float responseInst = 1.0f;
+                if (intentNow > 0.01f) {
+                    responseInst = std::clamp(moveSpeed / (expectedMoveSpeed * std::max(0.35f, intentNow)), 0.0f, 1.2f);
+                } else {
+                    responseInst = std::clamp(1.0f - (moveSpeed / (expectedMoveSpeed + 0.001f)), 0.0f, 1.0f);
+                }
+                const float responseBlend = std::clamp(dtCtrl * 6.0f, 0.0f, 1.0f);
+                controlMoveResponseEma += (responseInst - controlMoveResponseEma) * responseBlend;
+
+                const bool intentActive = controlObsLive && intentNow > 0.25f;
+                const bool intentSustained = intentActive && controlIntentActiveSec >= controlDelayIntentMinSec;
+                if (intentActive && !controlAwaitMove) {
+                    if (intentSustained) {
+                        controlAwaitMove = true;
+                        controlAwaitMoveStart = now;
+                        controlMoveDelayMsLast = 0;
+                    }
+                }
+                if (!intentActive) {
+                    controlAwaitMove = false;
+                    controlAwaitMoveStart = -1.0;
+                } else if (controlAwaitMove && moveSpeed >= expectedMoveSpeed * 0.35f) {
+                    const long long delayRawMs = std::llround((now - controlAwaitMoveStart) * 1000.0);
+                    const int delayMs = (int)std::clamp<long long>(delayRawMs, 0ll, 4000ll);
+                    controlMoveDelayMsLast = (delayMs >= controlDelayReportMinMs) ? delayMs : 0;
+                    if (delayMs >= controlDelayReportMinMs) {
+                        controlMoveDelayMsMaxSec = std::max(controlMoveDelayMsMaxSec, delayMs);
+                    }
+                    controlAwaitMove = false;
+                    controlAwaitMoveStart = -1.0;
+                } else if (controlAwaitMove && controlAwaitMoveStart >= 0.0) {
+                    const long long delayRawMs = std::llround((now - controlAwaitMoveStart) * 1000.0);
+                    const int delayMs = (int)std::clamp<long long>(delayRawMs, 0ll, 4000ll);
+                    controlMoveDelayMsLast = (delayMs >= controlDelayReportMinMs) ? delayMs : 0;
+                    if (delayMs >= controlDelayReportMinMs) {
+                        controlMoveDelayMsMaxSec = std::max(controlMoveDelayMsMaxSec, delayMs);
+                    }
+                }
+
+                const float yawAbs = std::abs(camera.Yaw - lastFrameYaw);
+                const float pitchAbs = std::abs(camera.Pitch - lastFramePitch);
+                const float rotDegPerSec = (yawAbs + pitchAbs) / dtCtrl;
+                const float rotBlend = std::clamp(dtCtrl * 5.0f, 0.0f, 1.0f);
+                controlRotDegPerSecEma += (rotDegPerSec - controlRotDegPerSecEma) * rotBlend;
+
+                const float frameMsNow = dtCtrl * 1000.0f;
+                const float lagInstMs = std::max(0.0f, (1.0f - responseInst) * 26.0f) + std::max(0.0f, frameMsNow - 16.7f);
+                const float lagBlend = std::clamp(dtCtrl * 6.0f, 0.0f, 1.0f);
+                controlLagMsEma += (lagInstMs - controlLagMsEma) * lagBlend;
+
+                if (keyForwardDown) controlDistForwardMetersCounter += moveDist;
+                if (keyBackDown) controlDistBackMetersCounter += moveDist;
+                if (keyLeftDown) controlDistLeftMetersCounter += moveDist;
+                if (keyRightDown) controlDistRightMetersCounter += moveDist;
+
+                controlPlaceOpsCounter += controlPlaceOpsThisFrame;
+                controlBreakOpsCounter += controlBreakOpsThisFrame;
+            }
+            lastFrameYaw = camera.Yaw;
+            lastFramePitch = camera.Pitch;
             if (!menuVisible) {
                 // Keep menu click edge state in sync while menu isn't visible.
                 lastMenuLmb = lmbDown;
@@ -6193,6 +7487,11 @@ namespace Engine {
             const glm::vec3 sunDir = dayNightCycle
                 ? glm::normalize(glm::vec3(std::sin(sunPhase), 0.18f + 0.92f * std::sin(sunPhase), std::cos(sunPhase)))
                 : glm::normalize(glm::vec3(0.35f, 0.78f, 0.52f));
+            const float dayFactorFog = std::clamp(sunDir.y * 0.5f + 0.5f, 0.0f, 1.0f);
+            const float fogDensity = fogDensityBase * (1.0f + (1.0f - dayFactorFog) * (fogNightBoost - 1.0f));
+            const glm::vec3 fogDayColor(0.66f, 0.76f, 0.90f);
+            const glm::vec3 fogNightColor(0.05f, 0.07f, 0.11f);
+            const glm::vec3 fogColor = glm::mix(fogNightColor, fogDayColor, dayFactorFog);
 
             if (skyProg != 0) {
                 const GLboolean hadDepth = glIsEnabled(GL_DEPTH_TEST);
@@ -6215,11 +7514,63 @@ namespace Engine {
                 if (hadDepth) glEnable(GL_DEPTH_TEST);
             }
 
+            if (horizonTerrainEnabled && horizonProg != 0 && !horizonLevels.empty() && !wireframe) {
+                int clipBudget = horizonPointsPerFrame;
+                if (horizonAdaptiveBudget) {
+                    const float frameMsAdaptive = deltaTime * 1000.0f;
+                    if (frameMsAdaptive > 26.0f) {
+                        clipBudget = std::max(256, horizonPointsPerFrame / 3);
+                    } else if (frameMsAdaptive > 19.0f) {
+                        clipBudget = std::max(512, horizonPointsPerFrame / 2);
+                    } else if (frameMsAdaptive < 12.0f) {
+                        clipBudget = std::min(65536, horizonPointsPerFrame + horizonPointsPerFrame / 2);
+                    }
+                }
+                updateHorizonTerrain(camera.Position, now, clipBudget, false);
+
+                const GLboolean hadDepth = glIsEnabled(GL_DEPTH_TEST);
+                const GLboolean hadBlend = glIsEnabled(GL_BLEND);
+                const GLboolean hadCull = glIsEnabled(GL_CULL_FACE);
+                if (!hadDepth) glEnable(GL_DEPTH_TEST);
+                if (hadBlend) glDisable(GL_BLEND);
+                if (hadCull) glDisable(GL_CULL_FACE);
+                glDepthMask(GL_TRUE);
+
+                glUseProgram(horizonProg);
+                const glm::mat4 vp = projection * camera.GetViewMatrix();
+                const GLint locVP = glGetUniformLocation(horizonProg, "u_ViewProjection");
+                const GLint locView = glGetUniformLocation(horizonProg, "u_ViewPos");
+                const GLint locSun = glGetUniformLocation(horizonProg, "u_SunDir");
+                const GLint locFogColor = glGetUniformLocation(horizonProg, "u_FogColor");
+                const GLint locFogDensity = glGetUniformLocation(horizonProg, "u_FogDensity");
+                if (locVP >= 0) glUniformMatrix4fv(locVP, 1, GL_FALSE, &vp[0][0]);
+                if (locView >= 0) glUniform3f(locView, camera.Position.x, camera.Position.y, camera.Position.z);
+                if (locSun >= 0) glUniform3f(locSun, sunDir.x, sunDir.y, sunDir.z);
+                if (locFogColor >= 0) glUniform3f(locFogColor, fogColor.x, fogColor.y, fogColor.z);
+                if (locFogDensity >= 0) glUniform1f(locFogDensity, fogDensity);
+
+                for (std::size_t li = horizonLevels.size(); li-- > 0;) {
+                    const HorizonLevel& level = horizonLevels[li];
+                    if (!level.ready || level.vao == 0 || level.indices.empty()) continue;
+                    glBindVertexArray(level.vao);
+                    glDrawElements(GL_TRIANGLES, (GLsizei)level.indices.size(), GL_UNSIGNED_INT, (const void*)0);
+                }
+                glBindVertexArray(0);
+                glUseProgram(0);
+
+                if (hadCull) glEnable(GL_CULL_FACE);
+                if (hadBlend) glEnable(GL_BLEND);
+                if (!hadDepth) glDisable(GL_DEPTH_TEST);
+            }
+
             shader.Use();
             shader.SetMat4("u_ViewProjection", projection * camera.GetViewMatrix());
             shader.SetVec3("u_ViewPos", camera.Position);
+            shader.SetVec3("u_FogColor", fogColor);
+            shader.SetFloat("u_FogDensity", fogDensity);
 
-            const float cullDistance = std::max(64.0f, (float)(activeStreamDistance + 2) * (float)Game::World::CHUNK_SIZE);
+            const int renderCullChunks = wireframe ? std::min(activeStreamDistance, wireframeCullChunksCfg) : activeStreamDistance;
+            const float cullDistance = std::max(64.0f, (float)(renderCullChunks + 2) * (float)Game::World::CHUNK_SIZE);
             worldRenderer.PrepareVisibleDraws(projection * camera.GetViewMatrix(), camera.Position, cullDistance);
 
             // Sun direction for directional lighting.
@@ -6235,17 +7586,26 @@ namespace Engine {
             // This fixes the biggest "water looks wrong" issue: blending against not-yet-drawn opaque geometry.
             glEnable(GL_DEPTH_TEST);
 
-            glDisable(GL_BLEND);
-            glDepthMask(GL_TRUE);
-            shader.SetInt("u_RenderPass", 0);
-            worldRenderer.DrawAll(shader);
+            glPolygonMode(GL_FRONT_AND_BACK, wireframe ? GL_LINE : GL_FILL);
+            if (wireframe) {
+                glDisable(GL_BLEND);
+                glDepthMask(GL_TRUE);
+                shader.SetInt("u_RenderPass", 0);
+                worldRenderer.DrawAll(shader);
+            } else {
+                glDisable(GL_BLEND);
+                glDepthMask(GL_TRUE);
+                shader.SetInt("u_RenderPass", 0);
+                worldRenderer.DrawAll(shader);
 
-            glEnable(GL_BLEND);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-            glDepthMask(GL_FALSE);
-            shader.SetInt("u_RenderPass", 1);
-            worldRenderer.DrawAll(shader);
-            glDepthMask(GL_TRUE);
+                glEnable(GL_BLEND);
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                glDepthMask(GL_FALSE);
+                shader.SetInt("u_RenderPass", 1);
+                worldRenderer.DrawAll(shader);
+                glDepthMask(GL_TRUE);
+            }
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
             if (visualSelValid && editorSelProg != 0 && editorSelVao != 0 && editorSelVbo != 0) {
                 const GLboolean hadDepth = glIsEnabled(GL_DEPTH_TEST);
@@ -6416,7 +7776,7 @@ namespace Engine {
                 if (!hadDepth) glDisable(GL_DEPTH_TEST);
             }
 
-            if (!menuVisible && !inventoryOpen && perfHudEnabled && invProg != 0 && invVao != 0 && invVbo != 0) {
+            if (!futuristicUi && !menuVisible && !inventoryOpen && perfHudEnabled && invProg != 0 && invVao != 0 && invVbo != 0) {
                 const GLboolean hadDepth = glIsEnabled(GL_DEPTH_TEST);
                 const GLboolean hadBlend = glIsEnabled(GL_BLEND);
                 if (hadDepth) glDisable(GL_DEPTH_TEST);
@@ -6533,6 +7893,52 @@ namespace Engine {
                 yPx += line;
                 {
                     std::ostringstream ss;
+                    ss << "HOLE_GUARD staleGen " << chunkManager.GetStaleGenerateDropCount()
+                       << " | staleRemesh " << chunkManager.GetStaleRemeshDropCount()
+                       << " | surfMiss " << coverageMisses
+                       << " | covBoost " << coverageBoostApplied
+                       << " | alarm " << (coverageAlarmActive ? "ON" : "off")
+                       << " | fixedSat " << fixedStepSaturatedFramesSec;
+                    pushTextPx(xPx, yPx, ss.str(), 0.95f, 0.86f, 0.75f, 0.98f, 0.90f);
+                }
+                yPx += line;
+                {
+                    std::ostringstream ss;
+                    ss << "LATENCY score " << stutterLatencyScore
+                       << " | pending " << streamPendingNotReady
+                       << " oldTick " << streamPendingOldestTicks
+                       << " | overdue " << streamWatchdogOverdue
+                       << " / " << streamWatchdogEligible
+                       << " | cause " << stutterAlertCause;
+                    pushTextPx(xPx, yPx, ss.str(), 0.95f,
+                               stutterAlertActive ? 1.00f : 0.76f,
+                               stutterAlertActive ? 0.58f : 0.88f,
+                               stutterAlertActive ? 0.58f : 0.98f,
+                               0.92f);
+                }
+                yPx += line;
+                {
+                    std::ostringstream ss;
+                    ss.setf(std::ios::fixed); ss.precision(1);
+                    ss << "CONTROL q " << controlQualityScoreSec
+                       << "% | lag " << controlLagMsSec << "ms"
+                       << " | rot " << controlRotDegPerSecSec << "dps"
+                              << " | moveDelay " << controlMoveDelayMsSec << "ms"
+                              << " | m(W/A/S/D) " << controlDistForwardMetersSec << "/" << controlDistLeftMetersSec << "/" << controlDistBackMetersSec << "/" << controlDistRightMetersSec
+                       << " | wasdHold " << controlWASDHoldSec << "s"
+                       << " | lmb/rmb " << controlLmbHoldSec << "/" << controlRmbHoldSec << "s"
+                       << " | place/break " << controlPlaceOpsSec << "/" << controlBreakOpsSec;
+                    const bool controlWarn = controlLagMsSec >= (int)std::lround(controlLagWarnMs)
+                        || controlQualityScoreSec < (int)std::lround(controlResponseThreshold * 100.0f);
+                    pushTextPx(xPx, yPx, ss.str(), 0.95f,
+                               controlWarn ? 1.00f : 0.74f,
+                               controlWarn ? 0.62f : 0.92f,
+                               controlWarn ? 0.45f : 0.96f,
+                               0.93f);
+                }
+                yPx += line;
+                {
+                    std::ostringstream ss;
                     ss.setf(std::ios::fixed); ss.precision(1);
                     ss << "Speed " << speed << " | View " << viewDistanceChunks << " | Margin " << streamMarginChunks;
                     pushTextPx(xPx, yPx, ss.str(), 1.0f, 0.75f, 0.85f, 0.96f, 0.85f);
@@ -6544,6 +7950,18 @@ namespace Engine {
                        << " | Height " << hudHeightChunks
                        << " | Unload " << unloadDistanceChunks;
                     pushTextPx(xPx, yPx, ss.str(), 1.0f, 0.74f, 0.92f, 0.95f, 0.88f);
+                }
+                yPx += line;
+                {
+                    std::ostringstream ss;
+                    ss.setf(std::ios::fixed);
+                    ss.precision(1);
+                    ss << "LowEnd L" << lowEndLevel
+                       << " | fast " << lowEndEmaFastMs << "ms"
+                       << " | down/s " << lowEndDownshiftEventsSec
+                       << " up/s " << lowEndUpshiftEventsSec
+                       << " | reason " << lowEndLastReason;
+                    pushTextPx(xPx, yPx, ss.str(), 0.95f, 0.84f, 0.95f, 0.74f, 0.92f);
                 }
                 yPx += line;
                 {
@@ -6609,6 +8027,7 @@ namespace Engine {
                 hudVerts.insert(hudVerts.end(), hudTextVerts.begin(), hudTextVerts.end());
 
                 glUseProgram(invProg);
+                applyUiProgramUniforms(invProg);
                 glActiveTexture(GL_TEXTURE0);
                 glBindTexture(GL_TEXTURE_2D, blockTexAtlas);
                 glUniform1i(glGetUniformLocation(invProg, "u_BlockAtlas"), 0);
@@ -6872,6 +8291,7 @@ namespace Engine {
                 overlayVerts.insert(overlayVerts.end(), overlayText.begin(), overlayText.end());
 
                 glUseProgram(invProg);
+                applyUiProgramUniforms(invProg);
                 glActiveTexture(GL_TEXTURE0);
                 glBindTexture(GL_TEXTURE_2D, blockTexAtlas);
                 glUniform1i(glGetUniformLocation(invProg, "u_BlockAtlas"), 0);
@@ -7039,6 +8459,7 @@ namespace Engine {
                 overlayVerts.insert(overlayVerts.end(), overlayText.begin(), overlayText.end());
 
                 glUseProgram(invProg);
+                applyUiProgramUniforms(invProg);
                 glActiveTexture(GL_TEXTURE0);
                 glBindTexture(GL_TEXTURE_2D, blockTexAtlas);
                 glUniform1i(glGetUniformLocation(invProg, "u_BlockAtlas"), 0);
@@ -7516,13 +8937,10 @@ namespace Engine {
                         ini["vsync"] = vsync ? "1" : "0";
                         SaveIniKeyValue(settingsPath, ini);
                     }
-                    toggleButton(-0.35f, -0.50f, 0.35f, -0.38f, "Wireframe", wireframe, menuSettingsIndex == 6, hov);
+                    toggleButton(-0.35f, -0.50f, 0.35f, -0.38f, "Wireframe (Keybind)", wireframe, menuSettingsIndex == 6, hov);
                     if (hov) menuSettingsIndex = 6;
                     if ((click && hov) || (activateKey && menuSettingsIndex == 6)) {
-                        wireframe = !wireframe;
-                        glPolygonMode(GL_FRONT_AND_BACK, wireframe ? GL_LINE : GL_FILL);
-                        ini["wireframe"] = wireframe ? "1" : "0";
-                        SaveIniKeyValue(settingsPath, ini);
+                        std::cout << "Use keybind to toggle wireframe (default F3)." << std::endl;
                     }
 
                     // Quality preset
@@ -7841,6 +9259,7 @@ namespace Engine {
                 // lastMenuLmb update moved to end of frame to support inventory clicks correctly.
 
                 glUseProgram(invProg);
+                applyUiProgramUniforms(invProg);
                 glActiveTexture(GL_TEXTURE0);
                 glBindTexture(GL_TEXTURE_2D, blockTexAtlas);
                 glUniform1i(glGetUniformLocation(invProg, "u_BlockAtlas"), 0);
@@ -7947,19 +9366,17 @@ namespace Engine {
                     const float trayY0 = y - 0.03f;
                     const float trayY1 = y + size + 0.03f;
                     pushQuad(trayX0 - 0.005f, trayY0 - 0.005f, trayX1 + 0.005f, trayY1 + 0.005f,
-                             0.12f, 0.56f + 0.12f * hotbarPulse, 1.00f, 0.20f + 0.08f * hotbarPulse);
-                    pushQuad(trayX0, trayY0, trayX1, trayY1, 0.03f, 0.05f, 0.09f, 0.88f);
-                    pushQuad(trayX0 + 0.004f, trayY0 + 0.004f, trayX1 - 0.004f, trayY1 - 0.004f, 0.06f, 0.10f, 0.16f, 0.94f);
-                    const float scanY = trayY0 + 0.012f + (trayY1 - trayY0 - 0.03f) * hotbarPulse;
-                    pushQuad(trayX0 + 0.01f, scanY, trayX1 - 0.01f, scanY + 0.006f, 0.20f, 0.80f, 1.00f, 0.14f);
+                             0.10f, 0.50f + 0.10f * hotbarPulse, 0.95f, 0.20f + 0.06f * hotbarPulse);
+                    pushQuad(trayX0, trayY0, trayX1, trayY1, 0.02f, 0.05f, 0.10f, 0.90f);
+                    pushQuad(trayX0 + 0.004f, trayY0 + 0.004f, trayX1 - 0.004f, trayY1 - 0.004f, 0.05f, 0.11f, 0.20f, 0.96f);
                 }
 
                 for (int i = 0; i < slots; ++i) {
                     const int id = (int)hotbarSlots[(size_t)i].id;
                     float r = 0.2f, g = 0.2f, b = 0.2f;
                     float cr = futuristicUi ? 0.05f : 0.1f;
-                    float cg = futuristicUi ? 0.08f : 0.1f;
-                    float cb = futuristicUi ? 0.13f : 0.1f;
+                    float cg = futuristicUi ? 0.10f : 0.1f;
+                    float cb = futuristicUi ? 0.20f : 0.1f;
                     colorForBlock(id, r, g, b);
 
                     const float x0 = startX + i * (size + pad);
@@ -7972,7 +9389,7 @@ namespace Engine {
 
                     // Inner color (slightly inset); highlight if selected
                     const bool selected = (i == hotbarIndex);
-                    const float inset = selected ? 0.003f : 0.006f;
+                    const float inset = selected ? 0.003f : 0.007f;
                     float ir = 1.0f, ig = 1.0f, ib = 1.0f;
                     if (selected) {
                         ir = std::min(1.0f, ir + 0.10f);
@@ -7981,9 +9398,16 @@ namespace Engine {
                     }
 
                     if (futuristicUi) {
-                        const float glowA = selected ? (0.30f + 0.22f * hotbarPulse) : 0.08f;
-                        pushInvFrame(x0 - 0.004f, y0 - 0.004f, x1 + 0.004f, y1 + 0.004f, 0.004f,
-                                     0.22f, 0.78f, 1.00f, glowA);
+                        if (selected) {
+                            const float neonA = 0.62f + 0.26f * hotbarPulse;
+                            pushInvFrame(x0 - 0.008f, y0 - 0.008f, x1 + 0.008f, y1 + 0.008f, 0.0035f,
+                                         0.00f, 0.72f, 1.00f, neonA);
+                            pushInvFrame(x0 - 0.004f, y0 - 0.004f, x1 + 0.004f, y1 + 0.004f, 0.0035f,
+                                         0.50f, 0.92f, 1.00f, 0.88f);
+                        } else {
+                            pushInvFrame(x0 - 0.003f, y0 - 0.003f, x1 + 0.003f, y1 + 0.003f, 0.003f,
+                                         0.16f, 0.34f, 0.56f, 0.26f);
+                        }
                     }
 
                     if (id > 0) {
@@ -8005,6 +9429,7 @@ namespace Engine {
                 }
 
                 glUseProgram(hotbarProg);
+                applyUiProgramUniforms(hotbarProg);
                 glActiveTexture(GL_TEXTURE0);
                 glBindTexture(GL_TEXTURE_2D, blockTexAtlas);
                 glUniform1i(glGetUniformLocation(hotbarProg, "u_BlockAtlas"), 0);
@@ -8054,9 +9479,10 @@ namespace Engine {
                 
                 static std::vector<InvCategory> categories;
                 static int builtMaxId = -1;
+                static int builtImportPage = -1;
 
                 // Rebuild categories if block count changes
-                if (builtMaxId != runtimeMaxBlockId) {
+                if (builtMaxId != runtimeMaxBlockId || builtImportPage != g_MinecraftImportPage) {
                     categories.clear();
                     
                     // define standard categories
@@ -8090,6 +9516,7 @@ namespace Engine {
                     if(categories.empty()) addCat("All", 1, {1,2,3});
                     
                     builtMaxId = runtimeMaxBlockId;
+                    builtImportPage = g_MinecraftImportPage;
                 }
                 
                 static int activeTab = 0;
@@ -8409,6 +9836,7 @@ namespace Engine {
                 verts.insert(verts.end(), textVerts.begin(), textVerts.end());
                 if (!verts.empty()) {
                     glUseProgram(invProg);
+                    applyUiProgramUniforms(invProg);
                     glActiveTexture(GL_TEXTURE0);
                     glBindTexture(GL_TEXTURE_2D, blockTexAtlas);
                     glUniform1i(glGetUniformLocation(invProg, "u_BlockAtlas"), 0);
@@ -8633,7 +10061,8 @@ namespace Engine {
                 static std::vector<std::string> mcExtraNames;
                 static std::vector<InvItem> mcExtraItems;
                 static int mcExtraBuiltMax = -1;
-                if (mcExtraBuiltMax != runtimeMaxBlockId) {
+                static int mcExtraBuiltPage = -1;
+                if (mcExtraBuiltMax != runtimeMaxBlockId || mcExtraBuiltPage != g_MinecraftImportPage) {
                     mcExtraNames.clear();
                     mcExtraItems.clear();
                     const int extraCount = std::max(0, runtimeMaxBlockId - kBuiltinBlockMaxId);
@@ -8647,11 +10076,13 @@ namespace Engine {
                         mcExtraItems.push_back(InvItem{ id, mcExtraNames.back().c_str() });
                     }
                     mcExtraBuiltMax = runtimeMaxBlockId;
+                    mcExtraBuiltPage = g_MinecraftImportPage;
                 }
 
                 static std::vector<InvCategory> categories;
                 static int categoriesBuiltMax = -1;
-                if (categoriesBuiltMax != runtimeMaxBlockId) {
+                static int categoriesBuiltPage = -1;
+                if (categoriesBuiltMax != runtimeMaxBlockId || categoriesBuiltPage != g_MinecraftImportPage) {
                     categories.clear();
                     categories = {
                         { "Nature", "Terrain + foliage", 2, {
@@ -8708,6 +10139,7 @@ namespace Engine {
                         categories.push_back(InvCategory{ "Minecraft Blocks", "Imported local block set", kBuiltinBlockMaxId + 1, mcExtraItems });
                     }
                     categoriesBuiltMax = runtimeMaxBlockId;
+                    categoriesBuiltPage = g_MinecraftImportPage;
                 }
 
                 auto findItemName = [&](int id) -> const char* {
@@ -8993,6 +10425,49 @@ namespace Engine {
                 pushTextInvLeft(gridX0 + 0.01f, 0.5f * (gridHeaderY0 + gridHeaderY1), headerLeft.c_str(), 1.2f, true);
                 std::string headerRight = std::string("ITEMS ") + std::to_string(viewItems.size());
                 pushTextInvLeft(gridX1 - 0.16f, 0.5f * (gridHeaderY0 + gridHeaderY1), headerRight.c_str(), 1.1f, false);
+
+                // Minecraft import page controls (clickable)
+                const int mcPageMax = GetMinecraftImportPageMax();
+                const float mcBtnW = 0.05f;
+                const float mcBtnPad = 0.008f;
+                const float mcRightX1 = gridX1 - 0.01f;
+                const float mcNextX0 = mcRightX1 - mcBtnW;
+                const float mcNextX1 = mcRightX1;
+                const float mcPrevX1 = mcNextX0 - mcBtnPad;
+                const float mcPrevX0 = mcPrevX1 - mcBtnW;
+                const float mcBtnY0 = gridHeaderY0 + 0.006f;
+                const float mcBtnY1 = gridHeaderY1 - 0.006f;
+                const bool mcPrevHover = (mx >= mcPrevX0 && mx <= mcPrevX1 && my >= mcBtnY0 && my <= mcBtnY1);
+                const bool mcNextHover = (mx >= mcNextX0 && mx <= mcNextX1 && my >= mcBtnY0 && my <= mcBtnY1);
+
+                const float mpr = mcPrevHover ? 0.20f : 0.14f;
+                const float mnr = mcNextHover ? 0.20f : 0.14f;
+                pushQuad(mcPrevX0, mcBtnY0, mcPrevX1, mcBtnY1, mpr, mpr, mpr, 0.98f);
+                pushInvFrame(mcPrevX0, mcBtnY0, mcPrevX1, mcBtnY1, 0.0025f, 0.10f, 0.14f, 0.20f, 0.9f);
+                pushTextInv(0.5f * (mcPrevX0 + mcPrevX1), 0.5f * (mcBtnY0 + mcBtnY1), "<", 1.3f, true);
+                pushQuad(mcNextX0, mcBtnY0, mcNextX1, mcBtnY1, mnr, mnr, mnr, 0.98f);
+                pushInvFrame(mcNextX0, mcBtnY0, mcNextX1, mcBtnY1, 0.0025f, 0.10f, 0.14f, 0.20f, 0.9f);
+                pushTextInv(0.5f * (mcNextX0 + mcNextX1), 0.5f * (mcBtnY0 + mcBtnY1), ">", 1.3f, true);
+
+                std::string mcPageText = std::string("MC ") + std::to_string(g_MinecraftImportPage) + "/" + std::to_string(mcPageMax);
+                pushTextInvLeft(mcPrevX0 - 0.19f, 0.5f * (gridHeaderY0 + gridHeaderY1), mcPageText.c_str(), 1.0f, false);
+
+                if (clickInv) {
+                    int pageDelta = 0;
+                    if (mcPrevHover) pageDelta = -1;
+                    if (mcNextHover) pageDelta = +1;
+                    if (pageDelta != 0) {
+                        const int oldPage = g_MinecraftImportPage;
+                        g_MinecraftImportPage = ClampMinecraftImportPage(g_MinecraftImportPage + pageDelta);
+                        if (g_MinecraftImportPage != oldPage) {
+                            runtimeMaxBlockId = GetRuntimeMaxBlockId();
+                            selectedBlockId = (uint8_t)std::clamp((int)selectedBlockId, 1, runtimeMaxBlockId);
+                            patternBlockId = selectedBlockId;
+                            ini["import_page"] = std::to_string(g_MinecraftImportPage);
+                            SaveIniKeyValue(settingsPath, ini);
+                        }
+                    }
+                }
 
                 // Grid for active tab
                 int hoveredId = 0;
@@ -9485,6 +10960,7 @@ namespace Engine {
                 verts.insert(verts.end(), textVerts.begin(), textVerts.end());
 
                 glUseProgram(invProg);
+                applyUiProgramUniforms(invProg);
                 glActiveTexture(GL_TEXTURE0);
                 glBindTexture(GL_TEXTURE_2D, blockTexAtlas);
                 glUniform1i(glGetUniformLocation(invProg, "u_BlockAtlas"), 0);
@@ -9684,6 +11160,13 @@ namespace Engine {
 
         if (skyVao != 0) glDeleteVertexArrays(1, &skyVao);
         if (skyProg != 0) glDeleteProgram(skyProg);
+
+        for (auto& level : horizonLevels) {
+            if (level.ebo != 0) glDeleteBuffers(1, &level.ebo);
+            if (level.vbo != 0) glDeleteBuffers(1, &level.vbo);
+            if (level.vao != 0) glDeleteVertexArrays(1, &level.vao);
+        }
+        if (horizonProg != 0) glDeleteProgram(horizonProg);
 
         if (invVbo != 0) glDeleteBuffers(1, &invVbo);
         if (invVao != 0) glDeleteVertexArrays(1, &invVao);
