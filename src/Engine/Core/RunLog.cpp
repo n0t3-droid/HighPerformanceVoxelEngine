@@ -11,6 +11,7 @@ namespace Engine {
 
     static std::mutex s_Mutex;
     static std::ofstream s_Out;
+    static int s_WriteCounter = 0;
 
     static std::string NowStamp() {
         using clock = std::chrono::system_clock;
@@ -45,7 +46,11 @@ namespace Engine {
         std::scoped_lock lock(s_Mutex);
         if (!s_Out.is_open()) return;
         s_Out << "[" << NowStamp() << "]" << "[" << level << "] " << msg << "\n";
-        s_Out.flush();
+        ++s_WriteCounter;
+        if (s_WriteCounter >= 32 || level[0] != 'I') {
+            s_Out.flush();
+            s_WriteCounter = 0;
+        }
     }
 
     void RunLog::Info(const std::string& msg) { Write("INFO", msg); }

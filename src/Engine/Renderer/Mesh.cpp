@@ -108,19 +108,21 @@ namespace Engine {
 
     // --- Meshing Logic ---
     
-    // Bit Packing Helper - includes block type for texture selection
-    uint32_t PackVertex(int x, int y, int z, int normal, int u, int v, int blockType) {
-        // Packed Layout (32 bits total):
-        // We must support coordinates on voxel cell corners, i.e. 0..32 for CHUNK_SIZE=32.
-        // Bits 0-5    (6 bits): X position (0-63)
-        // Bits 6-11   (6 bits): Y position (0-63)
-        // Bits 12-17  (6 bits): Z position (0-63)
-        // Bits 18-20  (3 bits): Normal Index (0-5)
-        // Bit  21     (1 bit) : U coord (0-1)
-        // Bit  22     (1 bit) : V coord (0-1)
-        // Bits 23-30  (8 bits): Block Type (0-255)
-        // Bit  31     (1 bit) : Reserved (AO, etc)
-        
+    // ---------------------------------------------------------------------------
+    //  INVENTION: Per-Vertex Ambient Occlusion packed into the vertex word.
+    //  Block type reduced to 7 bits (0-127, max used = 83) to free 2 AO bits.
+    //
+    //  Packed Layout (32 bits total):
+    //  Bits 0-5    (6 bits): X position (0-63)
+    //  Bits 6-11   (6 bits): Y position (0-63)
+    //  Bits 12-17  (6 bits): Z position (0-63)
+    //  Bits 18-20  (3 bits): Normal Index (0-5)
+    //  Bit  21     (1 bit) : U coord (0-1)
+    //  Bit  22     (1 bit) : V coord (0-1)
+    //  Bits 23-29  (7 bits): Block Type (0-127)
+    //  Bits 30-31  (2 bits): AO level (0=darkest, 3=brightest)
+    // ---------------------------------------------------------------------------
+    uint32_t PackVertex(int x, int y, int z, int normal, int u, int v, int blockType, int ao = 3) {
         uint32_t data = 0;
         data |= (uint32_t(x) & 63u) << 0;
         data |= (uint32_t(y) & 63u) << 6;
@@ -128,9 +130,26 @@ namespace Engine {
         data |= (uint32_t(normal) & 7u) << 18;
         data |= (uint32_t(u) & 1u) << 21;
         data |= (uint32_t(v) & 1u) << 22;
-        data |= (uint32_t(blockType) & 255u) << 23;
+        data |= (uint32_t(blockType) & 127u) << 23;
+        data |= (uint32_t(ao) & 3u) << 30;
         return data;
     }
+
+    // ---------------------------------------------------------------------------
+    //  INVENTION: Classic Minecraft-style per-vertex AO.
+    //  For a given face vertex corner, sample 3 adjacent blocks (side1, side2,
+    //  corner diagonal). The AO level 0-3 determines shadow darkness:
+    //    3 = fully lit, 2 = light shadow, 1 = medium shadow, 0 = deep crease.
+    //  This adds enormous depth perception for zero extra draw-call cost.
+    // ---------------------------------------------------------------------------
+    static int ComputeVertexAO(bool side1, bool side2, bool corner) {
+        if (side1 && side2) return 0;
+        return 3 - (int)side1 - (int)side2 - (int)corner;
+    }
+
+    static bool IsTransparent(uint8_t id) { return id == 0 || id == 5 || id == 18 || id == 35 || (id >= 36 && id <= 51); }
+
+    static bool ShouldRenderFace(uint8_t currentBlock, uint8_t neighborBlock) { if (neighborBlock == 0) return true; if (currentBlock == neighborBlock) return false; return IsTransparent(neighborBlock); }
 
     static bool IsPaneBlock(uint8_t id) {
         return id == 35 || (id >= 36 && id <= 51);
@@ -218,7 +237,7 @@ namespace Engine {
                     }
 
                     // UP
-                    if (y == Game::World::CHUNK_SIZE - 1 || chunk.GetBlock(x, y + 1, z) == 0) {
+                    if (y == Game::World::CHUNK_SIZE - 1 || ShouldRenderFace(block, chunk.GetBlock(x, y + 1, z))) {
                         emitQuad(
                             PackVertex(x,   y + 1, z,     0, 0, 0, block),
                             PackVertex(x,   y + 1, z + 1, 0, 0, 1, block),
@@ -228,7 +247,7 @@ namespace Engine {
                     }
 
                     // DOWN
-                    if (y == 0 || chunk.GetBlock(x, y - 1, z) == 0) {
+                    if (y == 0 || ShouldRenderFace(block, chunk.GetBlock(x, y - 1, z))) {
                         emitQuad(
                             PackVertex(x,   y, z + 1, 1, 0, 0, block),
                             PackVertex(x,   y, z,     1, 0, 1, block),
@@ -238,7 +257,7 @@ namespace Engine {
                     }
 
                     // EAST
-                    if (x == Game::World::CHUNK_SIZE - 1 || chunk.GetBlock(x + 1, y, z) == 0) {
+                    if (x == Game::World::CHUNK_SIZE - 1 || ShouldRenderFace(block, chunk.GetBlock(x + 1, y, z))) {
                         emitQuad(
                             PackVertex(x+1, y,   z,     4, 0, 0, block),
                             PackVertex(x+1, y+1, z,     4, 0, 1, block),
@@ -248,7 +267,7 @@ namespace Engine {
                     }
 
                     // WEST
-                    if (x == 0 || chunk.GetBlock(x - 1, y, z) == 0) {
+                    if (x == 0 || ShouldRenderFace(block, chunk.GetBlock(x - 1, y, z))) {
                         emitQuad(
                             PackVertex(x, y,   z + 1, 5, 0, 0, block),
                             PackVertex(x, y+1, z + 1, 5, 0, 1, block),
@@ -258,7 +277,7 @@ namespace Engine {
                     }
 
                     // SOUTH
-                    if (z == Game::World::CHUNK_SIZE - 1 || chunk.GetBlock(x, y, z + 1) == 0) {
+                    if (z == Game::World::CHUNK_SIZE - 1 || ShouldRenderFace(block, chunk.GetBlock(x, y, z + 1))) {
                         emitQuad(
                             PackVertex(x+1, y,   z + 1, 2, 0, 0, block),
                             PackVertex(x+1, y+1, z + 1, 2, 0, 1, block),
@@ -268,7 +287,7 @@ namespace Engine {
                     }
 
                     // NORTH
-                    if (z == 0 || chunk.GetBlock(x, y, z - 1) == 0) {
+                    if (z == 0 || ShouldRenderFace(block, chunk.GetBlock(x, y, z - 1))) {
                         emitQuad(
                             PackVertex(x,   y,   z, 3, 0, 0, block),
                             PackVertex(x,   y+1, z, 3, 0, 1, block),
@@ -281,6 +300,21 @@ namespace Engine {
         }
     }
 
+    // ---------------------------------------------------------------------------
+    //  INVENTION: High-performance mesher with per-vertex AO, face-count
+    //  pre-estimation, and SIMD-style word-level empty detection.
+    //
+    //  Per-vertex AO samples 3 diagonal neighbors for each face corner
+    //  (classic Minecraft style) and encodes the result in 2 bits per vertex.
+    //  This produces gorgeous self-shadowing at ZERO extra GPU cost.
+    //
+    //  Face pre-estimation scans blocks once to count exposed faces, then
+    //  pre-allocates vertex/index arrays to the exact size — eliminating
+    //  all vector growth/realloc overhead during meshing.
+    //
+    //  Word-level empty scan checks 4 bytes at once to detect pure-air
+    //  chunks in ~8K iterations instead of ~32K.
+    // ---------------------------------------------------------------------------
     void BuildChunkMeshCPU_Padded(const uint8_t* paddedBlocks, int paddedSize, std::vector<uint32_t>& outVertices, std::vector<unsigned int>& outIndices) {
         outVertices.clear();
         outIndices.clear();
@@ -288,14 +322,61 @@ namespace Engine {
 
         constexpr int SIZE = Game::World::CHUNK_SIZE;
         const int pad = paddedSize;
+        const int padSq = pad * pad;
 
-        auto get = [&](int lx, int ly, int lz) -> uint8_t {
-            const int px = lx + 1;
-            const int py = ly + 1;
-            const int pz = lz + 1;
-            if (px < 0 || px >= pad || py < 0 || py >= pad || pz < 0 || pz >= pad) return 0;
-            return paddedBlocks[px + py * pad + pz * pad * pad];
+        // INVENTION: Word-level solid scan — 4x fewer iterations than byte scan.
+        {
+            const uint32_t* words = reinterpret_cast<const uint32_t*>(paddedBlocks);
+            const std::size_t wordCount = ((std::size_t)pad * (std::size_t)pad * (std::size_t)pad) / 4;
+            bool hasAny = false;
+            for (std::size_t i = 0; i < wordCount; ++i) {
+                if (words[i] != 0u) { hasAny = true; break; }
+            }
+            // Check trailing bytes
+            if (!hasAny) {
+                const std::size_t bytesDone = wordCount * 4;
+                const std::size_t totalBytes = (std::size_t)pad * (std::size_t)pad * (std::size_t)pad;
+                for (std::size_t i = bytesDone; i < totalBytes; ++i) {
+                    if (paddedBlocks[i] != 0) { hasAny = true; break; }
+                }
+            }
+            if (!hasAny) return; // Entire volume is air — nothing to mesh.
+        }
+
+        // Inline block accessor using direct indexing (no bounds checks needed
+        // because the padded volume guarantees 1-block border on all sides).
+        auto getP = [&](int px, int py, int pz) -> uint8_t {
+            return paddedBlocks[px + py * pad + pz * padSq];
         };
+        auto get = [&](int lx, int ly, int lz) -> uint8_t {
+            return getP(lx + 1, ly + 1, lz + 1);
+        };
+        // Bool solid test (for AO).
+        auto solid = [&](int lx, int ly, int lz) -> bool {
+            return getP(lx + 1, ly + 1, lz + 1) != 0;
+        };
+
+        // INVENTION: Face-count pre-estimation. Scan once to count exposed faces,
+        // then allocate exact output buffer sizes. This eliminates all vector
+        // growth overhead during the main meshing loop.
+        std::size_t faceEstimate = 0;
+        for (int x = 0; x < SIZE; ++x) {
+            for (int y = 0; y < SIZE; ++y) {
+                for (int z = 0; z < SIZE; ++z) {
+                    if (get(x, y, z) == 0) continue;
+                    if (get(x, y + 1, z) == 0) ++faceEstimate;
+                    if (get(x, y - 1, z) == 0) ++faceEstimate;
+                    if (get(x + 1, y, z) == 0) ++faceEstimate;
+                    if (get(x - 1, y, z) == 0) ++faceEstimate;
+                    if (get(x, y, z + 1) == 0) ++faceEstimate;
+                    if (get(x, y, z - 1) == 0) ++faceEstimate;
+                }
+            }
+        }
+        if (faceEstimate == 0) return;
+
+        outVertices.reserve(faceEstimate * 4);
+        outIndices.reserve(faceEstimate * 6);
 
         auto emitQuad = [&](uint32_t v0, uint32_t v1, uint32_t v2, uint32_t v3) {
             const unsigned int base = (unsigned int)outVertices.size();
@@ -313,59 +394,89 @@ namespace Engine {
                     const uint8_t b = get(x, y, z);
                     if (b == 0) continue;
 
+                    // UP (+Y)
                     if (get(x, y + 1, z) == 0) {
+                        const int ao0 = ComputeVertexAO(solid(x - 1, y + 1, z), solid(x, y + 1, z - 1), solid(x - 1, y + 1, z - 1));
+                        const int ao1 = ComputeVertexAO(solid(x - 1, y + 1, z), solid(x, y + 1, z + 1), solid(x - 1, y + 1, z + 1));
+                        const int ao2 = ComputeVertexAO(solid(x + 1, y + 1, z), solid(x, y + 1, z + 1), solid(x + 1, y + 1, z + 1));
+                        const int ao3 = ComputeVertexAO(solid(x + 1, y + 1, z), solid(x, y + 1, z - 1), solid(x + 1, y + 1, z - 1));
                         emitQuad(
-                            PackVertex(x,   y + 1, z,     0, 0, 0, b),
-                            PackVertex(x,   y + 1, z + 1, 0, 0, 1, b),
-                            PackVertex(x+1, y + 1, z + 1, 0, 1, 1, b),
-                            PackVertex(x+1, y + 1, z,     0, 1, 0, b)
+                            PackVertex(x,   y + 1, z,     0, 0, 0, b, ao0),
+                            PackVertex(x,   y + 1, z + 1, 0, 0, 1, b, ao1),
+                            PackVertex(x+1, y + 1, z + 1, 0, 1, 1, b, ao2),
+                            PackVertex(x+1, y + 1, z,     0, 1, 0, b, ao3)
                         );
                     }
+                    // DOWN (-Y)
                     if (get(x, y - 1, z) == 0) {
+                        const int ao0 = ComputeVertexAO(solid(x - 1, y - 1, z), solid(x, y - 1, z + 1), solid(x - 1, y - 1, z + 1));
+                        const int ao1 = ComputeVertexAO(solid(x - 1, y - 1, z), solid(x, y - 1, z - 1), solid(x - 1, y - 1, z - 1));
+                        const int ao2 = ComputeVertexAO(solid(x + 1, y - 1, z), solid(x, y - 1, z - 1), solid(x + 1, y - 1, z - 1));
+                        const int ao3 = ComputeVertexAO(solid(x + 1, y - 1, z), solid(x, y - 1, z + 1), solid(x + 1, y - 1, z + 1));
                         emitQuad(
-                            PackVertex(x,   y, z + 1, 1, 0, 0, b),
-                            PackVertex(x,   y, z,     1, 0, 1, b),
-                            PackVertex(x+1, y, z,     1, 1, 1, b),
-                            PackVertex(x+1, y, z + 1, 1, 1, 0, b)
+                            PackVertex(x,   y, z + 1, 1, 0, 0, b, ao0),
+                            PackVertex(x,   y, z,     1, 0, 1, b, ao1),
+                            PackVertex(x+1, y, z,     1, 1, 1, b, ao2),
+                            PackVertex(x+1, y, z + 1, 1, 1, 0, b, ao3)
                         );
                     }
+                    // EAST (+X)
                     if (get(x + 1, y, z) == 0) {
+                        const int ao0 = ComputeVertexAO(solid(x + 1, y, z - 1), solid(x + 1, y - 1, z), solid(x + 1, y - 1, z - 1));
+                        const int ao1 = ComputeVertexAO(solid(x + 1, y, z - 1), solid(x + 1, y + 1, z), solid(x + 1, y + 1, z - 1));
+                        const int ao2 = ComputeVertexAO(solid(x + 1, y, z + 1), solid(x + 1, y + 1, z), solid(x + 1, y + 1, z + 1));
+                        const int ao3 = ComputeVertexAO(solid(x + 1, y, z + 1), solid(x + 1, y - 1, z), solid(x + 1, y - 1, z + 1));
                         emitQuad(
-                            PackVertex(x+1, y,   z,     4, 0, 0, b),
-                            PackVertex(x+1, y+1, z,     4, 0, 1, b),
-                            PackVertex(x+1, y+1, z + 1, 4, 1, 1, b),
-                            PackVertex(x+1, y,   z + 1, 4, 1, 0, b)
+                            PackVertex(x+1, y,   z,     4, 0, 0, b, ao0),
+                            PackVertex(x+1, y+1, z,     4, 0, 1, b, ao1),
+                            PackVertex(x+1, y+1, z + 1, 4, 1, 1, b, ao2),
+                            PackVertex(x+1, y,   z + 1, 4, 1, 0, b, ao3)
                         );
                     }
+                    // WEST (-X)
                     if (get(x - 1, y, z) == 0) {
+                        const int ao0 = ComputeVertexAO(solid(x - 1, y, z + 1), solid(x - 1, y - 1, z), solid(x - 1, y - 1, z + 1));
+                        const int ao1 = ComputeVertexAO(solid(x - 1, y, z + 1), solid(x - 1, y + 1, z), solid(x - 1, y + 1, z + 1));
+                        const int ao2 = ComputeVertexAO(solid(x - 1, y, z - 1), solid(x - 1, y + 1, z), solid(x - 1, y + 1, z - 1));
+                        const int ao3 = ComputeVertexAO(solid(x - 1, y, z - 1), solid(x - 1, y - 1, z), solid(x - 1, y - 1, z - 1));
                         emitQuad(
-                            PackVertex(x, y,   z + 1, 5, 0, 0, b),
-                            PackVertex(x, y+1, z + 1, 5, 0, 1, b),
-                            PackVertex(x, y+1, z,     5, 1, 1, b),
-                            PackVertex(x, y,   z,     5, 1, 0, b)
+                            PackVertex(x, y,   z + 1, 5, 0, 0, b, ao0),
+                            PackVertex(x, y+1, z + 1, 5, 0, 1, b, ao1),
+                            PackVertex(x, y+1, z,     5, 1, 1, b, ao2),
+                            PackVertex(x, y,   z,     5, 1, 0, b, ao3)
                         );
                     }
+                    // SOUTH (+Z)
                     if (get(x, y, z + 1) == 0) {
+                        const int ao0 = ComputeVertexAO(solid(x + 1, y, z + 1), solid(x, y - 1, z + 1), solid(x + 1, y - 1, z + 1));
+                        const int ao1 = ComputeVertexAO(solid(x + 1, y, z + 1), solid(x, y + 1, z + 1), solid(x + 1, y + 1, z + 1));
+                        const int ao2 = ComputeVertexAO(solid(x - 1, y, z + 1), solid(x, y + 1, z + 1), solid(x - 1, y + 1, z + 1));
+                        const int ao3 = ComputeVertexAO(solid(x - 1, y, z + 1), solid(x, y - 1, z + 1), solid(x - 1, y - 1, z + 1));
                         emitQuad(
-                            PackVertex(x+1, y,   z + 1, 2, 0, 0, b),
-                            PackVertex(x+1, y+1, z + 1, 2, 0, 1, b),
-                            PackVertex(x,   y+1, z + 1, 2, 1, 1, b),
-                            PackVertex(x,   y,   z + 1, 2, 1, 0, b)
+                            PackVertex(x+1, y,   z + 1, 2, 0, 0, b, ao0),
+                            PackVertex(x+1, y+1, z + 1, 2, 0, 1, b, ao1),
+                            PackVertex(x,   y+1, z + 1, 2, 1, 1, b, ao2),
+                            PackVertex(x,   y,   z + 1, 2, 1, 0, b, ao3)
                         );
                     }
+                    // NORTH (-Z)
                     if (get(x, y, z - 1) == 0) {
+                        const int ao0 = ComputeVertexAO(solid(x - 1, y, z - 1), solid(x, y - 1, z - 1), solid(x - 1, y - 1, z - 1));
+                        const int ao1 = ComputeVertexAO(solid(x - 1, y, z - 1), solid(x, y + 1, z - 1), solid(x - 1, y + 1, z - 1));
+                        const int ao2 = ComputeVertexAO(solid(x + 1, y, z - 1), solid(x, y + 1, z - 1), solid(x + 1, y + 1, z - 1));
+                        const int ao3 = ComputeVertexAO(solid(x + 1, y, z - 1), solid(x, y - 1, z - 1), solid(x + 1, y - 1, z - 1));
                         emitQuad(
-                            PackVertex(x,   y,   z, 3, 0, 0, b),
-                            PackVertex(x,   y+1, z, 3, 0, 1, b),
-                            PackVertex(x+1, y+1, z, 3, 1, 1, b),
-                            PackVertex(x+1, y,   z, 3, 1, 0, b)
+                            PackVertex(x,   y,   z, 3, 0, 0, b, ao0),
+                            PackVertex(x,   y+1, z, 3, 0, 1, b, ao1),
+                            PackVertex(x+1, y+1, z, 3, 1, 1, b, ao2),
+                            PackVertex(x+1, y,   z, 3, 1, 0, b, ao3)
                         );
                     }
                 }
             }
         }
 
-        std::cout << "[MESH SUCCESS] " << (outVertices.size() / 4) << " Quads | " << outIndices.size() << " Indices" << std::endl;
+        std::cout << "[MESH+AO] " << (outVertices.size() / 4) << " Quads | " << outIndices.size() << " Indices | AO=2bit" << std::endl;
     }
 
     void UploadMeshToGPU(Mesh& mesh, const std::vector<uint32_t>& vertices, const std::vector<unsigned int>& indices) {
@@ -394,3 +505,4 @@ namespace Engine {
         UploadMeshToGPU(mesh, verts, inds);
     }
 }
+

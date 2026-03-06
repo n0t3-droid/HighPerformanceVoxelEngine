@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Compat\MemsetCompat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Engine\Core\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -59,6 +62,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\Generation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\Hydrology.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\SparseVoxelOctree.cpp">
@@ -154,6 +160,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\Generation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\Hydrology.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\ylber\Downloads\r9-hyper-core\HighPerformanceVoxelEngine\src\Game\World\Lighting.h">

@@ -938,7 +938,7 @@ namespace Engine {
                   << "  Preload: HVE_PRELOAD_RADIUS, HVE_PRELOAD_MAX_SEC\n"
                   << "  World: HVE_WORLD_FILE (default hve_world.hvew), HVE_QUALITY (0..2)\n"
                   << "  Settings: writes hve_settings.ini (or HVE_SETTINGS_FILE)\n"
-                  << "  Terrain: HVE_CITY_FLAT=1, HVE_FLATLAND=1 (override)\n"
+                  << "  Terrain: HVE_FORCE_FLAT_WORLD=1, HVE_FORCE_FLAT_Y=40, HVE_SUPERFLAT_MODE=1\n"
                   << "  Walk: HVE_WALK_SPEED (default 8), HVE_WALK_EYE_HEIGHT (default 1.8)\n"
                   << "  Walk: HVE_WALK_ACCEL, HVE_WALK_DRAG, HVE_WALK_MAX_MULT\n"
                   << "  Build: HVE_REACH, HVE_PLACE_RATE, HVE_BREAK_RATE, HVE_PLACE_MAX, HVE_UNDO_MAX\n"
@@ -2330,20 +2330,20 @@ namespace Engine {
         const int wireframeHeightCapCfg = GetEnvIntClamped("HVE_WIREFRAME_HEIGHT", 8, 4, 32);
         const int wireframeCullChunksCfg = GetEnvIntClamped("HVE_WIREFRAME_CULL", 14, 6, 64);
         const int streamDistanceCap = GetEnvIntClamped("HVE_STREAM_DISTANCE_CAP", 2048, 64, 32768);
-        int viewDistanceChunks = GetEnvIntClamped("HVE_VIEWDIST", 24, 1, streamDistanceCap);
-        int streamMarginChunks = GetEnvIntClamped("HVE_STREAM_MARGIN", 12, 0, streamDistanceCap);
+        int viewDistanceChunks = GetEnvIntClamped("HVE_VIEWDIST", 64, 1, streamDistanceCap);
+        int streamMarginChunks = GetEnvIntClamped("HVE_STREAM_MARGIN", 48, 0, streamDistanceCap);
         int streamDistanceChunks = std::min(streamDistanceCap, viewDistanceChunks + streamMarginChunks);
-        const int heightChunks = GetEnvIntClamped("HVE_HEIGHT_CHUNKS", 48, 1, 256); // Default 48 (1536 blocks), max 256
-        const int preloadHeightChunks = GetEnvIntClamped("HVE_PRELOAD_HEIGHT_CHUNKS", std::min(12, heightChunks), 1, 256);
+        const int heightChunks = GetEnvIntClamped("HVE_HEIGHT_CHUNKS", 128, 1, 256); // Default 128 (4096 blocks), max 256
+        const int preloadHeightChunks = GetEnvIntClamped("HVE_PRELOAD_HEIGHT_CHUNKS", std::min(32, heightChunks), 1, 256);
 
-        int uploadBudget = GetEnvIntClamped("HVE_UPLOAD_BUDGET", 120, 1, 512);
+        int uploadBudget = GetEnvIntClamped("HVE_UPLOAD_BUDGET", 512, 1, 2048);
         int baseUploadBudget = uploadBudget;
         const bool adaptiveBudget = GetEnvBool("HVE_ADAPTIVE_STREAM_BUDGET", true);
         const bool largeMode = GetEnvBool("HVE_LARGE_MODE", true);
         const float largeTargetFps = GetEnvFloatClamped("HVE_LARGE_TARGET_FPS", 55.0f, 30.0f, 120.0f);
-        const int largeMinStream = GetEnvIntClamped("HVE_LARGE_MIN_STREAM", 10, 1, streamDistanceCap);
-        const int largeMinUpload = GetEnvIntClamped("HVE_LARGE_MIN_UPLOAD", 8, 1, 128);
-        const int largeUploadBoost = GetEnvIntClamped("HVE_LARGE_UPLOAD_BOOST", 24, 0, 128);
+        const int largeMinStream = GetEnvIntClamped("HVE_LARGE_MIN_STREAM", 64, 1, streamDistanceCap);
+        const int largeMinUpload = GetEnvIntClamped("HVE_LARGE_MIN_UPLOAD", 64, 1, 1024);
+        const int largeUploadBoost = GetEnvIntClamped("HVE_LARGE_UPLOAD_BOOST", 256, 0, 1024);
         const bool lowEndController = GetEnvBool("HVE_LOWEND_CONTROLLER", true);
         const float lowEndTargetMs = GetEnvFloatClamped("HVE_LOWEND_TARGET_MS", 22.2f, 10.0f, 60.0f);
         const float lowEndHysteresisMs = GetEnvFloatClamped("HVE_LOWEND_HYST_MS", 0.6f, 0.1f, 8.0f);
@@ -2356,11 +2356,11 @@ namespace Engine {
         int preloadRadiusChunks = GetEnvIntClamped("HVE_PRELOAD_RADIUS", std::min(12, viewDistanceChunks), 0, streamDistanceCap);
         float preloadMaxSec = GetEnvFloatClamped("HVE_PRELOAD_MAX_SEC", 14.0f, 0.0f, 120.0f);
         bool preloadBlocksInput = GetEnvBool("HVE_PRELOAD_BLOCKS_INPUT", false);
-        const bool instantHugeSight = GetEnvBool("HVE_INSTANT_HUGE_SIGHT", true);
+        const bool instantHugeSight = GetEnvBool("HVE_INSTANT_HUGE_SIGHT", false);
         const bool instantHugeReposition = GetEnvBool("HVE_INSTANT_HUGE_REPOSITION", true);
         const int instantHugeRadius = GetEnvIntClamped("HVE_INSTANT_HUGE_RADIUS", 168, 16, streamDistanceCap);
         const int instantHugeVertical = GetEnvIntClamped("HVE_INSTANT_HUGE_VERTICAL", 64, 8, 1024);
-        const bool megaPreloadContinuous = GetEnvBool("HVE_MEGA_PRELOAD_CONTINUOUS", true);
+        const bool megaPreloadContinuous = GetEnvBool("HVE_MEGA_PRELOAD_CONTINUOUS", false);
         const float megaPreloadPulseSec = GetEnvFloatClamped("HVE_MEGA_PRELOAD_PULSE_SEC", 0.8f, 0.05f, 10.0f);
         const int megaPreloadRadiusStep = GetEnvIntClamped("HVE_MEGA_PRELOAD_RADIUS_STEP", 64, 1, streamDistanceCap);
         const int megaPreloadRadiusMax = GetEnvIntClamped("HVE_MEGA_PRELOAD_RADIUS_MAX", streamDistanceCap, 16, streamDistanceCap);
@@ -2380,7 +2380,10 @@ namespace Engine {
         const bool hasEnvPreloadRadius = hasEnvValue("HVE_PRELOAD_RADIUS");
         const bool hasEnvPreloadMaxSec = hasEnvValue("HVE_PRELOAD_MAX_SEC");
         const bool autoHardwareQuality = GetEnvBool("HVE_AUTO_HW_QUALITY", true);
+        const bool autoVegaAscension = GetEnvBool("HVE_AUTO_VEGA_ASCENSION", true);
         const HardwareProfile hardware = HardwareDetector::Detect();
+        // INVENTION: Re-initialize QualityManager with hardware-aware limits.
+        Engine::QualityManager::InitWithProfile(hardware);
         if (autoHardwareQuality && hardware.IsToasterClass()) {
             qualityLevel = 0;
         }
@@ -2404,17 +2407,17 @@ namespace Engine {
                 qPreloadRadius = 2;
                 qPreloadMaxSec = 6.0f;
             } else if (qualityLevel == 1) {
-                qViewDistance = 24;
-                qStreamMargin = 12;
-                qUploadBudget = 120;
-                qPreloadRadius = 10;
-                qPreloadMaxSec = 14.0f;
+                qViewDistance = 14;
+                qStreamMargin = 6;
+                qUploadBudget = 96;
+                qPreloadRadius = 4;
+                qPreloadMaxSec = 6.0f;
             } else {
-                qViewDistance = 40;
-                qStreamMargin = 20;
-                qUploadBudget = 190;
-                qPreloadRadius = 18;
-                qPreloadMaxSec = 30.0f;
+                qViewDistance = 24;
+                qStreamMargin = 10;
+                qUploadBudget = 140;
+                qPreloadRadius = 8;
+                qPreloadMaxSec = 10.0f;
             }
             if (!hasEnvViewDist) viewDistanceChunks = qViewDistance;
             if (!hasEnvStreamMargin) streamMarginChunks = qStreamMargin;
@@ -2440,13 +2443,24 @@ namespace Engine {
 
         const float gpuScore = gpuScoreFromTier(hardware.gpuTier);
         const float detailLevel = std::clamp((gpuScore * 0.8f) + ((float)hardware.systemRamGB * 1024.0f / 32000.0f), 0.3f, 1.0f);
-        const int adaptiveViewDistance = std::clamp((int)std::round(32.0f + gpuScore * 48.0f), 24, 96);
+        const int adaptiveViewDistance = std::clamp((int)std::round(64.0f + gpuScore * 96.0f), 48, 256);
         if (autoHardwareQuality) {
             viewDistanceChunks = std::min(viewDistanceChunks, adaptiveViewDistance);
             streamMarginChunks = std::min(streamMarginChunks, std::max(4, (int)std::round(12.0f * detailLevel)));
             streamDistanceChunks = std::min(streamDistanceCap, viewDistanceChunks + streamMarginChunks);
             uploadBudget = std::max(16, (int)std::round((float)uploadBudget * detailLevel));
             baseUploadBudget = uploadBudget;
+
+            if (autoVegaAscension && hardware.IsVegaApuClass()) {
+                if (!hasEnvViewDist) viewDistanceChunks = std::min(viewDistanceChunks, 14);
+                if (!hasEnvStreamMargin) streamMarginChunks = std::min(streamMarginChunks, 8);
+                if (!hasEnvUploadBudget) uploadBudget = std::min(160, std::max(96, uploadBudget));
+                if (!hasEnvPreloadRadius) preloadRadiusChunks = std::min(preloadRadiusChunks, 8);
+                if (!hasEnvPreloadMaxSec) preloadMaxSec = std::min(preloadMaxSec, 18.0f);
+                streamDistanceChunks = std::min(streamDistanceCap, viewDistanceChunks + streamMarginChunks);
+                baseUploadBudget = uploadBudget;
+                std::cout << "VEGA ASCENSION auto-profile: ON (stability + fast input)" << std::endl;
+            }
         }
 
         if (hardSafeMode) {
@@ -2487,32 +2501,68 @@ namespace Engine {
         int keyWireframe = GetEnvOrIniIntClamped("HVE_KEY_WIREFRAME", ini, "key_wireframe", GLFW_KEY_F3, 0, 512);
         int keyImportPagePrev = GetEnvOrIniIntClamped("HVE_KEY_IMPORT_PREV", ini, "key_import_prev", GLFW_KEY_PAGE_UP, 0, 512);
         int keyImportPageNext = GetEnvOrIniIntClamped("HVE_KEY_IMPORT_NEXT", ini, "key_import_next", GLFW_KEY_PAGE_DOWN, 0, 512);
+        const bool forceWasd = GetEnvBool("HVE_FORCE_WASD", true);
+        if (forceWasd) {
+            keyForward = GLFW_KEY_W;
+            keyBack = GLFW_KEY_S;
+            keyLeft = GLFW_KEY_A;
+            keyRight = GLFW_KEY_D;
+            keyUp = GLFW_KEY_SPACE;
+            keyDown = GLFW_KEY_LEFT_SHIFT;
+        }
+        const bool badMoveKeyMap =
+            keyForward <= 0 || keyBack <= 0 || keyLeft <= 0 || keyRight <= 0 ||
+            keyForward == keyBack || keyForward == keyLeft || keyForward == keyRight ||
+            keyBack == keyLeft || keyBack == keyRight || keyLeft == keyRight;
+        if (badMoveKeyMap) {
+            keyForward = GLFW_KEY_W;
+            keyBack = GLFW_KEY_S;
+            keyLeft = GLFW_KEY_A;
+            keyRight = GLFW_KEY_D;
+            keyUp = GLFW_KEY_SPACE;
+            keyDown = GLFW_KEY_LEFT_SHIFT;
+            std::cout << "Input fallback: invalid movement keymap detected, restoring WASD defaults" << std::endl;
+        }
         const bool startWithMouseCaptured = GetEnvBool("HVE_MOUSE_CAPTURED", true);
         const float inputGraceSec = GetEnvFloatClamped("HVE_INPUT_GRACE_SEC", 0.0f, 0.0f, 2.0f);
         const bool loadingInputBreakout = GetEnvBool("HVE_LOADING_INPUT_BREAKOUT", true);
         const float loadingOverlayMaxSec = GetEnvFloatClamped("HVE_LOADING_OVERLAY_MAX_SEC", 2.5f, 0.0f, 120.0f);
-        const bool startupForcePreload = GetEnvBool("HVE_STARTUP_FORCE_PRELOAD", true);
-        const int startupBlockMinChunks = GetEnvIntClamped("HVE_STARTUP_BLOCK_MIN_CHUNKS", 1200, 0, 500000);
-        const float startupBlockMaxSec = GetEnvFloatClamped("HVE_STARTUP_BLOCK_MAX_SEC", 20.0f, 0.0f, 300.0f);
-        const float startupBlockStallSec = GetEnvFloatClamped("HVE_STARTUP_BLOCK_STALL_SEC", 3.0f, 0.5f, 60.0f);
-        const float startupPerfProtectSec = GetEnvFloatClamped("HVE_STARTUP_PERF_PROTECT_SEC", 8.0f, 0.0f, 60.0f);
-        const int startupProtectStream = GetEnvIntClamped("HVE_STARTUP_STREAM", 14, 6, 96);
-        const int startupProtectUploadMin = GetEnvIntClamped("HVE_STARTUP_UPLOAD_MIN", 24, 4, 256);
-        const int startupProtectHeight = GetEnvIntClamped("HVE_STARTUP_HEIGHT", 12, 4, 128);
-        const int startupWarmChunksTarget = GetEnvIntClamped("HVE_STARTUP_WARM_CHUNKS", 120, 24, 200000);
-        const int startupMinStreamSteps = GetEnvIntClamped("HVE_STARTUP_STREAM_STEPS", 2, 1, 8);
+        const bool startupForcePreload = GetEnvBool("HVE_STARTUP_FORCE_PRELOAD", false);
+        const bool startupInputHardUnlock = GetEnvBool("HVE_STARTUP_INPUT_HARD_UNLOCK", true);
+        const float startupInputUnlockSec = GetEnvFloatClamped("HVE_STARTUP_INPUT_UNLOCK_SEC", 1.5f, 0.0f, 30.0f);
+        const int startupBlockMinChunks = GetEnvIntClamped("HVE_STARTUP_BLOCK_MIN_CHUNKS", 512, 0, 500000);
+        const float startupBlockMaxSec = GetEnvFloatClamped("HVE_STARTUP_BLOCK_MAX_SEC", 60.0f, 0.0f, 300.0f);
+        const float startupBlockStallSec = GetEnvFloatClamped("HVE_STARTUP_BLOCK_STALL_SEC", 10.0f, 0.5f, 60.0f);
+        const float streamLookAheadSec = GetEnvFloatClamped("HVE_STREAM_LOOKAHEAD_SEC", 1.10f, 0.0f, 4.0f);
+        const int streamLookAheadMaxChunks = GetEnvIntClamped("HVE_STREAM_LOOKAHEAD_MAX_CHUNKS", 20, 0, 128);
+        const float streamLookAheadSpeedMult = GetEnvFloatClamped("HVE_STREAM_LOOKAHEAD_SPEED_MULT", 0.55f, 0.1f, 2.5f);
+        const int streamFlightStepsBonus = GetEnvIntClamped("HVE_STREAM_FLIGHT_STEPS_BONUS", 2, 0, 8);
+        const int streamFlightUploadBoost = GetEnvIntClamped("HVE_STREAM_FLIGHT_UPLOAD_BOOST", 96, 0, 2048);
+        const int streamInFlightSoftCap = GetEnvIntClamped("HVE_STREAM_INFLIGHT_SOFTCAP", 1200, 64, 200000);
+        const float starvationRescueHoldSec = GetEnvFloatClamped("HVE_STARVATION_RESCUE_HOLD_SEC", 1.4f, 0.0f, 10.0f);
+        const int starvationRescueMinStream = GetEnvIntClamped("HVE_STARVATION_RESCUE_MIN_STREAM", 24, 8, streamDistanceCap);
+        const int starvationRescueMinHeight = GetEnvIntClamped("HVE_STARVATION_RESCUE_MIN_HEIGHT", 24, 8, 256);
+        const int starvationRescueUploadBoost = GetEnvIntClamped("HVE_STARVATION_RESCUE_UPLOAD_BOOST", 192, 0, 4096);
+        const int starvationExtraPumpPasses = GetEnvIntClamped("HVE_STARVATION_EXTRA_PUMP_PASSES", 2, 0, 6);
+        const int starvationExtraPumpBudget = GetEnvIntClamped("HVE_STARVATION_EXTRA_PUMP_BUDGET", 96, 1, 4096);
+        const float startupPerfProtectSec = GetEnvFloatClamped("HVE_STARTUP_PERF_PROTECT_SEC", 15.0f, 0.0f, 60.0f);
+        const int startupProtectStream = GetEnvIntClamped("HVE_STARTUP_STREAM", 64, 6, 128);
+        const int startupProtectUploadMin = GetEnvIntClamped("HVE_STARTUP_UPLOAD_MIN", 128, 4, 512);
+        const int startupProtectHeight = GetEnvIntClamped("HVE_STARTUP_HEIGHT", 64, 4, 128);
+        const int startupWarmChunksTarget = GetEnvIntClamped("HVE_STARTUP_WARM_CHUNKS", 1024, 24, 200000);
+        const int startupMinStreamSteps = GetEnvIntClamped("HVE_STARTUP_STREAM_STEPS", 16, 1, 32);
         const bool chunkCatchupEnabled = GetEnvBool("HVE_CHUNK_CATCHUP_ENABLED", true);
-        const int chunkCatchupTarget = GetEnvIntClamped("HVE_CHUNK_CATCHUP_TARGET", 220, 24, 200000);
-        const int chunkCatchupUploadBoost = GetEnvIntClamped("HVE_CHUNK_CATCHUP_UPLOAD_BOOST", 22, 0, 256);
-        const int chunkCatchupStreamBonus = GetEnvIntClamped("HVE_CHUNK_CATCHUP_STREAM_BONUS", 8, 0, 128);
-        const int chunkCatchupStepsBonus = GetEnvIntClamped("HVE_CHUNK_CATCHUP_STEPS_BONUS", 1, 0, 4);
-        const int streamStepsWhileMoving = GetEnvIntClamped("HVE_STREAM_STEPS_WHILE_MOVING", 2, 1, 8);
-        const int chunkCatchupDeficitSoft = GetEnvIntClamped("HVE_CHUNK_CATCHUP_DEFICIT_SOFT", 96, 1, 500000);
-        const int chunkCatchupStreamBurstMax = GetEnvIntClamped("HVE_CHUNK_CATCHUP_STREAM_BURST_MAX", 6, 1, 16);
-        const int chunkCatchupUploadBurstMax = GetEnvIntClamped("HVE_CHUNK_CATCHUP_UPLOAD_BURST_MAX", 192, 8, 512);
-        const float chunkCatchupMinFps = GetEnvFloatClamped("HVE_CHUNK_CATCHUP_MIN_FPS", 52.0f, 20.0f, 240.0f);
-        const float chunkCatchupMaxFrameMs = GetEnvFloatClamped("HVE_CHUNK_CATCHUP_MAX_FRAME_MS", 20.0f, 5.0f, 80.0f);
-        const int uploadPumpCap = GetEnvIntClamped("HVE_UPLOAD_PUMP_CAP", 192, 16, 512);
+        const int chunkCatchupTarget = GetEnvIntClamped("HVE_CHUNK_CATCHUP_TARGET", 4096, 24, 200000);
+        const int chunkCatchupUploadBoost = GetEnvIntClamped("HVE_CHUNK_CATCHUP_UPLOAD_BOOST", 256, 0, 1024);
+        const int chunkCatchupStreamBonus = GetEnvIntClamped("HVE_CHUNK_CATCHUP_STREAM_BONUS", 128, 0, 512);
+        const int chunkCatchupStepsBonus = GetEnvIntClamped("HVE_CHUNK_CATCHUP_STEPS_BONUS", 8, 0, 16);
+        const int streamStepsWhileMoving = GetEnvIntClamped("HVE_STREAM_STEPS_WHILE_MOVING", 16, 1, 32);
+        const int chunkCatchupDeficitSoft = GetEnvIntClamped("HVE_CHUNK_CATCHUP_DEFICIT_SOFT", 4096, 1, 500000);
+        const int chunkCatchupStreamBurstMax = GetEnvIntClamped("HVE_CHUNK_CATCHUP_STREAM_BURST_MAX", 256, 1, 512);
+        const int chunkCatchupUploadBurstMax = GetEnvIntClamped("HVE_CHUNK_CATCHUP_UPLOAD_BURST_MAX", 4096, 8, 8192);
+        const float chunkCatchupMinFps = GetEnvFloatClamped("HVE_CHUNK_CATCHUP_MIN_FPS", 45.0f, 20.0f, 240.0f);
+        const float chunkCatchupMaxFrameMs = GetEnvFloatClamped("HVE_CHUNK_CATCHUP_MAX_FRAME_MS", 22.0f, 5.0f, 80.0f);
+        const int uploadPumpCap = GetEnvIntClamped("HVE_UPLOAD_PUMP_CAP", 2048, 16, 4096);
 
         const float flySpeed = GetEnvFloatClamped("HVE_FLY_SPEED", 25.0f, 1.0f, 500.0f);
         const float flyBoostMult = GetEnvFloatClamped("HVE_FLY_BOOST_MULT", 4.0f, 1.0f, 20.0f);
@@ -2523,10 +2573,16 @@ namespace Engine {
         const float flyPrecisionMult = GetEnvFloatClamped("HVE_FLY_PRECISION_MULT", 0.35f, 0.1f, 1.0f);
         const float flyPrecisionDrag = GetEnvFloatClamped("HVE_FLY_PRECISION_DRAG", 6.5f, 0.5f, 40.0f);
         const float reachDist = GetEnvFloatClamped("HVE_REACH", 16.0f, 2.0f, 20.0f);
-        const float placeRate = GetEnvFloatClamped("HVE_PLACE_RATE", 6.0f, 1.0f, 240.0f);
+        const float placeRate = GetEnvFloatClamped("HVE_PLACE_RATE", 60.0f, 1.0f, 240.0f);
         const float breakRate = GetEnvFloatClamped("HVE_BREAK_RATE", 9.0f, 1.0f, 60.0f);
         const float placeHoldDelay = GetEnvFloatClamped("HVE_PLACE_HOLD_DELAY", 0.0f, 0.0f, 0.8f);
         const float breakHoldDelay = GetEnvFloatClamped("HVE_BREAK_HOLD_DELAY", 0.18f, 0.05f, 0.8f);
+        const bool fogStarvationRelief = GetEnvBool("HVE_FOG_STARVATION_RELIEF", true);
+        const float fogStarvationMinScale = GetEnvFloatClamped("HVE_FOG_STARVATION_MIN_SCALE", 0.58f, 0.05f, 1.0f);
+        const bool fogHighAltitudeRelief = GetEnvBool("HVE_FOG_HIGHALT_RELIEF", true);
+        const float fogHighAltStart = GetEnvFloatClamped("HVE_FOG_HIGHALT_START", 130.0f, 16.0f, 4000.0f);
+        const float fogHighAltEnd = GetEnvFloatClamped("HVE_FOG_HIGHALT_END", 360.0f, 24.0f, 5000.0f);
+        const float fogHighAltMinScale = GetEnvFloatClamped("HVE_FOG_HIGHALT_MIN_SCALE", 0.68f, 0.10f, 1.0f);
         const float playerBuildHalfWidth = GetEnvFloatClamped("HVE_PLAYER_BUILD_HALF_WIDTH", 0.22f, 0.12f, 0.45f);
         const float playerBuildHeight = GetEnvFloatClamped("HVE_PLAYER_BUILD_HEIGHT", 1.65f, 1.2f, 2.4f);
         const int placeMax = GetEnvIntClamped("HVE_PLACE_MAX", 512, 1, 8192);
@@ -2780,9 +2836,9 @@ namespace Engine {
         // Streaming world (multi-chunk) + renderer
         Game::World::ChunkManager chunkManager;
 
-        const std::size_t hw = std::max(1u, std::thread::hardware_concurrency());
-        const std::size_t maxWorkers = 4u;
-        const std::size_t workerCount = std::min(maxWorkers, (hw > 1) ? (hw - 1) : 1);
+        const std::size_t hw = std::max<std::size_t>(1, std::thread::hardware_concurrency());
+        const std::size_t maxWorkers = std::max<std::size_t>(4, hw - 1); // Allow more workers on high-end CPUs
+        const std::size_t workerCount = std::min<std::size_t>(maxWorkers, (hw > 1) ? (hw - 1) : 1);
         Threading::ThreadPool pool(workerCount);
         chunkManager.Init(&pool);
 
@@ -3039,6 +3095,16 @@ namespace Engine {
         const float controlLagWarnMs = GetEnvFloatClamped("HVE_CONTROL_LAG_WARN_MS", 28.0f, 4.0f, 300.0f);
         const float controlDelayIntentMinSec = GetEnvFloatClamped("HVE_CONTROL_DELAY_INTENT_MIN_SEC", 0.10f, 0.0f, 2.0f);
         const int controlDelayReportMinMs = GetEnvIntClamped("HVE_CONTROL_DELAY_REPORT_MIN_MS", 120, 0, 4000);
+        const bool fastInputPriorityEnabled = GetEnvBool("HVE_FAST_INPUT_PRIORITY", true);
+        const float fastInputTimesliceFactor = GetEnvFloatClamped("HVE_FAST_INPUT_TIMESLICE_FACTOR", 0.08f, 0.00f, 0.50f);
+        const float fastInputHoldSec = GetEnvFloatClamped("HVE_FAST_INPUT_HOLD_SEC", 0.45f, 0.05f, 4.0f);
+        const float fastInputIntentThreshold = GetEnvFloatClamped("HVE_FAST_INPUT_INTENT_THRESHOLD", 0.18f, 0.01f, 1.0f);
+        const float fastInputLagWarnMs = GetEnvFloatClamped("HVE_FAST_INPUT_LAG_WARN_MS", 22.0f, 4.0f, 300.0f);
+        const float fastInputResponseMin = GetEnvFloatClamped("HVE_FAST_INPUT_RESPONSE_MIN", 0.78f, 0.10f, 1.20f);
+        const int fastInputMaxStreamSteps = GetEnvIntClamped("HVE_FAST_INPUT_MAX_STREAM_STEPS", 2, 1, 8);
+        const int fastInputStreamClamp = GetEnvIntClamped("HVE_FAST_INPUT_STREAM_CLAMP", 18, 8, streamDistanceCap);
+        const int fastInputUploadClamp = GetEnvIntClamped("HVE_FAST_INPUT_UPLOAD_CLAMP", 96, 8, uploadPumpCap);
+        const float farfieldSuppressHoldSec = GetEnvFloatClamped("HVE_FARFIELD_SUPPRESS_HOLD_SEC", 1.15f, 0.05f, 8.0f);
         const float spikeMinorMs = GetEnvFloatClamped("HVE_SPIKE_MINOR_MS", 2.2f, 0.4f, 25.0f);
         const float spikeMajorMs = GetEnvFloatClamped("HVE_SPIKE_MAJOR_MS", 7.5f, 1.0f, 80.0f);
         const float spikeZScore = GetEnvFloatClamped("HVE_SPIKE_Z", 2.4f, 0.8f, 8.0f);
@@ -3109,11 +3175,20 @@ namespace Engine {
         float controlRmbHoldSec = 0.0f;
         float lastFrameYaw = camera.Yaw;
         float lastFramePitch = camera.Pitch;
+        double fastInputPriorityUntil = -1.0;
         std::size_t streamPendingNotReady = 0;
         std::size_t streamWatchdogEligible = 0;
         std::size_t streamWatchdogOverdue = 0;
         int streamPendingOldestTicks = 0;
         int streamOverdueOldestTicks = 0;
+        float impostorQueuePressureLive = 0.0f;
+        float impostorBlendNearStartLive = 0.0f;
+        float impostorBlendNearEndLive = 0.0f;
+        float impostorQueuePushMulLive = 1.0f;
+        float impostorQueuePressureAvgLive = 0.0f;
+        float impostorQueuePressureAccum = 0.0f;
+        int impostorQueuePressureSamples = 0;
+        double impostorAutoTuneLast = -1.0;
         double stutterAlertCooldownUntil = -1.0;
 
         bool lastF1 = false;
@@ -3214,40 +3289,51 @@ namespace Engine {
         const float crossInnerWidth = GetEnvFloatClamped("HVE_CROSSHAIR_INNER_WIDTH", 2.2f, 1.0f, 6.0f);
         const float crossAlpha = GetEnvFloatClamped("HVE_CROSSHAIR_ALPHA", 0.96f, 0.2f, 1.0f);
         if (crosshairEnabled) {
+            // =========================================================================
+            // INVENTION: AAA Procedural Sci-Fi Crosshair (No-VBO, Fragment Driven)
+            // Replaces legacy jagged GL_LINES with a perfectly smooth, animated 
+            // circular UI element using implicit circle formulas.
+            // =========================================================================
             const char* vsSrc = R"GLSL(
                 #version 460 core
-                layout(location=0) in vec2 aPos;
-                void main(){ gl_Position = vec4(aPos, 0.0, 1.0); }
+                uniform float u_Aspect;
+                out vec2 vUV;
+                void main(){ 
+                    float size = 0.020;
+                    vec2 pos[4] = vec2[](
+                        vec2(-1,-1), vec2(1,-1),
+                        vec2(-1, 1), vec2(1, 1)
+                    );
+                    int idx[6] = int[](0,1,2, 2,1,3);
+                    vec2 p = pos[idx[gl_VertexID]];
+                    vUV = p;
+                    gl_Position = vec4(p.x * size, p.y * size * u_Aspect, 0.0, 1.0);
+                }
             )GLSL";
             const char* fsSrc = R"GLSL(
                 #version 460 core
-                uniform vec4 u_Color;
+                in vec2 vUV;
+                uniform float u_Time;
                 out vec4 FragColor;
-                void main(){ FragColor = u_Color; }
+                void main(){ 
+                    float dist = length(vUV);
+                    float dotPart = 1.0 - smoothstep(0.12, 0.20, dist); // Center dot
+                    float ringPart = smoothstep(0.60, 0.75, dist) * (1.0 - smoothstep(0.85, 0.95, dist)); // Outer ring
+                    
+                    float pulse = sin(u_Time * 4.0) * 0.5 + 0.5;
+                    float alpha = max(dotPart, ringPart * (0.4 + pulse * 0.3));
+                    if (alpha < 0.01) discard;
+
+                    vec3 color = mix(vec3(1.0), vec3(0.0, 0.8, 1.0), dist); // White center, cyan edge
+                    FragColor = vec4(color, alpha * 0.8);
+                }
             )GLSL";
             crossProg = CreateProgram(vsSrc, fsSrc);
             if (crossProg != 0) {
-                const float s = GetEnvFloatClamped("HVE_CROSSHAIR_SIZE", 0.020f, 0.003f, 0.08f);
-                const float g = GetEnvFloatClamped("HVE_CROSSHAIR_GAP", 0.006f, 0.0f, 0.03f);
-                const float verts[] = {
-                    -s,  0.0f,
-                    -g,  0.0f,
-                     g,  0.0f,
-                     s,  0.0f,
-                     0.0f, -s,
-                     0.0f, -g,
-                     0.0f,  g,
-                     0.0f,  s,
-                };
+                // Empty VAO for mathematically generated vertices
                 glGenVertexArrays(1, &crossVao);
-                glGenBuffers(1, &crossVbo);
                 glBindVertexArray(crossVao);
-                glBindBuffer(GL_ARRAY_BUFFER, crossVbo);
-                glBufferData(GL_ARRAY_BUFFER, sizeof(verts), verts, GL_STATIC_DRAW);
-                glEnableVertexAttribArray(0);
-                glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
                 glBindVertexArray(0);
-                glBindBuffer(GL_ARRAY_BUFFER, 0);
             } else {
                 crosshairEnabled = false;
             }
@@ -3414,6 +3500,36 @@ namespace Engine {
         const float horizonUpdateMinSec = GetEnvFloatClamped("HVE_HORIZON_UPDATE_MIN_SEC", 0.22f, 0.03f, 2.0f);
         const int horizonPointsPerFrame = GetEnvIntClamped("HVE_HORIZON_POINTS_PER_FRAME", 4096, 256, 65536);
         const bool horizonAdaptiveBudget = GetEnvBool("HVE_HORIZON_ADAPTIVE", true);
+        const bool impostorRingEnabled = horizonMode && GetEnvBool("HVE_IMPOSTOR_RING", true);
+        const int impostorRingSegments = GetEnvIntClamped("HVE_IMPOSTOR_SEGMENTS", 192, 48, 1024);
+        const int impostorRingBands = GetEnvIntClamped("HVE_IMPOSTOR_BANDS", 6, 2, 24);
+        const float impostorInnerRadius = GetEnvFloatClamped("HVE_IMPOSTOR_INNER_RADIUS", 2800.0f, 256.0f, 50000.0f);
+        const float impostorOuterRadius = GetEnvFloatClamped("HVE_IMPOSTOR_OUTER_RADIUS", 16000.0f, 512.0f, 140000.0f);
+        const float impostorBaseHeight = GetEnvFloatClamped("HVE_IMPOSTOR_BASE_HEIGHT", -18.0f, -256.0f, 512.0f);
+        const float impostorHeightAmp = GetEnvFloatClamped("HVE_IMPOSTOR_HEIGHT_AMP", 92.0f, 0.0f, 1200.0f);
+        const float impostorNoiseScale = GetEnvFloatClamped("HVE_IMPOSTOR_NOISE_SCALE", 0.0014f, 0.00005f, 0.05f);
+        const bool impostorAdaptiveBudget = GetEnvBool("HVE_IMPOSTOR_ADAPTIVE", true);
+        const float impostorBlendNearStart = GetEnvFloatClamped("HVE_IMPOSTOR_BLEND_NEAR_START", 2200.0f, 64.0f, 120000.0f);
+        const float impostorBlendNearEnd = GetEnvFloatClamped("HVE_IMPOSTOR_BLEND_NEAR_END", 3400.0f, 96.0f, 140000.0f);
+        const float impostorBlendFarStart = GetEnvFloatClamped("HVE_IMPOSTOR_BLEND_FAR_START", 0.88f, 0.10f, 0.995f);
+        const float impostorBlendMinAlpha = GetEnvFloatClamped("HVE_IMPOSTOR_BLEND_MIN_ALPHA", 0.03f, 0.0f, 0.5f);
+        const bool impostorDynamicBlend = GetEnvBool("HVE_IMPOSTOR_DYNAMIC_BLEND", true);
+        const float impostorDynamicNearScale = GetEnvFloatClamped("HVE_IMPOSTOR_DYNAMIC_NEAR_SCALE", 0.85f, 0.25f, 3.0f);
+        const float impostorDynamicNearWidth = GetEnvFloatClamped("HVE_IMPOSTOR_DYNAMIC_NEAR_WIDTH", 1200.0f, 64.0f, 12000.0f);
+        const float impostorDynamicMinStart = GetEnvFloatClamped("HVE_IMPOSTOR_DYNAMIC_MIN_START", 600.0f, 64.0f, 60000.0f);
+        const bool impostorQueuePressureBlend = GetEnvBool("HVE_IMPOSTOR_QUEUE_PRESSURE_BLEND", true);
+        const float impostorQueuePressurePush = GetEnvFloatClamped("HVE_IMPOSTOR_QUEUE_PRESSURE_PUSH", 1600.0f, 0.0f, 24000.0f);
+        const float impostorQueuePressureLagMs = GetEnvFloatClamped("HVE_IMPOSTOR_QUEUE_PRESSURE_LAG_MS", 36.0f, 8.0f, 400.0f);
+        const bool impostorAutoTunePush = GetEnvBool("HVE_IMPOSTOR_AUTOTUNE_PUSH", true);
+        const float impostorAutoTuneTarget = GetEnvFloatClamped("HVE_IMPOSTOR_AUTOTUNE_TARGET", 0.34f, 0.05f, 0.95f);
+        const float impostorAutoTuneIntervalSec = GetEnvFloatClamped("HVE_IMPOSTOR_AUTOTUNE_INTERVAL_SEC", 30.0f, 5.0f, 180.0f);
+        const int impostorAutoTuneMinSamples = GetEnvIntClamped("HVE_IMPOSTOR_AUTOTUNE_MIN_SAMPLES", 8, 1, 256);
+        const float impostorAutoTuneGain = GetEnvFloatClamped("HVE_IMPOSTOR_AUTOTUNE_GAIN", 0.70f, 0.05f, 3.00f);
+        const float impostorAutoTuneMulMin = GetEnvFloatClamped("HVE_IMPOSTOR_AUTOTUNE_MUL_MIN", 0.55f, 0.10f, 4.00f);
+        const float impostorAutoTuneMulMax = GetEnvFloatClamped("HVE_IMPOSTOR_AUTOTUNE_MUL_MAX", 1.80f, 0.20f, 6.00f);
+        const int impostorLowpcMinBands = GetEnvIntClamped("HVE_IMPOSTOR_LOWPC_MIN_BANDS", 2, 1, 12);
+        const int impostorLowpcMaxCadence = GetEnvIntClamped("HVE_IMPOSTOR_LOWPC_MAX_CADENCE", 4, 1, 8);
+        const bool impostorControlProtect = GetEnvBool("HVE_IMPOSTOR_CONTROL_PROTECT", true);
 
         struct HorizonLevel {
             GLuint vao = 0;
@@ -3431,6 +3547,12 @@ namespace Engine {
 
         GLuint horizonProg = 0;
         std::vector<HorizonLevel> horizonLevels;
+
+        GLuint impostorProg = 0;
+        GLuint impostorVao = 0;
+        GLuint impostorVbo = 0;
+        GLuint impostorEbo = 0;
+        GLsizei impostorIndexCount = 0;
 
         if (horizonTerrainEnabled) {
             const char* hVs = R"GLSL(
@@ -3451,6 +3573,10 @@ namespace Engine {
                 uniform vec3 u_SunDir;
                 uniform vec3 u_FogColor;
                 uniform float u_FogDensity;
+                uniform float u_BlendNearStart;
+                uniform float u_BlendNearEnd;
+                uniform float u_BlendFarStart;
+                uniform float u_BlendMinAlpha;
                 out vec4 FragColor;
 
                 void main() {
@@ -3520,6 +3646,149 @@ namespace Engine {
                 glBindBuffer(GL_ARRAY_BUFFER, 0);
             } else {
                 std::cerr << "[Horizon] Shader disabled (compile/link failed)." << std::endl;
+            }
+        }
+
+        if (impostorRingEnabled) {
+            const char* impVs = R"GLSL(
+                #version 460 core
+                layout(location=0) in vec3 aLocal;
+                uniform mat4 u_ViewProjection;
+                uniform vec3 u_ViewPos;
+                uniform float u_BaseHeight;
+                uniform float u_HeightAmp;
+                uniform float u_NoiseScale;
+                uniform float u_Time;
+                out vec3 vWorldPos;
+                out float vRingT;
+
+                float layeredNoise(vec2 p, float t) {
+                    float n0 = sin(p.x * 1.0 + t * 0.08) * cos(p.y * 0.9 - t * 0.05);
+                    float n1 = sin(p.x * 2.6 - t * 0.04) * cos(p.y * 2.1 + t * 0.03);
+                    float n2 = sin((p.x + p.y) * 4.8 + t * 0.02);
+                    return n0 * 0.62 + n1 * 0.28 + n2 * 0.10;
+                }
+
+                void main() {
+                    vec2 worldXZ = u_ViewPos.xz + vec2(aLocal.x, aLocal.z);
+                    float ringT = clamp(aLocal.y, 0.0, 1.0);
+                    float n = layeredNoise(worldXZ * u_NoiseScale, u_Time);
+                    float amp = u_HeightAmp * mix(1.0, 0.45, ringT);
+                    float y = u_BaseHeight + n * amp;
+
+                    vWorldPos = vec3(worldXZ.x, y, worldXZ.y);
+                    vRingT = ringT;
+                    gl_Position = u_ViewProjection * vec4(vWorldPos, 1.0);
+                }
+            )GLSL";
+
+            const char* impFs = R"GLSL(
+                #version 460 core
+                in vec3 vWorldPos;
+                in float vRingT;
+                uniform vec3 u_ViewPos;
+                uniform vec3 u_SunDir;
+                uniform vec3 u_FogColor;
+                uniform float u_FogDensity;
+                uniform float u_BlendNearStart;
+                uniform float u_BlendNearEnd;
+                uniform float u_BlendFarStart;
+                uniform float u_BlendMinAlpha;
+                out vec4 FragColor;
+
+                void main() {
+                    vec3 dpx = dFdx(vWorldPos);
+                    vec3 dpy = dFdy(vWorldPos);
+                    vec3 N = normalize(cross(dpy, dpx));
+                    if (!all(greaterThan(abs(N), vec3(0.00001)))) {
+                        N = vec3(0.0, 1.0, 0.0);
+                    }
+
+                    float slope = 1.0 - clamp(abs(N.y), 0.0, 1.0);
+                    vec3 low = vec3(0.10, 0.27, 0.14);
+                    vec3 high = vec3(0.30, 0.31, 0.34);
+                    vec3 albedo = mix(low, high, smoothstep(0.18, 0.76, slope));
+                    albedo = mix(albedo, albedo * 0.82, smoothstep(0.65, 1.0, vRingT));
+
+                    vec3 L = normalize(u_SunDir);
+                    float ndl = max(dot(N, L), 0.0);
+                    vec3 lit = albedo * (0.32 + ndl * 0.62);
+
+                    float dist = distance(u_ViewPos, vWorldPos);
+                    float farBias = mix(1.25, 2.00, vRingT);
+                    float fog = 1.0 - exp(-max(0.00001, u_FogDensity) * farBias * dist);
+                    vec3 col = mix(lit, u_FogColor, clamp(fog, 0.0, 1.0));
+
+                    float nearFade = smoothstep(u_BlendNearStart, u_BlendNearEnd, dist);
+                    float farFade = 1.0 - smoothstep(u_BlendFarStart, 1.0, vRingT);
+                    float alpha = max(u_BlendMinAlpha, nearFade * farFade);
+                    if (alpha <= u_BlendMinAlpha + 0.0005) {
+                        discard;
+                    }
+
+                    FragColor = vec4(col, alpha);
+                }
+            )GLSL";
+
+            impostorProg = CreateProgram(impVs, impFs);
+            if (impostorProg != 0) {
+                const float innerR = std::max(64.0f, impostorInnerRadius);
+                const float outerR = std::max(innerR + 32.0f, impostorOuterRadius);
+                const int segs = std::max(16, impostorRingSegments);
+                const int bands = std::max(1, impostorRingBands);
+                const float twoPi = 6.2831853071795864769f;
+
+                std::vector<float> ringVerts;
+                std::vector<unsigned int> ringIndices;
+                ringVerts.reserve((std::size_t)(bands + 1) * (std::size_t)(segs + 1) * 3u);
+                ringIndices.reserve((std::size_t)bands * (std::size_t)segs * 6u);
+
+                for (int b = 0; b <= bands; ++b) {
+                    const float t = (bands > 0) ? ((float)b / (float)bands) : 0.0f;
+                    const float radius = innerR + (outerR - innerR) * t;
+                    for (int s = 0; s <= segs; ++s) {
+                        const float a = twoPi * ((float)s / (float)segs);
+                        ringVerts.push_back(std::cos(a) * radius);
+                        ringVerts.push_back(t);
+                        ringVerts.push_back(std::sin(a) * radius);
+                    }
+                }
+
+                const int stride = segs + 1;
+                for (int b = 0; b < bands; ++b) {
+                    for (int s = 0; s < segs; ++s) {
+                        const unsigned int i0 = (unsigned int)(b * stride + s);
+                        const unsigned int i1 = i0 + 1u;
+                        const unsigned int i2 = i0 + (unsigned int)stride;
+                        const unsigned int i3 = i2 + 1u;
+                        ringIndices.push_back(i0);
+                        ringIndices.push_back(i2);
+                        ringIndices.push_back(i1);
+                        ringIndices.push_back(i1);
+                        ringIndices.push_back(i2);
+                        ringIndices.push_back(i3);
+                    }
+                }
+
+                impostorIndexCount = (GLsizei)ringIndices.size();
+
+                glGenVertexArrays(1, &impostorVao);
+                glGenBuffers(1, &impostorVbo);
+                glGenBuffers(1, &impostorEbo);
+
+                glBindVertexArray(impostorVao);
+                glBindBuffer(GL_ARRAY_BUFFER, impostorVbo);
+                glBufferData(GL_ARRAY_BUFFER, ringVerts.size() * sizeof(float), ringVerts.data(), GL_STATIC_DRAW);
+                glEnableVertexAttribArray(0);
+                glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+
+                glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, impostorEbo);
+                glBufferData(GL_ELEMENT_ARRAY_BUFFER, ringIndices.size() * sizeof(unsigned int), ringIndices.data(), GL_STATIC_DRAW);
+
+                glBindVertexArray(0);
+                glBindBuffer(GL_ARRAY_BUFFER, 0);
+            } else {
+                std::cerr << "[Impostor] Shader disabled (compile/link failed)." << std::endl;
             }
         }
 
@@ -3620,9 +3889,7 @@ namespace Engine {
 
         // Aim outline + placement preview (minimal building UX; no HUD).
         bool aimOutlineEnabled = GetEnvBool("HVE_AIM_OUTLINE", true);
-        if (simpleBuild) {
-            aimOutlineEnabled = false;
-        }
+        // Removed simpleBuild override for aim outline
         GLuint aimProg = 0;
         GLuint aimVao = 0;
         GLuint aimVbo = 0;
@@ -3630,66 +3897,76 @@ namespace Engine {
         GLint aimLocPos = -1;
         GLint aimLocColor = -1;
         if (aimOutlineEnabled) {
+            // =========================================================================
+            // INVENTION: AAA Procedural Glowing Target Highlighter (No-VBO)
+            // Replaces the old static GL_LINES 1px thin outline with a pulsating, 
+            // sci-fi translucent neon box that renders 36 triangles mathematically!
+            // =========================================================================
             const char* vsSrc = R"GLSL(
                 #version 460 core
-                layout(location=0) in vec3 aPos;
                 uniform mat4 u_ViewProjection;
                 uniform vec3 u_WorldPos;
+                out vec3 vLocalPos;
+                
+                const vec3 corners[8] = vec3[](
+                    vec3(0,0,0), vec3(1,0,0), vec3(1,0,1), vec3(0,0,1),
+                    vec3(0,1,0), vec3(1,1,0), vec3(1,1,1), vec3(0,1,1)
+                );
+                const int indices[36] = int[](
+                    0,1,2, 2,3,0, 
+                    4,7,6, 6,5,4, 
+                    0,4,5, 5,1,0, 
+                    1,5,6, 6,2,1, 
+                    2,6,7, 7,3,2, 
+                    3,7,4, 4,0,3
+                );
+
                 void main(){
-                    gl_Position = u_ViewProjection * vec4(aPos + u_WorldPos, 1.0);
+                    vec3 pos = corners[indices[gl_VertexID]];
+                    vLocalPos = pos - 0.5;
+                    // Slightly expand to avoid z-fighting
+                    pos = vLocalPos * 1.01 + 0.5;
+                    gl_Position = u_ViewProjection * vec4(pos + u_WorldPos, 1.0);
                 }
             )GLSL";
             const char* fsSrc = R"GLSL(
                 #version 460 core
                 uniform vec3 u_Color;
+                uniform float u_Time;
+                in vec3 vLocalPos;
                 out vec4 FragColor;
-                void main(){ FragColor = vec4(u_Color, 1.0); }
+                void main(){
+                    vec3 d = abs(vLocalPos);
+                    float eX = smoothstep(0.46, 0.505, d.y) * smoothstep(0.46, 0.505, d.z);
+                    float eY = smoothstep(0.46, 0.505, d.x) * smoothstep(0.46, 0.505, d.z);
+                    float eZ = smoothstep(0.46, 0.505, d.x) * smoothstep(0.46, 0.505, d.y);
+                    float edge = clamp(eX + eY + eZ, 0.0, 1.0);
+                    
+                    float pulse = sin(u_Time * 5.0) * 0.5 + 0.5;
+                    float innerGlow = 0.05 + pulse * 0.05;
+                    float alpha = edge * 0.9 + innerGlow;
+                    
+                    vec3 finalCol = mix(u_Color * 0.5, u_Color * 2.0, edge);
+                    FragColor = vec4(finalCol, alpha);
+                }
             )GLSL";
             aimProg = CreateProgram(vsSrc, fsSrc);
             if (aimProg != 0) {
                 aimLocVP = glGetUniformLocation(aimProg, "u_ViewProjection");
                 aimLocPos = glGetUniformLocation(aimProg, "u_WorldPos");
                 aimLocColor = glGetUniformLocation(aimProg, "u_Color");
-
-                const float e = 0.01f;
-                const float a = 0.0f - e;
-                const float b = 1.0f + e;
-                const float verts[] = {
-                    // bottom
-                    a,a,a,  b,a,a,
-                    b,a,a,  b,b,a,
-                    b,b,a,  a,b,a,
-                    a,b,a,  a,a,a,
-
-                    // top
-                    a,a,b,  b,a,b,
-                    b,a,b,  b,b,b,
-                    b,b,b,  a,b,b,
-                    a,b,b,  a,a,b,
-
-                    // sides
-                    a,a,a,  a,a,b,
-                    b,a,a,  b,a,b,
-                    b,b,a,  b,b,b,
-                    a,b,a,  a,b,b,
-                };
-
+                
+                // We generate an empty VAO since we use gl_VertexID mathematically
                 glGenVertexArrays(1, &aimVao);
-                glGenBuffers(1, &aimVbo);
                 glBindVertexArray(aimVao);
-                glBindBuffer(GL_ARRAY_BUFFER, aimVbo);
-                glBufferData(GL_ARRAY_BUFFER, sizeof(verts), verts, GL_STATIC_DRAW);
-                glEnableVertexAttribArray(0);
-                glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
                 glBindVertexArray(0);
-                glBindBuffer(GL_ARRAY_BUFFER, 0);
             } else {
                 aimOutlineEnabled = false;
             }
         }
 
         // Placement face highlight (subtle side marker on the target block).
-        bool placeFaceEnabled = GetEnvBool("HVE_PLACE_FACE", true);
+        bool placeFaceEnabled = GetEnvBool("HVE_PLACE_FACE", false); // Disabled by default in favor of new sci-fi highlight
         const float placeFaceAlpha = GetEnvFloatClamped("HVE_PLACE_FACE_ALPHA", 0.20f, 0.05f, 0.50f);
         const float placeRetargetDelay = GetEnvFloatClamped("HVE_PLACE_RETARGET_DELAY", 0.0f, 0.0f, 0.8f);
         GLuint faceProg = 0;
@@ -3765,10 +4042,11 @@ namespace Engine {
         }
         bool preloadDone = (preloadRadiusChunks <= 0);
         double preloadStartTime = (double)glfwGetTime();
+        double starvationRescueUntil = -1.0;
         int startupBlockLastChunks = 0;
         double startupBlockLastProgressTime = preloadStartTime;
         bool startupPreloadGateReleasedLatched = false;
-        const bool startupLoadingOverlay = GetEnvBool("HVE_STARTUP_LOADING_OVERLAY", true);
+        const bool startupLoadingOverlay = GetEnvBool("HVE_STARTUP_LOADING_OVERLAY", false);
         bool loadingOverlayDismissedByInput = false;
 
         if (worldStarted && !menuOpen && !preloadDone && startupLoadingOverlay && !loadingOverlayDismissedByInput) {
@@ -4242,6 +4520,8 @@ namespace Engine {
         bool traceShift = false;
         bool traceEsc = false;
         bool traceTab = false;
+        std::uint64_t impostorFrameCounter = 0;
+        float fpsCurrent = 0.0f;
         int lastFbWidth = -1;
         int lastFbHeight = -1;
         double resizeGuardUntil = -1.0;
@@ -4308,7 +4588,7 @@ namespace Engine {
                     const float z = level.centerZ - halfSpan + (float)gz * level.cellSize;
                     const int sx = (int)std::floor(x);
                     const int sz = (int)std::floor(z);
-                    const float y = (float)Game::World::Generation::GetSurfaceYAtWorld(sx, sz) + horizonYOffset;
+                    const float y = (float)Game::World::Generation::GetBaseSurfaceYAtWorld(sx, sz) + horizonYOffset;
 
                     const std::size_t w = (std::size_t)idx * 3u;
                     level.verts[w + 0] = x;
@@ -4520,11 +4800,20 @@ namespace Engine {
             const double elapsedMs = glfwGetTime() * 1000.0 - frameStartMs;
             double budgetLeft = eliteFrameBudgetMs - elapsedMs;
             if (budgetLeft > 0.0 && !resizeGuardActive) {
-                timeSlicedJobs.RunForBudgetMs(budgetLeft * 0.25);
+                const bool fastInputTimesliceNow = fastInputPriorityEnabled && (
+                    immediateMoveKeyDown
+                    || Input::IsMouseButtonPressed(GLFW_MOUSE_BUTTON_LEFT)
+                    || Input::IsMouseButtonPressed(GLFW_MOUSE_BUTTON_RIGHT)
+                );
+                const double timesliceFactor = fastInputTimesliceNow
+                    ? (double)fastInputTimesliceFactor
+                    : 0.25;
+                timeSlicedJobs.RunForBudgetMs(budgetLeft * std::clamp(timesliceFactor, 0.0, 0.50));
             }
 
             const float frameMs = deltaTime * 1000.0f;
             const float fpsNow = (deltaTime > 0.0f) ? (1.0f / deltaTime) : 0.0f;
+            fpsCurrent = fpsNow;
             if (horizonMode) {
                 Engine::QualityManager::Update(fpsNow, camera.Position);
             }
@@ -4712,6 +5001,24 @@ namespace Engine {
             menuBlocksInput = menuVisible;
             builderPanelEnabled = visualBuildEnabled && !editorEnabled;
 
+            const bool startupInputUnlocked = startupInputHardUnlock
+                && worldStarted
+                && ((now - startTime) >= (double)startupInputUnlockSec);
+
+            if (startupInputUnlocked) {
+                if (menuOpen || showLoadingOverlay) {
+                    menuOpen = false;
+                    showLoadingOverlay = false;
+                    menuVisible = false;
+                    menuBlocksInput = false;
+                }
+                preloadBlocksInput = false;
+                if (!mouseCaptured) {
+                    mouseCaptured = true;
+                    Input::SetCursorMode(true);
+                }
+            }
+
             // Hard-sync cursor lock state every frame (fixes cursor escaping window on focus/resize transitions).
             if (strictMouseCapture && nativeWindow != nullptr) {
                 const bool windowFocused = glfwGetWindowAttrib(nativeWindow, GLFW_FOCUSED) == GLFW_TRUE;
@@ -4732,7 +5039,17 @@ namespace Engine {
                 }
             }
 
-            const bool gameplayArmed = inputArmed && worldStarted && !menuBlocksInput && (!preloadBlocksInput || preloadDone);
+            const bool gameplayArmed = inputArmed && worldStarted && (!menuBlocksInput || startupInputUnlocked) && ((!preloadBlocksInput || preloadDone) || startupInputUnlocked);
+            const bool fastInputDemandNow = gameplayArmed && (
+                immediateMoveKeyDown
+                || Input::IsMouseButtonPressed(GLFW_MOUSE_BUTTON_LEFT)
+                || Input::IsMouseButtonPressed(GLFW_MOUSE_BUTTON_RIGHT)
+            );
+            const bool fastInputLaggingNow = (controlLagMsEma >= fastInputLagWarnMs) || (controlMoveResponseEma <= fastInputResponseMin);
+            if (fastInputPriorityEnabled && (fastInputDemandNow || (controlIntentEma >= fastInputIntentThreshold && fastInputLaggingNow))) {
+                fastInputPriorityUntil = std::max(fastInputPriorityUntil, now + (double)fastInputHoldSec);
+            }
+            const bool fastInputPriorityActive = fastInputPriorityEnabled && gameplayArmed && (fastInputPriorityUntil > now);
 
             if (mouseCaptured != lastMouseCapturedState) {
                 Input::ResetRuntimeInputState(true);
@@ -4759,7 +5076,7 @@ namespace Engine {
                     for (int x = 0; x < erosionGrid; ++x) {
                         const int worldX = originX + x * erosionSampleStep;
                         const int worldZ = originZ + z * erosionSampleStep;
-                        erosionBase[(size_t)z * (size_t)erosionGrid + (size_t)x] = (float)Game::World::Generation::GetSurfaceYAtWorld(worldX, worldZ);
+                        erosionBase[(size_t)z * (size_t)erosionGrid + (size_t)x] = (float)Game::World::Generation::GetBaseSurfaceYAtWorld(worldX, worldZ);
                     }
                 }
 
@@ -4841,7 +5158,7 @@ namespace Engine {
             }
 
             if (showStatsInTitle && now - lastFpsUpdate >= 1.0) {
-                const double fps = (fpsAccumTime > 0.0) ? (double)fpsFrames / fpsAccumTime : 0.0;
+                const double fpsSec = (fpsAccumTime > 0.0) ? (double)fpsFrames / fpsAccumTime : 0.0;
                 fpsAccumTime = 0.0;
                 fpsFrames = 0;
                 lastFpsUpdate = now;
@@ -4877,7 +5194,7 @@ namespace Engine {
                 streamPendingOldestTicks = (int)std::min<std::uint64_t>(streamHealth.oldestPendingTicks, 1000000ull);
                 streamOverdueOldestTicks = (int)std::min<std::uint64_t>(streamHealth.oldestOverdueTicks, 1000000ull);
 
-                const float fpsPenalty = std::clamp((stutterAlertMinFps - (float)fps) / std::max(1.0f, stutterAlertMinFps), 0.0f, 2.0f) * 40.0f;
+                const float fpsPenalty = std::clamp((stutterAlertMinFps - (float)fpsSec) / std::max(1.0f, stutterAlertMinFps), 0.0f, 2.0f) * 40.0f;
                 const float fixedPenalty = (stutterAlertFixedSatSec <= 0)
                     ? 0.0f
                     : std::clamp((float)fixedStepSaturatedFramesSec / (float)std::max(1, stutterAlertFixedSatSec), 0.0f, 2.0f) * 15.0f;
@@ -4911,7 +5228,7 @@ namespace Engine {
                 controlDistLeftMetersCounter = 0.0f;
                 controlDistRightMetersCounter = 0.0f;
 
-                const bool fpsLow = fps < stutterAlertMinFps;
+                const bool fpsLow = fpsSec < stutterAlertMinFps;
                 const bool pendingOld = streamPendingOldestTicks >= stutterAlertPendingOldTicks;
                 const bool overdueBad = (int)streamWatchdogOverdue >= stutterAlertOverdueChunks;
                 const bool inFlightBad = (int)inFlightGen >= stutterAlertInFlightGen && completedCount == 0;
@@ -4965,7 +5282,7 @@ namespace Engine {
                     warn.precision(1);
                     warn << "ALERT cause=" << stutterAlertCause
                          << " latency=" << stutterLatencyScore
-                         << " fps=" << fps
+                        << " fps=" << fpsSec
                          << " fixedSat=" << fixedStepSaturatedFramesSec
                          << " pendOld=" << streamPendingOldestTicks
                          << " overdue=" << streamWatchdogOverdue
@@ -4982,7 +5299,7 @@ namespace Engine {
                     std::ostringstream trace;
                     trace.setf(std::ios::fixed);
                     trace.precision(1);
-                    trace << "SNAP fps=" << fps
+                    trace << "SNAP fps=" << fpsSec
                           << " chunks=" << worldRenderer.GetChunkCount()
                           << " tris=" << worldRenderer.GetLastTriangleCount()
                           << " draws=" << worldRenderer.GetLastDrawCount()
@@ -5015,6 +5332,11 @@ namespace Engine {
                           << " distD=" << controlDistRightMetersSec
                           << " placeS=" << controlPlaceOpsSec
                           << " breakS=" << controlBreakOpsSec
+                          << " impQP=" << impostorQueuePressureLive
+                          << " impQAvg=" << impostorQueuePressureAvgLive
+                          << " impMul=" << impostorQueuePushMulLive
+                          << " impNear=" << impostorBlendNearStartLive
+                          << " impNearEnd=" << impostorBlendNearEndLive
                           << " alert=" << (stutterAlertActive ? 1 : 0)
                           << " cause=" << stutterAlertCause
                           << " menuOpen=" << (menuOpen ? 1 : 0)
@@ -5022,6 +5344,7 @@ namespace Engine {
                           << " worldStarted=" << (worldStarted ? 1 : 0)
                           << " mouseCaptured=" << (mouseCaptured ? 1 : 0);
                     RunLog::Info(trace.str());
+                    RunLog::Flush();
                     traceLastSnapshot = now;
                 }
 
@@ -5029,7 +5352,7 @@ namespace Engine {
                 ss.setf(std::ios::fixed);
                 ss.precision(1);
                 ss << "High Performance Voxel Engine";
-                ss << " | FPS " << fps;
+                ss << " | FPS " << fpsSec;
                 ss << " | Chunks " << worldRenderer.GetChunkCount();
                 ss << " | TSI " << elite.toasterStabilityIndex << "%";
                 ss << " | Tris " << worldRenderer.GetLastTriangleCount();
@@ -5047,6 +5370,9 @@ namespace Engine {
                     ss << " | CtrlQ " << controlQualityScoreSec;
                     ss << " | CLag " << controlLagMsSec << "ms";
                 }
+                ss << " | ImpQ " << std::fixed << std::setprecision(2) << impostorQueuePressureLive;
+                ss << " | ImpAvg " << std::fixed << std::setprecision(2) << impostorQueuePressureAvgLive;
+                ss << " | ImpMul " << std::fixed << std::setprecision(2) << impostorQueuePushMulLive;
                 if (stutterAlertActive) {
                     ss << " | ALERT " << stutterAlertCause;
                 }
@@ -5078,7 +5404,7 @@ namespace Engine {
                                            (int)worldRenderer.GetChunkCount(),
                                            (int)worldRenderer.GetLastTriangleCount(),
                                            (int)worldRenderer.GetLastDrawCount(),
-                                           (float)fps);
+                                           (float)fpsSec);
             }
 
             // Clear color is a fallback background. If the sky shader fails to compile on a driver,
@@ -6063,6 +6389,13 @@ namespace Engine {
                 unloadDistanceChunks = std::min(192, activeStreamDistance + std::max(8, cacheMarginChunks));
             }
 
+            if (fastInputPriorityActive) {
+                const int streamCapFastInput = std::max(8, std::min(streamDistanceChunks, fastInputStreamClamp));
+                activeStreamDistance = std::min(activeStreamDistance, streamCapFastInput);
+                activeUploadBudget = std::min(activeUploadBudget, fastInputUploadClamp);
+                unloadDistanceChunks = std::min(192, activeStreamDistance + std::max(8, cacheMarginChunks));
+            }
+
             if (lowEndController) {
                 const float frameMsNow = deltaTime * 1000.0f;
                 lowEndEmaFastMs += (frameMsNow - lowEndEmaFastMs) * lowEndFastEma;
@@ -6186,6 +6519,31 @@ namespace Engine {
                     ? std::min(heightChunks, preloadHeightChunks)
                     : heightChunks;
 
+                const float speedNow = glm::length(camera.Velocity);
+                const bool highSpeedFlight = !walkMode && (speedNow > flySpeed * streamLookAheadSpeedMult);
+                const float lookAheadSec = lowEndController ? std::min(streamLookAheadSec, 0.60f) : streamLookAheadSec;
+                const int lookAheadMaxChunks = lowEndController ? std::min(streamLookAheadMaxChunks, 8) : streamLookAheadMaxChunks;
+                const float lookAheadMaxWorld = (float)(lookAheadMaxChunks * Game::World::CHUNK_SIZE);
+                const float lookAheadWorld = std::clamp(speedNow * lookAheadSec, 0.0f, lookAheadMaxWorld);
+
+                glm::vec3 streamOrigin = camera.Position;
+                if (lookAheadWorld > 0.01f) {
+                    glm::vec3 streamDir = camera.Front;
+                    streamDir.y = 0.0f;
+                    const float dirLen = glm::length(streamDir);
+                    if (dirLen > 0.0001f) {
+                        streamDir /= dirLen;
+                        streamOrigin += streamDir * lookAheadWorld;
+                    }
+                }
+
+                if (highSpeedFlight) {
+                    const int streamBoost = std::clamp((int)std::lround(lookAheadWorld / (float)Game::World::CHUNK_SIZE), 1, 12);
+                    activeStreamDistance = std::min(streamDistanceChunks, activeStreamDistance + streamBoost);
+                    const int uploadBoost = std::min(streamFlightUploadBoost, std::max(12, (int)std::lround(speedNow * 0.9f)));
+                    activeUploadBudget = std::min(uploadPumpCap, activeUploadBudget + uploadBoost);
+                }
+
                 if (worldStarted && startupPerfProtectSec > 0.0f) {
                     const float startupAgeSec = (float)std::max(0.0, now - startTime);
                     if (startupAgeSec < startupPerfProtectSec) {
@@ -6193,7 +6551,7 @@ namespace Engine {
                     }
                 }
 
-                if (horizonMode && !hardSafeMode) {
+                if ((horizonTerrainEnabled || impostorRingEnabled) && !hardSafeMode) {
                     activeHeightChunks = 12;
                 }
 
@@ -6204,6 +6562,18 @@ namespace Engine {
                 int streamViewDistance = activeStreamDistance;
                 const int streamStepsMax = GetEnvIntClamped("HVE_STREAM_STEPS_MAX", 2, 1, 16);
                 const int streamStepsOverloadMax = GetEnvIntClamped("HVE_STREAM_STEPS_OVERLOAD_MAX", 1, 1, 16);
+                const std::size_t prevTriCount = worldRenderer.GetLastTriangleCount();
+                const std::size_t prevDrawCount = worldRenderer.GetLastDrawCount();
+                const bool renderStarved = worldStarted
+                    && (worldRenderer.GetChunkCount() >= 768)
+                    && (prevTriCount == 0)
+                    && (prevDrawCount == 0);
+                const bool pendingBacklogEmergency = stutterAlertPendingOldTicks > 0
+                    && streamPendingOldestTicks > (std::size_t)std::max(220, stutterAlertPendingOldTicks * 3);
+                if (renderStarved || pendingBacklogEmergency) {
+                    starvationRescueUntil = std::max(starvationRescueUntil, now + (double)starvationRescueHoldSec);
+                }
+                const bool starvationRescueActive = (starvationRescueUntil > now);
                 // Fixed-step streaming: each simulation step schedules/updates chunk work.
                 int streamStepsTarget = std::max(1, std::min(fixedStepCount, streamStepsMax));
                 if (fixedStepSaturated) {
@@ -6238,11 +6608,59 @@ namespace Engine {
                     streamStepsTarget = std::min(streamStepsTarget, streamStepsWhileMoving);
                 }
 
-                for (int streamSteps = 0; streamSteps < streamStepsTarget; ++streamSteps) {
-                    chunkManager.UpdateStreaming(camera.Position, streamViewDistance, activeHeightChunks);
-                    if (!disableUnload && !resizeGuardActive) {
-                        chunkManager.UnloadFarChunks(camera.Position, unloadDistanceChunks, activeHeightChunks, worldRenderer);
+                if (highSpeedFlight && !fixedStepSaturated) {
+                    streamStepsTarget = std::min(streamStepsMax, streamStepsTarget + streamFlightStepsBonus);
+                }
+
+                if (renderStarved) {
+                    streamOrigin = camera.Position;
+                    streamViewDistance = std::max(10, std::min(streamViewDistance, 20));
+                    activeHeightChunks = std::max(12, std::min(activeHeightChunks, 32));
+                    activeUploadBudget = std::max(activeUploadBudget, std::min(uploadPumpCap, baseUploadBudget + std::max(96, streamFlightUploadBoost / 2)));
+                    if (!fixedStepSaturated) {
+                        streamStepsTarget = std::min(streamStepsMax, std::max(streamStepsTarget, std::min(streamStepsMax, streamStepsWhileMoving + 2)));
                     }
+                }
+
+                if (starvationRescueActive) {
+                    streamOrigin = camera.Position;
+                    streamViewDistance = std::max(streamViewDistance, starvationRescueMinStream);
+                    activeHeightChunks = std::max(activeHeightChunks, std::min(heightChunks, starvationRescueMinHeight));
+                    const int rescueUpload = baseUploadBudget + starvationRescueUploadBoost;
+                    activeUploadBudget = std::max(activeUploadBudget, std::min(uploadPumpCap, rescueUpload));
+                    if (!fixedStepSaturated) {
+                        streamStepsTarget = std::min(streamStepsMax, std::max(streamStepsTarget, 2));
+                    }
+                }
+
+                if (fastInputPriorityActive && !renderStarved && !starvationRescueActive) {
+                    const int streamCapFastInput = std::max(8, std::min(streamDistanceChunks, fastInputStreamClamp));
+                    streamViewDistance = std::min(streamViewDistance, streamCapFastInput);
+                    streamStepsTarget = std::min(streamStepsTarget, fastInputMaxStreamSteps);
+                }
+
+                const int inFlightGenNow = (int)chunkManager.GetInFlightGenerate();
+                if (inFlightGenNow > streamInFlightSoftCap) {
+                    const int over = inFlightGenNow - streamInFlightSoftCap;
+                    const int stepCut = std::clamp(1 + over / 256, 1, 6);
+                    const int viewCut = std::clamp(2 + over / 512, 2, 24);
+                    streamStepsTarget = std::max(1, streamStepsTarget - stepCut);
+                    streamViewDistance = std::max(8, streamViewDistance - viewCut);
+                }
+
+                for (int streamSteps = 0; streamSteps < streamStepsTarget; ++streamSteps) {
+                    chunkManager.UpdateStreaming(streamOrigin, streamViewDistance, activeHeightChunks);
+                }
+                if (starvationRescueActive && starvationExtraPumpPasses > 0) {
+                    const int rescuePumpBudget = std::clamp(std::max(activeUploadBudget, starvationExtraPumpBudget), 1, uploadPumpCap);
+                    for (int pass = 0; pass < starvationExtraPumpPasses; ++pass) {
+                        chunkManager.PumpCompleted(worldRenderer, rescuePumpBudget);
+                    }
+                }
+                static double lastUnloadTime = 0.0;
+                if (!disableUnload && !resizeGuardActive && (now - lastUnloadTime) > 0.5) {
+                    chunkManager.UnloadFarChunks(camera.Position, unloadDistanceChunks, worldRenderer);
+                    lastUnloadTime = now;
                 }
                 hudStreamViewDistance = streamViewDistance;
                 hudHeightChunks = activeHeightChunks;
@@ -6428,7 +6846,7 @@ namespace Engine {
                 if (!placed && (now - autoPlaceStartTime) >= autoPlaceFallbackSec) {
                     const int sx = anchorXZ.x;
                     const int sz = anchorXZ.y;
-                    const int surfaceY = Game::World::Generation::GetSurfaceYAtWorld(sx, sz);
+                    const int surfaceY = Game::World::Generation::GetBaseSurfaceYAtWorld(sx, sz);
                     safePos = glm::vec3((float)sx + 0.5f, (float)surfaceY + walkEyeHeight + 0.25f, (float)sz + 0.5f);
                     placed = true;
                     if (traceRuntime) {
@@ -6456,14 +6874,14 @@ namespace Engine {
             if (emergencyTerrainBootstrap && !emergencyTerrainDone && worldStarted && (now - autoPlaceStartTime) >= emergencyTerrainDelaySec) {
                 const int cx = (int)std::floor(camera.Position.x);
                 const int cz = (int)std::floor(camera.Position.z);
-                const int surfaceY = Game::World::Generation::GetSurfaceYAtWorld(cx, cz);
+                const int surfaceY = Game::World::Generation::GetBaseSurfaceYAtWorld(cx, cz);
                 const bool likelySkyOnly = (camera.Position.y > (float)surfaceY + walkEyeHeight + 26.0f) || !cameraAutoPlaced;
                 if (likelySkyOnly) {
                     const int radius = hardSafeMode ? 10 : 6;
                     chunkManager.BeginBulkEdit();
                     for (int z = cz - radius; z <= cz + radius; ++z) {
                         for (int x = cx - radius; x <= cx + radius; ++x) {
-                            const int h = Game::World::Generation::GetSurfaceYAtWorld(x, z);
+                            const int h = Game::World::Generation::GetBaseSurfaceYAtWorld(x, z);
                             chunkManager.SetBlockWorld(glm::ivec3(x, h - 2, z), 1);
                             chunkManager.SetBlockWorld(glm::ivec3(x, h - 1, z), 1);
                             chunkManager.SetBlockWorld(glm::ivec3(x, h, z), 2);
@@ -7488,10 +7906,51 @@ namespace Engine {
                 ? glm::normalize(glm::vec3(std::sin(sunPhase), 0.18f + 0.92f * std::sin(sunPhase), std::cos(sunPhase)))
                 : glm::normalize(glm::vec3(0.35f, 0.78f, 0.52f));
             const float dayFactorFog = std::clamp(sunDir.y * 0.5f + 0.5f, 0.0f, 1.0f);
-            const float fogDensity = fogDensityBase * (1.0f + (1.0f - dayFactorFog) * (fogNightBoost - 1.0f));
+            const float fogDensityRaw = fogDensityBase * (1.0f + (1.0f - dayFactorFog) * (fogNightBoost - 1.0f));
             const glm::vec3 fogDayColor(0.66f, 0.76f, 0.90f);
             const glm::vec3 fogNightColor(0.05f, 0.07f, 0.11f);
             const glm::vec3 fogColor = glm::mix(fogNightColor, fogDayColor, dayFactorFog);
+            const std::size_t frameChunkCount = worldRenderer.GetChunkCount();
+            const std::size_t frameTriCount = worldRenderer.GetLastTriangleCount();
+            const std::size_t frameDrawCount = worldRenderer.GetLastDrawCount();
+            const bool renderStarvedFrame = worldStarted
+                && (frameChunkCount >= 768)
+                && (frameTriCount == 0)
+                && (frameDrawCount == 0);
+            const bool pendingEmergency = stutterAlertPendingOldTicks > 0
+                && streamPendingOldestTicks > (std::size_t)std::max(240, stutterAlertPendingOldTicks * 3);
+            static double farfieldSuppressUntil = -1.0;
+            if (renderStarvedFrame || pendingEmergency) {
+                farfieldSuppressUntil = std::max(farfieldSuppressUntil, now + (double)farfieldSuppressHoldSec);
+            }
+            const bool farfieldSuppressed = (farfieldSuppressUntil > now);
+            float fogDensity = fogDensityRaw;
+            if (fogHighAltitudeRelief && fogHighAltEnd > fogHighAltStart) {
+                const float tAlt = std::clamp((camera.Position.y - fogHighAltStart) / (fogHighAltEnd - fogHighAltStart), 0.0f, 1.0f);
+                const float altScale = 1.0f - (1.0f - fogHighAltMinScale) * tAlt;
+                fogDensity *= altScale;
+            }
+            if (fogStarvationRelief && (renderStarvedFrame || pendingEmergency)) {
+                const float emergencyScale = 0.75f;
+                fogDensity = std::max(0.00001f, fogDensity * std::max(fogStarvationMinScale, emergencyScale));
+            }
+            static int stableRenderCullChunks = 0;
+            int renderCullTarget = std::max(viewDistanceChunks, activeStreamDistance);
+            if (renderStarvedFrame || pendingEmergency) {
+                renderCullTarget = std::max(renderCullTarget, std::max(24, viewDistanceChunks + 4));
+            }
+            if (stableRenderCullChunks <= 0) {
+                stableRenderCullChunks = renderCullTarget;
+            } else if (renderCullTarget < stableRenderCullChunks) {
+                stableRenderCullChunks = std::max(renderCullTarget, stableRenderCullChunks - 1);
+            } else if (renderCullTarget > stableRenderCullChunks) {
+                stableRenderCullChunks = std::min(renderCullTarget, stableRenderCullChunks + 2);
+            }
+            const int renderCullChunks = wireframe ? std::min(stableRenderCullChunks, wireframeCullChunksCfg) : stableRenderCullChunks;
+            const float nearFieldCullDistance = std::max(64.0f, (float)(renderCullChunks + 2) * (float)Game::World::CHUNK_SIZE);
+            impostorQueuePressureLive = 0.0f;
+            impostorBlendNearStartLive = impostorBlendNearStart;
+            impostorBlendNearEndLive = std::max(impostorBlendNearStart + 64.0f, impostorBlendNearEnd);
 
             if (skyProg != 0) {
                 const GLboolean hadDepth = glIsEnabled(GL_DEPTH_TEST);
@@ -7514,7 +7973,7 @@ namespace Engine {
                 if (hadDepth) glEnable(GL_DEPTH_TEST);
             }
 
-            if (horizonTerrainEnabled && horizonProg != 0 && !horizonLevels.empty() && !wireframe) {
+            if (horizonTerrainEnabled && horizonProg != 0 && !horizonLevels.empty() && !wireframe && !farfieldSuppressed) {
                 int clipBudget = horizonPointsPerFrame;
                 if (horizonAdaptiveBudget) {
                     const float frameMsAdaptive = deltaTime * 1000.0f;
@@ -7525,6 +7984,9 @@ namespace Engine {
                     } else if (frameMsAdaptive < 12.0f) {
                         clipBudget = std::min(65536, horizonPointsPerFrame + horizonPointsPerFrame / 2);
                     }
+                }
+                if (fastInputPriorityActive) {
+                    clipBudget = std::max(384, clipBudget / 2);
                 }
                 updateHorizonTerrain(camera.Position, now, clipBudget, false);
 
@@ -7563,15 +8025,168 @@ namespace Engine {
                 if (!hadDepth) glDisable(GL_DEPTH_TEST);
             }
 
+            if (impostorRingEnabled && impostorProg != 0 && impostorVao != 0 && impostorIndexCount > 0 && !wireframe && !farfieldSuppressed) {
+                int cadenceDiv = 1;
+                int activeBands = impostorRingBands;
+                if (impostorAdaptiveBudget) {
+                    const float frameMsAdaptive = deltaTime * 1000.0f;
+                    if (lowEndController && lowEndLevel >= 3) {
+                        cadenceDiv = 3;
+                        activeBands = std::max(2, impostorRingBands / 2);
+                    } else if (frameMsAdaptive > 24.0f) {
+                        cadenceDiv = 3;
+                        activeBands = std::max(2, impostorRingBands / 2);
+                    } else if (frameMsAdaptive > 18.0f) {
+                        cadenceDiv = 2;
+                        activeBands = std::max(3, (impostorRingBands * 3) / 4);
+                    }
+
+                    const bool controlPressure = impostorControlProtect
+                        && ((controlIntentEma > 0.42f)
+                            || (controlLagMsEma >= (controlLagWarnMs * 1.20f))
+                            || (stutterLatencyScore >= 45));
+                    if (controlPressure) {
+                        cadenceDiv = std::max(cadenceDiv, std::max(2, impostorLowpcMaxCadence - 1));
+                        activeBands = std::max(impostorLowpcMinBands, impostorRingBands / 3);
+                    }
+                }
+                if (fastInputPriorityActive) {
+                    cadenceDiv = std::max(cadenceDiv, 2);
+                    activeBands = std::max(impostorLowpcMinBands, activeBands - 2);
+                }
+
+                ++impostorFrameCounter;
+                if ((impostorFrameCounter % (std::uint64_t)std::max(1, cadenceDiv)) == 0u) {
+                    const int clampedBands = std::clamp(activeBands, impostorLowpcMinBands, impostorRingBands);
+                    const GLsizei drawCount = (GLsizei)(clampedBands * impostorRingSegments * 6);
+                    const float outerR = std::max(impostorInnerRadius + 32.0f, impostorOuterRadius);
+                    float nearStart = impostorBlendNearStart;
+                    float nearEnd = std::max(nearStart + 64.0f, impostorBlendNearEnd);
+                    if (impostorDynamicBlend) {
+                        nearStart = std::max(impostorDynamicMinStart, nearFieldCullDistance * impostorDynamicNearScale);
+                        nearEnd = std::max(nearStart + 64.0f, nearStart + impostorDynamicNearWidth);
+                        nearEnd = std::min(nearEnd, outerR - 32.0f);
+                        nearStart = std::min(nearStart, nearEnd - 32.0f);
+                    }
+
+                    float queuePressure = 0.0f;
+                    float effectiveQueuePush = impostorQueuePressurePush * impostorQueuePushMulLive;
+                    if (impostorQueuePressureBlend) {
+                        const float pendingP = std::clamp((float)streamPendingOldestTicks / (float)std::max(1, stutterAlertPendingOldTicks), 0.0f, 2.0f) * 0.34f;
+                        const float overdueP = std::clamp((float)streamWatchdogOverdue / (float)std::max(1, stutterAlertOverdueChunks), 0.0f, 2.0f) * 0.34f;
+                        const float fixedP = (stutterAlertFixedSatSec > 0)
+                            ? std::clamp((float)fixedStepSaturatedFramesSec / (float)std::max(1, stutterAlertFixedSatSec), 0.0f, 2.0f) * 0.18f
+                            : 0.0f;
+                        const float latencyP = std::clamp((float)stutterLatencyScore / 100.0f, 0.0f, 1.0f) * 0.10f;
+                        const float controlP = std::clamp((controlLagMsEma - impostorQueuePressureLagMs) / std::max(8.0f, impostorQueuePressureLagMs), 0.0f, 1.0f) * 0.16f;
+                        queuePressure = std::clamp(pendingP + overdueP + fixedP + latencyP + controlP, 0.0f, 1.0f);
+
+                        nearStart = std::min(outerR - 96.0f, nearStart + effectiveQueuePush * queuePressure);
+                        nearEnd = std::min(outerR - 32.0f, nearEnd + effectiveQueuePush * 1.20f * queuePressure);
+                        nearStart = std::min(nearStart, nearEnd - 32.0f);
+                    }
+
+                    if (impostorAutoTunePush) {
+                        if (impostorAutoTuneLast < 0.0) {
+                            impostorAutoTuneLast = now;
+                        }
+                        impostorQueuePressureAccum += queuePressure;
+                        impostorQueuePressureSamples += 1;
+                        if ((now - impostorAutoTuneLast) >= (double)impostorAutoTuneIntervalSec && impostorQueuePressureSamples >= impostorAutoTuneMinSamples) {
+                            const float avgPressure = impostorQueuePressureAccum / (float)std::max(1, impostorQueuePressureSamples);
+                            impostorQueuePressureAvgLive = avgPressure;
+                            const float error = avgPressure - impostorAutoTuneTarget;
+                            impostorQueuePushMulLive = std::clamp(
+                                impostorQueuePushMulLive + error * impostorAutoTuneGain,
+                                impostorAutoTuneMulMin,
+                                impostorAutoTuneMulMax
+                            );
+                            impostorQueuePressureAccum = 0.0f;
+                            impostorQueuePressureSamples = 0;
+                            impostorAutoTuneLast = now;
+                        } else if (impostorQueuePressureSamples > 0) {
+                            impostorQueuePressureAvgLive = impostorQueuePressureAccum / (float)impostorQueuePressureSamples;
+                        }
+                    } else {
+                        impostorQueuePressureAvgLive = queuePressure;
+                        impostorQueuePushMulLive = 1.0f;
+                    }
+                    impostorQueuePressureLive = queuePressure;
+                    impostorBlendNearStartLive = nearStart;
+                    impostorBlendNearEndLive = nearEnd;
+
+                    const float farStartT = std::clamp(
+                        std::max(impostorBlendFarStart, (nearEnd / std::max(outerR, 1.0f)) + 0.08f + queuePressure * 0.05f),
+                        0.20f,
+                        0.995f
+                    );
+
+                    const GLboolean hadDepth = glIsEnabled(GL_DEPTH_TEST);
+                    const GLboolean hadBlend = glIsEnabled(GL_BLEND);
+                    const GLboolean hadCull = glIsEnabled(GL_CULL_FACE);
+                    if (!hadDepth) glEnable(GL_DEPTH_TEST);
+                    if (!hadBlend) glEnable(GL_BLEND);
+                    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                    if (hadCull) glDisable(GL_CULL_FACE);
+                    glDepthMask(GL_FALSE);
+
+                    glUseProgram(impostorProg);
+                    const glm::mat4 vp = projection * camera.GetViewMatrix();
+                    const GLint locVP = glGetUniformLocation(impostorProg, "u_ViewProjection");
+                    const GLint locView = glGetUniformLocation(impostorProg, "u_ViewPos");
+                    const GLint locSun = glGetUniformLocation(impostorProg, "u_SunDir");
+                    const GLint locFogColor = glGetUniformLocation(impostorProg, "u_FogColor");
+                    const GLint locFogDensity = glGetUniformLocation(impostorProg, "u_FogDensity");
+                    const GLint locBaseHeight = glGetUniformLocation(impostorProg, "u_BaseHeight");
+                    const GLint locHeightAmp = glGetUniformLocation(impostorProg, "u_HeightAmp");
+                    const GLint locNoiseScale = glGetUniformLocation(impostorProg, "u_NoiseScale");
+                    const GLint locTime = glGetUniformLocation(impostorProg, "u_Time");
+                    const GLint locNearStart = glGetUniformLocation(impostorProg, "u_BlendNearStart");
+                    const GLint locNearEnd = glGetUniformLocation(impostorProg, "u_BlendNearEnd");
+                    const GLint locFarStart = glGetUniformLocation(impostorProg, "u_BlendFarStart");
+                    const GLint locMinAlpha = glGetUniformLocation(impostorProg, "u_BlendMinAlpha");
+
+                    if (locVP >= 0) glUniformMatrix4fv(locVP, 1, GL_FALSE, &vp[0][0]);
+                    if (locView >= 0) glUniform3f(locView, camera.Position.x, camera.Position.y, camera.Position.z);
+                    if (locSun >= 0) glUniform3f(locSun, sunDir.x, sunDir.y, sunDir.z);
+                    if (locFogColor >= 0) glUniform3f(locFogColor, fogColor.x, fogColor.y, fogColor.z);
+                    if (locFogDensity >= 0) glUniform1f(locFogDensity, fogDensity);
+                    if (locBaseHeight >= 0) glUniform1f(locBaseHeight, impostorBaseHeight);
+                    if (locHeightAmp >= 0) glUniform1f(locHeightAmp, impostorHeightAmp);
+                    if (locNoiseScale >= 0) glUniform1f(locNoiseScale, impostorNoiseScale);
+                    if (locTime >= 0) glUniform1f(locTime, tNow);
+                    if (locNearStart >= 0) glUniform1f(locNearStart, nearStart);
+                    if (locNearEnd >= 0) glUniform1f(locNearEnd, nearEnd);
+                    if (locFarStart >= 0) glUniform1f(locFarStart, farStartT);
+                    if (locMinAlpha >= 0) glUniform1f(locMinAlpha, impostorBlendMinAlpha);
+
+                    glBindVertexArray(impostorVao);
+                    glDrawElements(GL_TRIANGLES, drawCount, GL_UNSIGNED_INT, (const void*)0);
+                    glBindVertexArray(0);
+                    glUseProgram(0);
+
+                    glDepthMask(GL_TRUE);
+                    if (hadCull) glEnable(GL_CULL_FACE);
+                    if (!hadBlend) glDisable(GL_BLEND);
+                    if (!hadDepth) glDisable(GL_DEPTH_TEST);
+                }
+            }
+
             shader.Use();
             shader.SetMat4("u_ViewProjection", projection * camera.GetViewMatrix());
             shader.SetVec3("u_ViewPos", camera.Position);
             shader.SetVec3("u_FogColor", fogColor);
             shader.SetFloat("u_FogDensity", fogDensity);
+            shader.SetFloat("u_Time", tNow); // INVENTION: Animated water + fog scattering
 
-            const int renderCullChunks = wireframe ? std::min(activeStreamDistance, wireframeCullChunksCfg) : activeStreamDistance;
-            const float cullDistance = std::max(64.0f, (float)(renderCullChunks + 2) * (float)Game::World::CHUNK_SIZE);
-            worldRenderer.PrepareVisibleDraws(projection * camera.GetViewMatrix(), camera.Position, cullDistance);
+            worldRenderer.PrepareVisibleDraws(projection * camera.GetViewMatrix(), camera.Position, nearFieldCullDistance);
+            if (renderStarvedFrame || pendingEmergency) {
+                const float fallbackCullDistance = std::max(
+                    nearFieldCullDistance,
+                    (float)(std::max(viewDistanceChunks + 6, 28) * Game::World::CHUNK_SIZE)
+                );
+                worldRenderer.PrepareVisibleDraws(projection * camera.GetViewMatrix(), camera.Position, fallbackCullDistance);
+            }
 
             // Sun direction for directional lighting.
             shader.SetVec3("u_SunDir", sunDir);
@@ -7851,7 +8466,7 @@ namespace Engine {
 
                 const Engine::EliteTelemetrySnapshot elite = Telemetry::GetEliteMetrics();
 
-                const float fps = (deltaTime > 0.0f) ? (1.0f / deltaTime) : 0.0f;
+                const float fpsHud = fpsCurrent;
                 const float frameMs = deltaTime * 1000.0f;
                 const float speed = glm::length(camera.Velocity);
 
@@ -7869,7 +8484,7 @@ namespace Engine {
                 {
                     std::ostringstream ss;
                     ss.setf(std::ios::fixed); ss.precision(1);
-                    ss << "Frame " << frameMs << " ms | FPS " << fps;
+                    ss << "Frame " << frameMs << " ms | FPS " << fpsHud;
                     pushTextPx(xPx, yPx, ss.str(), 1.0f, 0.85f, 0.92f, 1.00f, 0.90f);
                 }
                 yPx += line;
@@ -7909,6 +8524,9 @@ namespace Engine {
                        << " oldTick " << streamPendingOldestTicks
                        << " | overdue " << streamWatchdogOverdue
                        << " / " << streamWatchdogEligible
+                                        << " | impQ " << std::fixed << std::setprecision(2) << impostorQueuePressureLive
+                                        << " avg " << std::fixed << std::setprecision(2) << impostorQueuePressureAvgLive
+                                        << " mul " << std::fixed << std::setprecision(2) << impostorQueuePushMulLive
                        << " | cause " << stutterAlertCause;
                     pushTextPx(xPx, yPx, ss.str(), 0.95f,
                                stutterAlertActive ? 1.00f : 0.76f,
@@ -7948,7 +8566,9 @@ namespace Engine {
                     std::ostringstream ss;
                     ss << "Stream " << hudStreamViewDistance
                        << " | Height " << hudHeightChunks
-                       << " | Unload " << unloadDistanceChunks;
+                       << " | Unload " << unloadDistanceChunks
+                       << " | ImpNear " << (int)std::lround(impostorBlendNearStartLive)
+                       << "-" << (int)std::lround(impostorBlendNearEndLive);
                     pushTextPx(xPx, yPx, ss.str(), 1.0f, 0.74f, 0.92f, 0.95f, 0.88f);
                 }
                 yPx += line;
@@ -10991,16 +11611,26 @@ namespace Engine {
 
                 glUseProgram(aimProg);
                 if (aimLocVP >= 0) glUniformMatrix4fv(aimLocVP, 1, GL_FALSE, &vp[0][0]);
+                GLint aimTimeLoc = glGetUniformLocation(aimProg, "u_Time");
+                if (aimTimeLoc >= 0) glUniform1f(aimTimeLoc, (float)glfwGetTime());
 
                 glBindVertexArray(aimVao);
+                
+                // Enable Blending for glow
+                GLboolean wasBlend; glGetBooleanv(GL_BLEND, &wasBlend);
+                glEnable(GL_BLEND);
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+                
+                // Allow partial depth (so it wraps smoothly around the block without being blocked totally)
+                glDepthFunc(GL_LEQUAL);
 
-                // Target block (red)
-                if (aimLocColor >= 0) glUniform3f(aimLocColor, 1.0f, 0.25f, 0.25f);
+                // Target block (Sci-Fi Cyan-Blue instead of flat Red for better modern aesthetics)
+                if (aimLocColor >= 0) glUniform3f(aimLocColor, 0.2f, 0.8f, 1.0f);
                 if (aimLocPos >= 0) {
                     const glm::vec3 p = glm::vec3(aimHit.blockWorld);
                     glUniform3f(aimLocPos, p.x, p.y, p.z);
                 }
-                glDrawArrays(GL_LINES, 0, 24);
+                glDrawArrays(GL_TRIANGLES, 0, 36);
 
                 // Placement preview (green) only if empty
                 if (chunkManager.GetBlockWorld(aimHit.prevWorld) == 0) {
@@ -11009,18 +11639,21 @@ namespace Engine {
                         const glm::vec3 p = glm::vec3(aimHit.prevWorld);
                         glUniform3f(aimLocPos, p.x, p.y, p.z);
                     }
-                    glDrawArrays(GL_LINES, 0, 24);
+                    glDrawArrays(GL_TRIANGLES, 0, 36);
                 }
 
-                // Precision anchor (blue)
+                // Precision anchor (magenta)
                 if (precisionBuild && precisionAnchor) {
-                    if (aimLocColor >= 0) glUniform3f(aimLocColor, 0.35f, 0.65f, 1.0f);
+                    if (aimLocColor >= 0) glUniform3f(aimLocColor, 1.0f, 0.2f, 0.8f);
                     if (aimLocPos >= 0) {
                         const glm::vec3 p = glm::vec3(precisionAnchorPos);
                         glUniform3f(aimLocPos, p.x, p.y, p.z);
                     }
-                    glDrawArrays(GL_LINES, 0, 24);
+                    glDrawArrays(GL_TRIANGLES, 0, 36);
                 }
+
+                if (!wasBlend) glDisable(GL_BLEND);
+                glDepthFunc(GL_LESS);
 
                 glBindVertexArray(0);
                 glUseProgram(0);
@@ -11102,25 +11735,16 @@ namespace Engine {
                     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
                 }
                 glUseProgram(crossProg);
-                const GLint crossColorLoc = glGetUniformLocation(crossProg, "u_Color");
                 glBindVertexArray(crossVao);
-                const float crossPulse = futuristicUi ? (0.5f + 0.5f * std::sin((float)now * 4.1f)) : 0.0f;
+                
+                GLint crossAspectLoc = glGetUniformLocation(crossProg, "u_Aspect");
+                if (crossAspectLoc >= 0) glUniform1f(crossAspectLoc, (float)Window::GetWidth() / (float)Window::GetHeight());
+                
+                GLint crossTimeLoc = glGetUniformLocation(crossProg, "u_Time");
+                if (crossTimeLoc >= 0) glUniform1f(crossTimeLoc, (float)glfwGetTime());
 
-                glLineWidth(crossOuterWidth);
-                if (crossColorLoc >= 0) {
-                    if (futuristicUi) glUniform4f(crossColorLoc, 0.18f, 0.10f, 0.34f, std::min(1.0f, crossAlpha * (0.72f + 0.25f * crossPulse)));
-                    else glUniform4f(crossColorLoc, 0.04f, 0.06f, 0.08f, std::min(1.0f, crossAlpha));
-                }
-                glDrawArrays(GL_LINES, 0, 8);
-
-                glLineWidth(crossInnerWidth);
-                if (crossColorLoc >= 0) {
-                    if (futuristicUi) glUniform4f(crossColorLoc, 0.40f, 0.92f, 1.00f, std::min(1.0f, crossAlpha * (0.90f + 0.10f * crossPulse)));
-                    else glUniform4f(crossColorLoc, 0.90f, 0.97f, 1.00f, crossAlpha);
-                }
-                glDrawArrays(GL_LINES, 0, 8);
-
-                glLineWidth(1.0f);
+                glDrawArrays(GL_TRIANGLES, 0, 6);
+                
                 glBindVertexArray(0);
                 glUseProgram(0);
                 if (!hadBlend) glDisable(GL_BLEND);
@@ -11161,11 +11785,15 @@ namespace Engine {
         if (skyVao != 0) glDeleteVertexArrays(1, &skyVao);
         if (skyProg != 0) glDeleteProgram(skyProg);
 
+        if (impostorEbo != 0) glDeleteBuffers(1, &impostorEbo);
+        if (impostorVbo != 0) glDeleteBuffers(1, &impostorVbo);
+        if (impostorVao != 0) glDeleteVertexArrays(1, &impostorVao);
+        if (impostorProg != 0) glDeleteProgram(impostorProg);
+
         for (auto& level : horizonLevels) {
             if (level.ebo != 0) glDeleteBuffers(1, &level.ebo);
             if (level.vbo != 0) glDeleteBuffers(1, &level.vbo);
-            if (level.vao != 0) glDeleteVertexArrays(1, &level.vao);
-        }
+            if (level.vao != 0) glDeleteVertexArrays(
         if (horizonProg != 0) glDeleteProgram(horizonProg);
 
         if (invVbo != 0) glDeleteBuffers(1, &invVbo);
@@ -11181,3 +11809,9 @@ namespace Engine {
         if (faceProg != 0) glDeleteProgram(faceProg);
     }
 }
+
+
+
+
+
+

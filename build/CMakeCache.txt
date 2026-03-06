@@ -319,10 +319,6 @@ FETCHCONTENT_SOURCE_DIR_FAST_NOISE_LITE:PATH=
 FETCHCONTENT_SOURCE_DIR_FMT:PATH=
 
 //When not empty, overrides where to find pre-populated content
-// for glad
-FETCHCONTENT_SOURCE_DIR_GLAD:PATH=
-
-//When not empty, overrides where to find pre-populated content
 // for glfw
 FETCHCONTENT_SOURCE_DIR_GLFW:PATH=
 
@@ -349,9 +345,6 @@ FETCHCONTENT_UPDATES_DISCONNECTED_FAST_NOISE_LITE:BOOL=OFF
 
 //Enables UPDATE_DISCONNECTED behavior just for population of fmt
 FETCHCONTENT_UPDATES_DISCONNECTED_FMT:BOOL=OFF
-
-//Enables UPDATE_DISCONNECTED behavior just for population of glad
-FETCHCONTENT_UPDATES_DISCONNECTED_GLAD:BOOL=OFF
 
 //Enables UPDATE_DISCONNECTED behavior just for population of glfw
 FETCHCONTENT_UPDATES_DISCONNECTED_GLFW:BOOL=OFF
@@ -527,15 +520,6 @@ HighPerformanceVoxelEngine_SOURCE_DIR:STATIC=C:/Users/ylber/Downloads/r9-hyper-c
 
 //Use MSVC runtime library DLL
 USE_MSVC_RUNTIME_LIBRARY_DLL:BOOL=ON
-
-//Value Computed by CMake
-glad_BINARY_DIR:STATIC=C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-build
-
-//Value Computed by CMake
-glad_IS_TOP_LEVEL:STATIC=OFF
-
-//Value Computed by CMake
-glad_SOURCE_DIR:STATIC=C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/libigl_glad-src
 
 //Value Computed by CMake
 glm_BINARY_DIR:STATIC=C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/_deps/glm-build

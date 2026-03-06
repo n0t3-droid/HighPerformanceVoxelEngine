@@ -33,7 +33,7 @@ If you are looking for a more extensive noise generation library consider using 
 - [GLSL](/GLSL/)
 - [Go](/Go/)
 - [Java](/Java/)
-- [JavaScript](/JavaScript/)  
+- [JavaScript and TypeScript](/JavaScript/)  
   [![npm](https://img.shields.io/npm/v/fastnoise-lite?logo=npm "npm")](https://www.npmjs.com/package/fastnoise-lite)
 - [Rust](/Rust/)  
   [![crates.io](https://img.shields.io/crates/v/fastnoise-lite?logo=rust "crates.io")](https://crates.io/crates/fastnoise-lite)
@@ -99,7 +99,8 @@ Million points of noise generated per second (higher = better)
 - [@itsdanott](https://github.com/itsdanott) for creating the Odin port.
 - [@Zylann](https://github.com/Zylann) for creating the Haxe port.
 - [@CptnRoughnight](https://github.com/CptnRoughnight) for creating the Pascal port.
-- [@Tinkerer_Red]([https://github.com/CptnRoughnight](https://github.com/tinkerer-red)) for creating the GameMaker port.
+- [@Tinkerer_Red](https://github.com/tinkerer-red) for creating the GameMaker port.
+- [@simon-paris](https://github.com/simon-paris) for creating the TypeScript port.
 
 ## Contributing
 

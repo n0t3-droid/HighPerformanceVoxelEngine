@@ -22,6 +22,15 @@ namespace Engine {
         bool IsToasterClass() const {
             return systemRamGB < 12.0 || logicalCores <= 4 || gpuTier == GpuTier::UltraLow;
         }
+
+        bool IsVegaApuClass() const {
+            const bool rendererMatch =
+                (gpuRenderer.find("Radeon(TM) Graphics") != std::string::npos) ||
+                (gpuRenderer.find("VEGA") != std::string::npos) ||
+                (gpuRenderer.find("Vega") != std::string::npos);
+            const bool cpuRamStrong = (logicalCores >= 8) && (systemRamGB >= 24.0);
+            return rendererMatch && cpuRamStrong;
+        }
     };
 
     class HardwareDetector {

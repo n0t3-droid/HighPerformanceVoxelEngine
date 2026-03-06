@@ -9,6 +9,11 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+if(MSVC)
+    add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
+    add_compile_options(/wd4996)
+endif()
+
 # --- Dependencies ---
 include(FetchContent)
 
@@ -155,3 +160,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 
 # --- Definitions ---
 target_compile_definitions(${PROJECT_NAME} PRIVATE GLM_FORCE_RADIANS)
+
+if(MSVC)
+    target_compile_options(${PROJECT_NAME} PRIVATE /wd4005)
+endif()

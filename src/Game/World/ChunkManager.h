@@ -49,6 +49,7 @@ namespace Game { namespace World {
     struct ChunkMeshCPU {
         ChunkKey key;
         glm::ivec3 chunkCoord{0};
+        std::uint32_t jobToken = 0;
         std::vector<uint8_t> blocks; // 32^3
         std::vector<uint32_t> vertices;
         std::vector<unsigned int> indices;
@@ -60,6 +61,14 @@ namespace Game { namespace World {
         glm::ivec3 blockWorld{0};
         glm::ivec3 prevWorld{0};
         uint8_t blockId = 0;
+    };
+
+    struct StreamHealthStats {
+        std::size_t pendingNotReady = 0;
+        std::size_t watchdogEligible = 0;
+        std::size_t watchdogOverdue = 0;
+        std::uint64_t oldestPendingTicks = 0;
+        std::uint64_t oldestOverdueTicks = 0;
     };
 
     class ChunkManager {
@@ -77,7 +86,7 @@ namespace Game { namespace World {
         void PreloadLargeArea(const glm::vec3& centerPos, int horizontalRadius, int verticalRadius);
 
         // Unload chunks outside view distance and remove them from the renderer.
-        void UnloadFarChunks(const glm::vec3& playerWorldPos, int viewDistance, int heightChunks, Engine::WorldRenderer& renderer);
+        void UnloadFarChunks(const glm::vec3& playerWorldPos, int viewDistance, Engine::WorldRenderer& renderer);
 
         // Apply completed worker jobs on the main thread and upload to renderer.
         // maxUploads limits how many chunks are uploaded per frame to prevent stutter.
@@ -110,12 +119,16 @@ namespace Game { namespace World {
 
         // Debug/diagnostics: read last mesh upload stamp for a chunk.
         bool GetChunkMeshStamp(const glm::ivec3& chunkCoord, std::uint64_t& outStamp) const;
+        std::size_t EstimateSurfaceCoverageMisses(const glm::vec3& playerWorldPos, int horizontalRadiusChunks, int sampleStrideChunks, int heightChunks) const;
 
         // Perf diagnostics
         std::size_t GetInFlightGenerate() const;
         std::size_t GetInFlightRemesh() const;
         std::size_t GetCompletedCount() const;
         std::size_t GetDeferredRemeshCount() const;
+        std::size_t GetStaleGenerateDropCount() const;
+        std::size_t GetStaleRemeshDropCount() const;
+        StreamHealthStats GetStreamHealthStats(int watchdogTicks) const;
 
         // Mark a chunk dirty and schedule a remesh job
         void RequestRemesh(const glm::ivec3& chunkCoord);
@@ -127,17 +140,22 @@ namespace Game { namespace World {
             bool meshingQueued = false;
             bool needsRemesh = false;
             bool remeshDeferred = false;
+            bool hasMesh = false;
             std::uint64_t lastMeshStamp = 0;
+            std::uint32_t queuedJobToken = 0;
+            std::uint64_t lastRequestTick = 0;
+            std::uint64_t lastCompleteTick = 0;
 
             explicit ChunkRecord(const glm::ivec3& coord) : chunk(coord) {}
         };
 
         glm::ivec3 WorldToChunkCoord(const glm::ivec3& world) const;
         glm::ivec3 WorldToLocal(const glm::ivec3& world, const glm::ivec3& chunkCoord) const;
+        int GetCachedSurfaceY(int cx, int cz) const;
 
         void QueueGenerateAndMesh(const glm::ivec3& chunkCoord);
         void QueueRemeshCopy(const glm::ivec3& chunkCoord);
-        void EnqueueRemeshJob(const glm::ivec3& chunkCoord);
+        void EnqueueRemeshJob(const glm::ivec3& chunkCoord, std::uint32_t jobToken);
         void RequestRemeshLocked(const glm::ivec3& chunkCoord);
         void QueueRemeshNeighborhood27Locked(const glm::ivec3& centerCoord);
         void CopyPaddedForRemesh(const glm::ivec3& chunkCoord, std::vector<uint8_t>& out) const;
@@ -151,9 +169,12 @@ namespace Game { namespace World {
         mutable std::shared_mutex m_ChunksMutex;
         std::atomic<std::size_t> m_InFlightGenerate{0};
         std::atomic<std::size_t> m_InFlightRemesh{0};
+        std::atomic<std::size_t> m_StaleGenerateDrops{0};
+        std::atomic<std::size_t> m_StaleRemeshDrops{0};
         std::uint64_t m_MeshStampCounter = 0;
 
         std::unordered_map<ChunkKey, ChunkRecord, ChunkKeyHash> m_Chunks;
+        mutable std::unordered_map<uint64_t, int> m_SurfaceYCache;
 
         // Completed jobs from workers
         mutable std::mutex m_CompletedMutex;
@@ -161,7 +182,10 @@ namespace Game { namespace World {
 
         std::deque<glm::ivec3> m_RemeshDeferred;
         int m_BulkEditDepth = 0;
+        std::unordered_set<ChunkKey, ChunkKeyHash> m_BulkEditedCenters;
         std::unordered_set<ChunkKey, ChunkKeyHash> m_BulkDirtyChunks;
+        std::uint64_t m_StreamTick = 0;
+        glm::ivec3 m_LastStreamCenterChunk{0};
         glm::vec3 m_LastStreamPlayerPos{0.0f};
         glm::vec2 m_StreamDirXZ{0.0f};
         bool m_HasLastStreamPos = false;

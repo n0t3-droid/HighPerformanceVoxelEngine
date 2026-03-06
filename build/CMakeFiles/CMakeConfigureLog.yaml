@@ -35,6 +35,9 @@ events:
     found: "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeCCompilerId.c.in"
     search_context:
       ENV{PATH}:
+        - "c:\\Users\\ylber\\.vscode\\extensions\\vadimcn.vscode-lldb-1.12.1\\bin"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\java8path"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\Program Files\\Microsoft\\jdk-17.0.17.10-hotspot\\bin"
@@ -50,6 +53,7 @@ events:
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files\\CMake\\bin"
         - "C:\\Program Files\\Amazon\\AWSCLIV2\\"
+        - "C:\\Users\\ylber\\.local\\bin"
         - "C:\\Users\\ylber\\.cargo\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
@@ -61,6 +65,8 @@ events:
         - "C:\\Users\\ylber\\AppData\\Roaming\\npm"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Microsoft VS Code Insiders\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\Users\\ylber\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "c:\\Users\\ylber\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "message-v1"
     backtrace:
@@ -77,7 +83,7 @@ events:
       The output was:
       0
       MSBuild-Version 17.14.23+b0019275e f├╝r .NET Framework
-      Der Buildvorgang wurde am 09.02.2026 17:52:16 gestartet.
+      Der Buildvorgang wurde am 22.02.2026 22:03:51 gestartet.
       
       Projekt "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\4.2.1\\CompilerIdC\\CompilerIdC.vcxproj" auf Knoten "1" (Standardziele).
       PrepareForBuild:
@@ -106,7 +112,7 @@ events:
           0 Warnung(en)
           0 Fehler
       
-      Verstrichene Zeit 00:00:00.57
+      Verstrichene Zeit 00:00:00.84
       
       
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
@@ -139,6 +145,9 @@ events:
       - "link"
     candidate_directories:
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Program Files/Microsoft/jdk-17.0.17.10-hotspot/bin/"
@@ -154,6 +163,7 @@ events:
       - "C:/Program Files/Git/cmd/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/Amazon/AWSCLIV2/"
+      - "C:/Users/ylber/.local/bin/"
       - "C:/Users/ylber/.cargo/bin/"
       - "C:/Users/ylber/AppData/Local/Programs/Python/Launcher/"
       - "C:/Users/ylber/AppData/Local/Programs/Python/Python312/Scripts/"
@@ -165,11 +175,16 @@ events:
       - "C:/Users/ylber/AppData/Roaming/npm/"
       - "C:/Users/ylber/AppData/Local/Programs/Microsoft VS Code Insiders/bin/"
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/link.com"
     found: "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/link.exe"
     search_context:
       ENV{PATH}:
+        - "c:\\Users\\ylber\\.vscode\\extensions\\vadimcn.vscode-lldb-1.12.1\\bin"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\java8path"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\Program Files\\Microsoft\\jdk-17.0.17.10-hotspot\\bin"
@@ -185,6 +200,7 @@ events:
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files\\CMake\\bin"
         - "C:\\Program Files\\Amazon\\AWSCLIV2\\"
+        - "C:\\Users\\ylber\\.local\\bin"
         - "C:\\Users\\ylber\\.cargo\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
@@ -196,6 +212,8 @@ events:
         - "C:\\Users\\ylber\\AppData\\Roaming\\npm"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Microsoft VS Code Insiders\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\Users\\ylber\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "c:\\Users\\ylber\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -219,6 +237,9 @@ events:
       - "lld-link"
     candidate_directories:
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Program Files/Microsoft/jdk-17.0.17.10-hotspot/bin/"
@@ -234,6 +255,7 @@ events:
       - "C:/Program Files/Git/cmd/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/Amazon/AWSCLIV2/"
+      - "C:/Users/ylber/.local/bin/"
       - "C:/Users/ylber/.cargo/bin/"
       - "C:/Users/ylber/AppData/Local/Programs/Python/Launcher/"
       - "C:/Users/ylber/AppData/Local/Programs/Python/Python312/Scripts/"
@@ -245,10 +267,21 @@ events:
       - "C:/Users/ylber/AppData/Roaming/npm/"
       - "C:/Users/ylber/AppData/Local/Programs/Microsoft VS Code Insiders/bin/"
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/lld-link.com"
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/lld-link.exe"
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/lld-link"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/lld-link.com"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/lld-link.exe"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/lld-link"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/lld-link.com"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/lld-link.exe"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/lld-link"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/lld-link.com"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/lld-link.exe"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/lld-link"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/lld-link.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/lld-link.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/lld-link"
@@ -294,6 +327,9 @@ events:
       - "C:/Program Files/Amazon/AWSCLIV2/lld-link.com"
       - "C:/Program Files/Amazon/AWSCLIV2/lld-link.exe"
       - "C:/Program Files/Amazon/AWSCLIV2/lld-link"
+      - "C:/Users/ylber/.local/bin/lld-link.com"
+      - "C:/Users/ylber/.local/bin/lld-link.exe"
+      - "C:/Users/ylber/.local/bin/lld-link"
       - "C:/Users/ylber/.cargo/bin/lld-link.com"
       - "C:/Users/ylber/.cargo/bin/lld-link.exe"
       - "C:/Users/ylber/.cargo/bin/lld-link"
@@ -327,9 +363,18 @@ events:
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/lld-link.com"
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/lld-link.exe"
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/lld-link"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/lld-link.com"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/lld-link.exe"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/lld-link"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/lld-link.com"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/lld-link.exe"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/lld-link"
     found: false
     search_context:
       ENV{PATH}:
+        - "c:\\Users\\ylber\\.vscode\\extensions\\vadimcn.vscode-lldb-1.12.1\\bin"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\java8path"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\Program Files\\Microsoft\\jdk-17.0.17.10-hotspot\\bin"
@@ -345,6 +390,7 @@ events:
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files\\CMake\\bin"
         - "C:\\Program Files\\Amazon\\AWSCLIV2\\"
+        - "C:\\Users\\ylber\\.local\\bin"
         - "C:\\Users\\ylber\\.cargo\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
@@ -356,6 +402,8 @@ events:
         - "C:\\Users\\ylber\\AppData\\Roaming\\npm"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Microsoft VS Code Insiders\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\Users\\ylber\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "c:\\Users\\ylber\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -377,6 +425,9 @@ events:
       - "link"
     candidate_directories:
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Program Files/Microsoft/jdk-17.0.17.10-hotspot/bin/"
@@ -392,6 +443,7 @@ events:
       - "C:/Program Files/Git/cmd/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/Amazon/AWSCLIV2/"
+      - "C:/Users/ylber/.local/bin/"
       - "C:/Users/ylber/.cargo/bin/"
       - "C:/Users/ylber/AppData/Local/Programs/Python/Launcher/"
       - "C:/Users/ylber/AppData/Local/Programs/Python/Python312/Scripts/"
@@ -403,11 +455,16 @@ events:
       - "C:/Users/ylber/AppData/Roaming/npm/"
       - "C:/Users/ylber/AppData/Local/Programs/Microsoft VS Code Insiders/bin/"
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/link.com"
     found: "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/link.exe"
     search_context:
       ENV{PATH}:
+        - "c:\\Users\\ylber\\.vscode\\extensions\\vadimcn.vscode-lldb-1.12.1\\bin"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\java8path"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\Program Files\\Microsoft\\jdk-17.0.17.10-hotspot\\bin"
@@ -423,6 +480,7 @@ events:
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files\\CMake\\bin"
         - "C:\\Program Files\\Amazon\\AWSCLIV2\\"
+        - "C:\\Users\\ylber\\.local\\bin"
         - "C:\\Users\\ylber\\.cargo\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
@@ -434,6 +492,8 @@ events:
         - "C:\\Users\\ylber\\AppData\\Roaming\\npm"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Microsoft VS Code Insiders\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\Users\\ylber\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "c:\\Users\\ylber\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -455,6 +515,9 @@ events:
       - "mt"
     candidate_directories:
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Program Files/Microsoft/jdk-17.0.17.10-hotspot/bin/"
@@ -470,6 +533,7 @@ events:
       - "C:/Program Files/Git/cmd/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/Amazon/AWSCLIV2/"
+      - "C:/Users/ylber/.local/bin/"
       - "C:/Users/ylber/.cargo/bin/"
       - "C:/Users/ylber/AppData/Local/Programs/Python/Launcher/"
       - "C:/Users/ylber/AppData/Local/Programs/Python/Python312/Scripts/"
@@ -481,10 +545,21 @@ events:
       - "C:/Users/ylber/AppData/Roaming/npm/"
       - "C:/Users/ylber/AppData/Local/Programs/Microsoft VS Code Insiders/bin/"
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/mt.com"
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/mt.exe"
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/mt"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/mt.com"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/mt.exe"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/mt"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/mt.com"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/mt.exe"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/mt"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/mt.com"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/mt.exe"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/mt"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/mt.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/mt.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/mt"
@@ -530,6 +605,9 @@ events:
       - "C:/Program Files/Amazon/AWSCLIV2/mt.com"
       - "C:/Program Files/Amazon/AWSCLIV2/mt.exe"
       - "C:/Program Files/Amazon/AWSCLIV2/mt"
+      - "C:/Users/ylber/.local/bin/mt.com"
+      - "C:/Users/ylber/.local/bin/mt.exe"
+      - "C:/Users/ylber/.local/bin/mt"
       - "C:/Users/ylber/.cargo/bin/mt.com"
       - "C:/Users/ylber/.cargo/bin/mt.exe"
       - "C:/Users/ylber/.cargo/bin/mt"
@@ -563,9 +641,18 @@ events:
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/mt.com"
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/mt.exe"
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/mt"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/mt.com"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/mt.exe"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/mt"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/mt.com"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/mt.exe"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/mt"
     found: false
     search_context:
       ENV{PATH}:
+        - "c:\\Users\\ylber\\.vscode\\extensions\\vadimcn.vscode-lldb-1.12.1\\bin"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\java8path"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\Program Files\\Microsoft\\jdk-17.0.17.10-hotspot\\bin"
@@ -581,6 +668,7 @@ events:
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files\\CMake\\bin"
         - "C:\\Program Files\\Amazon\\AWSCLIV2\\"
+        - "C:\\Users\\ylber\\.local\\bin"
         - "C:\\Users\\ylber\\.cargo\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
@@ -592,6 +680,8 @@ events:
         - "C:\\Users\\ylber\\AppData\\Roaming\\npm"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Microsoft VS Code Insiders\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\Users\\ylber\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "c:\\Users\\ylber\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -613,6 +703,9 @@ events:
       - "lib"
     candidate_directories:
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Program Files/Microsoft/jdk-17.0.17.10-hotspot/bin/"
@@ -628,6 +721,7 @@ events:
       - "C:/Program Files/Git/cmd/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/Amazon/AWSCLIV2/"
+      - "C:/Users/ylber/.local/bin/"
       - "C:/Users/ylber/.cargo/bin/"
       - "C:/Users/ylber/AppData/Local/Programs/Python/Launcher/"
       - "C:/Users/ylber/AppData/Local/Programs/Python/Python312/Scripts/"
@@ -639,11 +733,16 @@ events:
       - "C:/Users/ylber/AppData/Roaming/npm/"
       - "C:/Users/ylber/AppData/Local/Programs/Microsoft VS Code Insiders/bin/"
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/lib.com"
     found: "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/lib.exe"
     search_context:
       ENV{PATH}:
+        - "c:\\Users\\ylber\\.vscode\\extensions\\vadimcn.vscode-lldb-1.12.1\\bin"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\java8path"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\Program Files\\Microsoft\\jdk-17.0.17.10-hotspot\\bin"
@@ -659,6 +758,7 @@ events:
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files\\CMake\\bin"
         - "C:\\Program Files\\Amazon\\AWSCLIV2\\"
+        - "C:\\Users\\ylber\\.local\\bin"
         - "C:\\Users\\ylber\\.cargo\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
@@ -670,6 +770,8 @@ events:
         - "C:\\Users\\ylber\\AppData\\Roaming\\npm"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Microsoft VS Code Insiders\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\Users\\ylber\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "c:\\Users\\ylber\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -697,6 +799,9 @@ events:
     found: "C:/Program Files/CMake/share/cmake-4.2/Modules/CMakeCXXCompilerId.cpp.in"
     search_context:
       ENV{PATH}:
+        - "c:\\Users\\ylber\\.vscode\\extensions\\vadimcn.vscode-lldb-1.12.1\\bin"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\java8path"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\Program Files\\Microsoft\\jdk-17.0.17.10-hotspot\\bin"
@@ -712,6 +817,7 @@ events:
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files\\CMake\\bin"
         - "C:\\Program Files\\Amazon\\AWSCLIV2\\"
+        - "C:\\Users\\ylber\\.local\\bin"
         - "C:\\Users\\ylber\\.cargo\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
@@ -723,6 +829,8 @@ events:
         - "C:\\Users\\ylber\\AppData\\Roaming\\npm"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Microsoft VS Code Insiders\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\Users\\ylber\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "c:\\Users\\ylber\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "message-v1"
     backtrace:
@@ -739,7 +847,7 @@ events:
       The output was:
       0
       MSBuild-Version 17.14.23+b0019275e f├╝r .NET Framework
-      Der Buildvorgang wurde am 09.02.2026 17:52:17 gestartet.
+      Der Buildvorgang wurde am 22.02.2026 22:03:52 gestartet.
       
       Projekt "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\4.2.1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" auf Knoten "1" (Standardziele).
       PrepareForBuild:
@@ -768,7 +876,7 @@ events:
           0 Warnung(en)
           0 Fehler
       
-      Verstrichene Zeit 00:00:00.55
+      Verstrichene Zeit 00:00:00.52
       
       
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -801,6 +909,9 @@ events:
       - "lld-link"
     candidate_directories:
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Program Files/Microsoft/jdk-17.0.17.10-hotspot/bin/"
@@ -816,6 +927,7 @@ events:
       - "C:/Program Files/Git/cmd/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/Amazon/AWSCLIV2/"
+      - "C:/Users/ylber/.local/bin/"
       - "C:/Users/ylber/.cargo/bin/"
       - "C:/Users/ylber/AppData/Local/Programs/Python/Launcher/"
       - "C:/Users/ylber/AppData/Local/Programs/Python/Python312/Scripts/"
@@ -827,10 +939,21 @@ events:
       - "C:/Users/ylber/AppData/Roaming/npm/"
       - "C:/Users/ylber/AppData/Local/Programs/Microsoft VS Code Insiders/bin/"
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
     searched_directories:
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/lld-link.com"
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/lld-link.exe"
       - "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/lld-link"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/lld-link.com"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/lld-link.exe"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/lld-link"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/lld-link.com"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/lld-link.exe"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/lld-link"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/lld-link.com"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/lld-link.exe"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/lld-link"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/lld-link.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/lld-link.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/lld-link"
@@ -876,6 +999,9 @@ events:
       - "C:/Program Files/Amazon/AWSCLIV2/lld-link.com"
       - "C:/Program Files/Amazon/AWSCLIV2/lld-link.exe"
       - "C:/Program Files/Amazon/AWSCLIV2/lld-link"
+      - "C:/Users/ylber/.local/bin/lld-link.com"
+      - "C:/Users/ylber/.local/bin/lld-link.exe"
+      - "C:/Users/ylber/.local/bin/lld-link"
       - "C:/Users/ylber/.cargo/bin/lld-link.com"
       - "C:/Users/ylber/.cargo/bin/lld-link.exe"
       - "C:/Users/ylber/.cargo/bin/lld-link"
@@ -909,9 +1035,18 @@ events:
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/lld-link.com"
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/lld-link.exe"
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/lld-link"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/lld-link.com"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/lld-link.exe"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/lld-link"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/lld-link.com"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/lld-link.exe"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/lld-link"
     found: false
     search_context:
       ENV{PATH}:
+        - "c:\\Users\\ylber\\.vscode\\extensions\\vadimcn.vscode-lldb-1.12.1\\bin"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\java8path"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\Program Files\\Microsoft\\jdk-17.0.17.10-hotspot\\bin"
@@ -927,6 +1062,7 @@ events:
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files\\CMake\\bin"
         - "C:\\Program Files\\Amazon\\AWSCLIV2\\"
+        - "C:\\Users\\ylber\\.local\\bin"
         - "C:\\Users\\ylber\\.cargo\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
@@ -938,6 +1074,8 @@ events:
         - "C:\\Users\\ylber\\AppData\\Roaming\\npm"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Microsoft VS Code Insiders\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\Users\\ylber\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "c:\\Users\\ylber\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
   -
     kind: "find-v1"
     backtrace:
@@ -961,6 +1099,9 @@ events:
     names:
       - "rc"
     candidate_directories:
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Program Files/Microsoft/jdk-17.0.17.10-hotspot/bin/"
@@ -976,6 +1117,7 @@ events:
       - "C:/Program Files/Git/cmd/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/Amazon/AWSCLIV2/"
+      - "C:/Users/ylber/.local/bin/"
       - "C:/Users/ylber/.cargo/bin/"
       - "C:/Users/ylber/AppData/Local/Programs/Python/Launcher/"
       - "C:/Users/ylber/AppData/Local/Programs/Python/Python312/Scripts/"
@@ -987,6 +1129,8 @@ events:
       - "C:/Users/ylber/AppData/Roaming/npm/"
       - "C:/Users/ylber/AppData/Local/Programs/Microsoft VS Code Insiders/bin/"
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
       - "C:/Program Files/bin/"
       - "C:/Program Files/sbin/"
       - "C:/Program Files/"
@@ -1000,6 +1144,15 @@ events:
       - "C:/Program Files (x86)/HighPerformanceVoxelEngine/sbin/"
       - "C:/Program Files (x86)/HighPerformanceVoxelEngine/"
     searched_directories:
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/rc.com"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/rc.exe"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/rc"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/rc.com"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/rc.exe"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/rc"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/rc.com"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/rc.exe"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/rc"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/rc.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/rc.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/rc"
@@ -1045,6 +1198,9 @@ events:
       - "C:/Program Files/Amazon/AWSCLIV2/rc.com"
       - "C:/Program Files/Amazon/AWSCLIV2/rc.exe"
       - "C:/Program Files/Amazon/AWSCLIV2/rc"
+      - "C:/Users/ylber/.local/bin/rc.com"
+      - "C:/Users/ylber/.local/bin/rc.exe"
+      - "C:/Users/ylber/.local/bin/rc"
       - "C:/Users/ylber/.cargo/bin/rc.com"
       - "C:/Users/ylber/.cargo/bin/rc.exe"
       - "C:/Users/ylber/.cargo/bin/rc"
@@ -1078,6 +1234,12 @@ events:
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/rc.com"
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/rc.exe"
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/rc"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/rc.com"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/rc.exe"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/rc"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/rc.com"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/rc.exe"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/rc"
       - "C:/Program Files/bin/rc.com"
       - "C:/Program Files/bin/rc.exe"
       - "C:/Program Files/bin/rc"
@@ -1117,6 +1279,9 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "c:\\Users\\ylber\\.vscode\\extensions\\vadimcn.vscode-lldb-1.12.1\\bin"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\java8path"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\Program Files\\Microsoft\\jdk-17.0.17.10-hotspot\\bin"
@@ -1132,6 +1297,7 @@ events:
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files\\CMake\\bin"
         - "C:\\Program Files\\Amazon\\AWSCLIV2\\"
+        - "C:\\Users\\ylber\\.local\\bin"
         - "C:\\Users\\ylber\\.cargo\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
@@ -1143,6 +1309,8 @@ events:
         - "C:\\Users\\ylber\\AppData\\Roaming\\npm"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Microsoft VS Code Insiders\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\Users\\ylber\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "c:\\Users\\ylber\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
       CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/HighPerformanceVoxelEngine"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "C:/Program Files"
@@ -1158,8 +1326,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-82mv6h"
-      binary: "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-82mv6h"
+      source: "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-38cc9j"
+      binary: "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-38cc9j"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -1168,39 +1336,39 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-82mv6h'
+        Change Dir: 'C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-38cc9j'
         
-        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_0d3c9.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_c5cde.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild-Version 17.14.23+b0019275e f├╝r .NET Framework
-        Der Buildvorgang wurde am 09.02.2026 17:52:18 gestartet.
+        Der Buildvorgang wurde am 22.02.2026 22:03:53 gestartet.
         
-        Projekt "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-82mv6h\\cmTC_0d3c9.vcxproj" auf Knoten "1" (Standardziele).
+        Projekt "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-38cc9j\\cmTC_c5cde.vcxproj" auf Knoten "1" (Standardziele).
         PrepareForBuild:
           Die strukturierte Ausgabe ist aktiviert. Die Formatierung der Compilerdiagnose spiegelt die Fehlerhierarchie wider. Weitere Informationen finden Sie unter https://aka.ms/cpp/structured-output.
-          Das Verzeichnis "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-82mv6h\\Debug\\" wird erstellt.
-          Das Verzeichnis "cmTC_0d3c9.dir\\Debug\\cmTC_0d3c9.tlog\\" wird erstellt.
+          Das Verzeichnis "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-38cc9j\\Debug\\" wird erstellt.
+          Das Verzeichnis "cmTC_c5cde.dir\\Debug\\cmTC_c5cde.tlog\\" wird erstellt.
         InitializeBuildStatus:
-          "cmTC_0d3c9.dir\\Debug\\cmTC_0d3c9.tlog\\unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
-          Aktualisieren des Timestamps von "cmTC_0d3c9.dir\\Debug\\cmTC_0d3c9.tlog\\unsuccessfulbuild".
+          "cmTC_c5cde.dir\\Debug\\cmTC_c5cde.tlog\\unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
+          Aktualisieren des Timestamps von "cmTC_c5cde.dir\\Debug\\cmTC_c5cde.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_0d3c9.dir\\Debug\\\\" /Fd"cmTC_0d3c9.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_c5cde.dir\\Debug\\\\" /Fd"cmTC_c5cde.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
           Microsoft (R) C/C++-Optimierungscompiler Version 19.44.35222 f├╝r x64
           Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_0d3c9.dir\\Debug\\\\" /Fd"cmTC_0d3c9.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_c5cde.dir\\Debug\\\\" /Fd"cmTC_c5cde.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCCompilerABI.c"
           CMakeCCompilerABI.c
         Link:
-          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-82mv6h\\Debug\\cmTC_0d3c9.exe" /INCREMENTAL /ILK:"cmTC_0d3c9.dir\\Debug\\cmTC_0d3c9.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-82mv6h/Debug/cmTC_0d3c9.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-82mv6h/Debug/cmTC_0d3c9.lib" /MACHINE:X64  /machine:x64 cmTC_0d3c9.dir\\Debug\\CMakeCCompilerABI.obj
-          cmTC_0d3c9.vcxproj -> C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-82mv6h\\Debug\\cmTC_0d3c9.exe
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-38cc9j\\Debug\\cmTC_c5cde.exe" /INCREMENTAL /ILK:"cmTC_c5cde.dir\\Debug\\cmTC_c5cde.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-38cc9j/Debug/cmTC_c5cde.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-38cc9j/Debug/cmTC_c5cde.lib" /MACHINE:X64  /machine:x64 cmTC_c5cde.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_c5cde.vcxproj -> C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-38cc9j\\Debug\\cmTC_c5cde.exe
         FinalizeBuildStatus:
-          Die Datei "cmTC_0d3c9.dir\\Debug\\cmTC_0d3c9.tlog\\unsuccessfulbuild" wird gel├Âscht.
-          Aktualisieren des Timestamps von "cmTC_0d3c9.dir\\Debug\\cmTC_0d3c9.tlog\\cmTC_0d3c9.lastbuildstate".
-        Die Erstellung von Projekt "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-82mv6h\\cmTC_0d3c9.vcxproj" ist abgeschlossen (Standardziele).
+          Die Datei "cmTC_c5cde.dir\\Debug\\cmTC_c5cde.tlog\\unsuccessfulbuild" wird gel├Âscht.
+          Aktualisieren des Timestamps von "cmTC_c5cde.dir\\Debug\\cmTC_c5cde.tlog\\cmTC_c5cde.lastbuildstate".
+        Die Erstellung von Projekt "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-38cc9j\\cmTC_c5cde.vcxproj" ist abgeschlossen (Standardziele).
         
         Der Buildvorgang wurde erfolgreich ausgef├╝hrt.
             0 Warnung(en)
             0 Fehler
         
-        Verstrichene Zeit 00:00:00.55
+        Verstrichene Zeit 00:00:00.53
         
       exitCode: 0
   -
@@ -1240,8 +1408,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-kmq8it"
-      binary: "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-kmq8it"
+      source: "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-wyooy5"
+      binary: "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-wyooy5"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -1251,39 +1419,39 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-kmq8it'
+        Change Dir: 'C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-wyooy5'
         
-        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_20ca8.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_b1ef0.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild-Version 17.14.23+b0019275e f├╝r .NET Framework
-        Der Buildvorgang wurde am 09.02.2026 17:52:19 gestartet.
+        Der Buildvorgang wurde am 22.02.2026 22:03:54 gestartet.
         
-        Projekt "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-kmq8it\\cmTC_20ca8.vcxproj" auf Knoten "1" (Standardziele).
+        Projekt "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wyooy5\\cmTC_b1ef0.vcxproj" auf Knoten "1" (Standardziele).
         PrepareForBuild:
           Die strukturierte Ausgabe ist aktiviert. Die Formatierung der Compilerdiagnose spiegelt die Fehlerhierarchie wider. Weitere Informationen finden Sie unter https://aka.ms/cpp/structured-output.
-          Das Verzeichnis "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-kmq8it\\Debug\\" wird erstellt.
-          Das Verzeichnis "cmTC_20ca8.dir\\Debug\\cmTC_20ca8.tlog\\" wird erstellt.
+          Das Verzeichnis "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wyooy5\\Debug\\" wird erstellt.
+          Das Verzeichnis "cmTC_b1ef0.dir\\Debug\\cmTC_b1ef0.tlog\\" wird erstellt.
         InitializeBuildStatus:
-          "cmTC_20ca8.dir\\Debug\\cmTC_20ca8.tlog\\unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
-          Aktualisieren des Timestamps von "cmTC_20ca8.dir\\Debug\\cmTC_20ca8.tlog\\unsuccessfulbuild".
+          "cmTC_b1ef0.dir\\Debug\\cmTC_b1ef0.tlog\\unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
+          Aktualisieren des Timestamps von "cmTC_b1ef0.dir\\Debug\\cmTC_b1ef0.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_20ca8.dir\\Debug\\\\" /Fd"cmTC_20ca8.dir\\Debug\\vc143.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_b1ef0.dir\\Debug\\\\" /Fd"cmTC_b1ef0.dir\\Debug\\vc143.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"
           Microsoft (R) C/C++-Optimierungscompiler Version 19.44.35222 f├╝r x64
           Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_20ca8.dir\\Debug\\\\" /Fd"cmTC_20ca8.dir\\Debug\\vc143.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /Fo"cmTC_b1ef0.dir\\Debug\\\\" /Fd"cmTC_b1ef0.dir\\Debug\\vc143.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.2\\Modules\\CMakeCXXCompilerABI.cpp"
           CMakeCXXCompilerABI.cpp
         Link:
-          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-kmq8it\\Debug\\cmTC_20ca8.exe" /INCREMENTAL /ILK:"cmTC_20ca8.dir\\Debug\\cmTC_20ca8.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-kmq8it/Debug/cmTC_20ca8.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-kmq8it/Debug/cmTC_20ca8.lib" /MACHINE:X64  /machine:x64 cmTC_20ca8.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_20ca8.vcxproj -> C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-kmq8it\\Debug\\cmTC_20ca8.exe
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wyooy5\\Debug\\cmTC_b1ef0.exe" /INCREMENTAL /ILK:"cmTC_b1ef0.dir\\Debug\\cmTC_b1ef0.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-wyooy5/Debug/cmTC_b1ef0.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-wyooy5/Debug/cmTC_b1ef0.lib" /MACHINE:X64  /machine:x64 cmTC_b1ef0.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_b1ef0.vcxproj -> C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wyooy5\\Debug\\cmTC_b1ef0.exe
         FinalizeBuildStatus:
-          Die Datei "cmTC_20ca8.dir\\Debug\\cmTC_20ca8.tlog\\unsuccessfulbuild" wird gel├Âscht.
-          Aktualisieren des Timestamps von "cmTC_20ca8.dir\\Debug\\cmTC_20ca8.tlog\\cmTC_20ca8.lastbuildstate".
-        Die Erstellung von Projekt "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-kmq8it\\cmTC_20ca8.vcxproj" ist abgeschlossen (Standardziele).
+          Die Datei "cmTC_b1ef0.dir\\Debug\\cmTC_b1ef0.tlog\\unsuccessfulbuild" wird gel├Âscht.
+          Aktualisieren des Timestamps von "cmTC_b1ef0.dir\\Debug\\cmTC_b1ef0.tlog\\cmTC_b1ef0.lastbuildstate".
+        Die Erstellung von Projekt "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-wyooy5\\cmTC_b1ef0.vcxproj" ist abgeschlossen (Standardziele).
         
         Der Buildvorgang wurde erfolgreich ausgef├╝hrt.
             0 Warnung(en)
             0 Fehler
         
-        Verstrichene Zeit 00:00:00.56
+        Verstrichene Zeit 00:00:00.53
         
       exitCode: 0
   -
@@ -1323,7 +1491,7 @@ events:
       - "C:/Program Files/CMake/share/cmake-4.2/Modules/FetchContent.cmake:2155:EVAL:2 (__FetchContent_doPopulation)"
       - "C:/Program Files/CMake/share/cmake-4.2/Modules/FetchContent.cmake:2155 (cmake_language)"
       - "C:/Program Files/CMake/share/cmake-4.2/Modules/FetchContent.cmake:2394 (__FetchContent_Populate)"
-      - "CMakeLists.txt:16 (FetchContent_MakeAvailable)"
+      - "CMakeLists.txt:26 (FetchContent_MakeAvailable)"
     mode: "program"
     variable: "GIT_EXECUTABLE"
     description: "Git command line client"
@@ -1339,6 +1507,9 @@ events:
       - "git.cmd"
       - "git"
     candidate_directories:
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Program Files/Microsoft/jdk-17.0.17.10-hotspot/bin/"
@@ -1354,6 +1525,7 @@ events:
       - "C:/Program Files/Git/cmd/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/Amazon/AWSCLIV2/"
+      - "C:/Users/ylber/.local/bin/"
       - "C:/Users/ylber/.cargo/bin/"
       - "C:/Users/ylber/AppData/Local/Programs/Python/Launcher/"
       - "C:/Users/ylber/AppData/Local/Programs/Python/Python312/Scripts/"
@@ -1365,6 +1537,8 @@ events:
       - "C:/Users/ylber/AppData/Roaming/npm/"
       - "C:/Users/ylber/AppData/Local/Programs/Microsoft VS Code Insiders/bin/"
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
       - "C:/Program Files/bin/"
       - "C:/Program Files/sbin/"
       - "C:/Program Files/"
@@ -1379,6 +1553,15 @@ events:
       - "C:/Program Files (x86)/HighPerformanceVoxelEngine/"
       - "C:/Users/ylber/AppData/Local/Atlassian/SourceTree/git_local/bin/"
     searched_directories:
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/git.cmd.com"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/git.cmd.exe"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/git.cmd"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/git.cmd.com"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/git.cmd.exe"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/git.cmd"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/git.cmd.com"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/git.cmd.exe"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/git.cmd"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/git.cmd.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/git.cmd.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/git.cmd"
@@ -1424,6 +1607,9 @@ events:
       - "C:/Program Files/Amazon/AWSCLIV2/git.cmd.com"
       - "C:/Program Files/Amazon/AWSCLIV2/git.cmd.exe"
       - "C:/Program Files/Amazon/AWSCLIV2/git.cmd"
+      - "C:/Users/ylber/.local/bin/git.cmd.com"
+      - "C:/Users/ylber/.local/bin/git.cmd.exe"
+      - "C:/Users/ylber/.local/bin/git.cmd"
       - "C:/Users/ylber/.cargo/bin/git.cmd.com"
       - "C:/Users/ylber/.cargo/bin/git.cmd.exe"
       - "C:/Users/ylber/.cargo/bin/git.cmd"
@@ -1457,6 +1643,12 @@ events:
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/git.cmd.com"
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/git.cmd.exe"
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/git.cmd"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/git.cmd.com"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/git.cmd.exe"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/git.cmd"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/git.cmd.com"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/git.cmd.exe"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/git.cmd"
       - "C:/Program Files/bin/git.cmd.com"
       - "C:/Program Files/bin/git.cmd.exe"
       - "C:/Program Files/bin/git.cmd"
@@ -1496,6 +1688,15 @@ events:
       - "C:/Users/ylber/AppData/Local/Atlassian/SourceTree/git_local/bin/git.cmd.com"
       - "C:/Users/ylber/AppData/Local/Atlassian/SourceTree/git_local/bin/git.cmd.exe"
       - "C:/Users/ylber/AppData/Local/Atlassian/SourceTree/git_local/bin/git.cmd"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/git.com"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/git.exe"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/git"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/git.com"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/git.exe"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/git"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/git.com"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/git.exe"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/git"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/git.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/git.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/git"
@@ -1536,6 +1737,9 @@ events:
     found: "C:/Program Files/Git/cmd/git.exe"
     search_context:
       ENV{PATH}:
+        - "c:\\Users\\ylber\\.vscode\\extensions\\vadimcn.vscode-lldb-1.12.1\\bin"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\java8path"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\Program Files\\Microsoft\\jdk-17.0.17.10-hotspot\\bin"
@@ -1551,6 +1755,7 @@ events:
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files\\CMake\\bin"
         - "C:\\Program Files\\Amazon\\AWSCLIV2\\"
+        - "C:\\Users\\ylber\\.local\\bin"
         - "C:\\Users\\ylber\\.cargo\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
@@ -1562,6 +1767,8 @@ events:
         - "C:\\Users\\ylber\\AppData\\Roaming\\npm"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Microsoft VS Code Insiders\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\Users\\ylber\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "c:\\Users\\ylber\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
       CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/HighPerformanceVoxelEngine"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "C:/Program Files"
@@ -1579,8 +1786,8 @@ events:
     checks:
       - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
     directories:
-      source: "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-fr7a06"
-      binary: "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-fr7a06"
+      source: "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-ktkw0u"
+      binary: "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-ktkw0u"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -1590,39 +1797,39 @@ events:
       variable: "CMAKE_HAVE_LIBC_PTHREAD"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-fr7a06'
+        Change Dir: 'C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-ktkw0u'
         
-        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_0e6f3.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_429db.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild-Version 17.14.23+b0019275e f├╝r .NET Framework
-        Der Buildvorgang wurde am 09.02.2026 17:52:26 gestartet.
+        Der Buildvorgang wurde am 22.02.2026 22:04:00 gestartet.
         
-        Projekt "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fr7a06\\cmTC_0e6f3.vcxproj" auf Knoten "1" (Standardziele).
+        Projekt "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ktkw0u\\cmTC_429db.vcxproj" auf Knoten "1" (Standardziele).
         PrepareForBuild:
           Die strukturierte Ausgabe ist aktiviert. Die Formatierung der Compilerdiagnose spiegelt die Fehlerhierarchie wider. Weitere Informationen finden Sie unter https://aka.ms/cpp/structured-output.
-          Das Verzeichnis "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fr7a06\\Debug\\" wird erstellt.
-          Das Verzeichnis "cmTC_0e6f3.dir\\Debug\\cmTC_0e6f3.tlog\\" wird erstellt.
+          Das Verzeichnis "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ktkw0u\\Debug\\" wird erstellt.
+          Das Verzeichnis "cmTC_429db.dir\\Debug\\cmTC_429db.tlog\\" wird erstellt.
         InitializeBuildStatus:
-          "cmTC_0e6f3.dir\\Debug\\cmTC_0e6f3.tlog\\unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
-          Aktualisieren des Timestamps von "cmTC_0e6f3.dir\\Debug\\cmTC_0e6f3.tlog\\unsuccessfulbuild".
+          "cmTC_429db.dir\\Debug\\cmTC_429db.tlog\\unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
+          Aktualisieren des Timestamps von "cmTC_429db.dir\\Debug\\cmTC_429db.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_0e6f3.dir\\Debug\\\\" /Fd"cmTC_0e6f3.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fr7a06\\src.c"
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_429db.dir\\Debug\\\\" /Fd"cmTC_429db.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ktkw0u\\src.c"
           Microsoft (R) C/C++-Optimierungscompiler Version 19.44.35222 f├╝r x64
           Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_0e6f3.dir\\Debug\\\\" /Fd"cmTC_0e6f3.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fr7a06\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_429db.dir\\Debug\\\\" /Fd"cmTC_429db.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ktkw0u\\src.c"
           src.c
-        C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fr7a06\\src.c(1,10): error C1083: Datei (Include) kann nicht ge├Âffnet werden: "pthread.h": No such file or directory [C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fr7a06\\cmTC_0e6f3.vcxproj]
-        Die Erstellung des Projekts "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fr7a06\\cmTC_0e6f3.vcxproj" ist abgeschlossen (Standardziele) -- FEHLER.
+        C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ktkw0u\\src.c(1,10): error C1083: Datei (Include) kann nicht ge├Âffnet werden: "pthread.h": No such file or directory [C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ktkw0u\\cmTC_429db.vcxproj]
+        Die Erstellung des Projekts "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ktkw0u\\cmTC_429db.vcxproj" ist abgeschlossen (Standardziele) -- FEHLER.
         
         Fehler beim Buildvorgang.
         
-        "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fr7a06\\cmTC_0e6f3.vcxproj" (Standardziel) (1) ->
+        "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ktkw0u\\cmTC_429db.vcxproj" (Standardziel) (1) ->
         (ClCompile Ziel) -> 
-          C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fr7a06\\src.c(1,10): error C1083: Datei (Include) kann nicht ge├Âffnet werden: "pthread.h": No such file or directory [C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-fr7a06\\cmTC_0e6f3.vcxproj]
+          C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ktkw0u\\src.c(1,10): error C1083: Datei (Include) kann nicht ge├Âffnet werden: "pthread.h": No such file or directory [C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ktkw0u\\cmTC_429db.vcxproj]
         
             0 Warnung(en)
             1 Fehler
         
-        Verstrichene Zeit 00:00:00.44
+        Verstrichene Zeit 00:00:00.30
         
       exitCode: 1
   -
@@ -1635,8 +1842,8 @@ events:
     checks:
       - "Looking for pthread_create in pthreads"
     directories:
-      source: "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-61xce9"
-      binary: "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-61xce9"
+      source: "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-xgftg9"
+      binary: "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-xgftg9"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -1646,41 +1853,41 @@ events:
       variable: "CMAKE_HAVE_PTHREADS_CREATE"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-61xce9'
+        Change Dir: 'C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-xgftg9'
         
-        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_97337.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_16313.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild-Version 17.14.23+b0019275e f├╝r .NET Framework
-        Der Buildvorgang wurde am 09.02.2026 17:52:26 gestartet.
+        Der Buildvorgang wurde am 22.02.2026 22:04:01 gestartet.
         
-        Projekt "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-61xce9\\cmTC_97337.vcxproj" auf Knoten "1" (Standardziele).
+        Projekt "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xgftg9\\cmTC_16313.vcxproj" auf Knoten "1" (Standardziele).
         PrepareForBuild:
           Die strukturierte Ausgabe ist aktiviert. Die Formatierung der Compilerdiagnose spiegelt die Fehlerhierarchie wider. Weitere Informationen finden Sie unter https://aka.ms/cpp/structured-output.
-          Das Verzeichnis "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-61xce9\\Debug\\" wird erstellt.
-          Das Verzeichnis "cmTC_97337.dir\\Debug\\cmTC_97337.tlog\\" wird erstellt.
+          Das Verzeichnis "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xgftg9\\Debug\\" wird erstellt.
+          Das Verzeichnis "cmTC_16313.dir\\Debug\\cmTC_16313.tlog\\" wird erstellt.
         InitializeBuildStatus:
-          "cmTC_97337.dir\\Debug\\cmTC_97337.tlog\\unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
-          Aktualisieren des Timestamps von "cmTC_97337.dir\\Debug\\cmTC_97337.tlog\\unsuccessfulbuild".
+          "cmTC_16313.dir\\Debug\\cmTC_16313.tlog\\unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
+          Aktualisieren des Timestamps von "cmTC_16313.dir\\Debug\\cmTC_16313.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_97337.dir\\Debug\\\\" /Fd"cmTC_97337.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-61xce9\\CheckFunctionExists.c"
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_16313.dir\\Debug\\\\" /Fd"cmTC_16313.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xgftg9\\CheckFunctionExists.c"
           Microsoft (R) C/C++-Optimierungscompiler Version 19.44.35222 f├╝r x64
           Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_97337.dir\\Debug\\\\" /Fd"cmTC_97337.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-61xce9\\CheckFunctionExists.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_16313.dir\\Debug\\\\" /Fd"cmTC_16313.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xgftg9\\CheckFunctionExists.c"
           CheckFunctionExists.c
         Link:
-          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-61xce9\\Debug\\cmTC_97337.exe" /INCREMENTAL /ILK:"cmTC_97337.dir\\Debug\\cmTC_97337.ilk" /NOLOGO pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-61xce9/Debug/cmTC_97337.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-61xce9/Debug/cmTC_97337.lib" /MACHINE:X64  /machine:x64 cmTC_97337.dir\\Debug\\CheckFunctionExists.obj
-        LINK : fatal error LNK1104: Datei "pthreads.lib" kann nicht ge├Âffnet werden. [C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-61xce9\\cmTC_97337.vcxproj]
-        Die Erstellung des Projekts "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-61xce9\\cmTC_97337.vcxproj" ist abgeschlossen (Standardziele) -- FEHLER.
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xgftg9\\Debug\\cmTC_16313.exe" /INCREMENTAL /ILK:"cmTC_16313.dir\\Debug\\cmTC_16313.ilk" /NOLOGO pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-xgftg9/Debug/cmTC_16313.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-xgftg9/Debug/cmTC_16313.lib" /MACHINE:X64  /machine:x64 cmTC_16313.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: Datei "pthreads.lib" kann nicht ge├Âffnet werden. [C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xgftg9\\cmTC_16313.vcxproj]
+        Die Erstellung des Projekts "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xgftg9\\cmTC_16313.vcxproj" ist abgeschlossen (Standardziele) -- FEHLER.
         
         Fehler beim Buildvorgang.
         
-        "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-61xce9\\cmTC_97337.vcxproj" (Standardziel) (1) ->
+        "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xgftg9\\cmTC_16313.vcxproj" (Standardziel) (1) ->
         (Link Ziel) -> 
-          LINK : fatal error LNK1104: Datei "pthreads.lib" kann nicht ge├Âffnet werden. [C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-61xce9\\cmTC_97337.vcxproj]
+          LINK : fatal error LNK1104: Datei "pthreads.lib" kann nicht ge├Âffnet werden. [C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xgftg9\\cmTC_16313.vcxproj]
         
             0 Warnung(en)
             1 Fehler
         
-        Verstrichene Zeit 00:00:00.45
+        Verstrichene Zeit 00:00:00.42
         
       exitCode: 1
   -
@@ -1693,8 +1900,8 @@ events:
     checks:
       - "Looking for pthread_create in pthread"
     directories:
-      source: "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-872q41"
-      binary: "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-872q41"
+      source: "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-y82a8r"
+      binary: "C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-y82a8r"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -1704,41 +1911,41 @@ events:
       variable: "CMAKE_HAVE_PTHREAD_CREATE"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-872q41'
+        Change Dir: 'C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-y82a8r'
         
-        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_41507.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_ed46f.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild-Version 17.14.23+b0019275e f├╝r .NET Framework
-        Der Buildvorgang wurde am 09.02.2026 17:52:27 gestartet.
+        Der Buildvorgang wurde am 22.02.2026 22:04:01 gestartet.
         
-        Projekt "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-872q41\\cmTC_41507.vcxproj" auf Knoten "1" (Standardziele).
+        Projekt "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y82a8r\\cmTC_ed46f.vcxproj" auf Knoten "1" (Standardziele).
         PrepareForBuild:
           Die strukturierte Ausgabe ist aktiviert. Die Formatierung der Compilerdiagnose spiegelt die Fehlerhierarchie wider. Weitere Informationen finden Sie unter https://aka.ms/cpp/structured-output.
-          Das Verzeichnis "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-872q41\\Debug\\" wird erstellt.
-          Das Verzeichnis "cmTC_41507.dir\\Debug\\cmTC_41507.tlog\\" wird erstellt.
+          Das Verzeichnis "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y82a8r\\Debug\\" wird erstellt.
+          Das Verzeichnis "cmTC_ed46f.dir\\Debug\\cmTC_ed46f.tlog\\" wird erstellt.
         InitializeBuildStatus:
-          "cmTC_41507.dir\\Debug\\cmTC_41507.tlog\\unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
-          Aktualisieren des Timestamps von "cmTC_41507.dir\\Debug\\cmTC_41507.tlog\\unsuccessfulbuild".
+          "cmTC_ed46f.dir\\Debug\\cmTC_ed46f.tlog\\unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
+          Aktualisieren des Timestamps von "cmTC_ed46f.dir\\Debug\\cmTC_ed46f.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_41507.dir\\Debug\\\\" /Fd"cmTC_41507.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-872q41\\CheckFunctionExists.c"
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_ed46f.dir\\Debug\\\\" /Fd"cmTC_ed46f.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y82a8r\\CheckFunctionExists.c"
           Microsoft (R) C/C++-Optimierungscompiler Version 19.44.35222 f├╝r x64
           Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_41507.dir\\Debug\\\\" /Fd"cmTC_41507.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-872q41\\CheckFunctionExists.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /Fo"cmTC_ed46f.dir\\Debug\\\\" /Fd"cmTC_ed46f.dir\\Debug\\vc143.pdb" /external:W1 /TC /errorReport:queue "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y82a8r\\CheckFunctionExists.c"
           CheckFunctionExists.c
         Link:
-          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-872q41\\Debug\\cmTC_41507.exe" /INCREMENTAL /ILK:"cmTC_41507.dir\\Debug\\cmTC_41507.ilk" /NOLOGO pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-872q41/Debug/cmTC_41507.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-872q41/Debug/cmTC_41507.lib" /MACHINE:X64  /machine:x64 cmTC_41507.dir\\Debug\\CheckFunctionExists.obj
-        LINK : fatal error LNK1104: Datei "pthread.lib" kann nicht ge├Âffnet werden. [C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-872q41\\cmTC_41507.vcxproj]
-        Die Erstellung des Projekts "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-872q41\\cmTC_41507.vcxproj" ist abgeschlossen (Standardziele) -- FEHLER.
+          C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y82a8r\\Debug\\cmTC_ed46f.exe" /INCREMENTAL /ILK:"cmTC_ed46f.dir\\Debug\\cmTC_ed46f.ilk" /NOLOGO pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-y82a8r/Debug/cmTC_ed46f.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/ylber/Downloads/r9-hyper-core/HighPerformanceVoxelEngine/build/CMakeFiles/CMakeScratch/TryCompile-y82a8r/Debug/cmTC_ed46f.lib" /MACHINE:X64  /machine:x64 cmTC_ed46f.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: Datei "pthread.lib" kann nicht ge├Âffnet werden. [C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y82a8r\\cmTC_ed46f.vcxproj]
+        Die Erstellung des Projekts "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y82a8r\\cmTC_ed46f.vcxproj" ist abgeschlossen (Standardziele) -- FEHLER.
         
         Fehler beim Buildvorgang.
         
-        "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-872q41\\cmTC_41507.vcxproj" (Standardziel) (1) ->
+        "C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y82a8r\\cmTC_ed46f.vcxproj" (Standardziel) (1) ->
         (Link Ziel) -> 
-          LINK : fatal error LNK1104: Datei "pthread.lib" kann nicht ge├Âffnet werden. [C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-872q41\\cmTC_41507.vcxproj]
+          LINK : fatal error LNK1104: Datei "pthread.lib" kann nicht ge├Âffnet werden. [C:\\Users\\ylber\\Downloads\\r9-hyper-core\\HighPerformanceVoxelEngine\\build\\CMakeFiles\\CMakeScratch\\TryCompile-y82a8r\\cmTC_ed46f.vcxproj]
         
             0 Warnung(en)
             1 Fehler
         
-        Verstrichene Zeit 00:00:00.43
+        Verstrichene Zeit 00:00:00.39
         
       exitCode: 1
   -
@@ -1761,6 +1968,9 @@ events:
     names:
       - "doxygen"
     candidate_directories:
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/javapath/"
       - "C:/Program Files/Microsoft/jdk-17.0.17.10-hotspot/bin/"
@@ -1776,6 +1986,7 @@ events:
       - "C:/Program Files/Git/cmd/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/Amazon/AWSCLIV2/"
+      - "C:/Users/ylber/.local/bin/"
       - "C:/Users/ylber/.cargo/bin/"
       - "C:/Users/ylber/AppData/Local/Programs/Python/Launcher/"
       - "C:/Users/ylber/AppData/Local/Programs/Python/Python312/Scripts/"
@@ -1787,6 +1998,8 @@ events:
       - "C:/Users/ylber/AppData/Roaming/npm/"
       - "C:/Users/ylber/AppData/Local/Programs/Microsoft VS Code Insiders/bin/"
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/"
       - "C:/Program Files/bin/"
       - "C:/Program Files/sbin/"
       - "C:/Program Files/"
@@ -1805,6 +2018,15 @@ events:
       - "/Applications/Utilities/Doxygen.app/Contents/Resources/"
       - "/Applications/Utilities/Doxygen.app/Contents/MacOS/"
     searched_directories:
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/doxygen.com"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/doxygen.exe"
+      - "C:/Users/ylber/.vscode/extensions/vadimcn.vscode-lldb-1.12.1/bin/doxygen"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/doxygen.com"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/doxygen.exe"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/doxygen"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/doxygen.com"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/doxygen.exe"
+      - "C:/Users/ylber/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/copilotCli/doxygen"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/doxygen.com"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/doxygen.exe"
       - "C:/Program Files (x86)/Common Files/Oracle/Java/java8path/doxygen"
@@ -1850,6 +2072,9 @@ events:
       - "C:/Program Files/Amazon/AWSCLIV2/doxygen.com"
       - "C:/Program Files/Amazon/AWSCLIV2/doxygen.exe"
       - "C:/Program Files/Amazon/AWSCLIV2/doxygen"
+      - "C:/Users/ylber/.local/bin/doxygen.com"
+      - "C:/Users/ylber/.local/bin/doxygen.exe"
+      - "C:/Users/ylber/.local/bin/doxygen"
       - "C:/Users/ylber/.cargo/bin/doxygen.com"
       - "C:/Users/ylber/.cargo/bin/doxygen.exe"
       - "C:/Users/ylber/.cargo/bin/doxygen"
@@ -1883,6 +2108,12 @@ events:
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/doxygen.com"
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/doxygen.exe"
       - "C:/Users/ylber/AppData/Local/Programs/Antigravity/bin/doxygen"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/doxygen.com"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/doxygen.exe"
+      - "C:/Users/ylber/AppData/Local/Microsoft/WinGet/Links/doxygen"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/doxygen.com"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/doxygen.exe"
+      - "C:/Users/ylber/.vscode/extensions/ms-python.debugpy-2025.18.0-win32-x64/bundled/scripts/noConfigScripts/doxygen"
       - "C:/Program Files/bin/doxygen.com"
       - "C:/Program Files/bin/doxygen.exe"
       - "C:/Program Files/bin/doxygen"
@@ -1937,6 +2168,9 @@ events:
     found: false
     search_context:
       ENV{PATH}:
+        - "c:\\Users\\ylber\\.vscode\\extensions\\vadimcn.vscode-lldb-1.12.1\\bin"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\debugCommand"
+        - "c:\\Users\\ylber\\AppData\\Roaming\\Code\\User\\globalStorage\\github.copilot-chat\\copilotCli"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\java8path"
         - "C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath"
         - "C:\\Program Files\\Microsoft\\jdk-17.0.17.10-hotspot\\bin"
@@ -1952,6 +2186,7 @@ events:
         - "C:\\Program Files\\Git\\cmd"
         - "C:\\Program Files\\CMake\\bin"
         - "C:\\Program Files\\Amazon\\AWSCLIV2\\"
+        - "C:\\Users\\ylber\\.local\\bin"
         - "C:\\Users\\ylber\\.cargo\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Launcher\\"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\"
@@ -1963,6 +2198,8 @@ events:
         - "C:\\Users\\ylber\\AppData\\Roaming\\npm"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Microsoft VS Code Insiders\\bin"
         - "C:\\Users\\ylber\\AppData\\Local\\Programs\\Antigravity\\bin"
+        - "C:\\Users\\ylber\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "c:\\Users\\ylber\\.vscode\\extensions\\ms-python.debugpy-2025.18.0-win32-x64\\bundled\\scripts\\noConfigScripts"
       CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/HighPerformanceVoxelEngine"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "C:/Program Files"

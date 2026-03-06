@@ -21,11 +21,12 @@ namespace Game { namespace World {
         float riverFreq;
         uint8_t defaultTopBlock;
         uint8_t riverTopBlock;
+        bool    lowSpecReduce;  // true = apply reduced-detail noise for this preset
     };
 
     extern const TerrainPreset g_TerrainPresets[8];
     extern int g_CurrentPresetIndex;
 
-    void ApplyPresetToNoise();
+    void ApplyPresetToNoise(bool lowSpecMode = false);
 
 }}

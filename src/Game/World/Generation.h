@@ -23,6 +23,7 @@ namespace Game { namespace World {
         static uint8_t GetBlockAtWorld(int worldX, int worldY, int worldZ);
 
         static int GetSurfaceYAtWorld(int worldX, int worldZ);
+        static int GetBaseSurfaceYAtWorld(int worldX, int worldZ);
 
         static void SetErosionHeightDeltaPatch(int originX, int originZ,
                                int width, int height,
