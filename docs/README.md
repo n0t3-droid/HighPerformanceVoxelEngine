@@ -1,12 +1,6 @@
-# High-Performance Offline Minecraft Remake (C++ / OpenGL)
+# High-Performance Engine (C++ / OpenGL)
 
-A high-performance voxel engine research project based on techniques by Vercidium and IGoByLotsOfNames.
-
-## Research Source Material
-
-* Vercidium - "I Optimised My Game Engine Up To 12000 FPS"
-* IGoByLotsOfNames - "My game is 262,000 times faster than Minecraft"
-* IGoByLotsOfNames - "Game terrain generation is pretty simple, actually"
+A high-performance voxel engine research project based on techniques by Ylber Thaqi.
 
 ## 🛑 CRITICAL CODING RULES (Do Not Violate)
 
